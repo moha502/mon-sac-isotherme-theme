@@ -1,0 +1,299 @@
+<script src="{{ 'marquee.js' | asset_url }}" type="module" fetchpriority="low"></script>
+
+{% case block.settings.speed_factor %}
+  {% when 'slow' %}
+    {% assign speed_factor = 20 %}
+  {% when 'normal' %}
+    {% assign speed_factor = 30 %}
+  {% when 'fast' %}
+    {% assign speed_factor = 50 %}
+{% endcase %}
+
+<div
+  class="marquee color-{{ block.settings.color_scheme }} {{ block.settings.additional_class }}"
+  style="
+    --margin-top: {{ block.settings.margin_top }}px;
+    --margin-bottom: {{ block.settings.margin_bottom }}px;
+  "
+  {{ block.shopify_attributes }}
+>
+  <marquee-component
+    style="
+      --marquee-direction: {{ block.settings.movement_direction }};
+      --marquee-gap: {{ block.settings.gap }}px;
+      --padding-top: {{ block.settings.padding_top }}px;
+      --padding-bottom: {{ block.settings.padding_bottom }}px;
+    "
+    data-speed-factor="{{ speed_factor }}"
+    data-movement-direction="{{ block.settings.movement_direction }}"
+  >
+    <div
+      class="marquee__wrapper"
+      data-ref="wrapper"
+    >
+      <div
+        class="marquee__content"
+        data-ref="content"
+      >
+        <div class="marquee__repeated-items">
+          {% content_for 'blocks' %}
+        </div>
+      </div>
+    </div>
+  </marquee-component>
+</div>
+
+{% stylesheet %}
+  .marquee {
+    margin-top: var(--margin-top);
+    margin-bottom: var(--margin-bottom);
+    width: 100%;
+  }
+
+  /* Quand la barre est un enfant direct d'une section qui a page-width, on lui fait prendre toute la largeur de la page */
+  .page-width > .marquee {
+    margin-left: calc(-1 * var(--page-margin-desktop));
+    width: calc(100% + 2 * var(--page-margin-desktop));
+  }
+
+  marquee-component {
+    display: block;
+    width: 100%;
+    overflow: hidden;
+  }
+
+  .marquee__wrapper {
+    display: flex;
+    gap: var(--marquee-gap);
+    width: fit-content;
+    white-space: nowrap;
+    padding-top: var(--padding-top);
+    padding-bottom: var(--padding-bottom);
+  }
+
+  .marquee__content {
+    min-width: max-content;
+    display: flex;
+    gap: var(--marquee-gap);
+  }
+
+  .marquee__content :is(p, h1, h2, h3, h4, h5, h6) {
+    white-space: nowrap;
+  }
+
+  .marquee__content .marquee__repeated-items * {
+    max-width: none;
+  }
+
+  .marquee__repeated-items {
+    min-width: max-content;
+    display: flex;
+    gap: var(--marquee-gap);
+    align-items: center;
+    justify-content: center;
+  }
+
+  .marquee__repeated-items > * {
+    align-content: center;
+  }
+
+  @media (prefers-reduced-motion: no-preference) {
+    marquee-component:not([data-disabled]) .marquee__wrapper {
+      animation: marquee-motion var(--marquee-speed) linear infinite var(--marquee-direction);
+    }
+  }
+
+  @keyframes marquee-motion {
+    to {
+      transform: translate3d(calc(-50% - (var(--marquee-gap) / 2)), 0, 0);
+    }
+  }
+{% endstylesheet %}
+
+{% schema %}
+{
+  "name": "t:marquee",
+  "tag": null,
+  "blocks": [
+    {
+      "type": "text"
+    },
+    {
+      "type": "icon"
+    },
+    {
+      "type": "_marquee-image"
+    },
+    {
+      "type": "badges"
+    },
+    {
+      "type": "icon-with-text"
+    }
+  ],
+  "settings": [
+    {
+      "type": "select",
+      "id": "movement_direction",
+      "label": "t:motion_direction",
+      "options": [
+        {
+          "value": "reverse",
+          "label": "t:forward"
+        },
+        {
+          "value": "normal",
+          "label": "t:reverse"
+        }
+      ],
+      "default": "normal"
+    },
+    {
+      "type": "select",
+      "id": "speed_factor",
+      "label": "t:speed",
+      "options": [
+        {
+          "value": "slow",
+          "label": "t:slow"
+        },
+        {
+          "value": "normal",
+          "label": "t:normal"
+        },
+        {
+          "value": "fast",
+          "label": "t:fast"
+        }
+      ],
+      "default": "normal"
+    },
+    {
+      "type": "range",
+      "id": "gap",
+      "label": "t:gap",
+      "min": 0,
+      "max": 100,
+      "step": 1,
+      "unit": "px",
+      "default": 20
+    },
+    {
+      "type": "header",
+      "content": "t:style"
+    },
+    {
+      "type": "color_scheme",
+      "id": "color_scheme",
+      "label": "t:color_scheme",
+      "default": "scheme-2"
+    },
+    {
+      "type": "header",
+      "content": "t:paddings"
+    },
+    {
+      "type": "range",
+      "id": "padding_top",
+      "label": "t:padding_top",
+      "min": 0,
+      "max": 100,
+      "step": 1,
+      "unit": "px",
+      "default": 20
+    },
+    {
+      "type": "range",
+      "id": "padding_bottom",
+      "label": "t:padding_bottom",
+      "min": 0,
+      "max": 100,
+      "step": 1,
+      "unit": "px",
+      "default": 20
+    },
+    {
+      "type": "header",
+      "content": "t:margins"
+    },
+    {
+      "type": "range",
+      "id": "margin_top",
+      "label": "t:margin_top",
+      "default": 0,
+      "min": 0,
+      "max": 100,
+      "step": 1,
+      "unit": "px"
+    },
+    {
+      "type": "range",
+      "id": "margin_bottom",
+      "label": "t:margin_bottom",
+      "default": 0,
+      "min": 0,
+      "max": 100,
+      "step": 1,
+      "unit": "px"
+    },
+    {
+      "type": "header",
+      "content": "t:advanced_settings"
+    },
+    {
+      "type": "text",
+      "id": "additional_class",
+      "label": "t:additional_class",
+      "info": "t:additional_class_info"
+    },
+    {
+      "type": "header",
+      "content": "t:go_further"
+    },
+    {
+      "type": "paragraph",
+      "content": "t:go_further_description"
+    }
+  ],
+  "presets": [
+    {
+      "name": "t:marquee",
+      "category": "t:narrative",
+      "settings": {
+        "movement_direction": "normal",
+        "gap": 30,
+        "color_scheme": "scheme-2",
+        "padding_top": 20,
+        "padding_bottom": 20,
+        "margin_top": 0,
+        "margin_bottom": 0,
+        "additional_class": ""
+      },
+      "blocks": [
+        {
+          "type": "icon-with-text",
+          "name": "t:icon_with_text",
+          "settings": {
+            "show_on_display": "desktop_and_mobile",
+            "layout_direction_desktop": "row",
+            "layout_gap_desktop": 10,
+            "same_as_desktop": true,
+            "layout_direction_mobile": "row",
+            "layout_gap_mobile": 10,
+            "icon": "favorite",
+            "icon_custom": "",
+            "icon_size": 20,
+            "icon_position": "start",
+            "text": "t:marquee_best_theme_text_default",
+            "text_style": "paragraph",
+            "font_weight": 500,
+            "margin_top": 0,
+            "margin_bottom": 0,
+            "additional_class": ""
+          }
+        }
+      ]
+    }
+  ]
+}
+{% endschema %}

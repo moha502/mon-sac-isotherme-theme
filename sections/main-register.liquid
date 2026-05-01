@@ -1,0 +1,137 @@
+<div class="customer-register color-{{ section.settings.color_scheme }}">
+  <div class="page-width">
+    <div class="customer-register__register">
+      <h1 class="h2 text-center">{{ 'customer.register.title' | t }}</h1>
+
+      {%- form 'create_customer', novalidate: 'novalidate', class: 'customer-register__form' -%}
+        <div class="textfields-group">
+          {% assign first_name_label = 'customer.register.first_name' | t %}
+
+          {% render 'textfield',
+            label: first_name_label,
+            name: 'customer[first_name]',
+            id: 'RegisterForm-FirstName',
+            autocomplete: 'given-name',
+            full_width: true
+          %}
+
+          {% assign last_name_label = 'customer.register.last_name' | t %}
+
+          {% render 'textfield',
+            label: last_name_label,
+            name: 'customer[last_name]',
+            id: 'RegisterForm-LastName',
+            autocomplete: 'family-name',
+            full_width: true
+          %}
+        </div>
+
+        {% assign email_label = 'customer.register.email' | t %}
+
+        {% render 'textfield',
+          label: email_label,
+          name: 'customer[email]',
+          id: 'RegisterForm-email',
+          type: 'email',
+          autocomplete: 'email',
+          autocapitalize: 'off',
+          required: true,
+          full_width: true
+        %}
+
+        {%- if form.errors contains 'email' -%}
+          <div class="form-error">
+            {% render 'icon', icon: 'cancel' %}
+            {{ form.errors.translated_fields.email | capitalize }}
+            {{ form.errors.messages.email }}.
+          </div>
+        {%- endif -%}
+
+        {% assign password_label = 'customer.register.password' | t %}
+
+        {% render 'textfield',
+          label: password_label,
+          name: 'customer[password]',
+          id: 'RegisterForm-password',
+          type: 'password',
+          autocomplete: 'new-password',
+          full_width: true
+        %}
+
+        {%- if form.errors contains 'password' -%}
+          <div class="form-error">
+            {% render 'icon', icon: 'cancel' %}
+            {{ form.errors.translated_fields.password | capitalize }}
+            {{ form.errors.messages.password }}.
+          </div>
+        {%- endif -%}
+
+        {% assign submit_label = 'customer.register.submit' | t %}
+
+        <div class="customer-register__form-actions">
+          {% render 'button', label: submit_label, type: 'submit', button_shape: 'full-width' %}
+
+          <a class="button button--secondary button--full-width" href="{{ routes.account_login_url }}">
+            {{- 'customer.register.back_to_login' | t -}}
+          </a>
+        </div>
+      {%- endform -%}
+    </div>
+  </div>
+</div>
+
+{% stylesheet %}
+  .customer-register {
+    display: flex;
+    flex-direction: column;
+    gap: var(--gap-md);
+    width: 100%;
+    padding: 50px 0;
+  }
+
+  .customer-register__register {
+    max-width: 400px;
+    width: 100%;
+    margin: 0 auto;
+  }
+
+  .customer-register__form {
+    display: flex;
+    flex-direction: column;
+    gap: var(--gap-md);
+    margin-top: var(--margin-lg);
+  }
+
+  .customer-register__form-actions {
+    margin-top: var(--margin-md);
+    display: flex;
+    flex-direction: column;
+    gap: var(--gap-sm);
+  }
+{% endstylesheet %}
+
+{% schema %}
+{
+  "name": "t:register",
+  "settings": [
+    {
+      "type": "header",
+      "content": "t:style"
+    },
+    {
+      "type": "color_scheme",
+      "id": "color_scheme",
+      "label": "t:color_scheme",
+      "default": "scheme-1"
+    },
+    {
+      "type": "header",
+      "content": "t:go_further"
+    },
+    {
+      "type": "paragraph",
+      "content": "t:go_further_description"
+    }
+  ]
+}
+{% endschema %}

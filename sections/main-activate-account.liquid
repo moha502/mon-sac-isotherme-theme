@@ -1,0 +1,114 @@
+<div class="customer-activate color-{{ section.settings.color_scheme }}">
+  <div class="page-width">
+    <div class="customer-activate__activate">
+      <h1 class="h2 text-center">{{ 'customer.activate_account.title' | t }}</h1>
+
+      <p class="text-center">{{ 'customer.activate_account.subtext' | t }}</p>
+
+      {%- form 'activate_customer_password', class: 'customer-activate__form' -%}
+        {% assign password_label = 'customer.activate_account.password' | t %}
+
+        {% render 'textfield',
+          label: password_label,
+          name: 'customer[password]',
+          id: 'password',
+          type: 'password',
+          autocomplete: 'new-password',
+          full_width: true
+        %}
+
+        {%- if form.errors contains 'password' -%}
+          <div class="form-error">
+            {% render 'icon', icon: 'cancel' %}
+            {{ form.errors.translated_fields.password | capitalize }}
+            {{ form.errors.messages.password }}
+          </div>
+        {%- endif -%}
+
+        {% assign password_confirm_label = 'customer.activate_account.password_confirm' | t %}
+
+        {% render 'textfield',
+          label: password_confirm_label,
+          name: 'customer[password_confirmation]',
+          id: 'password_confirmation',
+          type: 'password',
+          autocomplete: 'new-password',
+          full_width: true
+        %}
+
+        {%- if form.errors contains 'password_confirmation' -%}
+          <div class="form-error">
+            {% render 'icon', icon: 'cancel' %}
+            {{ form.errors.translated_fields.password_confirmation | capitalize }}
+            {{ form.errors.messages.password_confirmation }}
+          </div>
+        {%- endif -%}
+
+        <div class="customer-activate__form-actions">
+          {% render 'button', label: 'customer.activate_account.submit' | t, type: 'submit', button_shape: 'full-width' %}
+          {% render 'button', label: 'customer.activate_account.cancel' | t, type: 'button', name: 'decline', button_shape: 'full-width' %}
+        </div>
+      {%- endform -%}
+    </div>
+  </div>
+</div>
+
+{% stylesheet %}
+  .customer-activate {
+    display: flex;
+    flex-direction: column;
+    gap: var(--gap-md);
+    width: 100%;
+    padding: 50px 0;
+  }
+
+  .customer-activate__activate {
+    max-width: 400px;
+    width: 100%;
+    margin: 0 auto;
+  }
+
+  .customer-activate__activate > .h2 {
+    margin-bottom: var(--margin-md);
+  }
+
+  .customer-activate__form {
+    margin-top: var(--margin-lg);
+    display: flex;
+    flex-direction: column;
+    gap: var(--gap-md);
+  }
+
+  .customer-activate__form-actions {
+    margin-top: var(--margin-md);
+    display: flex;
+    flex-direction: column;
+    gap: var(--gap-sm);
+  }
+{% endstylesheet %}
+
+{% schema %}
+{
+  "name": "t:activate_account",
+  "settings": [
+    {
+      "type": "header",
+      "content": "t:style"
+    },
+    {
+      "type": "color_scheme",
+      "id": "color_scheme",
+      "label": "t:color_scheme",
+      "default": "scheme-1"
+    },
+    {
+      "type": "header",
+      "content": "t:go_further"
+    },
+    {
+      "type": "paragraph",
+      "content": "t:go_further_description"
+    }
+  ]
+}
+{% endschema %}

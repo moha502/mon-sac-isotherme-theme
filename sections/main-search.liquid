@@ -1,0 +1,213 @@
+<div
+  class="main-search color-{{ section.settings.color_scheme }}"
+  style="
+    --margin-top: {{ section.settings.margin_top }}px;
+    --margin-bottom: {{ section.settings.margin_bottom }}px;
+  "
+>
+  <div
+    class="main-search__inner page-width"
+    style="
+      --padding-top: {{ section.settings.padding_top }}px;
+      --padding-bottom: {{ section.settings.padding_bottom }}px;
+    "
+  >
+    <form action="{{ routes.search_url }}" method="get" role="search" class="main-search__form">
+      {% assign search_terms = search.terms | escape %}
+      {% assign search_label = 'search.placeholder' | t %}
+      <div class="input-group">
+        {% render 'textfield', label: search_label, name: 'q', value: search_terms, full_width: true %}
+        <input type="hidden" name="options[prefix]" value="last">
+        <div class="input-group__action">
+          {% render 'button', type: 'submit', icon: 'search' %}
+        </div>
+      </div>
+    </form>
+
+    {% if search.performed %}
+      {% if search.results_count == 0 %}
+        <p class="main-search__results-for">{{ 'search.no_results_html' | t: terms: search.terms }}</p>
+      {% else %}
+        <p class="main-search__results-for">
+          {{ 'search.results_for_html' | t: terms: search.terms, count: search.results_count }}
+        </p>
+
+        <div class="main-search__pages">
+          {% for result in search.results %}
+            {% if result.object_type == 'page' %}
+              <a class="main-search__page-link" href="{{ result.url }}">{{ result.title }}</a>
+            {% endif %}
+          {% endfor %}
+        </div>
+
+        <div class="main-search__products_and_articles">
+          <div
+            class="main-search__grid"
+            style="
+              --grid-columns: {{ section.settings.grid_columns }};
+              --grid-columns-mobile: {{ section.settings.grid_columns_mobile }};
+            "
+          >
+            {% paginate search.results by 20 %}
+              {% for result in search.results %}
+                {% if result.object_type == 'product' %}
+                  {% content_for 'block', type: '_product-card', id: 'product-card', closest.product: result %}
+                {% elsif result.object_type == 'article' %}
+                  {% content_for 'block', type: '_article-card', id: 'article-card', closest.article: result %}
+                {% endif %}
+              {% endfor %}
+
+              {%- if paginate.pages > 1 -%}
+                {% render 'pagination', paginate_object: paginate %}
+              {%- endif -%}
+            {% endpaginate %}
+          </div>
+        </div>
+      {% endif %}
+    {% endif %}
+  </div>
+</div>
+
+{% stylesheet %}
+  .main-search {
+    margin-top: var(--margin-top);
+    margin-bottom: var(--margin-bottom);
+  }
+
+  .main-search__inner {
+    padding-top: var(--padding-top);
+    padding-bottom: var(--padding-bottom);
+  }
+
+  .main-search__form {
+    margin: 0;
+  }
+
+  .main-search__grid {
+    display: grid;
+    grid-template-columns: repeat(var(--grid-columns-mobile), 1fr);
+    gap: var(--gap-md);
+  }
+
+  .main-search__pages {
+    display: flex;
+    gap: var(--gap-md);
+    flex-wrap: wrap;
+    padding-bottom: var(--margin-xl);
+  }
+
+  .main-search__page-link {
+    color: var(--color-foreground);
+  }
+
+  .main-search__results-for {
+    margin-top: var(--margin-md);
+    margin-bottom: var(--margin-lg);
+  }
+
+  @media (width > 750px) {
+    .main-search__grid {
+      grid-template-columns: repeat(var(--grid-columns), 1fr);
+    }
+  }
+{% endstylesheet %}
+
+{% schema %}
+{
+  "name": "t:search",
+  "enabled_on": {
+    "templates": ["search"]
+  },
+  "settings": [
+    {
+      "type": "header",
+      "content": "t:style"
+    },
+    {
+      "type": "color_scheme",
+      "id": "color_scheme",
+      "label": "t:color_scheme",
+      "default": "scheme-1"
+    },
+    {
+      "type": "header",
+      "content": "t:style_desktop"
+    },
+    {
+      "type": "range",
+      "id": "grid_columns",
+      "label": "t:layout_grid_columns",
+      "default": 4,
+      "min": 2,
+      "max": 5,
+      "step": 1
+    },
+    {
+      "type": "header",
+      "content": "t:style_mobile"
+    },
+    {
+      "type": "select",
+      "id": "grid_columns_mobile",
+      "label": "t:layout_grid_columns",
+      "options": [
+        { "value": "1", "label": "1" },
+        { "value": "2", "label": "2" }
+      ],
+      "default": "2"
+    },
+    {
+      "type": "header",
+      "content": "t:paddings"
+    },
+    {
+      "type": "range",
+      "id": "padding_top",
+      "label": "t:padding_top",
+      "default": 50,
+      "min": 0,
+      "max": 100,
+      "step": 1
+    },
+    {
+      "type": "range",
+      "id": "padding_bottom",
+      "label": "t:padding_bottom",
+      "default": 50,
+      "min": 0,
+      "max": 100,
+      "step": 1
+    },
+    {
+      "type": "header",
+      "content": "t:margins"
+    },
+    {
+      "type": "range",
+      "id": "margin_top",
+      "label": "t:margin_top",
+      "default": 0,
+      "min": 0,
+      "max": 100,
+      "step": 1
+    },
+    {
+      "type": "range",
+      "id": "margin_bottom",
+      "label": "t:margin_bottom",
+      "default": 0,
+      "min": 0,
+      "max": 100,
+      "step": 1
+    },
+    {
+      "type": "header",
+      "content": "t:go_further"
+    },
+    {
+      "type": "paragraph",
+      "content": "t:go_further_description"
+    }
+  ]
+}
+{% endschema %}

@@ -1,0 +1,83 @@
+<div
+  class="contact-form"
+  {{ block.shopify_attributes }}
+  {% if request.visual_preview_mode %}
+    data-visual-preview-mode
+  {% endif %}
+>
+  {% form 'contact' %}
+    {% liquid
+      assign first_name_label = 'contact.first_name' | t
+      assign last_name_label = 'contact.last_name' | t
+      assign phone_label = 'contact.phone' | t
+      assign email_label = 'contact.email' | t
+      assign message_label = 'contact.message' | t
+      assign submit_label = 'contact.submit' | t
+    %}
+
+    <div class="textfields-group">
+      {% render 'textfield', label: first_name_label, name: 'contact[first_name]', id: 'first-name', full_width: true %}
+
+      {% render 'textfield', label: last_name_label, name: 'contact[last_name]', id: 'last-name', full_width: true %}
+    </div>
+
+    {% render 'textfield', label: phone_label, name: 'contact[phone]', id: 'phone', type: 'tel', full_width: true %}
+
+    {% render 'textfield', label: email_label, name: 'contact[email]', id: 'email', type: 'email', full_width: true %}
+
+    {% render 'textarea', placeholder: message_label, name: 'contact[body]', id: 'message', full_width: true %}
+
+    {% render 'button', label: submit_label, type: 'submit', button_shape: 'full-width' %}
+
+    {%- if form.errors -%}
+      <div class="form-error">
+        {% render 'icon', icon: 'cancel' %}
+        {{- form.errors.translated_fields.email | capitalize }}
+        {{ form.errors.messages.email -}}
+      </div>
+    {%- endif -%}
+
+    {%- if form.posted_successfully? -%}
+      <div class="form-success">
+        {% render 'icon', icon: 'check_circle' %}
+        {{- 'contact.success' | t }}
+      </div>
+    {%- endif -%}
+  {% endform %}
+</div>
+
+{% stylesheet %}
+  .contact-form {
+    display: flex;
+    flex-direction: column;
+    gap: var(--gap-md);
+    width: 100%;
+  }
+
+  shopify-visual-preview-block-list .contact-form[data-visual-preview-mode] {
+    max-width: 500px;
+  }
+{% endstylesheet %}
+
+{% schema %}
+{
+  "name": "t:contact_form",
+  "tag": null,
+  "settings": [
+    {
+      "type": "header",
+      "content": "t:go_further"
+    },
+    {
+      "type": "paragraph",
+      "content": "t:go_further_description"
+    }
+  ],
+  "presets": [
+    {
+      "name": "t:contact_form",
+      "category": "t:forms"
+    }
+  ]
+}
+{% endschema %}

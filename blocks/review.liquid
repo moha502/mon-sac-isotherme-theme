@@ -1,0 +1,396 @@
+{% liquid
+  assign ratio = 1
+
+  case block.settings.image_ratio
+    when 'landscape'
+      assign ratio = '4 / 3'
+    when 'portrait'
+      assign ratio = '4 / 5'
+    when 'adapt'
+      assign ratio = block.settings.image.aspect_ratio
+  endcase
+
+  if ratio == 0 or ratio == null
+    assign ratio = 1
+  endif
+%}
+
+<div
+  class="
+    review review--{{ block.settings.display_type }}
+    {%- if block.settings.wrap_in_card %} card color-{{ block.settings.color_scheme }}{% if block.settings.show_card_border %} card--with-border{% endif %}{% endif -%}
+    {%- if block.settings.show_on_display == 'desktop_only' %} mobile-hide{% endif -%}
+    {%- if block.settings.show_on_display == 'mobile_only' %} desktop-hide{% endif -%}
+    {%- if block.settings.additional_class != blank %} {{ block.settings.additional_class }}{% endif -%}
+  "
+  style="
+    --image-ratio: {{ ratio }};
+    --margin-top: {{ block.settings.margin_top }}px;
+    --margin-bottom: {{ block.settings.margin_bottom }}px;
+  "
+  {{ block.shopify_attributes }}
+  {% if request.visual_preview_mode %}
+    data-visual-preview-mode
+  {% endif %}
+>
+  {% render 'review', block: block %}
+</div>
+
+{% stylesheet %}
+  .review {
+    margin-top: var(--margin-top);
+    margin-bottom: var(--margin-bottom);
+  }
+
+  shopify-visual-preview-block-list .review[data-visual-preview-mode] {
+    width: 400px;
+  }
+{% endstylesheet %}
+
+{% schema %}
+{
+  "name": "t:review",
+  "tag": null,
+  "settings": [
+    {
+      "type": "select",
+      "id": "show_on_display",
+      "label": "t:show_on_display",
+      "default": "desktop_and_mobile",
+      "options": [
+        { "value": "desktop_and_mobile", "label": "t:desktop_and_mobile" },
+        { "value": "desktop_only", "label": "t:desktop_only" },
+        { "value": "mobile_only", "label": "t:mobile_only" }
+      ]
+    },
+    {
+      "type": "header",
+      "content": "t:style"
+    },
+    {
+      "type": "select",
+      "id": "display_type",
+      "label": "t:display_type",
+      "default": "1",
+      "options": [
+        {
+          "value": "1",
+          "label": "t:display_type_1"
+        },
+        {
+          "value": "2",
+          "label": "t:display_type_2"
+        },
+        {
+          "value": "3",
+          "label": "t:display_type_3"
+        },
+        {
+          "value": "4",
+          "label": "t:display_type_4"
+        },
+        {
+          "value": "5",
+          "label": "t:display_type_5"
+        },
+        {
+          "value": "6",
+          "label": "t:display_type_6_video"
+        }
+      ]
+    },
+    {
+      "type": "checkbox",
+      "id": "wrap_in_card",
+      "label": "t:wrap_in_card",
+      "default": true
+    },
+    {
+      "type": "color_scheme",
+      "id": "color_scheme",
+      "label": "t:color_scheme",
+      "default": "color-scheme-1",
+      "visible_if": "{{ block.settings.wrap_in_card }}"
+    },
+    {
+      "type": "checkbox",
+      "id": "show_card_border",
+      "label": "t:show_card_border",
+      "default": true,
+      "visible_if": "{{ block.settings.wrap_in_card }}"
+    },
+    {
+      "type": "header",
+      "content": "t:content"
+    },
+    {
+      "type": "range",
+      "id": "rating",
+      "label": "t:rating",
+      "default": 4.5,
+      "min": 0,
+      "max": 5,
+      "step": 0.1
+    },
+    {
+      "type": "image_picker",
+      "id": "image",
+      "label": "t:image",
+      "info": "t:review_image_info",
+      "visible_if": "{{ block.settings.display_type == '3' or block.settings.display_type == '4' }}"
+    },
+    {
+      "type": "select",
+      "id": "image_ratio",
+      "label": "t:aspect_ratio",
+      "options": [
+        {
+          "value": "adapt",
+          "label": "t:auto"
+        },
+        {
+          "value": "portrait",
+          "label": "t:portrait"
+        },
+        {
+          "value": "square",
+          "label": "t:square"
+        },
+        {
+          "value": "landscape",
+          "label": "t:landscape"
+        }
+      ],
+      "default": "landscape",
+      "visible_if": "{{ block.settings.display_type == '3' }}"
+    },
+    {
+      "type": "select",
+      "id": "source",
+      "label": "t:video_source",
+      "options": [
+        {
+          "value": "uploaded",
+          "label": "t:video_uploaded"
+        },
+        {
+          "value": "url",
+          "label": "t:video_external_url"
+        }
+      ],
+      "default": "uploaded",
+      "visible_if": "{{ block.settings.display_type == '6' }}"
+    },
+    {
+      "type": "video",
+      "id": "video",
+      "label": "t:video",
+      "visible_if": "{{ block.settings.display_type == '6' and block.settings.source == 'uploaded' }}"
+    },
+    {
+      "type": "video_url",
+      "id": "video_url",
+      "label": "t:video_external_url",
+      "info": "t:video_external_info",
+      "accept": ["youtube", "vimeo"],
+      "visible_if": "{{ block.settings.display_type == '6' and block.settings.source == 'url' }}"
+    },
+    {
+      "type": "text",
+      "id": "title",
+      "label": "t:title",
+      "default": "Excellent produit !",
+      "visible_if": "{{ block.settings.display_type == '2' or block.settings.display_type == '5' }}"
+    },
+    {
+      "type": "richtext",
+      "id": "content",
+      "label": "t:content",
+      "default": "<p>Écrivez un retour à propos de vos produits. Ajustez le nombre de colonnes en fonction de la taille moyenne des messages.</p>"
+    },
+    {
+      "type": "image_picker",
+      "id": "author_profile",
+      "label": "t:author_profile",
+      "info": "t:review_author_profile_info",
+      "visible_if": "{{ block.settings.display_type == '5' }}"
+    },
+    {
+      "type": "text",
+      "id": "author",
+      "label": "t:author",
+      "default": "John Doe"
+    },
+    {
+      "type": "text",
+      "id": "date",
+      "label": "t:date",
+      "default": "11/03/2025"
+    },
+    {
+      "type": "header",
+      "content": "t:margins"
+    },
+    {
+      "type": "range",
+      "id": "margin_top",
+      "label": "t:margin_top",
+      "default": 0,
+      "min": 0,
+      "max": 100,
+      "step": 1,
+      "unit": "px"
+    },
+    {
+      "type": "range",
+      "id": "margin_bottom",
+      "label": "t:margin_bottom",
+      "default": 0,
+      "min": 0,
+      "max": 100,
+      "step": 1,
+      "unit": "px"
+    },
+    {
+      "type": "header",
+      "content": "t:advanced_settings"
+    },
+    {
+      "type": "text",
+      "id": "additional_class",
+      "label": "t:additional_class",
+      "info": "t:additional_class_info"
+    },
+    {
+      "type": "header",
+      "content": "t:go_further"
+    },
+    {
+      "type": "paragraph",
+      "content": "t:go_further_description"
+    }
+  ],
+  "presets": [
+    {
+      "name": "t:review_display_1",
+      "category": "t:reviews",
+      "settings": {
+        "show_on_display": "desktop_and_mobile",
+        "display_type": "1",
+        "wrap_in_card": true,
+        "color_scheme": "scheme-1",
+        "show_card_border": true,
+        "rating": 4.5,
+        "image_ratio": "landscape",
+        "title": "t:review_title_default",
+        "content": "t:review_content_default",
+        "author": "John Doe",
+        "date": "t:review_date_default",
+        "margin_top": 0,
+        "margin_bottom": 0,
+        "additional_class": ""
+      }
+    },
+    {
+      "name": "t:review_display_2",
+      "category": "t:reviews",
+      "settings": {
+        "show_on_display": "desktop_and_mobile",
+        "display_type": "2",
+        "wrap_in_card": true,
+        "color_scheme": "",
+        "show_card_border": true,
+        "rating": 4.5,
+        "image_ratio": "landscape",
+        "title": "t:review_title_default",
+        "content": "t:review_content_default",
+        "author": "John Doe",
+        "date": "t:review_date_default",
+        "margin_top": 0,
+        "margin_bottom": 0,
+        "additional_class": ""
+      }
+    },
+    {
+      "name": "t:review_display_3",
+      "category": "t:reviews",
+      "settings": {
+        "show_on_display": "desktop_and_mobile",
+        "display_type": "3",
+        "wrap_in_card": true,
+        "color_scheme": "",
+        "show_card_border": true,
+        "rating": 4.5,
+        "image_ratio": "landscape",
+        "title": "t:review_title_default",
+        "content": "t:review_content_default",
+        "author": "John Doe",
+        "date": "t:review_date_default",
+        "margin_top": 0,
+        "margin_bottom": 0,
+        "additional_class": ""
+      }
+    },
+    {
+      "name": "t:review_display_4",
+      "category": "t:reviews",
+      "settings": {
+        "show_on_display": "desktop_and_mobile",
+        "display_type": "4",
+        "wrap_in_card": true,
+        "color_scheme": "",
+        "show_card_border": true,
+        "rating": 4.5,
+        "image_ratio": "landscape",
+        "title": "t:review_title_default",
+        "content": "t:review_content_default",
+        "author": "John Doe",
+        "date": "t:review_date_default_3",
+        "margin_top": 0,
+        "margin_bottom": 0,
+        "additional_class": ""
+      }
+    },
+    {
+      "name": "t:review_display_5",
+      "category": "t:reviews",
+      "settings": {
+        "show_on_display": "desktop_and_mobile",
+        "display_type": "5",
+        "wrap_in_card": true,
+        "color_scheme": "",
+        "show_card_border": true,
+        "rating": 4.5,
+        "image_ratio": "landscape",
+        "title": "t:review_title_default",
+        "content": "t:review_content_default",
+        "author": "John Doe",
+        "date": "t:review_date_default_3",
+        "margin_top": 0,
+        "margin_bottom": 0,
+        "additional_class": ""
+      }
+    },
+    {
+      "name": "t:review_display_6_video",
+      "category": "t:reviews",
+      "settings": {
+        "show_on_display": "desktop_and_mobile",
+        "display_type": "6",
+        "wrap_in_card": true,
+        "color_scheme": "",
+        "show_card_border": true,
+        "rating": 4.5,
+        "image_ratio": "landscape",
+        "title": "t:review_title_default",
+        "content": "t:review_content_default",
+        "author": "John Doe",
+        "date": "t:review_date_default_3",
+        "margin_top": 0,
+        "margin_bottom": 0,
+        "additional_class": ""
+      }
+    }
+  ]
+}
+{% endschema %}

@@ -1,0 +1,127 @@
+{% liquid
+  if request.visual_preview_mode and product == blank
+    assign product = collections.all.products.first
+  endif
+%}
+
+{% if product != blank %}
+  <div
+    {% if section.settings.anchor_id != blank %}
+      id="{{ section.settings.anchor_id }}"
+    {% endif %}
+    class="
+      product-section color-{{ section.settings.color_scheme }}
+      {% if section.settings.carrousel_full_width %} product-section--carrousel-image-full-width{% endif %}
+    "
+    style="
+      --margin-top: {{ section.settings.margin_top }}px;
+      --margin-bottom: {{ section.settings.margin_bottom }}px;
+      --image-position: {{ section.settings.image_position }};
+      --product-info-width: {{ section.settings.product_info_width }}%;
+      --gap: {{ section.settings.gap }}px;
+    "
+  >
+    <div
+      class="product-section__content page-width"
+      style="
+        --padding-top: {{ section.settings.padding_top }}px;
+        --padding-bottom: {{ section.settings.padding_bottom }}px;
+      "
+      data-ref="product-section-content"
+    >
+      <div class="product-section__medias {% if section.settings.carrousel_sticky %}product-section__medias--sticky{% endif %}">
+        <div class="product-section__medias-container">
+          {{ media_gallery }}
+        </div>
+      </div>
+
+      <div
+        class="
+          product-section__product-info
+          {% if section.settings.product_info_sticky %}product-section__product-info--sticky{% endif %}
+          {% if section.settings.show_product_info_card %}card color-{{ section.settings.color_scheme_product_info }}{% endif %}
+        "
+        data-ref="product-section-product-info"
+      >
+        {{ blocks }}
+      </div>
+    </div>
+  </div>
+{% elsif request.design_mode %}
+  <div class="design-mode-message-container page-width color-{{ section.settings.color_scheme }}">
+    <p class="design-mode-message">{{ 'products.no_product' | t }}</p>
+  </div>
+{% endif %}
+
+{% stylesheet %}
+  @media (width > 750px) {
+    .shopify-section-product-section {
+      overflow: visible;
+    }
+  }
+
+  .product-section {
+    margin-top: var(--margin-top);
+    margin-bottom: var(--margin-bottom);
+  }
+
+  .product-section__content {
+    display: flex;
+    justify-content: space-between;
+    flex-direction: column;
+    gap: var(--gap-md);
+    padding-top: var(--padding-top);
+    padding-bottom: var(--padding-bottom);
+  }
+
+  .product-section__product-info {
+    display: flex;
+    flex-direction: column;
+    gap: var(--padding-sm);
+  }
+
+  @media (width > 750px) {
+    .product-section__content {
+      flex-direction: var(--image-position);
+      gap: var(--gap);
+    }
+
+    .product-section__medias-container {
+      overflow: hidden;
+    }
+
+    .product-section__medias {
+      width: calc(100% - var(--product-info-width));
+    }
+
+    .product-section__product-info {
+      max-width: calc(var(--product-info-width) - var(--gap));
+      width: 100%;
+    }
+
+    .product-section__medias--sticky,
+    .product-section__product-info--sticky {
+      height: fit-content;
+      position: sticky;
+      top: calc(var(--header-height, 0px) + var(--padding-md));
+      z-index: 2;
+    }
+  }
+
+  @media (width <= 750px) {
+    .product-section--carrousel-image-full-width {
+      .product-section__content {
+        padding-top: 0 !important;
+      }
+
+      .product-media-gallery-main-slider {
+        width: calc(100% + 2 * (var(--page-margin-mobile)));
+        margin-left: calc(var(--page-margin-mobile) * -1);
+      }
+
+      .product-media-gallery__media--rounded {
+        border-radius: 0;
+      }
+    }
+  }
+{% endstylesheet %}

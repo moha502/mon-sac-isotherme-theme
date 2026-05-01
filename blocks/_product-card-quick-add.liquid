@@ -1,0 +1,281 @@
+{% assign product = closest.product %}
+
+<script type="module" src="{{ 'quick-add.js' | asset_url }}"></script>
+
+<quick-add-component
+  class="
+    quick-add-component
+    {%- if block.settings.align_quick_add_together %} quick-add-component--aligned-at-bottom{% endif -%}
+    {%- if block.settings.show_on_display == 'desktop_only' %} mobile-hide{% endif -%}
+    {%- if block.settings.show_on_display == 'mobile_only' %} desktop-hide{% endif -%}
+    {%- if block.settings.additional_class != blank %} {{ block.settings.additional_class }}{% endif -%}
+  "
+  style="
+    --margin-top: {{ block.settings.margin_top }}px;
+    --margin-bottom: {{ block.settings.margin_bottom }}px;
+  "
+  {{ block.shopify_attributes }}
+  {% if request.visual_preview_mode %}
+    data-visual-preview-mode
+  {% endif %}
+>
+  {%- if product.variants.size == 1 -%}
+    <button
+      class="button button--{{ block.settings.button_style }} button--{{ block.settings.button_shape }} button--full-width quick-add-button"
+      data-ref="add-to-cart-button"
+      data-product-id="{{ product.id }}"
+      data-variant-id="{{ product.variants.first.id }}"
+      {% if product.available == false %}
+        disabled
+      {% endif %}
+    >
+      <span class="button__content">
+        {%- if product.available -%}
+          <span class="full-add-to-cart-text">
+            {{ 'products.add_to_cart' | t }}
+          </span>
+          <span class="small-add-to-cart-text">
+            {{ 'products.add' | t }}
+          </span>
+        {%- else -%}
+          {{ 'products.add_to_cart_unavailable' | t }}
+        {%- endif -%}
+      </span>
+
+      {% render 'loading-spinner' %}
+    </button>
+  {%- endif -%}
+
+  {%- if product.variants.size > 1 -%}
+    <dialog-component
+      data-ref="popup-component"
+      data-show-product-media-gallery="{{ block.settings.show_product_media_gallery }}"
+    >
+      <dialog
+        id="popup-{{ block.id }}"
+        class="dialog-modal card color-scheme-1{% if settings.popup_style_mobile == 'bottom' %} dialog-modal--bottom{% endif %}"
+        data-ref="popup-modal"
+      >
+        <div class="dialog-modal__content" data-ref="popup-content">
+          {% render 'loading-spinner' %}
+        </div>
+
+        <div class="dialog-modal__close">
+          {% render 'button', block: block, icon: 'close', button_style: 'tertiary', button_shape: 'small', data: 'data-ref="popup-close"' %}
+        </div>
+      </dialog>
+
+      <button
+        class="button button--{{ block.settings.button_style }} button--{{ block.settings.button_shape }} button--full-width quick-add-button"
+        data-ref="popup-toggle"
+        data-product-page-url="{{ product.url }}"
+        {% if product.available == false %}
+          disabled
+        {% endif %}
+      >
+        <span class="button__content">
+          {%- if product.available -%}
+            <span class="full-add-to-cart-text">
+              {{ 'products.add_to_cart' | t }}
+            </span>
+            <span class="small-add-to-cart-text">
+              {{ 'products.add' | t }}
+            </span>
+          {%- else -%}
+            {{ 'products.add_to_cart_unavailable' | t }}
+          {%- endif -%}
+        </span>
+      </button>
+    </dialog-component>
+  {%- endif -%}
+</quick-add-component>
+
+{% stylesheet %}
+  .quick-add-component {
+    display: block;
+    width: 100%;
+    cursor: auto;
+    margin-top: var(--margin-top);
+    margin-bottom: var(--margin-bottom);
+  }
+
+  .quick-add-component--aligned-at-bottom {
+    margin-top: auto;
+  }
+
+  .quick-add-component .dialog-modal {
+    overflow-x: hidden;
+  }
+
+  .quick-add-component .quick-add-button {
+    container-type: inline-size;
+  }
+
+  .quick-add-button .full-add-to-cart-text {
+    display: block;
+  }
+
+  .quick-add-button .small-add-to-cart-text {
+    display: none;
+  }
+
+  @container (width < 200px) {
+    .quick-add-button .full-add-to-cart-text {
+      display: none;
+    }
+
+    .quick-add-button .small-add-to-cart-text {
+      display: block;
+    }
+  }
+
+  .quick-add-component .dialog-modal__content {
+    display: flex;
+    flex-direction: column;
+    gap: var(--gap-sm);
+  }
+
+  .quick-add-component .dialog-modal__content > * {
+    margin-block: 0;
+  }
+
+  .quick-add-component .dialog-modal__content .fake-variant-picker,
+  .quick-add-component .dialog-modal__content .slider-block,
+  .quick-add-component .dialog-modal__content .stories__container {
+    display: none;
+  }
+
+  .quick-add-component .product-section__medias--sticky,
+  .quick-add-component .product-section__product-info--sticky {
+    position: relative !important;
+  }
+
+  Neutralize sticky add-to-cart inside quick-add dialogs .quick-add-component .sticky-add-to-cart,
+  .quick-add-component .sticky-add-to-cart[data-active='true'] {
+    position: static !important;
+    bottom: auto !important;
+    left: auto !important;
+    padding: 0 !important;
+    border-top: none !important;
+    z-index: auto !important;
+    transition: none !important;
+
+    .sticky-add-to-cart__content {
+      padding: 0 !important;
+    }
+  }
+{% endstylesheet %}
+
+{% schema %}
+{
+  "name": "t:product_card_quick_add",
+  "tag": null,
+  "settings": [
+    {
+      "type": "select",
+      "id": "show_on_display",
+      "label": "t:show_on_display",
+      "default": "desktop_and_mobile",
+      "options": [
+        { "value": "desktop_and_mobile", "label": "t:desktop_and_mobile" },
+        { "value": "desktop_only", "label": "t:desktop_only" },
+        { "value": "mobile_only", "label": "t:mobile_only" }
+      ]
+    },
+    {
+      "type": "header",
+      "content": "t:style"
+    },
+    {
+      "type": "select",
+      "id": "button_style",
+      "label": "t:button_style",
+      "options": [
+        {
+          "value": "primary",
+          "label": "t:primary"
+        },
+        {
+          "value": "secondary",
+          "label": "t:secondary"
+        }
+      ],
+      "default": "secondary"
+    },
+    {
+      "type": "select",
+      "id": "button_shape",
+      "label": "t:button_shape",
+      "options": [
+        { "value": "default", "label": "t:normal" },
+        { "value": "small", "label": "t:small" }
+      ],
+      "default": "default"
+    },
+    {
+      "type": "checkbox",
+      "id": "align_quick_add_together",
+      "label": "t:align_quick_add_together",
+      "default": false
+    },
+    {
+      "type": "header",
+      "content": "t:content"
+    },
+    {
+      "type": "checkbox",
+      "id": "show_product_media_gallery",
+      "label": "t:show_product_media_gallery",
+      "default": false
+    },
+    {
+      "type": "header",
+      "content": "t:margins"
+    },
+    {
+      "type": "range",
+      "id": "margin_top",
+      "label": "t:margin_top",
+      "default": 0,
+      "min": 0,
+      "max": 100,
+      "step": 1,
+      "unit": "px"
+    },
+    {
+      "type": "range",
+      "id": "margin_bottom",
+      "label": "t:margin_bottom",
+      "default": 0,
+      "min": 0,
+      "max": 100,
+      "step": 1,
+      "unit": "px"
+    },
+    {
+      "type": "header",
+      "content": "t:advanced_settings"
+    },
+    {
+      "type": "text",
+      "id": "additional_class",
+      "label": "t:additional_class",
+      "info": "t:additional_class_info"
+    },
+    {
+      "type": "header",
+      "content": "t:go_further"
+    },
+    {
+      "type": "paragraph",
+      "content": "t:go_further_description"
+    }
+  ],
+  "presets": [
+    {
+      "name": "t:product_card_quick_add",
+      "category": "t:product"
+    }
+  ]
+}
+{% endschema %}

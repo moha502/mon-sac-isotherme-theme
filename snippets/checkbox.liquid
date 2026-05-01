@@ -1,0 +1,172 @@
+{% doc %}
+  Affiche une case à cocher.
+
+  @param {string} [label] - Le texte de la case à cocher
+  @param {boolean} [checked] - Indique si la case est cochée par défaut
+  @param {boolean} [disabled] - Indique si la case est désactivée
+  @param {string} [name] - Le nom de la case à cocher (pour le formulaire)
+  @param {string} [id] - L'id de la case à cocher (pour le formulaire)
+  @param {string} [value] - La valeur de la case à cocher (pour le formulaire)
+  @param {string} [additionnal_label_content] - Contenu additionnel à afficher à côté du label
+  @param {string} [data] - Attribut data à ajouter au label
+  @param {string} [aria_label] - Attribut aria-label à ajouter au label
+
+  @example
+  {% render 'checkbox', label: 'Case à cocher', checked: true, name: 'checkbox-1' %}
+{% enddoc %}
+
+<label class="checkbox">
+  <input
+    type="checkbox"
+    {% if checked %}
+      checked
+    {% endif %}
+    {% if disabled %}
+      disabled
+    {% endif %}
+    {% if name %}
+      name="{{ name }}"
+    {% endif %}
+    {% if aria_label %}
+      aria-label="{{ aria_label }}"
+    {% endif %}
+    {% if id %}
+      id="{{ id }}"
+    {% endif %}
+    {% if value %}
+      value="{{ value }}"
+    {% endif %}
+    {% if data %}
+      {{ data }}
+    {% endif %}
+  >
+  <span>
+    {% if additionnal_label_content != blank %}
+      <span class="checkbox__additionnal-label-content">
+        {{ additionnal_label_content }}
+      </span>
+    {% endif %}
+    {{ label }}
+  </span>
+</label>
+
+{% stylesheet %}
+  .checkbox {
+    z-index: 0;
+    position: relative;
+    display: block;
+    line-height: var(--checkbox-size);
+  }
+
+  .checkbox > input {
+    appearance: none;
+    -moz-appearance: none;
+    -webkit-appearance: none;
+    z-index: -1;
+    position: absolute;
+    left: -8px;
+    top: -8px;
+    display: block;
+    margin: 0;
+    border-radius: 50%;
+    width: 36px;
+    height: 36px;
+    box-shadow: none;
+    outline: none;
+    opacity: 0;
+    transform: scale(1);
+    pointer-events: none;
+    transition: opacity 0.3s, transform 0.2s;
+  }
+
+  .checkbox > span {
+    display: flex;
+    align-items: center;
+    width: 100%;
+    cursor: pointer;
+    font-size: var(--font-body--size-emphasized);
+  }
+
+  .checkbox__additionnal-label-content {
+    margin-right: var(--margin-sm);
+  }
+
+  .checkbox > span::before {
+    content: '';
+    display: inline-block;
+    box-sizing: border-box;
+    margin-right: var(--margin-sm);
+    border: var(--inputs-border-width) solid var(--color-input-border);
+    border-radius: var(--checkbox-border-radius);
+    min-width: var(--checkbox-size);
+    width: var(--checkbox-size);
+    height: var(--checkbox-size);
+    vertical-align: top;
+    transition: border-color 0.2s, background-color 0.2s;
+    background-color: var(--color-input-background);
+  }
+
+  .checkbox > span:empty::before {
+    margin-right: 0;
+  }
+
+  .checkbox > span::after {
+    content: '';
+    display: block;
+    position: absolute;
+    top: 0;
+    left: 1px;
+    width: 0.6rem;
+    height: 0.3rem;
+    border: solid 1.5px transparent;
+    border-right: none;
+    border-top: none;
+    transform: translate(0.22rem, 0.32rem) rotate(-45deg);
+  }
+
+  .checkbox > input:checked + span::before,
+  .checkbox > input:indeterminate + span::before {
+    border-color: var(--color-input-text);
+    background-color: var(--color-input-text);
+  }
+
+  .checkbox > input:checked + span::after,
+  .checkbox > input:indeterminate + span::after {
+    border-color: var(--color-input-background);
+  }
+
+  .checkbox > input:indeterminate + span::after {
+    border-left: none;
+    transform: translate(0.25rem, 0.1875rem);
+  }
+
+  .checkbox > input:focus {
+    opacity: 0.12;
+  }
+
+  .checkbox > input:disabled {
+    opacity: 0;
+  }
+
+  .checkbox > input:disabled + span {
+    color: var(--color-input-text);
+    cursor: initial;
+    opacity: 0.5;
+  }
+
+  .checkbox > input:disabled + span::before {
+    border-color: var(--color-input-border);
+    cursor: not-allowed;
+  }
+
+  .checkbox > input:checked:disabled + span::before,
+  .checkbox > input:indeterminate:disabled + span::before {
+    border-color: transparent;
+    background-color: currentColor;
+  }
+
+  .checkbox > input:checked:disabled + span::after {
+    border-color: var(--color-input-background);
+    cursor: not-allowed;
+  }
+{% endstylesheet %}

@@ -1,0 +1,630 @@
+<div
+  class="
+    reviews color-{{ section.settings.color_scheme }}
+    {%- if section.settings.show_on_display == 'desktop_only' %} mobile-hide{% endif -%}
+    {%- if section.settings.show_on_display == 'mobile_only' %} desktop-hide{% endif -%}
+    {{ section.settings.additional_class }}
+  "
+  style="
+    --margin-top: {{ section.settings.margin_top }}px;
+    --margin-bottom: {{ section.settings.margin_bottom }}px;
+    --padding-top: {{ section.settings.padding_top }}px;
+    --padding-bottom: {{ section.settings.padding_bottom }}px;
+  "
+  id="{{ section.settings.anchor }}"
+>
+  <div class="page-width">
+    {% content_for 'block', type: 'text', id: 'title' %}
+
+    {% capture reviews %}
+      {% content_for 'blocks' %}
+    {% endcapture %}
+
+    {% if section.settings.layout_type == 'grid' %}
+      <ul
+        class="reviews__grid"
+        style="
+          --grid-columns: {{ section.settings.grid_columns }};
+          --grid-columns-mobile: {{ section.settings.grid_columns_mobile }};
+        "
+      >
+        {{ reviews }}
+      </ul>
+    {% elsif section.settings.layout_type == 'slider' %}
+      {% if settings.grids_vertical_gap == 'very_small' %}
+        {% assign slider_gap = 5 %}
+      {% elsif settings.grids_vertical_gap == 'small' %}
+        {% assign slider_gap = 8 %}
+      {% elsif settings.grids_vertical_gap == 'normal' %}
+        {% assign slider_gap = 16 %}
+      {% elsif settings.grids_vertical_gap == 'larger' %}
+        {% assign slider_gap = 32 %}
+      {% elsif settings.grids_vertical_gap == 'largest' %}
+        {% assign slider_gap = 48 %}
+      {% endif %}
+
+      {% render 'slider',
+        block: section,
+        slides: reviews,
+        gap: slider_gap,
+        show_arrows: section.settings.show_arrows,
+        arrows_button_style: section.settings.arrows_button_style,
+        show_pagination: section.settings.show_pagination,
+        per_page_desktop: section.settings.slider_items,
+        per_page_mobile: section.settings.slider_items_mobile,
+        rewind: section.settings.rewind
+      %}
+    {% endif %}
+  </div>
+</div>
+
+{% stylesheet %}
+  .section-reviews {
+    max-width: 100%;
+    padding: 0;
+  }
+
+  .reviews {
+    margin-top: var(--margin-top);
+    margin-bottom: var(--margin-bottom);
+    padding-top: var(--padding-top);
+    padding-bottom: var(--padding-bottom);
+    width: 100%;
+  }
+
+  .reviews__title {
+    margin-bottom: var(--gap-lg);
+  }
+
+  .reviews__grid {
+    display: grid;
+    grid-template-columns: repeat(var(--grid-columns-mobile), 1fr);
+    column-gap: var(--grid-gap-vertical);
+    row-gap: var(--grid-gap-horizontal);
+    list-style: none;
+    padding: 0;
+    margin: 0;
+  }
+
+  @media (width > 750px) {
+    .reviews__grid {
+      grid-template-columns: repeat(var(--grid-columns), 1fr);
+    }
+  }
+
+  .reviews .splide {
+    padding-bottom: 20px;
+  }
+{% endstylesheet %}
+
+{% schema %}
+{
+  "name": "t:reviews",
+  "class": "section-reviews",
+  "disabled_on": {
+    "groups": ["header", "custom.cart_drawer", "custom.breadcrumbs"]
+  },
+  "blocks": [
+    {
+      "type": "_review-slide"
+    },
+    {
+      "type": "text"
+    }
+  ],
+  "settings": [
+    {
+      "type": "select",
+      "id": "show_on_display",
+      "label": "t:show_on_display",
+      "default": "desktop_and_mobile",
+      "options": [
+        { "value": "desktop_and_mobile", "label": "t:desktop_and_mobile" },
+        { "value": "desktop_only", "label": "t:desktop_only" },
+        { "value": "mobile_only", "label": "t:mobile_only" }
+      ]
+    },
+    {
+      "type": "text",
+      "id": "anchor",
+      "label": "t:anchor",
+      "default": "reviews",
+      "info": "t:anchor_info"
+    },
+    {
+      "type": "header",
+      "content": "t:style"
+    },
+    {
+      "type": "color_scheme",
+      "id": "color_scheme",
+      "label": "t:color_scheme",
+      "default": "scheme-1"
+    },
+    {
+      "type": "header",
+      "content": "t:layout"
+    },
+    {
+      "type": "select",
+      "id": "layout_type",
+      "label": "t:layout_type",
+      "default": "grid",
+      "options": [
+        { "value": "grid", "label": "t:grid" },
+        { "value": "slider", "label": "t:slider" }
+      ]
+    },
+    {
+      "type": "header",
+      "content": "t:grid",
+      "visible_if": "{{ section.settings.layout_type == 'grid' }}"
+    },
+    {
+      "type": "range",
+      "id": "grid_columns",
+      "label": "t:grid_columns_desktop",
+      "min": 2,
+      "max": 5,
+      "default": 4,
+      "step": 1,
+      "visible_if": "{{ section.settings.layout_type == 'grid' }}"
+    },
+    {
+      "type": "select",
+      "id": "grid_columns_mobile",
+      "label": "t:grid_columns_mobile",
+      "default": "2",
+      "options": [
+        { "value": "1", "label": "1" },
+        { "value": "2", "label": "2" }
+      ],
+      "visible_if": "{{ section.settings.layout_type == 'grid' }}"
+    },
+    {
+      "type": "header",
+      "content": "t:slider",
+      "visible_if": "{{ section.settings.layout_type == 'slider' }}"
+    },
+    {
+      "type": "range",
+      "id": "slider_items",
+      "label": "t:slider_items",
+      "min": 2,
+      "max": 5,
+      "default": 4,
+      "step": 1,
+      "visible_if": "{{ section.settings.layout_type == 'slider' }}"
+    },
+    {
+      "type": "select",
+      "id": "slider_items_mobile",
+      "label": "t:slider_items_mobile",
+      "default": "1.8",
+      "options": [
+        { "value": "1", "label": "1" },
+        { "value": "1.8", "label": "1,8" },
+        { "value": "2", "label": "2" }
+      ],
+      "visible_if": "{{ section.settings.layout_type == 'slider' }}"
+    },
+    {
+      "type": "checkbox",
+      "id": "show_arrows",
+      "label": "t:show_arrows",
+      "default": false,
+      "visible_if": "{{ section.settings.layout_type == 'slider' }}"
+    },
+    {
+      "type": "select",
+      "id": "arrows_button_style",
+      "label": "t:arrows_button_style",
+      "options": [
+        { "value": "primary", "label": "t:primary" },
+        { "value": "secondary", "label": "t:secondary" },
+        { "value": "tertiary", "label": "t:tertiary" }
+      ],
+      "default": "secondary",
+      "visible_if": "{{ section.settings.layout_type == 'slider' and section.settings.show_arrows }}"
+    },
+    {
+      "type": "checkbox",
+      "id": "show_pagination",
+      "label": "t:show_pagination",
+      "default": true,
+      "visible_if": "{{ section.settings.layout_type == 'slider' }}"
+    },
+    {
+      "type": "checkbox",
+      "id": "rewind",
+      "label": "t:rewind",
+      "default": false,
+      "visible_if": "{{ section.settings.layout_type == 'slider' }}"
+    },
+    {
+      "type": "header",
+      "content": "t:paddings"
+    },
+    {
+      "type": "range",
+      "id": "padding_top",
+      "label": "t:padding_top",
+      "default": 50,
+      "min": 0,
+      "max": 100,
+      "step": 1,
+      "unit": "px"
+    },
+    {
+      "type": "range",
+      "id": "padding_bottom",
+      "label": "t:padding_bottom",
+      "default": 50,
+      "min": 0,
+      "max": 100,
+      "step": 1,
+      "unit": "px"
+    },
+    {
+      "type": "header",
+      "content": "t:margins"
+    },
+    {
+      "type": "range",
+      "id": "margin_top",
+      "label": "t:margin_top",
+      "default": 0,
+      "min": 0,
+      "max": 100,
+      "step": 1,
+      "unit": "px"
+    },
+    {
+      "type": "range",
+      "id": "margin_bottom",
+      "label": "t:margin_bottom",
+      "default": 0,
+      "min": 0,
+      "max": 100,
+      "step": 1,
+      "unit": "px"
+    },
+    {
+      "type": "header",
+      "content": "t:advanced_settings"
+    },
+    {
+      "type": "text",
+      "id": "additional_class",
+      "label": "t:additional_class",
+      "info": "t:additional_class_info"
+    },
+    {
+      "type": "header",
+      "content": "t:go_further"
+    },
+    {
+      "type": "paragraph",
+      "content": "t:go_further_description"
+    }
+  ],
+  "presets": [
+    {
+      "name": "t:reviews_grid",
+      "category": "t:reviews",
+      "settings": {
+        "show_on_display": "desktop_and_mobile",
+        "layout_type": "grid",
+        "color_scheme": "scheme-1",
+        "grid_columns": 3,
+        "grid_columns_mobile": "1",
+        "slider_items": 3,
+        "slider_items_mobile": "1",
+        "rewind": false,
+        "margin_top": 0,
+        "margin_bottom": 0,
+        "padding_top": 60,
+        "padding_bottom": 60,
+        "additional_class": ""
+      },
+      "blocks": [
+        {
+          "type": "text",
+          "id": "title",
+          "static": true,
+          "settings": {
+            "show_on_display": "desktop_and_mobile",
+            "text": "t:reviews_section_title_default",
+            "show_read_more": false,
+            "read_more_length": 200,
+            "text_style": "h3",
+            "font_weight": 400,
+            "alignment": "left",
+            "margin_top": 0,
+            "margin_bottom": 30,
+            "additional_class": ""
+          }
+        },
+        {
+          "type": "_review-slide",
+          "name": "t:review_display_1",
+          "settings": {
+            "show_on_display": "desktop_and_mobile",
+            "display_type": "1",
+            "wrap_in_card": true,
+            "color_scheme": "scheme-1",
+            "show_card_border": true,
+            "rating": 4.5,
+            "image_ratio": "landscape",
+            "title": "t:reviews_excellent_product_title_default",
+            "content": "t:reviews_content_example_default",
+            "author": "t:reviews_author_example_default",
+            "date": "t:reviews_date_example_default",
+            "margin_top": 0,
+            "margin_bottom": 0,
+            "additional_class": ""
+          }
+        },
+        {
+          "type": "_review-slide",
+          "name": "t:review_display_1",
+          "settings": {
+            "show_on_display": "desktop_and_mobile",
+            "display_type": "1",
+            "wrap_in_card": true,
+            "color_scheme": "scheme-1",
+            "show_card_border": true,
+            "rating": 4.5,
+            "image_ratio": "landscape",
+            "title": "t:reviews_excellent_product_title_default",
+            "content": "t:reviews_content_example_default",
+            "author": "t:reviews_author_example_default",
+            "date": "t:reviews_date_example_default",
+            "margin_top": 0,
+            "margin_bottom": 0,
+            "additional_class": ""
+          }
+        },
+        {
+          "type": "_review-slide",
+          "name": "t:review_display_1",
+          "settings": {
+            "show_on_display": "desktop_and_mobile",
+            "display_type": "1",
+            "wrap_in_card": true,
+            "color_scheme": "scheme-1",
+            "show_card_border": true,
+            "rating": 4.5,
+            "image_ratio": "landscape",
+            "title": "t:reviews_excellent_product_title_default",
+            "content": "t:reviews_content_example_default",
+            "author": "t:reviews_author_example_default",
+            "date": "t:reviews_date_example_default",
+            "margin_top": 0,
+            "margin_bottom": 0,
+            "additional_class": ""
+          }
+        },
+        {
+          "type": "_review-slide",
+          "name": "t:review_display_1",
+          "settings": {
+            "show_on_display": "desktop_and_mobile",
+            "display_type": "1",
+            "wrap_in_card": true,
+            "color_scheme": "scheme-1",
+            "show_card_border": true,
+            "rating": 4.5,
+            "image_ratio": "landscape",
+            "title": "t:reviews_excellent_product_title_default",
+            "content": "t:reviews_content_example_default",
+            "author": "t:reviews_author_example_default",
+            "date": "t:reviews_date_example_default",
+            "margin_top": 0,
+            "margin_bottom": 0,
+            "additional_class": ""
+          }
+        },
+        {
+          "type": "_review-slide",
+          "name": "t:review_display_1",
+          "settings": {
+            "show_on_display": "desktop_and_mobile",
+            "display_type": "1",
+            "wrap_in_card": true,
+            "color_scheme": "scheme-1",
+            "show_card_border": true,
+            "rating": 4.5,
+            "image_ratio": "landscape",
+            "title": "t:reviews_excellent_product_title_default",
+            "content": "t:reviews_content_example_default",
+            "author": "t:reviews_author_example_default",
+            "date": "t:reviews_date_example_default",
+            "margin_top": 0,
+            "margin_bottom": 0,
+            "additional_class": ""
+          }
+        },
+        {
+          "type": "_review-slide",
+          "name": "t:review_display_1",
+          "settings": {
+            "show_on_display": "desktop_and_mobile",
+            "display_type": "1",
+            "wrap_in_card": true,
+            "color_scheme": "scheme-1",
+            "show_card_border": true,
+            "rating": 4.5,
+            "image_ratio": "landscape",
+            "title": "t:reviews_excellent_product_title_default",
+            "content": "t:reviews_content_example_default",
+            "author": "t:reviews_author_example_default",
+            "date": "t:reviews_date_example_default",
+            "margin_top": 0,
+            "margin_bottom": 0,
+            "additional_class": ""
+          }
+        }
+      ]
+    },
+    {
+      "name": "t:reviews_slider",
+      "category": "t:reviews",
+      "settings": {
+        "show_on_display": "desktop_and_mobile",
+        "layout_type": "slider",
+        "color_scheme": "scheme-1",
+        "grid_columns": 3,
+        "grid_columns_mobile": "1",
+        "slider_items": 3,
+        "slider_items_mobile": "1",
+        "rewind": false,
+        "margin_top": 0,
+        "margin_bottom": 0,
+        "padding_top": 60,
+        "padding_bottom": 60,
+        "additional_class": ""
+      },
+      "blocks": [
+        {
+          "type": "text",
+          "id": "title",
+          "static": true,
+          "settings": {
+            "show_on_display": "desktop_and_mobile",
+            "text": "t:reviews_section_title_default",
+            "show_read_more": false,
+            "read_more_length": 200,
+            "text_style": "h3",
+            "font_weight": 400,
+            "alignment": "left",
+            "margin_top": 0,
+            "margin_bottom": 30,
+            "additional_class": ""
+          }
+        },
+        {
+          "type": "_review-slide",
+          "name": "t:review_display_1",
+          "settings": {
+            "show_on_display": "desktop_and_mobile",
+            "display_type": "1",
+            "wrap_in_card": true,
+            "color_scheme": "scheme-1",
+            "show_card_border": true,
+            "rating": 4.5,
+            "image_ratio": "landscape",
+            "title": "t:reviews_excellent_product_title_default",
+            "content": "t:reviews_content_example_default",
+            "author": "t:reviews_author_example_default",
+            "date": "t:reviews_date_example_default",
+            "margin_top": 0,
+            "margin_bottom": 0,
+            "additional_class": ""
+          }
+        },
+        {
+          "type": "_review-slide",
+          "name": "t:review_display_1",
+          "settings": {
+            "show_on_display": "desktop_and_mobile",
+            "display_type": "1",
+            "wrap_in_card": true,
+            "color_scheme": "scheme-1",
+            "show_card_border": true,
+            "rating": 4.5,
+            "image_ratio": "landscape",
+            "title": "t:reviews_excellent_product_title_default",
+            "content": "t:reviews_content_example_default",
+            "author": "t:reviews_author_example_default",
+            "date": "t:reviews_date_example_default",
+            "margin_top": 0,
+            "margin_bottom": 0,
+            "additional_class": ""
+          }
+        },
+        {
+          "type": "_review-slide",
+          "name": "t:review_display_1",
+          "settings": {
+            "show_on_display": "desktop_and_mobile",
+            "display_type": "1",
+            "wrap_in_card": true,
+            "color_scheme": "scheme-1",
+            "show_card_border": true,
+            "rating": 4.5,
+            "image_ratio": "landscape",
+            "title": "t:reviews_excellent_product_title_default",
+            "content": "t:reviews_content_example_default",
+            "author": "t:reviews_author_example_default",
+            "date": "t:reviews_date_example_default",
+            "margin_top": 0,
+            "margin_bottom": 0,
+            "additional_class": ""
+          }
+        },
+        {
+          "type": "_review-slide",
+          "name": "t:review_display_1",
+          "settings": {
+            "show_on_display": "desktop_and_mobile",
+            "display_type": "1",
+            "wrap_in_card": true,
+            "color_scheme": "scheme-1",
+            "show_card_border": true,
+            "rating": 4.5,
+            "image_ratio": "landscape",
+            "title": "t:reviews_excellent_product_title_default",
+            "content": "t:reviews_content_example_default",
+            "author": "t:reviews_author_example_default",
+            "date": "t:reviews_date_example_default",
+            "margin_top": 0,
+            "margin_bottom": 0,
+            "additional_class": ""
+          }
+        },
+        {
+          "type": "_review-slide",
+          "name": "t:review_display_1",
+          "settings": {
+            "show_on_display": "desktop_and_mobile",
+            "display_type": "1",
+            "wrap_in_card": true,
+            "color_scheme": "scheme-1",
+            "show_card_border": true,
+            "rating": 4.5,
+            "image_ratio": "landscape",
+            "title": "t:reviews_excellent_product_title_default",
+            "content": "t:reviews_content_example_default",
+            "author": "t:reviews_author_example_default",
+            "date": "t:reviews_date_example_default",
+            "margin_top": 0,
+            "margin_bottom": 0,
+            "additional_class": ""
+          }
+        },
+        {
+          "type": "_review-slide",
+          "name": "t:review_display_1",
+          "settings": {
+            "show_on_display": "desktop_and_mobile",
+            "display_type": "1",
+            "wrap_in_card": true,
+            "color_scheme": "scheme-1",
+            "show_card_border": true,
+            "rating": 4.5,
+            "image_ratio": "landscape",
+            "title": "t:reviews_excellent_product_title_default",
+            "content": "t:reviews_content_example_default",
+            "author": "t:reviews_author_example_default",
+            "date": "t:reviews_date_example_default",
+            "margin_top": 0,
+            "margin_bottom": 0,
+            "additional_class": ""
+          }
+        }
+      ]
+    }
+  ]
+}
+{% endschema %}

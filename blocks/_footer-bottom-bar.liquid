@@ -1,0 +1,183 @@
+<div
+  class="
+    footer-bottom-bar
+    {%- if block.settings.show_top_border %} footer-bottom-bar--top-border{% endif -%}
+    {%- if block.settings.additional_class != blank %} {{ block.settings.additional_class }}{% endif -%}
+  "
+  style="
+    --grid-columns: {{ block.settings.layout_grid_columns_desktop }};
+    --grid-columns-mobile: {{ block.settings.layout_grid_columns_mobile }};
+    --gap-mobile: {{ block.settings.layout_gap_mobile }}px;
+    --gap: {{ block.settings.layout_gap_desktop }}px;
+    --margin-top: {{ block.settings.margin_top }}px;
+    --padding-top: {{ block.settings.padding_top }}px;
+    --padding-bottom: {{ block.settings.padding_bottom }}px;
+  "
+  {{ block.shopify_attributes }}
+>
+  <div class="footer-bottom-bar__content page-width">
+    {% content_for 'blocks' %}
+  </div>
+</div>
+
+{% stylesheet %}
+  .footer-bottom-bar {
+    padding-top: var(--padding-top);
+    padding-bottom: var(--padding-bottom);
+    margin-top: var(--margin-top);
+  }
+
+  .footer-bottom-bar--top-border {
+    border-top: var(--separator-border-width) solid var(--color-border);
+  }
+
+  .footer-bottom-bar__content {
+    display: grid;
+    grid-template-columns: repeat(var(--grid-columns-mobile), 1fr);
+    grid-template-rows: auto;
+    gap: var(--gap-mobile);
+    width: 100%;
+  }
+
+  @media (width > 750px) {
+    .footer-bottom-bar__content {
+      gap: var(--gap);
+      grid-template-columns: repeat(var(--grid-columns), 1fr);
+    }
+  }
+{% endstylesheet %}
+
+{% schema %}
+{
+  "name": "t:footer_bottom_bar",
+  "blocks": [
+    {
+      "type": "@theme"
+    },
+    {
+      "type": "@app"
+    }
+  ],
+  "settings": [
+    {
+      "type": "header",
+      "content": "t:style"
+    },
+    {
+      "type": "checkbox",
+      "id": "show_top_border",
+      "label": "t:show_top_border",
+      "default": true
+    },
+    {
+      "type": "header",
+      "content": "t:layout_desktop"
+    },
+    {
+      "type": "range",
+      "id": "layout_grid_columns_desktop",
+      "label": "t:layout_grid_columns",
+      "default": 4,
+      "min": 1,
+      "max": 5,
+      "step": 1,
+      "unit": "|||"
+    },
+    {
+      "type": "range",
+      "id": "layout_gap_desktop",
+      "label": "t:layout_gap",
+      "default": 20,
+      "step": 1,
+      "min": 0,
+      "max": 30,
+      "unit": "px"
+    },
+    {
+      "type": "header",
+      "content": "t:layout_mobile"
+    },
+    {
+      "type": "range",
+      "id": "layout_gap_mobile",
+      "label": "t:layout_gap",
+      "default": 20,
+      "step": 1,
+      "min": 0,
+      "max": 30,
+      "unit": "px"
+    },
+    {
+      "type": "range",
+      "id": "layout_grid_columns_mobile",
+      "label": "t:layout_grid_columns",
+      "default": 1,
+      "min": 1,
+      "max": 4,
+      "step": 1,
+      "unit": "|||"
+    },
+    {
+      "type": "header",
+      "content": "t:paddings"
+    },
+    {
+      "type": "range",
+      "id": "padding_top",
+      "label": "t:padding_top",
+      "default": 20,
+      "min": 0,
+      "max": 100,
+      "step": 1,
+      "unit": "px"
+    },
+    {
+      "type": "range",
+      "id": "padding_bottom",
+      "label": "t:padding_bottom",
+      "default": 20,
+      "min": 0,
+      "max": 100,
+      "step": 1,
+      "unit": "px"
+    },
+    {
+      "type": "header",
+      "content": "t:margins"
+    },
+    {
+      "type": "range",
+      "id": "margin_top",
+      "label": "t:margin_top",
+      "default": 20,
+      "min": 0,
+      "max": 100,
+      "step": 1,
+      "unit": "px"
+    },
+    {
+      "type": "header",
+      "content": "t:advanced_settings"
+    },
+    {
+      "type": "text",
+      "id": "additional_class",
+      "label": "t:additional_class",
+      "info": "t:additional_class_info"
+    },
+    {
+      "type": "header",
+      "content": "t:go_further"
+    },
+    {
+      "type": "paragraph",
+      "content": "t:go_further_description"
+    }
+  ],
+  "presets": [
+    {
+      "name": "t:footer_bottom_bar"
+    }
+  ]
+}
+{% endschema %}

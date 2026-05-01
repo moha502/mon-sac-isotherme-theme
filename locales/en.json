@@ -1,0 +1,356 @@
+/*
+ * ------------------------------------------------------------
+ * IMPORTANT: The contents of this file are auto-generated.
+ *
+ * This file may be updated by the Shopify admin language editor
+ * or related systems. Please exercise caution as any changes
+ * made to this file may be overwritten.
+ * ------------------------------------------------------------
+ */
+{
+  "404": {
+    "back_to_shopping": "Back to shopping",
+    "not_found": "Page not found.",
+    "title": "404"
+  },
+  "accessibility": {
+    "country_region": "Country/Region",
+    "country_results_count": "[count] countries found",
+    "find_country": "Find a country"
+  },
+  "actions": {
+    "reset": "Reset"
+  },
+  "blocks": {
+    "load_video": "Load video {{ description }}",
+    "read_less": "Show less",
+    "read_more": "Show more"
+  },
+  "blog": {
+    "article_comments": "Comments",
+    "article_metadata_html": "{{ date }} by {{ author }}",
+    "comment_form_body": "Comment",
+    "comment_form_email": "Email",
+    "comment_form_name": "Name",
+    "comment_form_submit": "Post",
+    "comment_form_title": "Add a comment",
+    "empty": "No articles found"
+  },
+  "breadcrumbs": {
+    "home": "Home"
+  },
+  "cart": {
+    "checkout": "Checkout",
+    "code_already_applied": "This discount code is already applied",
+    "code_not_applicable": "This discount code is not applicable",
+    "continue_shopping": "Continue shopping",
+    "discount": "Discount",
+    "empty_title": "Your cart is empty",
+    "error_apply_discount": "Error applying discount code",
+    "error_remove_discount": "Error removing discount code",
+    "estimated_total": "Estimated total",
+    "please_insert_a_code": "Please enter a code",
+    "product_added_to_cart": "Product added to cart",
+    "remove": "Remove",
+    "title": "Cart",
+    "update": "Update"
+  },
+  "collections": {
+    "collections_empty": "No collections found",
+    "empty": "No products found",
+    "filters": {
+      "clear": "Reset",
+      "filter": "Filters",
+      "filter_and_sort": "Filters and sort",
+      "from": "From",
+      "to": "to"
+    },
+    "sorting": {
+      "sort_by": "Sort by"
+    },
+    "title": "Collections"
+  },
+  "contact": {
+    "email": "Email",
+    "first_name": "First name",
+    "last_name": "Last name",
+    "message": "Message",
+    "phone": "Phone",
+    "submit": "Send",
+    "success": "Your message has been sent successfully."
+  },
+  "content": {
+    "language": "Language",
+    "localization_region_and_language": "Region and language",
+    "no_results_found": "No results found",
+    "search": "Search"
+  },
+  "customer": {
+    "account": {
+      "addresses": "Addresses",
+      "default_address": "Default address",
+      "logout": "Logout",
+      "orders": "Orders",
+      "return": "Return",
+      "title": "Account",
+      "view_addresses": "View addresses"
+    },
+    "activate_account": {
+      "cancel": "Cancel",
+      "password": "Password",
+      "password_confirm": "Confirm password",
+      "submit": "Activate account",
+      "subtext": "Enter your password below to activate your account.",
+      "title": "Account activation"
+    },
+    "addresses": {
+      "add_new": "Add an address",
+      "address1": "Address",
+      "address2": "Apartment, suite, etc.",
+      "cancel": "Cancel",
+      "city": "City",
+      "company": "Company",
+      "country": "Country",
+      "default_address": "Default address",
+      "delete": "Delete",
+      "delete_address": "Delete address",
+      "edit": "Edit",
+      "edit_address": "Edit address",
+      "edit_default_address": "Edit default address",
+      "first_name": "First name",
+      "last_name": "Last name",
+      "phone": "Phone",
+      "province": "State/Province",
+      "set_default": "Set as default address",
+      "title": "Addresses",
+      "update": "Update",
+      "zip": "ZIP/Postal code"
+    },
+    "login": {
+      "cancel": "Cancel",
+      "create_account": "Create an account",
+      "email": "Email",
+      "forgot_password": "Forgot your password?",
+      "guest_continue": "Continue as guest",
+      "guest_title": "Guest account",
+      "password": "Password",
+      "reset_password": "Reset password",
+      "reset_password_error": "Error resetting password",
+      "reset_password_success": "Password reset successfully",
+      "submit": "Login",
+      "title": "Login"
+    },
+    "order": {
+      "billing_address": "Billing address",
+      "cancelled_html": "Canceled on {{ date }}",
+      "cancelled_reason": "Reason for cancellation: {{ reason }}",
+      "date": "Date",
+      "date_html": "Ordered on {{ date }}",
+      "discount": "Discount",
+      "fulfilled_at_html": "Delivered on {{ date }}",
+      "fulfillment_status": "Fulfillment status",
+      "payment_status": "Payment status",
+      "price": "Price",
+      "product": "Product",
+      "products": "Products",
+      "quantity": "Quantity",
+      "return_to_account": "Return to account",
+      "shipping": "Shipping",
+      "shipping_address": "Shipping address",
+      "sku": "SKU",
+      "subtotal": "Subtotal",
+      "tax": "Tax",
+      "title": "Order {{ name }}",
+      "total": "Total",
+      "total_due": "Total due",
+      "total_duties": "Total duties",
+      "total_refunded": "Total refunded",
+      "track_shipment": "Track shipment"
+    },
+    "orders": {
+      "date": "Date",
+      "fulfillment_status": "Fulfillment status",
+      "none": "No orders found",
+      "order": "Order",
+      "order_number": "Order number",
+      "orders": "Orders",
+      "payment_status": "Payment status",
+      "total": "Total"
+    },
+    "register": {
+      "back_to_login": "Back to login",
+      "email": "Email",
+      "first_name": "First name",
+      "last_name": "Last name",
+      "password": "Password",
+      "submit": "Create account",
+      "subtext": "Enter your information below to create an account.",
+      "title": "Create account"
+    },
+    "reset_password": {
+      "password": "Password",
+      "password_confirm": "Confirm password",
+      "submit": "Reset password",
+      "subtext": "Enter your new password below.",
+      "title": "Reset password"
+    }
+  },
+  "customers": {
+    "login": {
+      "email": "Email",
+      "password": "Password",
+      "submit": "Login",
+      "title": "Login"
+    }
+  },
+  "demo": {
+    "title": "Design System",
+    "description": "This section lets you preview the rendering of the different components and styles of the theme.",
+    "description2": "When you're done configuring the theme, you can remove it.",
+    "accordions": "Accordions",
+    "badges": "Badges",
+    "button_full_width_default": "Full width button",
+    "button_small_default": "Small button",
+    "button_with_icon_default": "Button with icon",
+    "buttons": "Buttons",
+    "checkbox_checked_default": "Pre-checked checkbox",
+    "checkbox_default": "Checkbox",
+    "checkbox_disabled_default": "Disabled checkbox",
+    "checkboxes": "Checkboxes",
+    "color_swatches": "Color swatches",
+    "icons_and_rating": "Icons & rating stars",
+    "input_fields": "Input fields",
+    "popup": "Pop-up",
+    "price": "Price",
+    "radio_buttons": "Radio buttons",
+    "radio_checked_default": "Pre-checked radio button",
+    "radio_default": "Radio button",
+    "radio_disabled_default": "Disabled radio button",
+    "selectors": "Selectors",
+    "swatch_color_1_default": "Color 1",
+    "swatch_color_2_default": "Color 2",
+    "swatch_color_3_default": "Color 3",
+    "swatch_image_1_default": "Pistachio",
+    "swatch_image_2_default": "Chocolate",
+    "swatch_image_3_default": "Strawberry",
+    "text_paragraph_preset_default": "This is a paragraph, this is a paragraph, this is a paragraph, this is a paragraph, this is a paragraph.",
+    "textfield_default": "Input field",
+    "textfield_disabled_default": "Disabled field",
+    "textfield_full_width_default": "Full width field",
+    "textfield_small_default": "Small field",
+    "title_1_preset_default": "Title H1",
+    "title_2_preset_default": "Title H2",
+    "title_3_preset_default": "Title H3",
+    "title_4_preset_default": "Title H4",
+    "title_5_preset_default": "Title H5",
+    "title_6_preset_default": "Title H6",
+    "typographies": "Typographies",
+    "badge_custom_default": "Custom badge",
+    "product_badges": "Product badges",
+    "button_tertiary_default": "Tertiary button",
+    "button_secondary_default": "Secondary button",
+    "quantity_selector": "Quantity selector",
+    "checkboxes_and_radios": "Checkboxes & radio buttons",
+    "selectors_and_inputs": "Selectors & input fields",
+    "product_components": "Product components",
+    "tabs": "Tabs",
+    "variant_buttons": "Variant buttons",
+    "logos": "Logos",
+    "logo": "Logo",
+    "logo_inverse": "Inverse logo",
+    "favicon": "Favicon",
+    "quantity_breaks": "Quantity breaks",
+    "product_name": "product",
+    "products_name": "products",
+    "toggle_cross_sell": "Toggle cross-sell",
+    "cross_sell_product_1": "Protective case",
+    "cross_sell_product_2": "Charging cable",
+    "cross_sell_title": "Cross-sell",
+    "cross_sell_bundle_title": "Complete bundle",
+    "cross_sell_bundle_description": "Save when buying the bundle",
+    "subscription_title": "Subscription",
+    "subscription_one_time": "One-time purchase",
+    "subscription_subscribe": "Subscribe and save -10%"
+  },
+  "gift_card": {
+    "add_to_apple_wallet": "Add to Apple Wallet",
+    "card": "Gift card",
+    "expired": "This gift card has expired",
+    "expires_on": "Expires on {{ expires_on }}",
+    "use_at_checkout": "Use this gift card at checkout"
+  },
+  "header": {
+    "account": "Account",
+    "menu_close": "Close menu",
+    "menu_open": "Open menu",
+    "notification_image_alt": "Notification image"
+  },
+  "newsletter": {
+    "success": "You are now subscribed to the newsletter."
+  },
+  "password": {
+    "enter": "Enter store",
+    "password": "Password",
+    "title": "This store is private"
+  },
+  "placeholder": {
+    "placeholder_banner_alt": "Banner",
+    "placeholder_image_alt": "Image",
+    "placeholder_video_alt": "Video"
+  },
+  "placeholders": {
+    "search": "Search"
+  },
+  "powered_by_fullstack": "Site created with the Fullstack theme",
+  "products": {
+    "add": "Add",
+    "add_to_cart": "Add to cart",
+    "add_to_cart_unavailable": "Unavailable",
+    "added": "Added",
+    "image_alt": "Product image",
+    "inventory_in_stock": "In stock",
+    "inventory_low_stock": "Low stock",
+    "inventory_low_stock_show_count": "{{ count }} items in stock",
+    "inventory_out_of_stock": "Out of stock",
+    "no_product": "Please select a product in the section settings",
+    "preorder": "Preorder",
+    "preorder_property": "Pre-order",
+    "remove": "Remove",
+    "reviews": "reviews",
+    "sales": "On sale",
+    "save": "Save",
+    "sold_out": "Sold out"
+  },
+  "search": {
+    "collections": "Collections",
+    "no_results_html": "No results found for {{ terms }}",
+    "pages_and_articles": "Pages and articles",
+    "placeholder": "Search",
+    "products": "Products",
+    "results_for_html": "{{ count }} results found for {{ terms }}",
+    "submit": "Search",
+    "title": "Search"
+  },
+  "theme": {
+    "consoleLogFullstack": "This store is powered by the Fullstack Theme.",
+    "consoleLogFullstackUrl": "Visit https://www.themefullstack.com to learn more."
+  },
+  "timer": {
+    "days": "Days",
+    "hours": "Hours",
+    "minutes": "Minutes",
+    "seconds": "Seconds"
+  },
+  "video": {
+    "pause": "Pause",
+    "pause_video": "Pause video",
+    "play": "Play",
+    "play_video": "Play video"
+  },
+  "wishlist": {
+    "empty": "Your wishlist is empty",
+    "product_added_to_wishlist": "Product added to wishlist",
+    "product_removed_from_wishlist": "Product removed from wishlist",
+    "title": "Wishlist"
+  }
+}

@@ -1,0 +1,94 @@
+{%- doc -%}
+  Détermine si le formulaire de localisation doit être enveloppé dans un composant dropdown et passe des variables à celui-ci.
+
+  @param {boolean} [show_country] - Affiche le sélecteur de pays.
+  @param {boolean} [show_language] - Affiche le sélecteur de langue.
+  @param {string} [show_country_icon] - Affiche l'icône du pays.
+  @param {boolean} [uppercase] - Indique si les éléments doivent être en majuscule.
+  @param {number} [font_weight] - Poids de la police.
+{%- enddoc -%}
+
+{% if show_language and show_country == false %}
+  <div class="dropdown-localization">
+    {% render 'localization-form', show_country: show_country, show_language: show_language, uppercase: uppercase, font_weight: font_weight %}
+  </div>
+{% elsif show_country %}
+  <dropdown-component class="dropdown-localization">
+    <button
+      type="button"
+      class="dropdown-toggle dropdown-localization__toggle"
+      data-ref="dropdown-toggle"
+    >
+      {% if show_country %}
+        {% if show_country_icon == true %}
+          <span
+            class="icon-flag"
+            style="background-image: url({{- localization.country | image_url: width: 32 }}); --color-shadow: rgb(from var(--color-foreground) r g b / var(--opacity-30-60));"
+          ></span>
+        {% endif %}
+        <span class="currency-code">
+          {{- localization.country.currency.iso_code -}}
+        </span>
+      {% endif %}
+
+      {%- if show_country and show_language -%}
+        <span>/</span>
+      {%- endif -%}
+
+      {%- if show_language -%}
+        <span>
+          {{- localization.language.iso_code | upcase -}}
+        </span>
+      {%- endif -%}
+
+      {% render 'icon', icon: 'keyboard_arrow_down' %}
+    </button>
+
+    <div
+      class="dropdown-content dropdown-content--open-left dropdown-localization-content color-scheme-1"
+      data-ref="dropdown-content"
+    >
+      {% render 'localization-form', show_country: show_country, show_language: show_language, uppercase: uppercase, font_weight: font_weight %}
+    </div>
+  </dropdown-component>
+{% endif %}
+
+{% stylesheet %}
+  dropdown-component .dropdown-localization__toggle {
+    gap: 3px;
+    font-size: var(--font-body--size-emphasized);
+
+    .icon-flag {
+      width: 14px;
+      height: 14px;
+      clip-path: circle(50%);
+      background-position: center;
+      background-size: cover;
+      margin-inline-end: 4px;
+      position: relative;
+    }
+  }
+
+  dropdown-component .dropdown-localization-content {
+    min-width: 240px;
+    padding: var(--padding-sm);
+  }
+
+  @media (width <= 1000px) {
+    dropdown-component .dropdown-localization__toggle {
+      width: 100%;
+      padding: var(--padding-sm) var(--padding-xs);
+    }
+
+    dropdown-component .dropdown-localization-content {
+      position: fixed;
+      top: auto;
+      bottom: 0;
+      left: 0;
+      width: 100%;
+      min-width: 100%;
+      border-bottom-left-radius: 0;
+      border-bottom-right-radius: 0;
+    }
+  }
+{% endstylesheet %}

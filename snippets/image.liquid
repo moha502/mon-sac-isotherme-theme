@@ -1,0 +1,23 @@
+{%- doc -%}
+  Affiche l'élément <img> en utilisant l'objet image fourni.
+
+  @param {object} image - objet image
+  @param {number} [height] - hauteur personnalisée de l'image
+  @param {string} [class] - classes supplémentaires,
+  @param {string} [fetch_priority] - priorité de chargement de l'image
+  @param {string} [sizes] - sizes de l'image,
+  @param {string} [widths] - widths de l'image
+
+  @example
+  {% render 'image', image: product.featured_image, height: 300, class: 'product-image' %}
+{%- enddoc -%}
+
+{% if image != blank %}
+  {% assign image_height = height | default: image.height %}
+
+  {{
+    image
+    | image_url: height: image_height
+    | image_tag: class: class, fetch_priority: fetch_priority, sizes: sizes, widths: widths
+  }}
+{% endif %}

@@ -1,0 +1,696 @@
+{% liquid
+  assign number_of_media = 0
+
+  for i in (1..8)
+    assign video_key = 'video_' | append: i
+    assign image_key = 'image_' | append: i
+    assign video = block.settings[video_key]
+    assign image = block.settings[image_key]
+
+    if video != blank or image != blank
+      assign number_of_media = number_of_media | plus: 1
+    endif
+  endfor
+%}
+
+<story-component data-story-id="{{ block.id }}">
+  <button class="story" data-ref="story">
+    <div class="story__bubble">
+      {% assign story_thumbnail = block.settings.story_thumbnail %}
+      {% if block.settings.story_thumbnail == blank %}
+        {% assign story_thumbnail = block.settings.image_1 %}
+        {% if block.settings.media_type_1 == 'video' %}
+          {% assign story_thumbnail = block.settings.video_1.preview_image %}
+        {% endif %}
+      {% endif %}
+
+      {% if story_thumbnail != blank %}
+        {{ story_thumbnail | image_url: width: 150 | image_tag }}
+      {% else %}
+        <img src="{{ 'placeholder-image.jpg' | asset_img_url: 'x150' }}" alt="Story image" width="55" height="55">
+      {% endif %}
+
+      {% render 'icon', icon: 'play_arrow' %}
+    </div>
+
+    <p class="story__bubble-label">{{ block.settings.title }}</p>
+  </button>
+
+  <template data-ref="story-content">
+    <li class="splide__slide" data-ref="stories-slide">
+      <div class="splide story__slider" role="group" data-ref="story-slider" data-story-id="{{ block.id }}">
+        <div class="story__header">
+          <div class="story__progress-bars" data-ref="story-progress-bars">
+            {% if number_of_media != 0 %}
+              {% for i in (1..number_of_media) %}
+                <progress class="story__progress-bar" data-ref="story-progress-bar" max="100" value="0" data-index="{{ i }}"></progress>
+              {% endfor %}
+            {% else %}
+              <progress class="story__progress-bar" data-ref="story-progress-bar" max="100" value="0" data-index="1"></progress>
+            {% endif %}
+          </div>
+
+          <div class="story__heading">
+            {% assign first_image = block.settings.image_1 %}
+            {% if block.settings.media_type_1 == 'video' %}
+              {% assign first_image = block.settings.video_1.preview_image %}
+            {% endif %}
+
+            {% if first_image != blank %}
+              {{ first_image | image_url: width: 100 | image_tag }}
+            {% else %}
+              <img
+                src="{{ 'placeholder-image.jpg' | asset_img_url: 'x70' }}"
+                alt="Story image"
+                width="32"
+                height="32"
+              >
+            {% endif %}
+
+            {{ block.settings.title }}
+          </div>
+        </div>
+
+        <div class="splide__arrows">
+          <button class="splide__arrow splide__arrow--prev">
+            {% render 'icon', icon: 'keyboard_arrow_left' %}
+          </button>
+
+          <button class="splide__arrow splide__arrow--next">
+            {% render 'icon', icon: 'keyboard_arrow_right' %}
+          </button>
+        </div>
+
+        <div class="splide__track">
+          <ul class="splide__list">
+            {% if number_of_media != 0 %}
+              {% for i in (1..8) %}
+                {% assign media_type_key = 'media_type_' | append: i %}
+                {% assign video_key = 'video_' | append: i %}
+                {% assign image_key = 'image_' | append: i %}
+                {% assign image_duration_key = 'image_duration_' | append: i %}
+
+                {% assign media_type = block.settings[media_type_key] %}
+                {% assign video = block.settings[video_key] %}
+                {% assign image = block.settings[image_key] %}
+                {% assign image_duration = block.settings[image_duration_key] %}
+                {% if image_duration == blank %}
+                  {% assign image_duration = 5 %}
+                {% endif %}
+
+                {% if media_type == 'video' and video != blank %}
+                  <li class="splide__slide story-slider__slide" data-ref="story-slide" data-index="{{ i }}" data-interval="{{ video.duration }}">
+                    {{ video | video_tag: image_size: '1000x', autoplay: false, loop: false, muted: true, controls: false }}
+                  </li>
+                {% elsif media_type == 'image' and image != blank %}
+                  {% assign image_duration = image_duration | times: 1000 %}
+
+                  <li class="splide__slide story-slider__slide" data-ref="story-slide" data-index="{{ i }}" data-interval="{{ image_duration }}">
+                    {% render 'image', image: image %}
+                  </li>
+                {% endif %}
+              {% endfor %}
+            {% else %}
+              <li class="splide__slide story-slider__slide" data-ref="story-slide" data-index="1" data-interval="50000">
+                <img src="{{ 'placeholder-image.jpg' | asset_img_url: 'x1000' }}" alt="Story image" width="600" height="auto">
+              </li>
+            {% endif %}
+          </ul>
+        </div>
+      </div>
+    </li>
+  </template>
+</story-component>
+
+{% stylesheet %}
+  .story {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    gap: 10px;
+    appearance: none;
+    border: none;
+    background-color: transparent;
+    cursor: pointer;
+    max-width: 65px;
+    padding: 0;
+    margin: 0;
+  }
+
+  .story__bubble {
+    border-radius: 50%;
+    position: relative;
+    cursor: pointer;
+    transition: all 0.2s ease-in-out;
+    width: 55px;
+    height: 55px;
+
+    .icon {
+      font-size: 32px !important;
+      position: absolute;
+      top: 50%;
+      left: 50%;
+      transform: translate(-50%, -50%);
+      z-index: 2;
+      color: white;
+    }
+
+    &:hover {
+      transform: scale(102%);
+    }
+
+    &:before {
+      width: 60px;
+      height: 60px;
+      content: '';
+      background-color: #fff;
+      border-radius: 50%;
+      position: absolute;
+      top: 50%;
+      left: 50%;
+      transform: translate(-50%, -50%);
+      z-index: 2;
+    }
+
+    &:after {
+      content: '';
+      width: 65px;
+      height: 65px;
+      background: linear-gradient(45deg, #f09433, #e6683c, #dc2743, #cc2366, #bc1888);
+      border-radius: 50%;
+      position: absolute;
+      top: 50%;
+      left: 50%;
+      transform: translate(-50%, -50%);
+      z-index: 1;
+    }
+
+    img {
+      z-index: 3;
+      width: 55px;
+      height: 55px;
+      border-radius: 50%;
+      position: relative;
+      overflow: hidden;
+      cursor: pointer;
+      z-index: 2;
+      object-fit: cover;
+    }
+  }
+
+  .story__bubble-label {
+    font-size: var(--font-body--size-small);
+    padding: 0;
+    margin: 0;
+    color: var(--color-foreground);
+  }
+
+  .story-slider__slide {
+    /* border-radius: var(--card-border-radius); */
+    overflow: hidden;
+  }
+
+  .story-slider__slide img,
+  .story-slider__slide video {
+    aspect-ratio: 3/5;
+    object-fit: cover;
+    max-width: 100%;
+    height: 100%;
+  }
+
+  .story__slider {
+    height: 100%;
+
+    & > .splide__track {
+      height: 100%;
+    }
+
+    & > .splide__arrows > .splide__arrow {
+      height: 100%;
+      width: 50%;
+      border: none;
+      background-color: transparent;
+      color: var(--color-foreground);
+    }
+
+    & > .splide__arrows > .splide__arrow--prev {
+      left: 0;
+      justify-content: flex-start;
+
+      .icon {
+        margin-left: 1rem;
+      }
+    }
+
+    & > .splide__arrows > .splide__arrow--next {
+      right: 0;
+      justify-content: flex-end;
+
+      .icon {
+        margin-right: 1rem;
+      }
+    }
+
+    .splide__arrow:disabled {
+      opacity: 0.5;
+    }
+  }
+
+  .story__header {
+    position: absolute;
+    left: 0;
+    top: 0;
+    padding: var(--padding-md);
+    width: 100%;
+    z-index: 1;
+    background: linear-gradient(0deg, #0000 6.99%, #00000080 163.32%);
+
+    /* Force GPU layer pour iOS */
+    transform: translateZ(0);
+    -webkit-backface-visibility: hidden;
+    backface-visibility: hidden;
+    will-change: transform;
+  }
+
+  .story__progress-bars {
+    display: flex;
+    flex-direction: row;
+    gap: 3px;
+  }
+
+  .story__progress-bar {
+    -webkit-appearance: none;
+    -moz-appearance: none;
+    appearance: none;
+    flex: 1;
+    min-width: 0;
+    height: 2.5px;
+  }
+
+  .story__progress-bar[value]::-webkit-progress-bar {
+    background-color: rgb(from white r g b / 15%);
+    border-radius: var(--card-border-radius);
+  }
+
+  .story__progress-bar[value]::-webkit-progress-value {
+    background-color: white;
+    border-radius: var(--card-border-radius);
+  }
+
+  .story__heading {
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+    justify-content: flex-start;
+    padding: var(--margin-md) 0;
+    gap: var(--gap-sm);
+    font-size: var(--font-body--size-small);
+    color: white;
+
+    img {
+      border-radius: 50%;
+      width: 32px;
+      height: 32px;
+      object-fit: cover;
+    }
+  }
+{% endstylesheet %}
+
+{% schema %}
+{
+  "name": "t:story",
+  "tag": null,
+  "settings": [
+    {
+      "type": "inline_richtext",
+      "id": "title",
+      "label": "t:title",
+      "default": "t:story"
+    },
+    {
+      "type": "image_picker",
+      "id": "story_thumbnail",
+      "label": "t:story_thumbnail"
+    },
+    {
+      "type": "header",
+      "content": "t:media_1"
+    },
+    {
+      "type": "select",
+      "id": "media_type_1",
+      "label": "t:media_type",
+      "options": [
+        {
+          "value": "video",
+          "label": "t:video"
+        },
+        {
+          "value": "image",
+          "label": "t:image"
+        }
+      ],
+      "default": "video"
+    },
+    {
+      "type": "video",
+      "id": "video_1",
+      "label": "t:video",
+      "info": "t:video_story_info",
+      "visible_if": "{{ block.settings.media_type_1 == 'video' }}"
+    },
+    {
+      "type": "image_picker",
+      "id": "image_1",
+      "label": "t:image",
+      "info": "t:image_story_info",
+      "visible_if": "{{ block.settings.media_type_1 == 'image' }}"
+    },
+    {
+      "type": "range",
+      "id": "image_duration_1",
+      "label": "t:image_duration",
+      "default": 5,
+      "min": 1,
+      "max": 60,
+      "step": 1,
+      "visible_if": "{{ block.settings.media_type_1 == 'image' }}"
+    },
+    {
+      "type": "header",
+      "content": "t:media_2"
+    },
+    {
+      "type": "select",
+      "id": "media_type_2",
+      "label": "t:media_type",
+      "options": [
+        {
+          "value": "video",
+          "label": "t:video"
+        },
+        {
+          "value": "image",
+          "label": "t:image"
+        }
+      ],
+      "default": "video"
+    },
+    {
+      "type": "video",
+      "id": "video_2",
+      "label": "t:video",
+      "info": "t:video_story_info",
+      "visible_if": "{{ block.settings.media_type_2 == 'video' }}"
+    },
+    {
+      "type": "image_picker",
+      "id": "image_2",
+      "label": "t:image",
+      "info": "t:image_story_info",
+      "visible_if": "{{ block.settings.media_type_2 == 'image' }}"
+    },
+    {
+      "type": "range",
+      "id": "image_duration_2",
+      "label": "t:image_duration",
+      "default": 5,
+      "min": 1,
+      "max": 60,
+      "step": 1,
+      "visible_if": "{{ block.settings.media_type_2 == 'image' }}"
+    },
+    {
+      "type": "header",
+      "content": "t:media_3"
+    },
+    {
+      "type": "select",
+      "id": "media_type_3",
+      "label": "t:media_type",
+      "options": [
+        {
+          "value": "video",
+          "label": "t:video"
+        },
+        {
+          "value": "image",
+          "label": "t:image"
+        }
+      ],
+      "default": "video"
+    },
+    {
+      "type": "video",
+      "id": "video_3",
+      "label": "t:video",
+      "info": "t:video_story_info",
+      "visible_if": "{{ block.settings.media_type_3 == 'video' }}"
+    },
+    {
+      "type": "image_picker",
+      "id": "image_3",
+      "label": "t:image",
+      "info": "t:image_story_info",
+      "visible_if": "{{ block.settings.media_type_3 == 'image' }}"
+    },
+    {
+      "type": "range",
+      "id": "image_duration_3",
+      "label": "t:image_duration",
+      "default": 5,
+      "min": 1,
+      "max": 60,
+      "step": 1,
+      "visible_if": "{{ block.settings.media_type_3 == 'image' }}"
+    },
+    {
+      "type": "header",
+      "content": "t:media_4"
+    },
+    {
+      "type": "select",
+      "id": "media_type_4",
+      "label": "t:media_type",
+      "options": [
+        {
+          "value": "video",
+          "label": "t:video"
+        },
+        {
+          "value": "image",
+          "label": "t:image"
+        }
+      ],
+      "default": "video"
+    },
+    {
+      "type": "video",
+      "id": "video_4",
+      "label": "t:video",
+      "info": "t:video_story_info",
+      "visible_if": "{{ block.settings.media_type_4 == 'video' }}"
+    },
+    {
+      "type": "image_picker",
+      "id": "image_4",
+      "label": "t:image",
+      "info": "t:image_story_info",
+      "visible_if": "{{ block.settings.media_type_4 == 'image' }}"
+    },
+    {
+      "type": "range",
+      "id": "image_duration_4",
+      "label": "t:image_duration",
+      "default": 5,
+      "min": 1,
+      "max": 60,
+      "step": 1,
+      "visible_if": "{{ block.settings.media_type_4 == 'image' }}"
+    },
+    {
+      "type": "header",
+      "content": "t:media_5"
+    },
+    {
+      "type": "select",
+      "id": "media_type_5",
+      "label": "t:media_type",
+      "options": [
+        {
+          "value": "video",
+          "label": "t:video"
+        },
+        {
+          "value": "image",
+          "label": "t:image"
+        }
+      ],
+      "default": "video"
+    },
+    {
+      "type": "video",
+      "id": "video_5",
+      "label": "t:video",
+      "info": "t:video_story_info",
+      "visible_if": "{{ block.settings.media_type_5 == 'video' }}"
+    },
+    {
+      "type": "image_picker",
+      "id": "image_5",
+      "label": "t:image",
+      "info": "t:image_story_info",
+      "visible_if": "{{ block.settings.media_type_5 == 'image' }}"
+    },
+    {
+      "type": "range",
+      "id": "image_duration_5",
+      "label": "t:image_duration",
+      "default": 5,
+      "min": 1,
+      "max": 60,
+      "step": 1,
+      "visible_if": "{{ block.settings.media_type_5 == 'image' }}"
+    },
+    {
+      "type": "header",
+      "content": "t:media_6"
+    },
+    {
+      "type": "select",
+      "id": "media_type_6",
+      "label": "t:media_type",
+      "options": [
+        {
+          "value": "video",
+          "label": "t:video"
+        },
+        {
+          "value": "image",
+          "label": "t:image"
+        }
+      ],
+      "default": "video"
+    },
+    {
+      "type": "video",
+      "id": "video_6",
+      "label": "t:video",
+      "info": "t:video_story_info",
+      "visible_if": "{{ block.settings.media_type_6 == 'video' }}"
+    },
+    {
+      "type": "image_picker",
+      "id": "image_6",
+      "label": "t:image",
+      "info": "t:image_story_info",
+      "visible_if": "{{ block.settings.media_type_6 == 'image' }}"
+    },
+    {
+      "type": "range",
+      "id": "image_duration_6",
+      "label": "t:image_duration",
+      "default": 5,
+      "min": 1,
+      "max": 60,
+      "step": 1,
+      "visible_if": "{{ block.settings.media_type_6 == 'image' }}"
+    },
+    {
+      "type": "header",
+      "content": "t:media_7"
+    },
+    {
+      "type": "select",
+      "id": "media_type_7",
+      "label": "t:media_type",
+      "options": [
+        {
+          "value": "video",
+          "label": "t:video"
+        },
+        {
+          "value": "image",
+          "label": "t:image"
+        }
+      ],
+      "default": "video"
+    },
+    {
+      "type": "video",
+      "id": "video_7",
+      "label": "t:video",
+      "info": "t:video_story_info",
+      "visible_if": "{{ block.settings.media_type_7 == 'video' }}"
+    },
+    {
+      "type": "image_picker",
+      "id": "image_7",
+      "label": "t:image",
+      "info": "t:image_story_info",
+      "visible_if": "{{ block.settings.media_type_7 == 'image' }}"
+    },
+    {
+      "type": "range",
+      "id": "image_duration_7",
+      "label": "t:image_duration",
+      "default": 5,
+      "min": 1,
+      "max": 60,
+      "step": 1,
+      "visible_if": "{{ block.settings.media_type_7 == 'image' }}"
+    },
+    {
+      "type": "header",
+      "content": "t:media_8"
+    },
+    {
+      "type": "select",
+      "id": "media_type_8",
+      "label": "t:media_type",
+      "options": [
+        {
+          "value": "video",
+          "label": "t:video"
+        },
+        {
+          "value": "image",
+          "label": "t:image"
+        }
+      ],
+      "default": "video"
+    },
+    {
+      "type": "video",
+      "id": "video_8",
+      "label": "t:video",
+      "info": "t:video_story_info",
+      "visible_if": "{{ block.settings.media_type_8 == 'video' }}"
+    },
+    {
+      "type": "image_picker",
+      "id": "image_8",
+      "label": "t:image",
+      "info": "t:image_story_info",
+      "visible_if": "{{ block.settings.media_type_8 == 'image' }}"
+    },
+    {
+      "type": "range",
+      "id": "image_duration_8",
+      "label": "t:image_duration",
+      "default": 5,
+      "min": 1,
+      "max": 60,
+      "step": 1,
+      "visible_if": "{{ block.settings.media_type_8 == 'image' }}"
+    }
+  ],
+  "presets": [
+    {
+      "name": "t:story",
+      "category": "t:stories"
+    }
+  ]
+}
+{% endschema %}

@@ -1,0 +1,76 @@
+{% doc %}
+  Affiche un champ de saisie.
+
+  @param {string} name - Nom du champ
+  @param {string} [id] - Id du champ
+  @param {string} [value] - Valeur du champ
+  @param {boolean} [disabled] - Indique si le champ est désactivé
+  @param {string} [placeholder] - Placeholder du champ
+  @param {string} [data] - Données du champ
+  @param {boolean} [full_width] - Indique si le champ doit prendre toute la largeur
+
+  @example
+  {% render 'textarea', name: 'textarea-1' %}
+{% enddoc %}
+
+{% assign style_class = 'textarea' %}
+
+{% if disabled %}
+  {% assign style_class = style_class | append: ' textarea--disabled' %}
+{% endif %}
+
+{% if full_width %}
+  {% assign style_class = style_class | append: ' textarea--full-width' %}
+{% endif %}
+
+<div class="{{ style_class }}">
+  <textarea
+    name="{{ name }}"
+    id="{{ id | default: name }}"
+    {% if disabled %}
+      disabled
+    {% endif %}
+    {% if placeholder %}
+      placeholder="{{ placeholder }}"
+    {% endif %}
+    {% if value %}
+      value="{{ value }}"
+    {% endif %}
+    {% if data %}
+      {{ data }}
+    {% endif %}
+  >
+    {%- if value -%}
+      {{ value }}
+    {%- endif -%}
+  </textarea>
+</div>
+
+{% stylesheet %}
+  .textarea {
+    position: relative;
+  }
+
+  .textarea textarea {
+    outline: none;
+    border: var(--inputs-border-width) solid var(--color-input-border);
+    border-radius: var(--inputs-border-radius);
+    padding: var(--inputs-padding);
+    color: var(--color-input-text);
+    background-color: var(--color-input-background);
+    transition: 0.1s ease-out;
+    height: calc(var(--inputs-min-height) * 2);
+    width: 100%;
+    font-size: var(--inputs-font-size);
+  }
+
+  .textarea--disabled textarea {
+    opacity: 0.5;
+    cursor: not-allowed;
+    background-color: var(--color-input-background);
+  }
+
+  .textarea--full-width textarea {
+    width: 100%;
+  }
+{% endstylesheet %}

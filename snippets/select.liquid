@@ -1,0 +1,61 @@
+{% doc %}
+  Affiche un sélecteur déroulant.
+
+  @param {string} name - Nom du select
+  @param {string[]} options - Liste des options
+  @param {boolean} [small] - Indique si le select est petit
+  @param {boolean} [full_width] - Indique si le select est pleine largeur
+  @param {boolean} [disabled] - Indique si le select est désactivé
+  @param {string} [selected] - Valeur sélectionnée par défaut
+  @param {string} [id] - Id du select
+  @param {string} [autocomplete] - Valeur de l'attribut autocomplete
+  @param {string} [data] - Données à ajouter au select
+
+  @example
+  {% assign options = "Option 1,Option 2,Option 3" | split: ',' %}
+  {% render 'select', name: 'select-1', options: options %}
+{% enddoc %}
+
+{% assign style_class = 'select' %}
+
+{% if small %}
+  {% assign style_class = style_class | append: ' select--small' %}
+{% endif %}
+
+{% if full_width %}
+  {% assign style_class = style_class | append: ' select--full-width' %}
+{% endif %}
+
+<div class="select-wrapper{% if full_width %} select-wrapper--full-width{% endif %}">
+  <select
+    name="{{ name }}"
+    class="{{ style_class }}"
+    {% if id %}
+      id="{{ id }}"
+    {% endif %}
+    {% if disabled %}
+      disabled
+    {% endif %}
+    {% if autocomplete %}
+      autocomplete="{{ autocomplete }}"
+    {% endif %}
+    {% if data %}
+      {{ data }}
+    {% endif %}
+  >
+    {% for option in options %}
+      <option
+        value="{{ option }}"
+        {% if selected == option %}
+          selected
+        {% endif %}
+      >
+        {{ option }}
+      </option>
+    {% endfor %}
+  </select>
+
+  <div class="select-wrapper__icon">
+    {% render 'icon', icon: 'keyboard_arrow_down' %}
+  </div>
+</div>

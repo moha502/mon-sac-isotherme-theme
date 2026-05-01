@@ -1,0 +1,343 @@
+{% assign first_name_label = 'customer.addresses.first_name' | t %}
+{% assign last_name_label = 'customer.addresses.last_name' | t %}
+{% assign company_label = 'customer.addresses.company' | t %}
+{% assign address1_label = 'customer.addresses.address1' | t %}
+{% assign address2_label = 'customer.addresses.address2' | t %}
+{% assign city_label = 'customer.addresses.city' | t %}
+{% assign zip_label = 'customer.addresses.zip' | t %}
+{% assign phone_label = 'customer.addresses.phone' | t %}
+{% assign set_default_label = 'customer.addresses.set_default' | t %}
+
+{%- paginate customer.addresses by 5 -%}
+  <customer-addresses class="customer-addresses color-{{ section.settings.color_scheme }}">
+    <div class="page-width">
+      <div class="customer-addresses__addresses-container">
+        <h1 class="h2 text-center">{{ 'customer.addresses.title' | t }}</h1>
+
+        <div class="card card--with-border">
+          <h2 class="h4">{{ 'customer.addresses.add_new' | t }}</h2>
+          {%- form 'customer_address', customer.new_address, return_to: routes.account_addresses_url -%}
+            <div class="customer-addresses__form">
+              <div class="textfields-group">
+                {% render 'textfield',
+                  label: first_name_label,
+                  name: 'address[first_name]',
+                  id: 'AddressFirstNameNew',
+                  value: form.first_name,
+                  autocomplete: 'given-name',
+                  type: 'text',
+                  full_width: true
+                %}
+
+                {% render 'textfield',
+                  label: last_name_label,
+                  name: 'address[last_name]',
+                  id: 'AddressLastNameNew',
+                  value: form.last_name,
+                  autocomplete: 'family-name',
+                  type: 'text',
+                  full_width: true
+                %}
+              </div>
+
+              <div class="textfields-group">
+                {% render 'textfield',
+                  label: company_label,
+                  name: 'address[company]',
+                  id: 'AddressCompanyNew',
+                  value: form.company,
+                  autocomplete: 'organization',
+                  type: 'text',
+                  full_width: true
+                %}
+
+                {% render 'textfield',
+                  label: phone_label,
+                  name: 'address[phone]',
+                  id: 'AddressPhoneNew',
+                  value: form.phone,
+                  autocomplete: 'tel',
+                  type: 'tel',
+                  full_width: true
+                %}
+              </div>
+
+              <div class="textfields-group">
+                {% render 'textfield',
+                  label: address1_label,
+                  name: 'address[address1]',
+                  id: 'AddressAddress1New',
+                  value: form.address1,
+                  autocomplete: 'address-line1',
+                  type: 'text',
+                  full_width: true
+                %}
+
+                {% render 'textfield',
+                  label: address2_label,
+                  name: 'address[address2]',
+                  id: 'AddressAddress2New',
+                  value: form.address2,
+                  autocomplete: 'address-line2',
+                  type: 'text',
+                  full_width: true
+                %}
+              </div>
+
+              {% render 'select', name: 'address[country]', autocomplete: 'country', options: all_country_option_tags, full_width: true %}
+
+              <div class="textfields-group">
+                {% render 'textfield',
+                  label: city_label,
+                  name: 'address[city]',
+                  id: 'AddressCityNew',
+                  value: form.city,
+                  autocomplete: 'address-level2',
+                  type: 'text',
+                  full_width: true
+                %}
+
+                {% render 'textfield',
+                  label: zip_label,
+                  name: 'address[zip]',
+                  id: 'AddressZipNew',
+                  value: form.zip,
+                  autocapitalize: 'characters',
+                  autocomplete: 'postal-code',
+                  type: 'text',
+                  full_width: true
+                %}
+              </div>
+
+              {% render 'checkbox', label: set_default_label, name: 'address[set_as_default]' %}
+            </div>
+
+            <div class="customer-addresses__form-actions">
+              {% assign add_label = 'customer.addresses.add_new' | t %}
+
+              {% render 'button', label: add_label, type: 'submit', button_shape: 'full-width' %}
+            </div>
+          {%- endform -%}
+        </div>
+
+        {%- for address in customer.addresses -%}
+          <div class="card card--with-border">
+            <div id="EditAddress_{{ address.id }}">
+              {%- if address == customer.default_address -%}
+                <h2 class="h4">{{ 'customer.addresses.edit_default_address' | t }}</h2>
+              {%- else -%}
+                <h2 class="h4">{{ 'customer.addresses.edit_address' | t }}</h2>
+              {%- endif -%}
+
+              {%- form 'customer_address', address, return_to: routes.account_addresses_url -%}
+                <div class="customer-addresses__form">
+                  <div class="textfields-group">
+                    {% render 'textfield',
+                      label: first_name_label,
+                      name: 'address[first_name]',
+                      id: 'AddressFirstNameNew',
+                      value: form.first_name,
+                      autocomplete: 'given-name',
+                      type: 'text',
+                      full_width: true
+                    %}
+
+                    {% render 'textfield',
+                      label: last_name_label,
+                      name: 'address[last_name]',
+                      id: 'AddressLastNameNew',
+                      value: form.last_name,
+                      autocomplete: 'family-name',
+                      type: 'text',
+                      full_width: true
+                    %}
+                  </div>
+
+                  <div class="textfields-group">
+                    {% render 'textfield',
+                      label: company_label,
+                      name: 'address[company]',
+                      id: 'AddressCompanyNew',
+                      value: form.company,
+                      autocomplete: 'organization',
+                      type: 'text',
+                      full_width: true
+                    %}
+
+                    {% render 'textfield',
+                      label: phone_label,
+                      name: 'address[phone]',
+                      id: 'AddressPhoneNew',
+                      value: form.phone,
+                      autocomplete: 'tel',
+                      type: 'tel',
+                      full_width: true
+                    %}
+                  </div>
+
+                  <div class="textfields-group">
+                    {% render 'textfield',
+                      label: address1_label,
+                      name: 'address[address1]',
+                      id: 'AddressAddress1New',
+                      value: form.address1,
+                      autocomplete: 'address-line1',
+                      type: 'text',
+                      full_width: true
+                    %}
+
+                    {% render 'textfield',
+                      label: address2_label,
+                      name: 'address[address2]',
+                      id: 'AddressAddress2New',
+                      value: form.address2,
+                      autocomplete: 'address-line2',
+                      type: 'text',
+                      full_width: true
+                    %}
+                  </div>
+
+                  {% assign data_default = 'data-default="' | append: form.country | append: '"' %}
+                  {% assign data = data_default | append: ' data-ref="address-country-select"' %}
+
+                  {% render 'select',
+                    name: 'address[country]',
+                    id: 'AddressCountryNew',
+                    autocomplete: 'country',
+                    data: data,
+                    options: all_country_option_tags
+                  %}
+
+                  <div class="textfields-group">
+                    {% render 'textfield',
+                      label: city_label,
+                      name: 'address[city]',
+                      id: 'AddressCityNew',
+                      value: form.city,
+                      autocomplete: 'address-level2',
+                      type: 'text',
+                      full_width: true
+                    %}
+
+                    {% render 'textfield',
+                      label: zip_label,
+                      name: 'address[zip]',
+                      id: 'AddressZipNew',
+                      value: form.zip,
+                      autocapitalize: 'characters',
+                      autocomplete: 'postal-code',
+                      type: 'text',
+                      full_width: true
+                    %}
+                  </div>
+
+                  {% comment %} {% render 'checkbox', label: set_default_label, name: 'address[set_as_default]' %} {% endcomment %}
+
+                  <div class="checkbox-group">
+                    {{ form.set_as_default_checkbox }}
+                    <label for="address_default_address_{{ address.id }}">
+                      {{ 'customer.addresses.set_default' | t }}
+                    </label>
+                  </div>
+                </div>
+
+                <div class="textfields-group">
+                  <button type="submit" class="button button--primary button--full-width">
+                    {{ 'customer.addresses.update' | t }}
+                  </button>
+                  <button type="reset" class="button button--secondary button--full-width">
+                    {{ 'customer.addresses.cancel' | t }}
+                  </button>
+                </div>
+              {%- endform -%}
+            </div>
+          </div>
+        {%- endfor -%}
+
+        {%- if paginate.pages > 1 -%}
+          {% render 'pagination', paginate_object: paginate %}
+        {%- endif -%}
+
+        <a class="button button--secondary button--full-width" href="{{ routes.account_url }}">
+          {{ 'customer.account.return' | t }}
+        </a>
+      </div>
+    </div>
+  </customer-addresses>
+{%- endpaginate -%}
+
+{% stylesheet %}
+  .customer-addresses {
+    width: 100%;
+    padding: 50px 0;
+    display: block;
+  }
+
+  .customer-addresses__addresses-container {
+    max-width: 600px;
+    width: 100%;
+    margin: 0 auto;
+    display: flex;
+    flex-direction: column;
+    gap: var(--gap-md);
+  }
+
+  .customer-addresses__form {
+    display: flex;
+    flex-direction: column;
+    gap: var(--gap-md);
+    margin: var(--margin-md) 0;
+  }
+
+  .checkbox-group {
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+    gap: var(--gap-sm);
+  }
+{% endstylesheet %}
+
+<script>
+  document.addEventListener('DOMContentLoaded', () => {
+    const addressCountrySelects = document.querySelectorAll('[data-ref="address-country-select"]');
+
+    if (addressCountrySelects) {
+      addressCountrySelects.forEach((select) => {
+        const defaultCountry = select.dataset.default;
+        select.value = defaultCountry;
+
+        select.querySelectorAll('option').forEach((option) => {
+          if (option.innerHTML === defaultCountry) {
+            option.selected = true;
+          }
+        });
+      });
+    }
+  });
+</script>
+
+{% schema %}
+{
+  "name": "t:addresses",
+  "settings": [
+    {
+      "type": "header",
+      "content": "t:style"
+    },
+    {
+      "type": "color_scheme",
+      "id": "color_scheme",
+      "label": "t:color_scheme",
+      "default": "scheme-1"
+    },
+    {
+      "type": "header",
+      "content": "t:go_further"
+    },
+    {
+      "type": "paragraph",
+      "content": "t:go_further_description"
+    }
+  ]
+}
+{% endschema %}

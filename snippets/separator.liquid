@@ -1,0 +1,50 @@
+{% doc %}
+  Affiche un séparateur de contenu.
+
+  @param {number} margin_top - Marge en haut
+  @param {number} margin_bottom - Marge en bas
+  @param {number} [width] - Largeur du séparateur
+  @param {boolean} [render_preview] - Affiche le mode "preview" pour l'éditeur de thème
+  @param {string} [separator_style] - Style du séparateur (line, dot, dashed)
+
+  @example
+  {% render 'separator', margin_top: 10, margin_bottom: 10, width: 100 %}
+{% enddoc %}
+
+<div
+  class="separator"
+  style="
+    --margin-top: {{ margin_top }}px;
+    --margin-bottom: {{ margin_bottom }}px;
+    --width: {{ width | default: 100 }}%;
+    {% if separator_style != blank %}
+      --separator-style: {{ separator_style }};
+    {% else %}
+      --separator-style: line;
+    {% endif %}
+  "
+>
+  {% if render_preview and request.visual_preview_mode %}
+    <p style="margin-bottom: 10px">Lorem ipsum before</p>
+  {% endif %}
+
+  <hr>
+
+  {% if render_preview and request.visual_preview_mode %}
+    <p style="margin-top: 10px">Lorem ipsum after</p>
+  {% endif %}
+</div>
+
+{% stylesheet %}
+  .separator {
+    margin-top: var(--margin-top);
+    margin-bottom: var(--margin-bottom);
+    display: block;
+    width: var(--width);
+  }
+
+  .separator hr {
+    border: none;
+    border-top: var(--separator-border-width) var(--separator-style) var(--color-border, #e0e0e0);
+  }
+{% endstylesheet %}

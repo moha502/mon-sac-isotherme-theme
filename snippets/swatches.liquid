@@ -1,0 +1,65 @@
+{% doc %}
+  Conteneur pour un groupe de swatches.
+
+  @param {string} swatches - Le contenu à afficher à l'intérieur du conteneur (généralement des snippets 'swatch').
+  @param {string} [size] - La taille des swatches (small, normal, big). La valeur par défaut est 'normal'.
+  @param {boolean} [rounded] - Indique si les swatches doivent être arrondis.
+
+  @example
+  {% capture swatches_content %} 
+    {% render 'swatch', id: 'Color-1', name: 'Color', value: 'Red', data_name: 'Red', background: 'rgb(255,0,0)', checked: true %}
+    {% render 'swatch', id: 'Color-2', name: 'Color', value: 'Blue', data_name: 'Blue', background: 'rgb(0,0,255)' %}
+  {% endcapture %}
+  {% render 'swatches', swatches: swatches_content, size: 'small', rounded: true %}
+{% enddoc %}
+
+{%- liquid
+  assign container_classes = 'swatches'
+
+  if size and size != 'normal'
+    assign container_classes = container_classes | append: ' swatches--' | append: size
+  endif
+
+  if rounded
+    assign container_classes = container_classes | append: ' swatches--rounded'
+  endif
+-%}
+
+<div class="{{ container_classes }}">
+  {{ swatches }}
+</div>
+
+{% stylesheet %}
+  .swatches {
+    display: flex;
+    justify-content: flex-start;
+    overflow-x: auto;
+    padding: 3px;
+    gap: 10px;
+    padding-bottom: 10px;
+  }
+
+  .swatches {
+    --swatch-size: var(--swatches-size);
+    --swatch-border-radius: var(--inputs-border-radius);
+    --swatch-outline-offset: var(--swatches-outline-offset);
+  }
+
+  .swatches--small {
+    --swatch-size: calc(var(--swatches-size) * var(--small-multiplier));
+    --swatch-border-radius: calc(var(--small-multiplier) * var(--inputs-border-radius));
+    --swatch-outline-offset: var(--swatches-small-outline-offset);
+  }
+
+  .swatches--big {
+    --swatch-size: calc(var(--swatches-size) * var(--big-multiplier));
+    --swatch-border-radius: calc(var(--inputs-border-radius) * var(--big-multiplier));
+    --swatch-outline-offset: var(--swatches-big-outline-offset);
+  }
+
+  .swatches--rounded .swatch,
+  .swatches--rounded .swatch-link,
+  .swatches--rounded .swatch span {
+    --swatch-border-radius: 100%;
+  }
+{% endstylesheet %}

@@ -1,0 +1,55 @@
+<div class="header__actions">
+  {% if localization_markup %}
+    {{ localization_markup }}
+  {% endif %}
+
+  {% if show_search %}
+    {% render 'search-popup' %}
+  {% endif %}
+
+  {{ header_notifications }}
+
+  {% if settings.activate_wishlist %}
+    {% render 'wishlist-icon' %}
+  {% endif %}
+
+  {% if shop.customer_accounts_enabled %}
+    <a href="{{ routes.account_url }}" class="header__icon header__icon-account">
+      <span class="material-symbols-{{ settings.icon_style }} notranslate icon" translate="no">
+        {{- account_icon -}}
+      </span>
+    </a>
+  {% endif %}
+
+  {% render 'cart-icon', cart_icon: cart_icon %}
+</div>
+
+{% stylesheet %}
+  .header__actions {
+    display: flex;
+    align-items: center;
+    gap: 1rem;
+    height: var(--header-height);
+  }
+
+  .header__actions a {
+    text-decoration: none;
+    color: inherit;
+  }
+
+  .header__actions .dropdown-toggle:hover {
+    opacity: 1;
+  }
+
+  .header__icon {
+    height: 24px;
+  }
+
+  @media (width < 1000px) {
+    .header__actions .dropdown-localization,
+    .header__actions .search-popup,
+    .header__actions .header__icon-account {
+      display: none;
+    }
+  }
+{% endstylesheet %}

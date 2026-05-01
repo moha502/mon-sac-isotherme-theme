@@ -1,0 +1,185 @@
+<div
+  class="
+    accordions accordions--{{ block.id }} accordions--{{ block.settings.icon }} accordions--padding-{{ block.settings.accordion_padding }}
+    {%- if block.settings.dividers %} accordions--dividers{% endif -%}
+    {%- if block.settings.show_on_display == 'desktop_only' %} mobile-hide{% endif -%}
+    {%- if block.settings.show_on_display == 'mobile_only' %} desktop-hide{% endif -%}
+    {%- if block.settings.additional_class != blank %} {{ block.settings.additional_class }}{% endif -%}
+  "
+  {{ block.shopify_attributes }}
+  {% if request.visual_preview_mode %}
+    data-visual-preview-mode
+  {% endif %}
+>
+  {% content_for 'blocks' %}
+</div>
+
+{% stylesheet %}
+  .accordions {
+    width: 100%;
+  }
+
+  shopify-visual-preview-block-list .accordions[data-visual-preview-mode] {
+    width: 450px;
+  }
+
+  .accordion-block {
+    flex: 1;
+    width: 100%;
+  }
+
+  .accordions--dividers .accordion-block:not(:last-child) .accordion {
+    border-bottom: var(--separator-border-width) solid var(--color-border);
+  }
+
+  .accordions--dividers .accordion .details-content {
+    padding-block-end: var(--padding-sm);
+  }
+
+  .accordions--caret .accordion__icons-add,
+  .accordions--add .icon--keyboard_arrow_down {
+    display: none;
+  }
+
+  .accordions--padding-medium .accordion__header {
+    padding: var(--padding-sm) 0;
+  }
+
+  .accordions--padding-large .accordion__header {
+    padding: var(--padding-md) 0;
+  }
+{% endstylesheet %}
+
+{% schema %}
+{
+  "name": "t:accordions",
+  "tag": null,
+  "class": "accordion",
+  "blocks": [
+    {
+      "type": "_accordion"
+    }
+  ],
+  "settings": [
+    {
+      "type": "select",
+      "id": "show_on_display",
+      "label": "t:show_on_display",
+      "default": "desktop_and_mobile",
+      "options": [
+        { "value": "desktop_and_mobile", "label": "t:desktop_and_mobile" },
+        { "value": "desktop_only", "label": "t:desktop_only" },
+        { "value": "mobile_only", "label": "t:mobile_only" }
+      ]
+    },
+    {
+      "type": "select",
+      "id": "icon",
+      "label": "t:icon",
+      "options": [
+        {
+          "value": "caret",
+          "label": "t:icons_list.caret"
+        },
+        {
+          "value": "add",
+          "label": "t:icons_list.add"
+        }
+      ],
+      "default": "caret"
+    },
+    {
+      "type": "select",
+      "id": "accordion_padding",
+      "label": "t:accordion_padding",
+      "options": [
+        { "value": "small", "label": "t:small" },
+        { "value": "medium", "label": "t:medium" },
+        { "value": "large", "label": "t:large" }
+      ],
+      "default": "small"
+    },
+    {
+      "type": "checkbox",
+      "id": "dividers",
+      "label": "t:show_dividers",
+      "default": true
+    },
+    {
+      "type": "header",
+      "content": "t:advanced_settings"
+    },
+    {
+      "type": "text",
+      "id": "additional_class",
+      "label": "t:additional_class",
+      "info": "t:additional_class_info"
+    },
+    {
+      "type": "header",
+      "content": "t:go_further"
+    },
+    {
+      "type": "paragraph",
+      "content": "t:go_further_description"
+    }
+  ],
+  "presets": [
+    {
+      "name": "t:accordions",
+      "category": "t:layout",
+      "blocks": [
+        {
+          "type": "_accordion",
+          "settings": {
+            "open_by_default": false,
+            "heading": "t:accordions_heading_return_policy_default"
+          },
+          "blocks": [
+            {
+              "type": "text",
+              "settings": {
+                "text": "t:accordions_text_return_policy_default",
+                "text_style": "paragraph",
+                "alignment": "left"
+              }
+            }
+          ]
+        },
+        {
+          "type": "_accordion",
+          "settings": {
+            "heading": "t:accordions_heading_shipping_default"
+          },
+          "blocks": [
+            {
+              "type": "text",
+              "settings": {
+                "text": "t:accordions_text_shipping_default",
+                "text_style": "paragraph",
+                "alignment": "left"
+              }
+            }
+          ]
+        },
+        {
+          "type": "_accordion",
+          "settings": {
+            "heading": "t:accordions_heading_manufacturing_default"
+          },
+          "blocks": [
+            {
+              "type": "text",
+              "settings": {
+                "text": "t:accordions_text_manufacturing_default",
+                "text_style": "paragraph",
+                "alignment": "left"
+              }
+            }
+          ]
+        }
+      ]
+    }
+  ]
+}
+{% endschema %}

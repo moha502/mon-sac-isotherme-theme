@@ -1,0 +1,356 @@
+<div
+  {% if section.settings.anchor_id != blank %}
+    id="{{ section.settings.anchor_id }}"
+  {% endif %}
+  class="
+    navigation navigation--{{ section.settings.display_mode }} color-{{ section.settings.color_scheme }}
+    {%- if section.settings.show_on_display == 'desktop_only' %} mobile-hide{% endif -%}
+    {%- if section.settings.show_on_display == 'mobile_only' %} desktop-hide{% endif -%}
+    {{- section.settings.additional_class -}}
+  "
+  style="
+    --margin-bottom: {{ section.settings.margin_bottom }}px;
+    --margin-top: {{ section.settings.margin_top }}px;
+    --alignment-desktop: {{ section.settings.alignment_desktop }};
+    --wrap: {{ section.settings.wrap }};
+    --image-width-mobile: {{ section.settings.image_width_mobile }}px;
+    --image-width-desktop: {{ section.settings.image_width_desktop }}px;
+  "
+>
+  <div
+    class="navigation__inner page-width"
+    style="
+      --padding-top: {{ section.settings.padding_top }}px;
+      --padding-bottom: {{ section.settings.padding_bottom }}px;
+    "
+  >
+    <div class="navigation__track">
+      {% content_for 'blocks' %}
+    </div>
+  </div>
+</div>
+
+{% stylesheet %}
+  .navigation {
+    width: 100%;
+    margin-top: var(--margin-top);
+    margin-bottom: var(--margin-bottom);
+  }
+
+  .navigation__inner {
+    padding-top: var(--padding-top);
+    padding-bottom: var(--padding-bottom);
+    padding-left: 0;
+    padding-right: 0;
+  }
+
+  .navigation__track {
+    display: flex;
+    gap: var(--gap-md);
+    scrollbar-width: none;
+    overflow-x: auto;
+    align-items: flex-start;
+    justify-content: flex-start;
+    flex-wrap: var(--wrap);
+    padding: calc(0.2rem + var(--container-border-width)) var(--page-margin-mobile);
+    width: 100%;
+  }
+
+  .navigation--bubble .navigation__track {
+    width: 100%;
+  }
+
+  @media (width > 750px) {
+    .navigation__track {
+      justify-content: var(--alignment-desktop);
+      padding: calc(0.2rem + var(--container-border-width)) var(--page-margin-desktop);
+    }
+  }
+{% endstylesheet %}
+
+{% schema %}
+{
+  "name": "t:navigation",
+  "disabled_on": {
+    "groups": ["footer", "custom.cart_drawer", "custom.breadcrumbs"]
+  },
+  "settings": [
+    {
+      "type": "select",
+      "id": "show_on_display",
+      "label": "t:show_on_display",
+      "default": "desktop_and_mobile",
+      "options": [
+        { "value": "desktop_and_mobile", "label": "t:desktop_and_mobile" },
+        { "value": "desktop_only", "label": "t:desktop_only" },
+        { "value": "mobile_only", "label": "t:mobile_only" }
+      ]
+    },
+    {
+      "type": "header",
+      "content": "t:style"
+    },
+    {
+      "type": "color_scheme",
+      "id": "color_scheme",
+      "label": "t:color_scheme",
+      "default": "scheme-1"
+    },
+    {
+      "type": "header",
+      "content": "t:layout"
+    },
+    {
+      "type": "select",
+      "id": "wrap",
+      "label": "t:layout_wrap",
+      "default": "nowrap",
+      "options": [
+        { "value": "nowrap", "label": "t:nowrap" },
+        { "value": "wrap", "label": "t:wrap" }
+      ]
+    },
+    {
+      "type": "select",
+      "id": "alignment_desktop",
+      "label": "t:alignment_desktop",
+      "options": [
+        {
+          "value": "center",
+          "label": "t:centered"
+        },
+        {
+          "value": "flex-start",
+          "label": "t:flex-start"
+        }
+      ],
+      "default": "flex-start",
+      "visible_if": "{{ section.settings.show_on_display != 'mobile_only' }}"
+    },
+    {
+      "type": "select",
+      "id": "display_mode",
+      "label": "t:display_mode",
+      "options": [
+        {
+          "value": "tab",
+          "label": "t:tab"
+        },
+        {
+          "value": "bubble",
+          "label": "t:bubble"
+        }
+      ],
+      "default": "tab",
+      "visible_if": "{{ section.settings.show_on_display != 'desktop_only' }}"
+    },
+    {
+      "type": "range",
+      "id": "image_width_desktop",
+      "label": "t:image_width_desktop",
+      "default": 30,
+      "min": 30,
+      "max": 80,
+      "step": 1,
+      "unit": "px"
+    },
+    {
+      "type": "range",
+      "id": "image_width_mobile",
+      "label": "t:image_width_mobile",
+      "default": 30,
+      "min": 30,
+      "max": 80,
+      "step": 1,
+      "unit": "px"
+    },
+    {
+      "type": "header",
+      "content": "t:paddings"
+    },
+    {
+      "type": "range",
+      "id": "padding_top",
+      "label": "t:padding_top",
+      "default": 20,
+      "min": 0,
+      "max": 100,
+      "step": 1,
+      "unit": "px"
+    },
+    {
+      "type": "range",
+      "id": "padding_bottom",
+      "label": "t:padding_bottom",
+      "default": 20,
+      "min": 0,
+      "max": 100,
+      "step": 1,
+      "unit": "px"
+    },
+    {
+      "type": "header",
+      "content": "t:margins"
+    },
+    {
+      "type": "range",
+      "id": "margin_top",
+      "label": "t:margin_top",
+      "default": 0,
+      "min": 0,
+      "max": 100,
+      "step": 1,
+      "unit": "px"
+    },
+    {
+      "type": "range",
+      "id": "margin_bottom",
+      "label": "t:margin_bottom",
+      "default": 0,
+      "min": 0,
+      "max": 100,
+      "step": 1,
+      "unit": "px"
+    },
+    {
+      "type": "header",
+      "content": "t:advanced_settings"
+    },
+    {
+      "type": "text",
+      "id": "anchor_id",
+      "label": "t:anchor_id",
+      "info": "t:anchor_id_info"
+    },
+    {
+      "type": "text",
+      "id": "additional_class",
+      "label": "t:additional_class",
+      "info": "t:additional_class_info"
+    },
+    {
+      "type": "header",
+      "content": "t:go_further"
+    },
+    {
+      "type": "paragraph",
+      "content": "t:go_further_description"
+    }
+  ],
+  "blocks": [
+    {
+      "type": "_navigation-link"
+    }
+  ],
+  "presets": [
+    {
+      "name": "t:navigation_row",
+      "category": "t:navigation",
+      "settings": {
+        "wrap": "nowrap",
+        "alignment_desktop": "flex-start",
+        "display_mode": "tab",
+        "image_width_desktop": 30,
+        "image_width_mobile": 30,
+        "margin_top": 0,
+        "margin_bottom": 0,
+        "padding_top": 20,
+        "padding_bottom": 20,
+        "additional_class": ""
+      },
+      "blocks": [
+        {
+          "type": "_navigation-link",
+          "name": "t:navigation_link",
+          "settings": {
+            "show_image": true,
+            "title": "t:navigation_link_title_default",
+            "link": "#"
+          }
+        },
+        {
+          "type": "_navigation-link",
+          "name": "t:navigation_link",
+          "settings": {
+            "show_image": true,
+            "title": "t:navigation_link_title_default",
+            "link": "#"
+          }
+        },
+        {
+          "type": "_navigation-link",
+          "name": "t:navigation_link",
+          "settings": {
+            "show_image": true,
+            "title": "t:navigation_link_title_default",
+            "link": "#"
+          }
+        },
+        {
+          "type": "_navigation-link",
+          "name": "t:navigation_link",
+          "settings": {
+            "show_image": true,
+            "title": "t:navigation_link_title_default",
+            "link": "#"
+          }
+        }
+      ]
+    },
+    {
+      "name": "t:navigation_column",
+      "category": "t:navigation",
+      "settings": {
+        "wrap": "nowrap",
+        "alignment_desktop": "flex-start",
+        "display_mode": "bubble",
+        "image_width_desktop": 50,
+        "image_width_mobile": 45,
+        "margin_top": 0,
+        "margin_bottom": 0,
+        "padding_top": 20,
+        "padding_bottom": 20,
+        "additional_class": ""
+      },
+      "blocks": [
+        {
+          "type": "_navigation-link",
+          "name": "t:navigation_link",
+          "settings": {
+            "show_image": true,
+            "title": "t:navigation_link_title_default",
+            "link": "#"
+          }
+        },
+        {
+          "type": "_navigation-link",
+          "name": "t:navigation_link",
+          "settings": {
+            "show_image": true,
+            "title": "t:navigation_link_title_default",
+            "link": "#"
+          }
+        },
+        {
+          "type": "_navigation-link",
+          "name": "t:navigation_link",
+          "settings": {
+            "show_image": true,
+            "title": "t:navigation_link_title_default",
+            "link": "#"
+          }
+        },
+        {
+          "type": "_navigation-link",
+          "name": "t:navigation_link",
+          "settings": {
+            "show_image": true,
+            "title": "t:navigation_link_title_default",
+            "link": "#"
+          }
+        }
+      ]
+    }
+  ]
+}
+{% endschema %}

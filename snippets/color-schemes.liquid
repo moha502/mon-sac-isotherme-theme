@@ -1,0 +1,67 @@
+{% style %}
+  {% for scheme in settings.color_schemes -%}
+    {% assign scheme_classes = scheme_classes | append: ', .color-' | append: scheme.id %}
+    {% if forloop.index == 1 %}
+      :root,
+    {% endif %}
+    .color-{{ scheme.id }} {
+        --color-background: rgba({{ scheme.settings.background.rgba }});
+        --color-foreground: rgba({{ scheme.settings.foreground.rgba }});
+        --color-border: rgba({{ scheme.settings.border.rgba }});
+
+        --color-stars-icons: rgba({{ scheme.settings.stars_icons_color.rgba }});
+
+        --color-primary-button-text: rgba({{ scheme.settings.primary_button_text.rgba }});
+        --color-primary-button-background: rgba({{ scheme.settings.primary_button_background.rgba }});
+        --color-primary-button-border: rgba({{ scheme.settings.primary_button_border.rgba }});
+
+        --color-secondary-button-text: rgba({{ scheme.settings.secondary_button_text.rgba }});
+        --color-secondary-button-background: rgba({{ scheme.settings.secondary_button_background.rgba }});
+        --color-secondary-button-border: rgba({{ scheme.settings.secondary_button_border.rgba }});
+
+        --color-primary-badge-text: rgba({{ scheme.settings.primary_badge_text.rgba }});
+        --color-primary-badge-background: rgba({{ scheme.settings.primary_badge_background.rgba }});
+        --color-primary-badge-border: rgba({{ scheme.settings.primary_badge_border.rgba }});
+
+        --color-secondary-badge-text: rgba({{ scheme.settings.secondary_badge_text.rgba }});
+        --color-secondary-badge-background: rgba({{ scheme.settings.secondary_badge_background.rgba }});
+        --color-secondary-badge-border: rgba({{ scheme.settings.secondary_badge_border.rgba }});
+
+        --color-input-text: rgba({{ scheme.settings.input_text_color.rgba }});
+        --color-input-border: rgba({{ scheme.settings.input_border_color.rgba }});
+        --color-input-border-low-opacity: rgba({{ scheme.settings.input_border_color.rgb }}/ 0.08);
+        --color-input-background: rgba({{ scheme.settings.input_background.rgba }});
+
+        --color-selected-input-text: rgba({{ scheme.settings.selected_input_text_color.rgba }});
+        --color-selected-input-border: rgba({{ scheme.settings.selected_input_border_color.rgba }});
+        --color-selected-input-border-low-opacity: rgba({{ scheme.settings.selected_input_border_color.rgb }}/ 0.08);
+        --color-selected-input-background: rgba({{ scheme.settings.selected_input_background.rgba }});
+
+        --color-variant-background: rgba({{ scheme.settings.variant_background_color.rgba }});
+        --color-variant-border: rgba({{ scheme.settings.variant_border_color.rgba }});
+        --color-variant-text: rgba({{ scheme.settings.variant_text_color.rgba }});
+
+        --color-selected-variant-background: rgba({{ scheme.settings.selected_variant_background_color.rgba }});
+        --color-selected-variant-border: rgba({{ scheme.settings.selected_variant_border_color.rgba }});
+        --color-selected-variant-text: rgba({{ scheme.settings.selected_variant_text_color.rgba }});
+
+        --color-tab-background: rgba({{ scheme.settings.tab_background_color.rgba }});
+        --color-tab-border: rgba({{ scheme.settings.tab_border_color.rgba }});
+        --color-tab-text: rgba({{ scheme.settings.tab_text_color.rgba }});
+
+        --color-selected-tab-background: rgba({{ scheme.settings.selected_tab_background_color.rgba }});
+        --color-selected-tab-border: rgba({{ scheme.settings.selected_tab_border_color.rgba }});
+        --color-selected-tab-text: rgba({{ scheme.settings.selected_tab_text_color.rgba }});
+
+        --color-shadow: rgba(0, 0, 0, 0.25);
+
+        --color-success: rgba(25, 135, 84, 1);
+        --color-error: rgba(239, 68, 68, 1);
+      }
+  {% endfor %}
+
+  {{ scheme_classes | prepend: 'body' }} {
+    color: var(--color-foreground);
+    background-color: var(--color-background);
+  }
+{% endstyle %}

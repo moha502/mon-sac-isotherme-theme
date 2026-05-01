@@ -1,0 +1,91 @@
+{% doc %}
+  Affiche une pagination pour une collection, un article, etc.
+
+  @param {object} paginate_object - Le paginate.
+
+  @example
+  {% render 'pagination', paginate_object: paginate %}
+{% enddoc %}
+
+{%- if paginate_object.parts.size > 0 -%}
+  <div class="pagination-wrapper">
+    <nav class="pagination" role="navigation">
+      <ul class="pagination__list list-unstyled" role="list">
+        <li>
+          <a
+            href="{{ paginate_object.previous.url }}"
+            {% unless paginate_object.previous %}
+              disabled
+            {% endunless %}
+            class="button button--small button--icon-only button--secondary pagination__item pagination__item--next pagination__item-arrow link motion-reduce"
+          >
+            {% render 'icon', icon: 'arrow_back' %}
+          </a>
+        </li>
+
+        {%- for part in paginate_object.parts -%}
+          <li>
+            {%- if part.is_link -%}
+              <a
+                href="{{ part.url }}"
+                class="button button--small button--icon-only button--secondary pagination__item link"
+              >
+                {{- part.title -}}
+              </a>
+            {%- else -%}
+              {%- if part.title == paginate_object.current_page -%}
+                <a
+                  role="link"
+                  class="button button--small button--icon-only pagination__item pagination__item--current light"
+                >
+                  {{- part.title -}}
+                </a>
+              {%- else -%}
+                <span class="button button--small button--tertiary button--icon-only pagination__item">
+                  {{- part.title -}}
+                </span>
+              {%- endif -%}
+            {%- endif -%}
+          </li>
+        {%- endfor -%}
+
+        <li>
+          <a
+            href="{{ paginate_object.next.url }}"
+            {% unless paginate_object.next %}
+              disabled
+            {% endunless %}
+            class="button button--small button--icon-only button--secondary pagination__item pagination__item--prev pagination__item-arrow"
+          >
+            {%- render 'icon', icon: 'arrow_forward' -%}
+          </a>
+        </li>
+      </ul>
+    </nav>
+  </div>
+{%- endif -%}
+
+{% stylesheet %}
+  .pagination-wrapper {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    padding: 30px 0;
+  }
+
+  .pagination__list {
+    display: flex;
+    gap: 10px;
+    flex-wrap: wrap;
+    justify-content: center;
+  }
+
+  .pagination__item {
+    text-decoration: none;
+  }
+
+  .pagination__item--current {
+    cursor: default;
+    pointer-events: none;
+  }
+{% endstylesheet %}

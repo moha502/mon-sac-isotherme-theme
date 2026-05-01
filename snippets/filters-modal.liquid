@@ -1,0 +1,55 @@
+<script src="{{ 'side-menu.js' | asset_url }}" type="module"></script>
+
+<side-menu-component>
+  <button
+    class="side-menu__toggle-link"
+    type="button"
+    data-ref="sidebar-toggle"
+  >
+    {% render 'icon', icon: 'page_info' %}
+    <span>
+      {% if show_sorting %}
+        {{ 'collections.filters.filter_and_sort' | t }}
+      {% else %}
+        {{ 'collections.filters.filter' | t }}
+      {% endif %}
+    </span>
+  </button>
+
+  <div class="header__mobile-menu-overlay" data-ref="sidebar-overlay">
+    <div class="header__mobile-menu" data-ref="sidebar-menu">
+      <div class="header__mobile-menu-header">
+        <button
+          class="button button--tertiary button--small button--icon-only"
+          type="button"
+          data-ref="sidebar-close"
+        >
+          {% render 'icon', icon: 'close' %}
+        </button>
+      </div>
+      <div class="filters-side-panel">
+        {% render 'filters-sidebar', collection: collection, show_sorting: show_sorting, show_filters: true %}
+      </div>
+    </div>
+  </div>
+</side-menu-component>
+
+{% stylesheet %}
+  .side-menu__toggle-link {
+    display: flex;
+    align-items: center;
+    gap: var(--gap-sm);
+    background-color: transparent;
+    color: var(--color-foreground);
+    border: none;
+    padding: 0;
+    margin: 0;
+    cursor: pointer;
+  }
+
+  .filters-side-panel {
+    overflow-y: auto;
+    height: 100%;
+    padding: 20px;
+  }
+{% endstylesheet %}

@@ -1,0 +1,109 @@
+<script src="{{ 'filter.js' | asset_url }}" type="module"></script>
+
+<filter-component data-ref="filters-inline">
+  <form class="filters__container" data-ref="filters-form">
+    <dropdown-group-component class="filters__list">
+      {%- for filter in collection.filters -%}
+        <dropdown-component data-ref="filter-dropdown">
+          <button type="button" class="dropdown-toggle filter-dropdown-toggle" data-ref="dropdown-toggle">
+            <span class="filter-dropdown-toggle__label">
+              {{- filter.label }}
+              {%- if filter.active_values.size > 0 -%}
+                <span class="filter-count" data-ref="filter-count">{{ filter.active_values.size }}</span>
+              {%- endif -%}
+            </span>
+            {% render 'icon', icon: 'keyboard_arrow_down' %}
+          </button>
+
+          <div class="dropdown-content filter-dropdown-content color-scheme-1" data-ref="dropdown-content">
+            {%- case filter.type -%}
+              {%- when 'boolean' -%}
+                {% render 'filter-boolean', filter: filter %}
+
+              {%- when 'list' -%}
+                {% render 'filter-list', filter: filter %}
+
+              {%- when 'price_range' -%}
+                {% render 'filter-price-range', filter: filter %}
+            {%- endcase -%}
+
+            <div>
+              {%- if filter.active_values.size > 1 -%}
+                <a
+                  class="filter-clear-button button button--secondary button--small"
+                  href="{{ filter.url_to_remove }}"
+                >
+                  {{ 'collections.filters.clear' | t }}
+                </a>
+              {%- endif -%}
+            </div>
+          </div>
+        </dropdown-component>
+      {%- endfor -%}
+    </dropdown-group-component>
+
+    <div class="filters__clear-all" data-ref="clear-all">
+      {% liquid
+        assign filters_active = 0
+        for filter in collection.filters
+          if filter.active_values.size > 0
+            assign filters_active = filters_active | plus: filter.active_values.size
+          endif
+        endfor
+      %}
+
+      {% if filters_active > 0 %}
+        <a class="button button--secondary button--small" href="{{ collection.url }}">
+          {{- 'collections.filters.clear' | t -}}
+        </a>
+      {% endif %}
+    </div>
+  </form>
+</filter-component>
+
+{% stylesheet %}
+  .filters__container {
+    display: flex;
+    align-items: center;
+    gap: var(--gap-sm);
+  }
+
+  .filters__list {
+    display: flex;
+    flex-direction: row;
+    flex-wrap: wrap;
+    gap: var(--gap-sm);
+  }
+
+  .filter-dropdown-toggle {
+    -webkit-font-smoothing: antialiased;
+    -moz-osx-font-smoothing: grayscale;
+  }
+
+  .filter-dropdown-toggle__label {
+    display: flex;
+    align-items: center;
+    gap: 4px;
+  }
+
+  .filter-count {
+    background-color: var(--color-primary-button-background);
+    color: var(--color-primary-button-text);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    width: 16px;
+    height: 16px;
+    border-radius: 50%;
+    font-size: var(--font-body--size-small);
+  }
+
+  dropdown-component .filter-dropdown-content {
+    min-width: fit-content;
+    padding: var(--padding-md);
+  }
+
+  .filter-clear-button {
+    margin-top: var(--margin-md);
+  }
+{% endstylesheet %}

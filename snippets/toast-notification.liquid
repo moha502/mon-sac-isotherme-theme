@@ -1,0 +1,9 @@
+<toast-notification class="toast-notification card">
+  <div class="content" data-ref="toast-content"></div>
+  <div class="icon-container">
+    {% render 'icon', icon: 'check_circle', class: 'icon-success', data: 'data-ref="success-icon"' %}
+    {% render 'icon', icon: 'error', class: 'icon-error', data: 'data-ref="error-icon"' %}
+    {% render 'icon', icon: 'info', class: 'icon-info', data: 'data-ref="info-icon"' %}
+    {% render 'icon', icon: 'report', class: 'icon-warning', data: 'data-ref="warning-icon"' %}
+  </div>
+</toast-notification>

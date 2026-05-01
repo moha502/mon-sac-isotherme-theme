@@ -1,0 +1,103 @@
+{% assign cart_note_label = block.settings.cart_note_label %}
+
+<script src="{{ 'cart-note.js' | asset_url }}" type="module"></script>
+
+{% assign data_ref = 'data-ref="cart-note-input"' %}
+
+{% capture content %}
+  {% render 'textarea', name: 'note', value: cart.note, data: data_ref %}
+{% endcapture %}
+
+{% liquid
+  if cart.note != blank
+    assign cart_note_label = cart_note_label | append: ' (1)'
+  endif
+%}
+
+<cart-note
+  style="--margin-top: {{ block.settings.margin_top }}px; --margin-bottom: {{ block.settings.margin_bottom }}px;"
+  {{ block.shopify_attributes }}
+  {% if request.visual_preview_mode %}
+    data-visual-preview-mode
+  {% endif %}
+>
+  {% render 'accordion', content: content, heading: cart_note_label %}
+</cart-note>
+
+{% stylesheet %}
+  cart-note {
+    display: block;
+    margin-top: var(--margin-top);
+    margin-bottom: var(--margin-bottom);
+
+    .icon--keyboard_arrow_down {
+      display: none;
+    }
+  }
+
+  cart-note[data-visual-preview-mode] {
+    width: 350px;
+  }
+{% endstylesheet %}
+
+{% schema %}
+{
+  "name": "t:cart_note",
+  "tag": null,
+  "settings": [
+    {
+      "type": "text",
+      "id": "cart_note_label",
+      "label": "t:cart_note_label",
+      "default": "t:cart_note_label_default"
+    },
+    {
+      "type": "header",
+      "content": "t:margins"
+    },
+    {
+      "type": "range",
+      "id": "margin_top",
+      "label": "t:margin_top",
+      "default": 0,
+      "min": 0,
+      "max": 100,
+      "step": 1,
+      "unit": "px"
+    },
+    {
+      "type": "range",
+      "id": "margin_bottom",
+      "label": "t:margin_bottom",
+      "default": 0,
+      "min": 0,
+      "max": 100,
+      "step": 1,
+      "unit": "px"
+    },
+    {
+      "type": "header",
+      "content": "t:advanced_settings"
+    },
+    {
+      "type": "text",
+      "id": "additional_class",
+      "label": "t:additional_class",
+      "info": "t:additional_class_info"
+    },
+    {
+      "type": "header",
+      "content": "t:go_further"
+    },
+    {
+      "type": "paragraph",
+      "content": "t:go_further_description"
+    }
+  ],
+  "presets": [
+    {
+      "name": "t:cart_note"
+    }
+  ]
+}
+{% endschema %}

@@ -1,0 +1,17 @@
+{%- liquid
+  assign id = 'Filter-' | append: filter.param_name
+
+  assign disabled = false
+  if filter.true_value.count == 0 and filter.true_value.active == false
+    assign disabled = true
+  endif
+-%}
+
+{% render 'checkbox',
+  label: filter.true_value.label,
+  name: filter.param_name,
+  value: filter.true_value.value,
+  id: id,
+  disabled: disabled,
+  checked: filter.true_value.active
+%}

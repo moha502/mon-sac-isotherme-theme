@@ -1,0 +1,112 @@
+<div
+  class="cart-drawer-empty-blocks{% if block.settings.wrap_in_card %} card color-{{ block.settings.color_scheme }}{% endif %}"
+  style="--margin-top: {{ block.settings.margin_top }}px; --margin-bottom: {{ block.settings.margin_bottom }}px;"
+>
+  {% if block.settings.show_continue_shopping_button %}
+    <button onclick="this.closest('cart-drawer').close()" class="button">
+      {{ 'cart.continue_shopping' | t }}
+    </button>
+  {% endif %}
+
+  {% content_for 'blocks' %}
+</div>
+
+{% stylesheet %}
+  .cart-drawer-empty-blocks {
+    margin-top: var(--margin-top);
+    margin-bottom: var(--margin-bottom);
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    gap: var(--gap-lg);
+    width: 100%;
+  }
+
+  @media (width <= 750px) {
+    .cart-drawer-empty-blocks .slider-component--65-percent .splide__list {
+      width: calc(100vw - 50%);
+    }
+  }
+{% endstylesheet %}
+
+{% schema %}
+{
+  "name": "t:cart_drawer_empty_blocks",
+  "tag": null,
+  "blocks": [
+    {
+      "type": "accordions"
+    },
+    {
+      "type": "text"
+    },
+    {
+      "type": "separator"
+    },
+    {
+      "type": "cross-sell"
+    },
+    {
+      "type": "slider"
+    },
+    {
+      "type": "image-card"
+    }
+  ],
+  "settings": [
+    {
+      "type": "checkbox",
+      "id": "show_continue_shopping_button",
+      "label": "t:show_continue_shopping_button",
+      "default": true
+    },
+    {
+      "type": "header",
+      "content": "t:style"
+    },
+    {
+      "type": "checkbox",
+      "id": "wrap_in_card",
+      "label": "t:wrap_in_card",
+      "default": false
+    },
+    {
+      "type": "color_scheme",
+      "id": "color_scheme",
+      "label": "t:color_scheme",
+      "default": "scheme-2",
+      "visible_if": "{{ block.settings.wrap_in_card }}"
+    },
+    {
+      "type": "header",
+      "content": "t:margins"
+    },
+    {
+      "type": "range",
+      "id": "margin_top",
+      "label": "t:margin_top",
+      "default": 0,
+      "min": 0,
+      "max": 100,
+      "step": 1,
+      "unit": "px"
+    },
+    {
+      "type": "range",
+      "id": "margin_bottom",
+      "label": "t:margin_bottom",
+      "default": 0,
+      "min": 0,
+      "max": 100,
+      "step": 1,
+      "unit": "px"
+    }
+  ],
+  "presets": [
+    {
+      "name": "t:cart_drawer_empty_blocks"
+    }
+  ]
+}
+{% endschema %}

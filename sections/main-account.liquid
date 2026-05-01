@@ -1,0 +1,156 @@
+<div class="customer-account color-{{ section.settings.color_scheme }}">
+  <div class="page-width">
+    <div class="customer-account__account">
+      <h1 class="h2 text-center">{{ 'customer.account.title' | t }}</h1>
+
+      <div class="card card--with-border customer-account__orders">
+        <h2 class="h4">{{ 'customer.orders.orders' | t }}</h2>
+
+        {% paginate customer.orders by 10 %}
+          {%- if customer.orders.size > 0 -%}
+            {%- for order in customer.orders -%}
+              <a href="{{ order.customer_url }}" class="card card--with-border customer-account__order">
+                <div class="customer-account__order-header">
+                  <div class="customer-account__order-header-left">
+                    <p class="customer-account__order-number">
+                      {{ 'customer.orders.order' | t }}
+                      {{ order.name }}
+                    </p>
+                    <p class="customer-account__order-date">{{ order.created_at | time_tag: format: 'date' }}</p>
+                  </div>
+
+                  <p class="customer-account__order-total">{{ order.total_net_amount | money_with_currency }}</p>
+                </div>
+
+                <div class="badges">
+                  {% if order.financial_status_label != blank %}
+                    <span class="badge badge--secondary">{{ order.financial_status_label }}</span>
+                  {% endif %}
+
+                  {% if order.fulfillment_status_label != blank %}
+                    <span class="badge badge--secondary">{{ order.fulfillment_status_label }}</span>
+                  {% endif %}
+                </div>
+              </a>
+            {%- endfor -%}
+          {%- else -%}
+            <p>{{ 'customer.orders.none' | t }}</p>
+          {%- endif -%}
+
+          {%- if paginate.pages > 1 -%}
+            {% render 'pagination', paginate_object: paginate %}
+          {%- endif -%}
+        {% endpaginate %}
+      </div>
+
+      <div class="card card--with-border customer-account__addresses">
+        <h2 class="h4">{{ 'customer.account.addresses' | t }}</h2>
+
+        <p>{{ 'customer.account.default_address' | t }}:</p>
+
+        <div class="customer-account__default-address">
+          {{ customer.default_address | format_address }}
+        </div>
+
+        <a href="{{ routes.account_addresses_url }}" class="button button--secondary button--full-width">
+          {{ 'customer.account.view_addresses' | t }} ({{ customer.addresses_count }})
+        </a>
+      </div>
+
+      <a href="{{ routes.account_logout_url }}" class="button button--secondary button--full-width">
+        {{- 'customer.account.logout' | t -}}
+      </a>
+    </div>
+  </div>
+</div>
+
+{% stylesheet %}
+  .customer-account {
+    display: flex;
+    flex-direction: column;
+    gap: var(--gap-md);
+    width: 100%;
+    padding: 50px 0;
+  }
+
+  .customer-account__account {
+    max-width: 600px;
+    width: 100%;
+    margin: 0 auto;
+  }
+
+  .customer-account__account > * {
+    margin-bottom: var(--margin-md);
+  }
+
+  .customer-account__orders,
+  .customer-account__addresses {
+    display: flex;
+    flex-direction: column;
+    gap: var(--gap-md);
+  }
+
+  .customer-account__order {
+    text-decoration: none;
+    color: var(--color-foreground);
+    display: flex;
+    flex-direction: column;
+    gap: var(--gap-sm);
+    transition: var(--animation-link-hover);
+
+    &:hover {
+      opacity: var(--opacity-link-hover);
+    }
+
+    .customer-account__order-header {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+    }
+
+    .customer-account__order-header-left {
+      display: flex;
+      gap: var(--gap-sm);
+      flex-wrap: wrap;
+    }
+
+    .customer-account__order-number {
+      font-weight: 600;
+    }
+
+    .customer-account__order-date {
+      font-weight: 100;
+      opacity: 0.75;
+    }
+  }
+
+  .customer-account__default-address > * {
+    font-style: italic;
+  }
+{% endstylesheet %}
+
+{% schema %}
+{
+  "name": "t:account",
+  "settings": [
+    {
+      "type": "header",
+      "content": "t:style"
+    },
+    {
+      "type": "color_scheme",
+      "id": "color_scheme",
+      "label": "t:color_scheme",
+      "default": "scheme-1"
+    },
+    {
+      "type": "header",
+      "content": "t:go_further"
+    },
+    {
+      "type": "paragraph",
+      "content": "t:go_further_description"
+    }
+  ]
+}
+{% endschema %}

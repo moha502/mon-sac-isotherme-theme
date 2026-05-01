@@ -1,0 +1,46 @@
+<!doctype html>
+<html lang="{{ request.locale.iso_code }}">
+  <head>
+    {% render 'meta-tags' %}
+
+    {%- if settings.favicon != blank -%}
+      <link rel="icon" type="image/png" href="{{ settings.favicon | image_url: width: 32, height: 32 }}">
+    {%- endif -%}
+
+    {% render 'material-icons-header' %}
+
+    {% # Charger et précharger le CSS critique %}
+    {{ 'reset.css' | asset_url | stylesheet_tag: preload: true }}
+    {{ 'base.css' | asset_url | stylesheet_tag: preload: true }}
+    {{ 'slider.css' | asset_url | stylesheet_tag: preload: true }}
+
+    {% render 'fonts' %}
+    {% render 'scripts' %}
+    {% render 'css-variables' %}
+    {% render 'color-schemes' %}
+
+    {{ content_for_header }}
+  </head>
+
+  <body>
+    {% render 'toast-notification' %}
+
+    {% if settings.activate_wishlist %}
+      {% section 'wishlist-drawer' %}
+    {% endif %}
+
+    {% sections 'header-group' %}
+
+    {% if settings.cart_type == 'drawer' %}
+      {% sections 'cart-drawer-group' %}
+    {% endif %}
+
+    {% sections 'breadcrumbs-group' %}
+
+    {{ content_for_layout }}
+
+    {% sections 'footer-group' %}
+
+    {% render 'material-icons-body' %}
+  </body>
+</html>

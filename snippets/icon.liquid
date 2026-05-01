@@ -1,0 +1,20 @@
+{% doc %}
+  Affiche une icône.
+
+  @param {string} icon - L'icône à afficher
+  @param {string} [class] - Classes supplémentaires
+  @param {string} [data] - Données à ajouter à l'élément
+
+  @example
+  {% render 'icon', icon: 'search' %}
+{% enddoc %}
+
+<span
+  class="material-symbols-{{ settings.icon_style }} notranslate icon icon--{{ icon }} {{ class }}"
+  translate="no"
+  {% if data %}
+    {{ data }}
+  {% endif %}
+>
+  {{- icon -}}
+</span>

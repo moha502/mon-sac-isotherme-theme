@@ -1,0 +1,134 @@
+{% doc %}
+  Affiche un séparateur de contenu.
+
+  @example
+  {% content_for 'block', type: 'separator', id: 'separator' %}
+{% enddoc %}
+
+<div
+  class="
+    separator-block
+    {%- if block.settings.show_on_display == 'desktop_only' %} mobile-hide{% endif -%}
+    {%- if block.settings.show_on_display == 'mobile_only' %} desktop-hide{% endif -%}
+    {%- if block.settings.additional_class != blank %} {{ block.settings.additional_class }}{% endif -%}
+  "
+  {{ block.shopify_attributes }}
+  {% if request.visual_preview_mode %}
+    data-visual-preview-mode
+  {% endif %}
+>
+  {% render 'separator',
+    margin_top: block.settings.margin_top,
+    margin_bottom: block.settings.margin_bottom,
+    width: block.settings.width,
+    render_preview: true,
+    separator_style: block.settings.separator_style
+  %}
+</div>
+
+{% stylesheet %}
+  .separator-block {
+    width: 100%;
+  }
+
+  shopify-visual-preview-block-list .separator-block[data-visual-preview-mode] {
+    width: 150px;
+  }
+{% endstylesheet %}
+
+{% schema %}
+{
+  "name": "t:separator",
+  "tag": null,
+  "settings": [
+    {
+      "type": "select",
+      "id": "show_on_display",
+      "label": "t:show_on_display",
+      "default": "desktop_and_mobile",
+      "options": [
+        { "value": "desktop_and_mobile", "label": "t:desktop_and_mobile" },
+        { "value": "desktop_only", "label": "t:desktop_only" },
+        { "value": "mobile_only", "label": "t:mobile_only" }
+      ]
+    },
+    {
+      "type": "header",
+      "content": "t:layout"
+    },
+    {
+      "type": "range",
+      "id": "width",
+      "label": "t:separator_width",
+      "default": 100,
+      "min": 30,
+      "max": 100,
+      "step": 10,
+      "unit": "%"
+    },
+    {
+      "type": "select",
+      "id": "separator_style",
+      "label": "t:separator_style",
+      "default": "solid",
+      "options": [
+        { "value": "solid", "label": "t:separator_style_solid" },
+        { "value": "dotted", "label": "t:separator_style_dotted" },
+        { "value": "dashed", "label": "t:separator_style_dashed" }
+      ]
+    },
+    {
+      "type": "header",
+      "content": "t:margins"
+    },
+    {
+      "type": "range",
+      "id": "margin_top",
+      "label": "t:margin_top",
+      "default": 10,
+      "min": 0,
+      "max": 100,
+      "step": 1,
+      "unit": "px"
+    },
+    {
+      "type": "range",
+      "id": "margin_bottom",
+      "label": "t:margin_bottom",
+      "default": 10,
+      "min": 0,
+      "max": 100,
+      "step": 1,
+      "unit": "px"
+    },
+    {
+      "type": "header",
+      "content": "t:advanced_settings"
+    },
+    {
+      "type": "text",
+      "id": "additional_class",
+      "label": "t:additional_class",
+      "info": "t:additional_class_info"
+    },
+    {
+      "type": "header",
+      "content": "t:go_further"
+    },
+    {
+      "type": "paragraph",
+      "content": "t:go_further_description"
+    }
+  ],
+  "presets": [
+    {
+      "name": "t:separator",
+      "category": "t:components",
+      "settings": {
+        "margin_top": 10,
+        "margin_bottom": 10
+      }
+    }
+  ]
+}
+{% endschema %}

@@ -1,0 +1,160 @@
+{%- if predictive_search.performed -%}
+  <div id="predictive-search-results" class="predictive-search-results">
+    {%- if predictive_search.resources.products.size > 0 -%}
+      <div class="predictive-search__section">
+        <h3 class="h6 predictive-search__title">{{ 'search.products' | t }}</h3>
+        <ul class="predictive-search__grid">
+          {%- for product in predictive_search.resources.products -%}
+            <li class="predictive-search__item-product">
+              <a href="{{ product.url }}">
+                {{ product | image_url: width: 200 | image_tag }}
+                <p>{{ product.title }}</p>
+                {% render 'price', from_product: product, sales_badge: 'none' %}
+              </a>
+            </li>
+          {%- endfor -%}
+        </ul>
+      </div>
+    {%- endif -%}
+
+    {%- if predictive_search.resources.collections.size > 0 -%}
+      <div class="predictive-search__section">
+        <h3 class="h6 predictive-search__title">{{ 'search.collections' | t }}</h3>
+        <ul class="predictive-search__grid">
+          {%- for collection in predictive_search.resources.collections -%}
+            <li class="predictive-search__item-collection">
+              <a href="{{ collection.url }}">
+                {{ collection | image_url: width: 200 | image_tag }}
+                <p>{{ collection.title }}</p>
+              </a>
+            </li>
+          {%- endfor -%}
+        </ul>
+      </div>
+    {%- endif -%}
+
+    {%- if predictive_search.resources.pages.size > 0 or predictive_search.resources.articles.size > 0 -%}
+      <div class="predictive-search__section">
+        <h3 class="h6 predictive-search__title">{{ 'search.pages_and_articles' | t }}</h3>
+        <ul class="predictive-search__list">
+          {%- for page in predictive_search.resources.pages -%}
+            <li class="predictive-search__item-page">
+              <a href="{{ page.url }}">{{ page.title }}</a>
+            </li>
+          {%- endfor -%}
+
+          {%- for article in predictive_search.resources.articles -%}
+            <li class="predictive-search__item-article">
+              <a href="{{ article.url }}">
+                <span>{{ article.title }}</span>
+                <span class="predictive-search__item-article-date">{{ article.published_at | date: '%d/%m/%Y' }}</span>
+              </a>
+            </li>
+          {%- endfor -%}
+        </ul>
+      </div>
+    {%- endif -%}
+  </div>
+{%- endif -%}
+
+{% stylesheet %}
+  .predictive-search-results-container {
+    overflow-y: auto;
+    max-height: calc(var(--search-modal-max-height-mobile) - var(--inputs-min-height) - var(--padding-md) * 2);
+  }
+
+  @media (width > 750px) {
+    .predictive-search-results-container {
+      max-height: calc(var(--search-modal-max-height) - var(--inputs-min-height) - var(--padding-md) * 2);
+    }
+  }
+
+  .predictive-search-results:not(:empty) {
+    display: flex;
+    flex-direction: column;
+    gap: var(--gap-lg);
+    padding: var(--padding-xs);
+    padding-top: var(--margin-md);
+  }
+
+  .predictive-search-results .predictive-search__section:not(:last-child) {
+    border-bottom: 1px solid var(--color-input-border-low-opacity);
+    padding-bottom: var(--gap-lg);
+  }
+
+  .predictive-search__title {
+    margin-bottom: var(--margin-md);
+  }
+
+  .predictive-search__list,
+  .predictive-search__grid {
+    list-style: none;
+    padding: 0;
+    margin: 0;
+    display: flex;
+    flex-direction: column;
+    gap: var(--gap-xs);
+  }
+
+  .predictive-search__grid {
+    display: grid;
+    grid-template-columns: repeat(2, 1fr);
+    gap: var(--gap-md);
+  }
+
+  @media (width > 750px) {
+    .predictive-search__grid {
+      grid-template-columns: repeat(4, 1fr);
+    }
+  }
+
+  .predictive-search__item-product a {
+    display: flex;
+    flex-direction: column;
+    gap: var(--gap-sm);
+    text-decoration: none;
+    font-size: var(--font-body--size);
+  }
+
+  .predictive-search__item-product a img,
+  .predictive-search__item-collection a img {
+    border-radius: calc(var(--card-border-radius) - (var(--card-padding) * 0.5));
+    aspect-ratio: 1/1;
+    object-fit: cover;
+  }
+
+  .predictive-search__item-collection a {
+    display: flex;
+    flex-direction: column;
+    gap: var(--gap-sm);
+    text-decoration: none;
+    font-size: var(--font-body--size);
+  }
+
+  .predictive-search__item-page,
+  .predictive-search__item-article {
+    padding: var(--padding-xs);
+    border-radius: calc(var(--inputs-border-radius) * var(--small-multiplier));
+    transition: background-color var(--animation-speed) var(--animation-easing);
+    font-size: var(--font-body--size);
+    text-decoration: none;
+    color: inherit;
+    display: block;
+  }
+
+  .predictive-search__item-page:hover,
+  .predictive-search__item-article:hover {
+    background-color: var(--color-input-border-low-opacity);
+  }
+
+  .predictive-search__item-article a {
+    display: flex;
+    justify-content: space-between;
+    gap: var(--gap-xs);
+    width: 100%;
+  }
+
+  .predictive-search__item-article-date {
+    opacity: 0.7;
+  }
+{% endstylesheet %}

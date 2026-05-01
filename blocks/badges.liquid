@@ -1,0 +1,150 @@
+<div
+  class="
+    badges
+    {%- if block.settings.show_on_display == 'desktop_only' %} mobile-hide{% endif -%}
+    {%- if block.settings.show_on_display == 'mobile_only' %} desktop-hide{% endif -%}
+    {%- if block.settings.additional_class != blank %} {{ block.settings.additional_class }}{% endif -%}
+  "
+  style="
+    --alignment: {{ block.settings.alignment_desktop }};
+    --alignment-mobile: {{ block.settings.alignment_mobile }};
+    --margin-top: {{ block.settings.margin_top }}px;
+    --margin-bottom: {{ block.settings.margin_bottom }}px;
+  "
+  {{ block.shopify_attributes }}
+>
+  {%- content_for 'blocks' -%}
+</div>
+
+{% stylesheet %}
+  .badges {
+    justify-content: var(--alignment-mobile);
+    margin-top: var(--margin-top);
+    margin-bottom: var(--margin-bottom);
+  }
+
+  @media (width > 750px) {
+    .badges {
+      justify-content: var(--alignment);
+    }
+  }
+{% endstylesheet %}
+
+{% schema %}
+{
+  "name": "t:badges",
+  "tag": null,
+  "class": "badges",
+  "blocks": [
+    {
+      "type": "_badge"
+    }
+  ],
+  "settings": [
+    {
+      "type": "select",
+      "id": "show_on_display",
+      "label": "t:show_on_display",
+      "default": "desktop_and_mobile",
+      "options": [
+        { "value": "desktop_and_mobile", "label": "t:desktop_and_mobile" },
+        { "value": "desktop_only", "label": "t:desktop_only" },
+        { "value": "mobile_only", "label": "t:mobile_only" }
+      ]
+    },
+    {
+      "type": "header",
+      "content": "t:style"
+    },
+    {
+      "type": "select",
+      "id": "alignment_desktop",
+      "label": "t:alignment_desktop",
+      "default": "flex-start",
+      "options": [
+        { "value": "flex-start", "label": "t:left" },
+        { "value": "center", "label": "t:centered" },
+        { "value": "flex-end", "label": "t:right" }
+      ],
+      "visible_if": "{{ block.settings.show_on_display != 'mobile_only' }}"
+    },
+    {
+      "type": "select",
+      "id": "alignment_mobile",
+      "label": "t:alignment_mobile",
+      "default": "flex-start",
+      "options": [
+        { "value": "flex-start", "label": "t:left" },
+        { "value": "center", "label": "t:centered" },
+        { "value": "flex-end", "label": "t:right" }
+      ],
+      "visible_if": "{{ block.settings.show_on_display != 'desktop_only' }}"
+    },
+    {
+      "type": "header",
+      "content": "t:margins"
+    },
+    {
+      "type": "range",
+      "id": "margin_top",
+      "label": "t:margin_top",
+      "default": 0,
+      "min": 0,
+      "max": 100,
+      "step": 1,
+      "unit": "px"
+    },
+    {
+      "type": "range",
+      "id": "margin_bottom",
+      "label": "t:margin_bottom",
+      "default": 0,
+      "min": 0,
+      "max": 100,
+      "step": 1,
+      "unit": "px"
+    },
+    {
+      "type": "header",
+      "content": "t:advanced_settings"
+    },
+    {
+      "type": "text",
+      "id": "additional_class",
+      "label": "t:additional_class",
+      "info": "t:additional_class_info"
+    },
+    {
+      "type": "header",
+      "content": "t:go_further"
+    },
+    {
+      "type": "paragraph",
+      "content": "t:go_further_description"
+    }
+  ],
+  "presets": [
+    {
+      "name": "t:badges",
+      "category": "t:components",
+      "settings": {},
+      "blocks": [
+        {
+          "type": "_badge",
+          "settings": {
+            "text": "t:badges_text_1_default",
+            "badge_style": "primary"
+          }
+        },
+        {
+          "type": "_badge",
+          "settings": {
+            "text": "t:badges_text_2_default",
+            "badge_style": "secondary"
+          }
+        }
+      ]
+    }
+  ]
+}
+{% endschema %}

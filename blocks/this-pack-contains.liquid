@@ -1,0 +1,160 @@
+{%- if block.blocks.size > 0 -%}
+  <div
+    class="
+      this-pack-contains
+      {%- if block.settings.show_on_display == 'desktop_only' %} mobile-hide{% endif -%}
+      {%- if block.settings.show_on_display == 'mobile_only' %} desktop-hide{% endif -%}
+      {%- if block.settings.additional_class != blank %} {{ block.settings.additional_class }}{% endif -%}
+    "
+    style="
+      --margin-top: {{ block.settings.margin_top }}px;
+      --margin-bottom: {{ block.settings.margin_bottom }}px;
+    "
+    {{ block.shopify_attributes }}
+    {% if request.visual_preview_mode %}
+      data-visual-preview-mode
+    {% endif %}
+  >
+    {%- if block.settings.title != blank -%}
+      <p class="this-pack-contains__title">{{ block.settings.title }}</p>
+    {%- endif -%}
+
+    {%- if block.settings.description != blank -%}
+      <div class="this-pack-contains_description">{{ block.settings.description }}</div>
+    {%- endif -%}
+
+    <div class="this-pack-contains_product-list">
+      {% content_for 'blocks' %}
+    </div>
+  </div>
+{%- endif -%}
+
+{% stylesheet %}
+  .this-pack-contains {
+    display: flex;
+    flex-direction: column;
+    font-size: var(--font-body--size);
+    margin-top: var(--margin-top);
+    margin-bottom: var(--margin-bottom);
+  }
+
+  shopify-visual-preview-block-list .this-pack-contains[data-visual-preview-mode] {
+    width: 450px;
+  }
+
+  .this-pack-contains__title {
+    font-weight: 500;
+  }
+
+  .this-pack-contains_description {
+    margin-top: var(--margin-xs);
+  }
+
+  .this-pack-contains_product-list {
+    display: flex;
+    gap: var(--gap-sm);
+    width: 100%;
+    overflow-y: auto;
+    padding: var(--padding-sm) 0;
+  }
+{% endstylesheet %}
+
+{% schema %}
+{
+  "name": "t:this_pack_contains",
+  "tag": null,
+  "blocks": [
+    {
+      "type": "product-mini-card"
+    }
+  ],
+  "settings": [
+    {
+      "type": "select",
+      "id": "show_on_display",
+      "label": "t:show_on_display",
+      "default": "desktop_and_mobile",
+      "options": [
+        { "value": "desktop_and_mobile", "label": "t:desktop_and_mobile" },
+        { "value": "desktop_only", "label": "t:desktop_only" },
+        { "value": "mobile_only", "label": "t:mobile_only" }
+      ]
+    },
+    {
+      "type": "header",
+      "content": "t:content"
+    },
+    {
+      "type": "inline_richtext",
+      "id": "title",
+      "label": "t:title",
+      "default": "t:this_pack_contains_default_title"
+    },
+    {
+      "type": "richtext",
+      "id": "description",
+      "label": "t:description",
+      "default": "t:this_pack_contains_default_description"
+    },
+    {
+      "type": "header",
+      "content": "t:margins"
+    },
+    {
+      "type": "range",
+      "id": "margin_top",
+      "label": "t:margin_top",
+      "default": 0,
+      "min": 0,
+      "max": 100,
+      "step": 1,
+      "unit": "px"
+    },
+    {
+      "type": "range",
+      "id": "margin_bottom",
+      "label": "t:margin_bottom",
+      "default": 0,
+      "min": 0,
+      "max": 100,
+      "step": 1,
+      "unit": "px"
+    },
+    {
+      "type": "header",
+      "content": "t:advanced_settings"
+    },
+    {
+      "type": "text",
+      "id": "additional_class",
+      "label": "t:additional_class",
+      "info": "t:additional_class_info"
+    },
+    {
+      "type": "header",
+      "content": "t:go_further"
+    },
+    {
+      "type": "paragraph",
+      "content": "t:go_further_description"
+    }
+  ],
+  "presets": [
+    {
+      "name": "t:this_pack_contains",
+      "category": "t:product",
+      "blocks": [
+        {
+          "type": "product-mini-card"
+        },
+        {
+          "type": "product-mini-card"
+        },
+        {
+          "type": "product-mini-card"
+        }
+      ]
+    }
+  ]
+}
+{% endschema %}

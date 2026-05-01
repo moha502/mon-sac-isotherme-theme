@@ -1,0 +1,254 @@
+<script src="{{ 'cart-discount.js' | asset_url }}" type="module"></script>
+
+{% liquid
+  assign discount_codes = cart.cart_level_discount_applications | where: 'type', 'discount_code' | map: 'title'
+  for item in cart.items
+    for allocation in item.line_level_discount_allocations
+      if allocation.discount_application.type == 'discount_code'
+        assign discount_codes = item.line_level_discount_allocations | slice: forloop.index0 | map: 'discount_application' | map: 'title' | concat: discount_codes
+      endif
+    endfor
+  endfor
+
+  assign discount_codes = discount_codes | uniq
+%}
+
+<div
+  class="cart-discount-block"
+  style="--margin-top: {{ block.settings.margin_top }}px; --margin-bottom: {{ block.settings.margin_bottom }}px;"
+  {% if request.visual_preview_mode %}
+    data-visual-preview-mode
+  {% endif %}
+  {{ block.shopify_attributes }}
+>
+  {% capture discount_code_content %}
+    <cart-discount
+      data-please-insert-a-code="{{ 'cart.please_insert_a_code' | t }}"
+      data-code-already-applied="{{ 'cart.code_already_applied' | t }}"
+      data-error-remove-discount="{{ 'cart.error_remove_discount' | t }}"
+      data-error-apply-discount="{{ 'cart.error_apply_discount' | t }}"
+      data-code-not-applicable="{{ 'cart.code_not_applicable' | t }}"
+    >
+
+      <div class="cart-discount__container">
+        {% liquid
+          assign data = 'data-ref="discount-input"'
+
+          assign small = false
+          if block.settings.style == 'compact'
+              assign small = true
+          endif
+        %}
+
+        {% render 'textfield',
+          type: 'text',
+          name: 'cart-discount',
+          label: block.settings.placeholder,
+          data: data,
+          small: small
+        %}
+
+        <button
+          class="button{% if block.settings.style == 'compact' %} button--small{% endif %} cart-discount_button"
+          data-ref="apply-discount"
+        >
+          <span class="button__content">
+            {{ block.settings.button_text }}
+          </span>
+
+          {% render 'loading-spinner' %}
+        </button>
+      </div>
+
+      <div class="cart-discount_badge-container {% if discount_codes.size == 0 %}hidden{% endif %}">
+        {% for discount_code in discount_codes %}
+          <p class="badge badge--secondary cart-discount_badge" data-ref="discount-badge" data-discount-code="{{ discount_code }}">
+            <span class="cart-discount__discount-text">
+              {{- discount_code }}
+            </span>
+
+            <span class="cart-discount__remove-discount" data-ref="remove-discount">
+              {% render 'icon', icon: 'close' %}
+            </span>
+          </p>
+        {% endfor %}
+      </div>
+    </cart-discount> 
+  {% endcapture %}
+
+  {% if block.settings.style == 'in_accordion' %}
+    {% assign accordion_heading = block.settings.accordion_heading %}
+    {% if discount_codes.size > 0 %}
+      {% assign accordion_heading = accordion_heading | append: ' (' | append: discount_codes.size | append: ')' %}
+    {% endif %}
+
+    {% render 'accordion', content: discount_code_content, heading: accordion_heading %}
+  {% else %}
+    {{ discount_code_content }}
+  {% endif %}
+</div>
+
+{% stylesheet %}
+  .cart-discount-block {
+    margin-top: var(--margin-top);
+    margin-bottom: var(--margin-bottom);
+
+    .icon--keyboard_arrow_down {
+      display: none;
+    }
+  }
+
+  .cart-discount-block[data-visual-preview-mode] {
+    width: 350px;
+  }
+
+  cart-discount {
+    display: block;
+  }
+
+  .cart-discount__container {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    gap: 10px;
+
+    .textfield {
+      width: 100%;
+    }
+
+    .textfield input {
+      min-width: 100%;
+      width: 100%;
+    }
+  }
+
+  .cart-discount_button {
+    min-width: 90px;
+  }
+
+  .cart-discount_badge-container {
+    margin-top: var(--margin-sm);
+  }
+
+  .cart-discount_badge {
+    justify-content: center;
+    gap: 5px;
+    padding-right: 5px !important;
+  }
+
+  .cart-discount_badge.loading {
+    cursor: default;
+    pointer-events: none;
+
+    .cart-discount__discount-text,
+    .cart-discount__remove-discount {
+      opacity: 0.5;
+    }
+  }
+
+  .cart-discount__remove-discount {
+    cursor: pointer;
+    height: 14px;
+  }
+
+  .cart-discount_badge .cart-discount__discount-text {
+    display: inline-block;
+    white-space: nowrap;
+    overflow: hidden;
+    text-overflow: ellipsis;
+  }
+{% endstylesheet %}
+
+{% schema %}
+{
+  "name": "t:discount_code",
+  "tag": null,
+  "settings": [
+    {
+      "type": "header",
+      "content": "t:style"
+    },
+    {
+      "type": "select",
+      "id": "style",
+      "label": "t:style",
+      "default": "normal",
+      "options": [
+        { "value": "in_accordion", "label": "t:in_accordion" },
+        { "value": "normal", "label": "t:normal" },
+        { "value": "compact", "label": "t:compact" }
+      ]
+    },
+    {
+      "type": "header",
+      "content": "t:content"
+    },
+    {
+      "type": "text",
+      "id": "accordion_heading",
+      "label": "t:accordion_heading_discount_code",
+      "default": "t:accordion_heading_discount_code_default",
+      "visible_if": "{{ block.settings.style == 'in_accordion' }}"
+    },
+    {
+      "type": "text",
+      "id": "button_text",
+      "label": "t:button_text",
+      "default": "t:apply"
+    },
+    {
+      "type": "text",
+      "id": "placeholder",
+      "label": "t:placeholder",
+      "default": "t:placeholder_discount_code"
+    },
+    {
+      "type": "header",
+      "content": "t:margins"
+    },
+    {
+      "type": "range",
+      "id": "margin_top",
+      "label": "t:margin_top",
+      "default": 0,
+      "min": 0,
+      "max": 100,
+      "step": 1,
+      "unit": "px"
+    },
+    {
+      "type": "range",
+      "id": "margin_bottom",
+      "label": "t:margin_bottom",
+      "default": 0,
+      "min": 0,
+      "max": 100,
+      "step": 1,
+      "unit": "px"
+    },
+    {
+      "type": "header",
+      "content": "t:advanced_settings"
+    },
+    {
+      "type": "text",
+      "id": "additional_class",
+      "label": "t:additional_class",
+      "info": "t:additional_class_info"
+    },
+    {
+      "type": "header",
+      "content": "t:go_further"
+    },
+    {
+      "type": "paragraph",
+      "content": "t:go_further_description"
+    }
+  ],
+  "presets": [
+    {
+      "name": "t:discount_code"
+    }
+  ]
+}
+{% endschema %}

@@ -1,0 +1,107 @@
+{%- if section.settings.enable_predictive_search -%}
+  <script src="{{ 'predictive-search.js' | asset_url }}" type="module"></script>
+{%- endif -%}
+
+<dialog-component class="search-popup">
+  <dialog
+    id="search-popup"
+    class="dialog-modal card color-scheme-1 dialog-modal--top dialog-modal--search"
+    data-ref="popup-modal"
+    style="
+      --search-modal-max-height: var(--modal-max-height);
+      --search-modal-max-height-mobile: 85dvh;
+    "
+  >
+    <div class="dialog-modal__content">
+      {% capture search_form %}
+        <form action="{{ routes.search_url }}" class="search-form">
+          {% assign search_terms = search.terms | escape %}
+          {% assign search_label = 'search.placeholder' | t %}
+          <div class="input-group">
+            {% render 'textfield', label: search_label, name: 'q', value: search_terms, full_width: true %}
+            <input type="hidden" name="options[prefix]" value="last">
+            <div class="input-group__action">
+              {% render 'button', type: 'submit', icon: 'search' %}
+            </div>
+          </div>
+
+          <div class="dialog-modal__close">
+            {% render 'button', block: block, icon: 'close', button_style: 'tertiary', data: 'data-ref="popup-close"' %}
+          </div>
+        </form>
+      {% endcapture %}
+
+      {%- if section.settings.enable_predictive_search -%}
+        <predictive-search>
+          {{ search_form }}
+
+          <div data-ref="predictive-search" tabindex="-1" class="predictive-search-results-container">
+            {%- render 'loading-spinner' -%}
+          </div>
+
+          <span class="predictive-search-status visually-hidden" role="status" aria-hidden="true"></span>
+        </predictive-search>
+      {%- else -%}
+        {{ search_form }}
+      {%- endif -%}
+    </div>
+  </dialog>
+
+  <button type="button" class="header__icon-search" data-ref="popup-toggle">
+    <span class="material-symbols-{{ settings.icon_style }} notranslate icon" translate="no">search</span>
+  </button>
+</dialog-component>
+
+{% stylesheet %}
+  .header__icon-search {
+    background: none;
+    border: none;
+    cursor: pointer;
+    padding: 0;
+    color: inherit;
+    display: flex;
+  }
+
+  .dialog-modal--search {
+    padding: var(--page-margin-mobile);
+    flex-direction: row;
+    gap: var(--gap-xs);
+    align-items: center;
+    width: var(--modal-width);
+    overflow: hidden !important;
+    max-height: var(--search-modal-max-height-mobile);
+
+    @media (width > 750px) {
+      max-height: var(--search-modal-max-height);
+    }
+
+    &[open] {
+      display: flex;
+      align-items: flex-start;
+    }
+
+    .dialog-modal__content {
+      width: 100%;
+    }
+
+    .dialog-modal__content .search-form {
+      display: flex;
+      flex-direction: row;
+      gap: var(--gap-xs);
+      align-items: center;
+      margin: 0;
+    }
+
+    .dialog-modal__close {
+      position: relative;
+      top: auto;
+      right: auto;
+    }
+  }
+
+  @media (width > 750px) {
+    .dialog-modal--search {
+      padding: var(--padding-md);
+    }
+  }
+{% endstylesheet %}

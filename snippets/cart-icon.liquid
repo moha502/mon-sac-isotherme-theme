@@ -1,0 +1,22 @@
+<script src="{{ 'cart-icon.js' | asset_url }}" type="module"></script>
+
+<cart-icon
+  class="header__icon header__icon-cart"
+  data-add-to-cart-behavior="{{ settings.add_to_cart_behavior }}"
+>
+  <span class="material-symbols-{{ settings.icon_style }} notranslate icon" translate="no">
+    {{ cart_icon }}
+  </span>
+  <span class="header__icon-count-bubble{% if cart.item_count >=100 %} header__icon-count-bubble--long{% endif %}">
+    <span class="header__icon-count-bubble-inner" data-ref="cart-count">
+      {{- cart.item_count -}}
+    </span>
+  </span>
+</cart-icon>
+
+{% stylesheet %}
+  .header__icon-cart {
+    position: relative;
+    cursor: pointer;
+  }
+{% endstylesheet %}

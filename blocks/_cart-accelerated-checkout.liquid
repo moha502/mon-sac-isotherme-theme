@@ -1,0 +1,124 @@
+{% if additional_checkout_buttons %}
+  <div
+    class="
+      accelerated-checkout accelerated-checkout--full-width
+      accelerated-checkout--{{ block.settings.button_style }}
+      {%- if block.settings.show_on_display == 'desktop_only' %} mobile-hide{% endif -%}
+      {%- if block.settings.show_on_display == 'mobile_only' %} desktop-hide{% endif -%}
+      {%- if block.settings.additional_class != blank %} {{ block.settings.additional_class }}{% endif -%}
+    "
+    style="--margin-top: {{ block.settings.margin_top }}px; --margin-bottom: {{ block.settings.margin_bottom }}px;"
+    {{ block.shopify_attributes }}
+    {% if request.visual_preview_mode %}
+      data-visual-preview-mode
+    {% endif %}
+  >
+    {{ content_for_additional_checkout_buttons }}
+  </div>
+{% endif %}
+
+{% stylesheet %}
+  shopify-visual-preview-block-list .accelerated-checkout[data-visual-preview-mode] {
+    width: 400px;
+  }
+
+  more-payment-options-link {
+    font-size: smaller;
+  }
+
+  more-payment-options-link a {
+    --button-color: var(--color-foreground);
+  }
+
+  more-payment-options-link a:hover {
+    opacity: var(--opacity-link-hover);
+  }
+
+  .shopify-payment-button__more-options[aria-hidden='true'] {
+    display: none;
+  }
+{% endstylesheet %}
+
+{% schema %}
+{
+  "name": "t:accelerated_checkout_button",
+  "tag": null,
+  "settings": [
+    {
+      "type": "select",
+      "id": "show_on_display",
+      "label": "t:show_on_display",
+      "default": "desktop_and_mobile",
+      "options": [
+        { "value": "desktop_and_mobile", "label": "t:desktop_and_mobile" },
+        { "value": "desktop_only", "label": "t:desktop_only" },
+        { "value": "mobile_only", "label": "t:mobile_only" }
+      ]
+    },
+    {
+      "type": "select",
+      "id": "button_style",
+      "label": "t:button_style",
+      "options": [
+        {
+          "value": "primary",
+          "label": "t:primary"
+        },
+        {
+          "value": "secondary",
+          "label": "t:secondary"
+        }
+      ],
+      "default": "primary"
+    },
+    {
+      "type": "header",
+      "content": "t:margins"
+    },
+    {
+      "type": "range",
+      "id": "margin_top",
+      "label": "t:margin_top",
+      "default": 0,
+      "min": 0,
+      "max": 100,
+      "step": 1,
+      "unit": "px"
+    },
+    {
+      "type": "range",
+      "id": "margin_bottom",
+      "label": "t:margin_bottom",
+      "default": 0,
+      "min": 0,
+      "max": 100,
+      "step": 1,
+      "unit": "px"
+    },
+    {
+      "type": "header",
+      "content": "t:advanced_settings"
+    },
+    {
+      "type": "text",
+      "id": "additional_class",
+      "label": "t:additional_class",
+      "info": "t:additional_class_info"
+    },
+    {
+      "type": "header",
+      "content": "t:go_further"
+    },
+    {
+      "type": "paragraph",
+      "content": "t:go_further_description"
+    }
+  ],
+  "presets": [
+    {
+      "name": "t:accelerated_checkout_button",
+      "category": "t:product_form"
+    }
+  ]
+}
+{% endschema %}

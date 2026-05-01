@@ -1,0 +1,68 @@
+<script src="{{ 'sort.js' | asset_url }}" type="module"></script>
+
+<sort-inline-component>
+  <dropdown-component data-ref="filter-dropdown">
+    <button type="button" class="dropdown-toggle sorting-dropdown-toggle" data-ref="dropdown-toggle">
+      <span>Trier</span>
+      {% render 'icon', icon: 'keyboard_arrow_down' %}
+    </button>
+
+    <div
+      class="dropdown-content dropdown-content--open-left color-scheme-1"
+      data-ref="dropdown-content"
+    >
+      {% assign sort_by = collection.sort_by | default: collection.default_sort_by %}
+
+      <input name="sort-by" id="sort-by" type="text" class="hidden" value="{{ sort_by }}">
+
+      <ul class="sorting__list" data-ref="sorting-list">
+        {% for option in collection.sort_options %}
+          <li
+            class="sorting__select {% if option.value == sort_by %}sorting__select--selected{% endif %}"
+            data-value="{{ option.value }}"
+          >
+            {{ option.name }}
+          </li>
+        {% endfor %}
+      </ul>
+    </div>
+  </dropdown-component>
+</sort-inline-component>
+
+{% stylesheet %}
+  .sorting-dropdown-toggle {
+    -webkit-font-smoothing: antialiased;
+    -moz-osx-font-smoothing: grayscale;
+  }
+
+  .sorting__select {
+    border-radius: calc(var(--card-border-radius) - var(--padding-xs));
+    display: flex;
+    align-items: center;
+    padding: var(--padding-xs);
+    font-size: var(--font-body--size);
+    gap: 3px;
+    cursor: pointer;
+    transition: background-color var(--animation-speed) var(--animation-easing);
+  }
+
+  .sorting__list {
+    display: flex;
+    flex-direction: column;
+    gap: 3px;
+    position: relative;
+    width: 100%;
+    scroll-padding: var(--padding-xs) 0;
+    overflow-y: auto;
+    white-space: nowrap;
+    list-style: none;
+    padding: 0;
+  }
+
+  .sorting__select:hover,
+  .sorting__select:focus,
+  .sorting__select--selected {
+    background-color: rgb(from var(--color-foreground) r g b / 5%);
+    font-weight: 500;
+  }
+{% endstylesheet %}

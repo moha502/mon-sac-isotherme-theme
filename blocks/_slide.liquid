@@ -1,0 +1,183 @@
+{% doc %}
+  Affiche un groupe de blocs avec une mise en page configurable.
+
+  @example
+  {% content_for 'block', type: 'group', id: 'group' %}
+{% enddoc %}
+
+<li
+  class="splide__slide{%- if block.settings.additional_class != blank %} {{ block.settings.additional_class }}{% endif -%}"
+  {{ block.shopify_attributes }}
+>
+  <div
+    class="slide{% if block.settings.wrap_in_card %} card color-{{ block.settings.color_scheme }}{% endif %}"
+    style="
+      --direction: {{ block.settings.layout_direction }};
+      --wrap: {{ block.settings.layout_wrap }};
+      --justify: {{ block.settings.layout_justify }};
+      --align_items: {{ block.settings.layout_align_items }};
+      --gap: {{ block.settings.layout_gap }}px;
+      --margin-top: {{ block.settings.margin_top }}px;
+      --margin-bottom: {{ block.settings.margin_bottom }}px;
+    "
+  >
+    {% content_for 'blocks' %}
+  </div>
+</li>
+
+{% stylesheet %}
+  .slide {
+    display: flex;
+    flex-direction: var(--direction);
+    flex-wrap: var(--wrap);
+    justify-content: var(--justify);
+    align-items: var(--align_items);
+    gap: var(--gap);
+    margin-top: var(--margin-top);
+    margin-bottom: var(--margin-bottom);
+    overflow: hidden;
+    width: 100%;
+    height: 100%;
+  }
+{% endstylesheet %}
+
+{% schema %}
+{
+  "name": "t:slide",
+  "tag": null,
+  "blocks": [
+    {
+      "type": "@theme"
+    },
+    {
+      "type": "@app"
+    }
+  ],
+  "settings": [
+    {
+      "type": "header",
+      "content": "t:style"
+    },
+    {
+      "type": "checkbox",
+      "id": "wrap_in_card",
+      "label": "t:wrap_in_card",
+      "default": false
+    },
+    {
+      "type": "color_scheme",
+      "id": "color_scheme",
+      "label": "t:color_scheme",
+      "default": "color-scheme-1",
+      "visible_if": "{{ block.settings.wrap_in_card }}"
+    },
+    {
+      "type": "header",
+      "content": "t:layout"
+    },
+    {
+      "type": "select",
+      "id": "layout_direction",
+      "label": "t:layout_direction",
+      "default": "row",
+      "options": [
+        { "value": "row", "label": "→" },
+        { "value": "column", "label": "↓" }
+      ]
+    },
+    {
+      "type": "select",
+      "id": "layout_wrap",
+      "label": "t:layout_wrap",
+      "default": "nowrap",
+      "options": [
+        { "value": "nowrap", "label": "t:nowrap" },
+        { "value": "wrap", "label": "t:wrap" }
+      ]
+    },
+    {
+      "type": "range",
+      "id": "layout_gap",
+      "label": "t:layout_gap",
+      "default": 10,
+      "step": 1,
+      "min": 0,
+      "max": 30,
+      "unit": "px"
+    },
+    {
+      "type": "select",
+      "id": "layout_justify",
+      "label": "t:layout_justify",
+      "default": "flex-start",
+      "options": [
+        { "value": "flex-start", "label": "t:flex-start" },
+        { "value": "center", "label": "t:centered" },
+        { "value": "flex-end", "label": "t:flex-end" },
+        { "value": "space-between", "label": "t:space-between" },
+        { "value": "space-around", "label": "t:space-around" },
+        { "value": "space-evenly", "label": "t:space-evenly" }
+      ]
+    },
+    {
+      "type": "select",
+      "id": "layout_align_items",
+      "label": "t:layout_align_items",
+      "default": "flex-start",
+      "options": [
+        { "value": "flex-start", "label": "t:flex-start" },
+        { "value": "center", "label": "t:centered" },
+        { "value": "flex-end", "label": "t:flex-end" }
+      ]
+    },
+    {
+      "type": "header",
+      "content": "t:margins"
+    },
+    {
+      "type": "range",
+      "id": "margin_top",
+      "label": "t:margin_top",
+      "default": 0,
+      "min": 0,
+      "max": 100,
+      "step": 1,
+      "unit": "px"
+    },
+    {
+      "type": "range",
+      "id": "margin_bottom",
+      "label": "t:margin_bottom",
+      "default": 0,
+      "min": 0,
+      "max": 100,
+      "step": 1,
+      "unit": "px"
+    },
+    {
+      "type": "header",
+      "content": "t:advanced_settings"
+    },
+    {
+      "type": "text",
+      "id": "additional_class",
+      "label": "t:additional_class",
+      "info": "t:additional_class_info"
+    },
+    {
+      "type": "header",
+      "content": "t:go_further"
+    },
+    {
+      "type": "paragraph",
+      "content": "t:go_further_description"
+    }
+  ],
+  "presets": [
+    {
+      "name": "t:slide",
+      "category": "t:layout"
+    }
+  ]
+}
+{% endschema %}

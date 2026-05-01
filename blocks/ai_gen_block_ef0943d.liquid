@@ -1,0 +1,394 @@
+{% doc %}
+  @prompt
+    titre et bullet point a gauche image a droite , moins d'espace entre les bullet point 
+{% enddoc %}
+{% assign ai_gen_id = block.id | replace: '_', '' | downcase %}
+
+{% style %}
+  .ai-text-image-{{ ai_gen_id }} {
+    display: block;
+    width: {{ block.settings.desktop_width_percent }}%;
+    max-width: 100%;
+  }
+
+  .ai-text-image-container-{{ ai_gen_id }} {
+    display: flex;
+    align-items: {{ block.settings.vertical_alignment }};
+    gap: {{ block.settings.gap }}px;
+  }
+
+  .ai-text-image-content-{{ ai_gen_id }} {
+    flex: 1;
+    display: flex;
+    flex-direction: column;
+    gap: {{ block.settings.content_gap }}px;
+  }
+
+  .ai-text-image-title-{{ ai_gen_id }} {
+    margin: 0;
+    color: {{ block.settings.title_color }};
+    font-size: {{ block.settings.title_size }}px;
+  }
+
+  .ai-text-image-list-{{ ai_gen_id }} {
+    list-style: none;
+    padding: 0;
+    margin: 0;
+    display: flex;
+    flex-direction: column;
+    gap: {{ block.settings.list_gap }}px;
+  }
+
+  .ai-text-image-list-item-{{ ai_gen_id }} {
+    display: flex;
+    align-items: flex-start;
+    gap: 12px;
+    color: {{ block.settings.text_color }};
+    font-size: {{ block.settings.text_size }}px;
+  }
+
+  .ai-text-image-list-icon-{{ ai_gen_id }} {
+    flex-shrink: 0;
+    width: {{ block.settings.icon_size }}px;
+    height: {{ block.settings.icon_size }}px;
+    margin-top: 2px;
+  }
+
+  .ai-text-image-list-icon-{{ ai_gen_id }} svg {
+    width: 100%;
+    height: 100%;
+    fill: {{ block.settings.icon_color }};
+  }
+
+  .ai-text-image-image-wrapper-{{ ai_gen_id }} {
+    flex: 1;
+    position: relative;
+  }
+
+  .ai-text-image-image-{{ ai_gen_id }} {
+    width: 100%;
+    height: auto;
+    display: block;
+    border-radius: {{ block.settings.image_border_radius }}px;
+  }
+
+  .ai-text-image-placeholder-{{ ai_gen_id }} {
+    width: 100%;
+    aspect-ratio: 1 / 1;
+    background-color: #f4f4f4;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    border-radius: {{ block.settings.image_border_radius }}px;
+    position: relative;
+  }
+
+  .ai-text-image-placeholder-{{ ai_gen_id }} svg {
+    width: 100%;
+    height: 100%;
+    max-width: 300px;
+    max-height: 300px;
+  }
+
+  .ai-text-image-empty-state-{{ ai_gen_id }} {
+    position: absolute;
+    bottom: 20px;
+    left: 50%;
+    transform: translateX(-50%);
+    padding: 12px 20px;
+    font-size: 14px;
+    color: #666;
+    text-align: center;
+    pointer-events: none;
+  }
+
+  @media screen and (max-width: 749px) {
+    .ai-text-image-container-{{ ai_gen_id }} {
+      flex-direction: column;
+    }
+
+    .ai-text-image-title-{{ ai_gen_id }} {
+      font-size: {{ block.settings.title_size | times: 0.8 }}px;
+    }
+
+    .ai-text-image-list-item-{{ ai_gen_id }} {
+      font-size: {{ block.settings.text_size | times: 0.9 }}px;
+    }
+  }
+{% endstyle %}
+
+<div class="ai-text-image-{{ ai_gen_id }}" {{ block.shopify_attributes }}>
+  <div class="ai-text-image-container-{{ ai_gen_id }}">
+    <div class="ai-text-image-content-{{ ai_gen_id }}">
+      {% if block.settings.title != blank %}
+        <h2 class="ai-text-image-title-{{ ai_gen_id }}">{{ block.settings.title }}</h2>
+      {% endif %}
+
+      {% if block.settings.bullet_1 != blank or block.settings.bullet_2 != blank or block.settings.bullet_3 != blank or block.settings.bullet_4 != blank or block.settings.bullet_5 != blank %}
+        <ul class="ai-text-image-list-{{ ai_gen_id }}">
+          {% if block.settings.bullet_1 != blank %}
+            <li class="ai-text-image-list-item-{{ ai_gen_id }}">
+              <span class="ai-text-image-list-icon-{{ ai_gen_id }}">
+                <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24">
+                  <path d="M9 16.17L4.83 12l-1.42 1.41L9 19 21 7l-1.41-1.41L9 16.17z"/>
+                </svg>
+              </span>
+              <span>{{ block.settings.bullet_1 }}</span>
+            </li>
+          {% endif %}
+
+          {% if block.settings.bullet_2 != blank %}
+            <li class="ai-text-image-list-item-{{ ai_gen_id }}">
+              <span class="ai-text-image-list-icon-{{ ai_gen_id }}">
+                <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24">
+                  <path d="M9 16.17L4.83 12l-1.42 1.41L9 19 21 7l-1.41-1.41L9 16.17z"/>
+                </svg>
+              </span>
+              <span>{{ block.settings.bullet_2 }}</span>
+            </li>
+          {% endif %}
+
+          {% if block.settings.bullet_3 != blank %}
+            <li class="ai-text-image-list-item-{{ ai_gen_id }}">
+              <span class="ai-text-image-list-icon-{{ ai_gen_id }}">
+                <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24">
+                  <path d="M9 16.17L4.83 12l-1.42 1.41L9 19 21 7l-1.41-1.41L9 16.17z"/>
+                </svg>
+              </span>
+              <span>{{ block.settings.bullet_3 }}</span>
+            </li>
+          {% endif %}
+
+          {% if block.settings.bullet_4 != blank %}
+            <li class="ai-text-image-list-item-{{ ai_gen_id }}">
+              <span class="ai-text-image-list-icon-{{ ai_gen_id }}">
+                <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24">
+                  <path d="M9 16.17L4.83 12l-1.42 1.41L9 19 21 7l-1.41-1.41L9 16.17z"/>
+                </svg>
+              </span>
+              <span>{{ block.settings.bullet_4 }}</span>
+            </li>
+          {% endif %}
+
+          {% if block.settings.bullet_5 != blank %}
+            <li class="ai-text-image-list-item-{{ ai_gen_id }}">
+              <span class="ai-text-image-list-icon-{{ ai_gen_id }}">
+                <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24">
+                  <path d="M9 16.17L4.83 12l-1.42 1.41L9 19 21 7l-1.41-1.41L9 16.17z"/>
+                </svg>
+              </span>
+              <span>{{ block.settings.bullet_5 }}</span>
+            </li>
+          {% endif %}
+        </ul>
+      {% endif %}
+    </div>
+
+    <div class="ai-text-image-image-wrapper-{{ ai_gen_id }}">
+      {% if block.settings.image %}
+        <img
+          src="{{ block.settings.image | image_url: width: 1000 }}"
+          alt="{{ block.settings.image.alt | escape }}"
+          loading="lazy"
+          width="{{ block.settings.image.width }}"
+          height="{{ block.settings.image.height }}"
+          class="ai-text-image-image-{{ ai_gen_id }}"
+        >
+      {% else %}
+        <div class="ai-text-image-placeholder-{{ ai_gen_id }}">
+          {{ 'image' | placeholder_svg_tag }}
+          <div class="ai-text-image-empty-state-{{ ai_gen_id }}">
+            Ajoutez une image
+          </div>
+        </div>
+      {% endif %}
+    </div>
+  </div>
+</div>
+
+{% schema %}
+{
+  "name": "Titre et bullet points",
+  "tag": null,
+  "settings": [
+    {
+      "type": "header",
+      "content": "Contenu"
+    },
+    {
+      "type": "text",
+      "id": "title",
+      "label": "Titre",
+      "default": "Nos avantages"
+    },
+    {
+      "type": "text",
+      "id": "bullet_1",
+      "label": "Point 1",
+      "default": "Livraison gratuite en France"
+    },
+    {
+      "type": "text",
+      "id": "bullet_2",
+      "label": "Point 2",
+      "default": "Garantie 2 ans"
+    },
+    {
+      "type": "text",
+      "id": "bullet_3",
+      "label": "Point 3",
+      "default": "Matériaux de qualité premium"
+    },
+    {
+      "type": "text",
+      "id": "bullet_4",
+      "label": "Point 4"
+    },
+    {
+      "type": "text",
+      "id": "bullet_5",
+      "label": "Point 5"
+    },
+    {
+      "type": "header",
+      "content": "Image"
+    },
+    {
+      "type": "image_picker",
+      "id": "image",
+      "label": "Image"
+    },
+    {
+      "type": "range",
+      "id": "image_border_radius",
+      "label": "Arrondi de l'image",
+      "min": 0,
+      "max": 40,
+      "step": 4,
+      "unit": "px",
+      "default": 0
+    },
+    {
+      "type": "header",
+      "content": "Mise en page"
+    },
+    {
+      "type": "range",
+      "id": "desktop_width_percent",
+      "label": "Largeur bureau",
+      "min": 50,
+      "max": 100,
+      "step": 5,
+      "unit": "%",
+      "default": 100
+    },
+    {
+      "type": "select",
+      "id": "vertical_alignment",
+      "label": "Alignement vertical",
+      "options": [
+        {
+          "value": "flex-start",
+          "label": "Haut"
+        },
+        {
+          "value": "center",
+          "label": "Centre"
+        },
+        {
+          "value": "flex-end",
+          "label": "Bas"
+        }
+      ],
+      "default": "center"
+    },
+    {
+      "type": "range",
+      "id": "gap",
+      "label": "Espacement entre texte et image",
+      "min": 20,
+      "max": 100,
+      "step": 10,
+      "unit": "px",
+      "default": 40
+    },
+    {
+      "type": "range",
+      "id": "content_gap",
+      "label": "Espacement titre et liste",
+      "min": 10,
+      "max": 50,
+      "step": 5,
+      "unit": "px",
+      "default": 20
+    },
+    {
+      "type": "range",
+      "id": "list_gap",
+      "label": "Espacement entre points",
+      "min": 5,
+      "max": 30,
+      "step": 5,
+      "unit": "px",
+      "default": 10
+    },
+    {
+      "type": "header",
+      "content": "Style"
+    },
+    {
+      "type": "range",
+      "id": "title_size",
+      "label": "Taille du titre",
+      "min": 20,
+      "max": 60,
+      "step": 2,
+      "unit": "px",
+      "default": 32
+    },
+    {
+      "type": "color",
+      "id": "title_color",
+      "label": "Couleur du titre",
+      "default": "#1a1a1a"
+    },
+    {
+      "type": "range",
+      "id": "text_size",
+      "label": "Taille du texte",
+      "min": 12,
+      "max": 24,
+      "step": 1,
+      "unit": "px",
+      "default": 16
+    },
+    {
+      "type": "color",
+      "id": "text_color",
+      "label": "Couleur du texte",
+      "default": "#1a1a1a"
+    },
+    {
+      "type": "range",
+      "id": "icon_size",
+      "label": "Taille de l'icône",
+      "min": 16,
+      "max": 32,
+      "step": 2,
+      "unit": "px",
+      "default": 24
+    },
+    {
+      "type": "color",
+      "id": "icon_color",
+      "label": "Couleur de l'icône",
+      "default": "#7a9e7e"
+    }
+  ],
+  "presets": [
+    {
+      "name": "Titre et bullet points"
+    }
+  ]
+}
+{% endschema %}

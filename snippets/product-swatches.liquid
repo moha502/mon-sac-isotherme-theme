@@ -1,0 +1,184 @@
+{%- doc -%}
+  le thème FullStack propose d'afficher 3 types de color-swatches:
+  - Les "natifs", ceux qui sont gérés par Shopify
+  - Les "custom_product_metafields", ceux qui sont gérés par des metafields sur le produit
+  - Les "custom_variants_metafields", ceux qui sont gérés par des metafields sur les variants
+  L'ordre de priorité est le suivant: natifs, custom_product_metafields, custom_variants_metafields.
+  Ce snippet est utilisé pour afficher les pastilles de couleur natifs ou custom.
+
+  @param {object} option - L'objet option du produit.
+  @param {string} swatches_size - La taille des pastilles de couleur.
+  @param {boolean} swatches_rounded - Indique si les pastilles de couleur doivent être arrondies.
+  @param {string} swatch_source - Le type de pastille de couleur à afficher (native, custom_product_metafields ou custom_variants_metafields).
+  @param {boolean} swatches_for_product_card - Indique si seulement les pastilles de couleur doivent être affichées.
+
+  @example
+  {% render 'product-swatches', option: option, swatches_size: 'small', swatches_rounded: true, swatch_source: 'native', swatches_for_product_card: false %}
+{%- enddoc -%}
+
+{% liquid
+  assign product = closest.product | default: product
+  if request.visual_preview_mode and product == blank
+    assign product = collections.all.products.first
+  endif
+
+  case swatch_source
+    when 'native'
+      capture swatches_content
+        for value in option.values
+          assign swatch = value.swatch
+          if swatch.image
+            assign swatch_image_url = swatch.image | image_url: width: 100
+            assign background = 'url(' | append: swatch_image_url | append: ')'
+          elsif swatch.color
+            assign background = 'rgb(' | append: swatch.color.rgb | append: ')'
+          endif
+
+          assign checked = false
+          if option.selected_value == value
+            assign checked = true
+          endif
+
+          assign disabled = false
+          if value.available == false
+            assign disabled = true
+          endif
+
+          assign name = 'option-' | append: option.name
+          assign id = 'option-' | append: option.name | append: '-' | append: value
+
+          assign product_variant_url = product.url
+          assign found_variant = false
+          for product_variant in product.variants
+            if found_variant == false
+              for variant_option in product_variant.options
+                if variant_option == value and found_variant == false
+                  assign product_variant_url = product_variant.url
+                  assign found_variant = true
+                endif
+              endfor
+            endif
+          endfor
+
+          render 'swatch', name: name, id: id, value: value, option_value_id: value.id, variant_id: value.variant.id, background: background, checked: checked, disabled: disabled, swatches_for_product_card: swatches_for_product_card, product_variant_url: product_variant_url
+        endfor
+      endcapture
+
+      render 'swatches', swatches: swatches_content, size: swatches_size, rounded: swatches_rounded
+
+    when 'custom_product_metafields'
+      capture swatches_content
+        for value in option.values
+          for color in product.metafields.custom.colors.value
+            if color.label == value
+              if color.image != blank
+                assign background_image = color.image | image_url: width: 100
+                assign background = 'url(' | append: background_image | append: ');'
+              else
+                assign background = color.color
+              endif
+            endif
+          endfor
+
+          for i in (1..5)
+            assign metafield_color_key = 'colors' | append: i
+            assign metafield_colors = product.metafields.custom[metafield_color_key].value
+
+            for color in metafield_colors
+              if color.label == value
+                if color.image != blank
+                  assign background_image = color.image | image_url: width: 100
+                  assign background = 'url(' | append: background_image | append: ');'
+                else
+                  assign background = color.color
+                endif
+              endif
+            endfor
+          endfor
+
+          assign checked = false
+          if option.selected_value == value
+            assign checked = true
+          endif
+
+          assign disabled = false
+          if value.available == false
+            assign disabled = true
+          endif
+
+          assign name = 'option-' | append: option.name
+          assign id = 'option-' | append: option.name | append: '-' | append: value
+
+          assign product_variant_url = product.url
+          assign found_variant = false
+          for product_variant in product.variants
+            if found_variant == false
+              for variant_option in product_variant.options
+                if variant_option == value and found_variant == false
+                  assign product_variant_url = product_variant.url
+                  assign found_variant = true
+                endif
+              endfor
+            endif
+          endfor
+
+          render 'swatch', name: name, id: id, value: value, option_value_id: value.id, variant_id: value.variant.id, background: background, checked: checked, disabled: disabled, swatches_for_product_card: swatches_for_product_card, product_variant_url: product_variant_url
+        endfor
+      endcapture
+
+      render 'swatches', swatches: swatches_content, size: swatches_size, rounded: swatches_rounded
+
+    when 'custom_variants_metafields'
+      assign color_aliases = 'color, colors, couleur, couleurs, colores, colore, colori, farbe, farben, cor, cores, kleur, kleuren, färg, färger, farve, farver, farge, farger, kolor, kolory, renk, renkler, väri, värit, szín, színek, barva, barvy, farba, farby, culoare, culori, boja, boje, spalva, spalvos, krāsa, krāsas, värv, värvid, колір, кольори, цвет, цвета, брой, χρώμα, χρώματα, צבע, צבעים, لون, ألوان, رنگ, رنگها' | split: ', '
+      assign option_name = option.name | downcase
+
+      if color_aliases contains option_name
+        capture swatches_content
+          if option.values.size > 0
+            for value in option.values
+              assign found = false
+              for product_variant in product.variants
+                for variant_option in product_variant.options
+                  if variant_option == value and found == false
+                    assign found = true
+                    assign background = null
+                    if product_variant.metafields.color.image != blank
+                      assign background_image = product_variant.metafields.color.image | image_url: width: 100
+                      assign background = 'url(' | append: background_image | append: ');'
+                    elsif product_variant.metafields.color.hexcode != blank
+                      assign background = product_variant.metafields.color.hexcode
+                    endif
+
+                    assign checked = false
+                    if option.selected_value == value
+                      assign checked = true
+                    endif
+
+                    assign disabled = false
+                    if value.available == false
+                      assign disabled = true
+                    endif
+
+                    assign name = 'option-' | append: option.name
+                    assign id = 'option-' | append: option.name | append: '-' | append: value
+
+                    render 'swatch', name: name, id: id, value: value, option_value_id: value.id, variant_id: value.variant.id, background: background, checked: checked, disabled: disabled, swatches_for_product_card: swatches_for_product_card, product_variant_url: product_variant.url
+                  endif
+                endfor
+              endfor
+            endfor
+          endif
+        endcapture
+        render 'swatches', swatches: swatches_content, size: swatches_size, rounded: swatches_rounded
+      elsif swatches_for_product_card == false
+        for value in option.values
+          render 'product-option-value-button', option: option, value: value
+        endfor
+      endif
+
+    else
+      for value in option.values
+        render 'product-option-value-button', option: option, value: value
+      endfor
+  endcase
+%}

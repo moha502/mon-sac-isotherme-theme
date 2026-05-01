@@ -1,0 +1,300 @@
+<script type="module" src="{{ 'variant-picker.js' | asset_url }}"></script>
+
+{% liquid
+  assign product = closest.product | default: product
+  if request.visual_preview_mode and product == blank
+    assign product = collections.all.products.first
+  endif
+%}
+
+{% if product.has_only_default_variant == false %}
+  <variant-picker
+    data-product-url="{{ product.url }}"
+    style="
+      --margin-top: {{ block.settings.margin_top }}px;
+      --margin-bottom: {{ block.settings.margin_bottom }}px;
+    "
+    {% if block.settings.additional_class != blank %}
+      class="{{ block.settings.additional_class }}"
+    {% endif %}
+    {{ block.shopify_attributes }}
+    {% if request.visual_preview_mode %}
+      data-visual-preview-mode
+    {% endif %}
+  >
+    <input type="hidden" name="id" value="{{ product.selected_or_first_available_variant.id }}">
+
+    <div class="variant-picker__options">
+      {% for option in product.options_with_values %}
+        {% if block.settings.variant_picker_type == 'selects' %}
+          <div class="variant-picker__option">
+            {% if block.settings.show_option_name %}
+              <div class="variant-picker__option-name variant_label">
+                <span>{{ option.name }} :</span>
+
+                {% # theme-check-disable %}
+                {% content_for 'block', type: '_product-variant-popup', id: 'product-variant-popup', option: option %}
+                {% # theme-check-enable %}
+              </div>
+            {% endif %}
+
+            <div class="select-wrapper select-wrapper--full-width">
+              <select
+                name="option-{{ option.name }}"
+                class="select select--full-width"
+              >
+                {% for value in option.values %}
+                  <option
+                    value="{{ value }}"
+                    {% if value.available == false %}
+                      aria-disabled="true"
+                    {% endif %}
+                    data-option-value-id="{{ value.id }}"
+                    {% if value.variant.id %}
+                      data-variant-id="{{ value.variant.id }}"
+                    {% endif %}
+                    {% if value.selected %}
+                      selected
+                    {% endif %}
+                  >
+                    {{ value }}
+                    {% if value.available == false %}
+                      ({{ 'products.sold_out' | t }})
+                    {% endif %}
+                  </option>
+                {% endfor %}
+              </select>
+              <div class="select-wrapper__icon">
+                {% render 'icon', icon: 'keyboard_arrow_down' %}
+              </div>
+            </div>
+          </div>
+        {% elsif block.settings.variant_picker_type == 'buttons' %}
+          <fieldset class="variant-picker__option">
+            {% if block.settings.show_option_name %}
+              <div class="variant-picker__option-name variant_label">
+                <span>{{ option.name }} :</span>
+
+                {% # theme-check-disable %}
+                {% content_for 'block', type: '_product-variant-popup', id: 'product-variant-popup', option: option %}
+                {% # theme-check-enable %}
+              </div>
+            {% endif %}
+
+            <div class="variant-picker__option-values">
+              {% liquid
+                assign native_swatches_count = option.values | map: 'swatch' | compact | size
+
+                assign custom_product_metafields_swatches_count = 0
+                for color in product.metafields.custom.colors.value
+                  for value in option.values
+                    if color.label == value
+                      assign custom_product_metafields_swatches_count = custom_product_metafields_swatches_count | plus: 1
+                    endif
+                  endfor
+                endfor
+                for i in (1..5)
+                  assign metafield_color_key = 'colors' | append: i
+                  assign metafield_colors = product.metafields.custom[metafield_color_key].value
+                  for color in metafield_colors
+                    for value in option.values
+                      if color.label == value
+                        assign custom_product_metafields_swatches_count = custom_product_metafields_swatches_count | plus: 1
+                      endif
+                    endfor
+                  endfor
+                endfor
+
+                assign custom_variants_metafields_swatches_count = 0
+                for product_variant in product.variants
+                  if product_variant.metafields.color.hexcode != blank or product_variant.metafields.color.image != blank
+                    assign custom_variants_metafields_swatches_count = custom_variants_metafields_swatches_count | plus: 1
+                  endif
+                endfor
+
+                if block.settings.show_swatches
+                  if native_swatches_count > 0
+                    render 'product-swatches', option: option, swatches_size: block.settings.swatches_size, swatches_rounded: block.settings.swatches_rounded, swatch_source: 'native', swatches_for_product_card: false
+
+                  elsif custom_product_metafields_swatches_count > 0
+                    render 'product-swatches', option: option, swatches_size: block.settings.swatches_size, swatches_rounded: block.settings.swatches_rounded, swatch_source: 'custom_product_metafields', swatches_for_product_card: false
+
+                  elsif custom_variants_metafields_swatches_count > 0
+                    render 'product-swatches', option: option, swatches_size: block.settings.swatches_size, swatches_rounded: block.settings.swatches_rounded, swatch_source: 'custom_variants_metafields', swatches_for_product_card: false
+
+                  else
+                    for value in option.values
+                      render 'product-option-value-button', option: option, value: value
+                    endfor
+                  endif
+                else
+                  for value in option.values
+                    render 'product-option-value-button', option: option, value: value
+                  endfor
+                endif
+              %}
+            </div>
+          </fieldset>
+        {% endif %}
+      {% endfor %}
+    </div>
+
+    <script type="application/json">
+      {{ product.selected_or_first_available_variant | json }}
+    </script>
+  </variant-picker>
+{% else %}
+  <input type="hidden" name="id" value="{{ product.selected_or_first_available_variant.id }}">
+{% endif %}
+
+{% stylesheet %}
+  shopify-visual-preview-block-list variant-picker[data-visual-preview-mode] {
+    width: 350px;
+  }
+
+  variant-picker {
+    margin-top: var(--margin-top);
+    margin-bottom: var(--margin-bottom);
+  }
+
+  .variant-picker__options {
+    display: flex;
+    flex-direction: column;
+    gap: var(--gap-md);
+  }
+
+  .variant-picker__option {
+    border: none;
+    padding: 0;
+  }
+
+  .variant-picker__option-name {
+    display: flex;
+    align-items: flex-end;
+    justify-content: space-between;
+    flex-wrap: wrap;
+    gap: var(--gap-sm);
+  }
+
+  .variant-picker__option-values {
+    display: flex;
+    flex-wrap: wrap;
+    gap: var(--gap-sm);
+  }
+{% endstylesheet %}
+
+{% schema %}
+{
+  "name": "t:product_variant_picker",
+  "tag": null,
+  "blocks": [],
+  "settings": [
+    {
+      "type": "checkbox",
+      "id": "show_option_name",
+      "label": "t:show_option_name",
+      "default": true
+    },
+    {
+      "type": "select",
+      "id": "variant_picker_type",
+      "label": "t:variant_picker_type",
+      "options": [
+        {
+          "value": "buttons",
+          "label": "t:buttons"
+        },
+        {
+          "value": "selects",
+          "label": "t:selects"
+        }
+      ],
+      "default": "buttons"
+    },
+    {
+      "type": "checkbox",
+      "id": "show_swatches",
+      "label": "t:show_swatches",
+      "default": true,
+      "visible_if": "{{ block.settings.variant_picker_type == 'buttons' }}",
+      "info": "t:show_swatches_info"
+    },
+    {
+      "type": "select",
+      "id": "swatches_size",
+      "label": "t:swatches_size",
+      "options": [
+        {
+          "value": "small",
+          "label": "t:small"
+        },
+        {
+          "value": "normal",
+          "label": "t:normal"
+        },
+        {
+          "value": "big",
+          "label": "t:big"
+        }
+      ],
+      "default": "normal",
+      "visible_if": "{{ block.settings.show_swatches and block.settings.variant_picker_type == 'buttons' }}"
+    },
+    {
+      "type": "checkbox",
+      "id": "swatches_rounded",
+      "label": "t:swatches_rounded",
+      "default": true,
+      "visible_if": "{{ block.settings.show_swatches and block.settings.variant_picker_type == 'buttons' }}"
+    },
+    {
+      "type": "header",
+      "content": "t:margins"
+    },
+    {
+      "type": "range",
+      "id": "margin_top",
+      "label": "t:margin_top",
+      "default": 0,
+      "min": 0,
+      "max": 100,
+      "step": 1,
+      "unit": "px"
+    },
+    {
+      "type": "range",
+      "id": "margin_bottom",
+      "label": "t:margin_bottom",
+      "default": 10,
+      "min": 0,
+      "max": 100,
+      "step": 1,
+      "unit": "px"
+    },
+    {
+      "type": "header",
+      "content": "t:advanced_settings"
+    },
+    {
+      "type": "text",
+      "id": "additional_class",
+      "label": "t:additional_class",
+      "info": "t:additional_class_info"
+    },
+    {
+      "type": "header",
+      "content": "t:go_further"
+    },
+    {
+      "type": "paragraph",
+      "content": "t:go_further_description"
+    }
+  ],
+  "presets": [
+    {
+      "name": "t:product_variant_picker",
+      "category": "t:product_form"
+    }
+  ]
+}
+{% endschema %}

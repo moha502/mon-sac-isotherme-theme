@@ -1,0 +1,87 @@
+<div
+  class="footer-copyright"
+  {{ block.shopify_attributes }}
+  style="
+    --alignment: {{ block.settings.alignment_desktop }};
+    --alignment-mobile: {{ block.settings.alignment_mobile }};
+  "
+>
+  <span class="footer-copyright__text">
+    &copy; {{ 'now' | date: '%Y' }}
+    {{ shop.name | link_to: routes.root_url -}}
+  </span>
+</div>
+
+{% stylesheet %}
+  .footer-copyright {
+    display: flex;
+    align-items: center;
+    justify-content: var(--alignment-mobile);
+  }
+
+  @media (width > 750px) {
+    .footer-copyright {
+      justify-content: var(--alignment);
+    }
+  }
+
+  .footer-copyright__text,
+  .footer-copyright__text > a {
+    color: var(--color-foreground);
+    text-decoration: none;
+    font-size: var(--font-body--size-small);
+  }
+
+  .footer-copyright__text > a {
+    transition: var(--animation-link-hover);
+
+    &:hover {
+      opacity: var(--opacity-link-hover);
+    }
+  }
+{% endstylesheet %}
+
+{% schema %}
+{
+  "name": "t:footer_copyright",
+  "tag": null,
+  "settings": [
+    {
+      "type": "select",
+      "id": "alignment_desktop",
+      "label": "t:alignment_desktop",
+      "default": "center",
+      "options": [
+        { "value": "flex-start", "label": "t:flex-start" },
+        { "value": "center", "label": "t:centered" },
+        { "value": "flex-end", "label": "t:flex-end" }
+      ]
+    },
+    {
+      "type": "select",
+      "id": "alignment_mobile",
+      "label": "t:alignment_mobile",
+      "default": "center",
+      "options": [
+        { "value": "flex-start", "label": "t:flex-start" },
+        { "value": "center", "label": "t:centered" },
+        { "value": "flex-end", "label": "t:flex-end" }
+      ]
+    },
+    {
+      "type": "header",
+      "content": "t:go_further"
+    },
+    {
+      "type": "paragraph",
+      "content": "t:go_further_description"
+    }
+  ],
+  "presets": [
+    {
+      "name": "t:footer_copyright",
+      "category": "t:footer"
+    }
+  ]
+}
+{% endschema %}

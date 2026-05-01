@@ -1,0 +1,58 @@
+{%- doc -%}
+  Affiche un composant média de produit.
+
+  @param {object} media - L'objet média du produit.
+  @param {boolean} show_video - Indique si la vidéo doit être affichée (sinon l'image est affichée).
+  @param {boolean} [video_loop] - Indique si la vidéo doit boucler.
+  @param {boolean} [enable_video_controls] - Indique si les contrôles de la vidéo doivent être désactivés.
+  @param {string} [widths] - Largeurs d'image pour les images responsives.
+  @param {string} [sizes] - Tailles d'image pour les images responsives.
+  @param {string} [ratio] - Ratio de l'image.
+
+  @example
+  {% render 'product-media', show_video: true, media: media %}
+{%- enddoc -%}
+
+{% liquid
+  assign widths = widths | default: '300, 450, 600, 750, 900, 1050, 1200, 1350, 1500, 1650, 1800, 1950, 2000, 2500, 3000, 3500, 4000, 5000'
+  assign video_loop = video_loop | default: true
+  assign enable_video_controls = enable_video_controls | default: true
+%}
+
+<div class="product-media" style="--ratio: {{ ratio | default: media.aspect_ratio }}">
+  {% if media != blank %}
+    {%- case media.media_type -%}
+      {% when 'image' %}
+        {{ media.preview_image | image_url: width: 1200 | image_tag: widths: widths, alt: media.alt, sizes: sizes }}
+      {% when 'video', 'external_video' %}
+        {% if show_video %}
+          {%- render 'video',
+            video: media,
+            video_autoplay: false,
+            video_loop: video_loop,
+            widths: widths,
+            sizes: sizes,
+            enable_video_controls: enable_video_controls
+          -%}
+        {% else %}
+          {{ media.preview_image | image_url: width: 1200 | image_tag: widths: widths, alt: media.alt, sizes: sizes }}
+        {% endif %}
+    {% endcase %}
+  {% else %}
+    <img
+      src="{{ 'placeholder-product.jpg' | asset_img_url: 'x1000' }}"
+      alt="placeholder product"
+      width="750"
+      height="750"
+      class="placeholder-image"
+      loading="lazy"
+    >
+  {% endif %}
+</div>
+
+{% stylesheet %}
+  .product-media img {
+    aspect-ratio: var(--ratio);
+    object-fit: cover;
+  }
+{% endstylesheet %}

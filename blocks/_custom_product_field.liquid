@@ -1,0 +1,154 @@
+{%- if block.settings.label != blank -%}
+  {%- liquid
+    assign field_name = 'properties[' | append: block.settings.label | append: ']'
+  -%}
+
+  <div
+    class="
+      custom-product-field
+      {%- if block.settings.show_on_display == 'desktop_only' %} mobile-hide{% endif -%}
+      {%- if block.settings.show_on_display == 'mobile_only' %} desktop-hide{% endif -%}
+      {%- if block.settings.additional_class != blank %} {{ block.settings.additional_class }}{% endif -%}
+    "
+    style="
+      --margin-top: {{ block.settings.margin_top }}px;
+      --margin-bottom: {{ block.settings.margin_bottom }}px;
+    "
+    {{ block.shopify_attributes }}
+  >
+    <p class="variant_label">{{ block.settings.label }} :</p>
+
+    {% assign label = block.settings.label %}
+    {% if block.settings.placeholder != blank %}
+      {% assign label = block.settings.placeholder %}
+    {% endif %}
+
+    {% render 'textfield',
+      label: label,
+      name: field_name,
+      full_width: block.settings.full_width,
+      minlength: block.settings.min_length,
+      maxlength: block.settings.max_length,
+      required: block.settings.required
+    %}
+  </div>
+{%- endif -%}
+
+{% stylesheet %}
+  .custom-product-field {
+    margin-top: var(--margin-top);
+    margin-bottom: var(--margin-bottom);
+  }
+{% endstylesheet %}
+
+{% schema %}
+{
+  "name": "t:custom_product_field",
+  "tag": null,
+  "settings": [
+    {
+      "type": "select",
+      "id": "show_on_display",
+      "label": "t:show_on_display",
+      "default": "desktop_and_mobile",
+      "options": [
+        { "value": "desktop_and_mobile", "label": "t:desktop_and_mobile" },
+        { "value": "desktop_only", "label": "t:desktop_only" },
+        { "value": "mobile_only", "label": "t:mobile_only" }
+      ]
+    },
+    {
+      "type": "header",
+      "content": "t:content"
+    },
+    {
+      "type": "text",
+      "id": "label",
+      "label": "t:label",
+      "default": "t:custom_product_field_label_default"
+    },
+    {
+      "type": "text",
+      "id": "placeholder",
+      "label": "t:placeholder",
+      "default": "t:custom_product_field_placeholder_default"
+    },
+    {
+      "type": "checkbox",
+      "id": "required",
+      "label": "t:custom_product_field_required",
+      "default": false
+    },
+    {
+      "type": "number",
+      "id": "min_length",
+      "label": "t:custom_product_field_min_length",
+      "default": 1
+    },
+    {
+      "type": "number",
+      "id": "max_length",
+      "label": "t:custom_product_field_max_length",
+      "default": 30
+    },
+    {
+      "type": "header",
+      "content": "t:layout"
+    },
+    {
+      "type": "checkbox",
+      "id": "full_width",
+      "label": "t:full_width",
+      "default": true
+    },
+    {
+      "type": "header",
+      "content": "t:margins"
+    },
+    {
+      "type": "range",
+      "id": "margin_top",
+      "label": "t:margin_top",
+      "default": 0,
+      "min": 0,
+      "max": 100,
+      "step": 1,
+      "unit": "px"
+    },
+    {
+      "type": "range",
+      "id": "margin_bottom",
+      "label": "t:margin_bottom",
+      "default": 10,
+      "min": 0,
+      "max": 100,
+      "step": 1,
+      "unit": "px"
+    },
+    {
+      "type": "header",
+      "content": "t:advanced_settings"
+    },
+    {
+      "type": "text",
+      "id": "additional_class",
+      "label": "t:additional_class",
+      "info": "t:additional_class_info"
+    },
+    {
+      "type": "header",
+      "content": "t:go_further"
+    },
+    {
+      "type": "paragraph",
+      "content": "t:go_further_description"
+    }
+  ],
+  "presets": [
+    {
+      "name": "t:custom_product_field",
+      "category": "t:product_form"
+    }
+  ]
+}
+{% endschema %}

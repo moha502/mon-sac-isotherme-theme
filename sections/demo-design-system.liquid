@@ -1,0 +1,646 @@
+<div class="page-width">
+  <div class="card_design_system highlight">
+    <h2>{{ 'demo.title' | t }}</h2>
+    <p>{{ 'demo.description' | t }}</p>
+    <p>{{ 'demo.description2' | t }}</p>
+  </div>
+
+  <div class="highlights">
+    <div class="card card--with-border highlight color-{{ section.settings.color_scheme }}">
+      {%- if settings.logo != blank -%}
+        <h3 class="h6">{{ 'demo.logos' | t }}</h3>
+        <div class="highlight-container highlight-logo">
+          {{ settings.logo | image_url: height: 120 | image_tag: class: 'highlight-logo__image' }}
+        </div>
+      {%- endif -%}
+
+      {% render 'separator', margin_top: 10, margin_bottom: 10 %}
+
+      {%- if settings.logo_inverse != blank -%}
+        <h3 class="h6">{{ 'demo.logo_inverse' | t }}</h3>
+        <div class="highlight-container highlight-logo">
+          {{ settings.logo_inverse | image_url: height: 120 | image_tag: class: 'highlight-logo__image' }}
+        </div>
+      {%- endif -%}
+
+      {% render 'separator', margin_top: 10, margin_bottom: 10 %}
+
+      {%- if settings.favicon != blank -%}
+        <h3 class="h6">{{ 'demo.favicon' | t }}</h3>
+        <div class="highlight-container highlight-logo--favicon">
+          {{ settings.favicon | image_url: height: 64 | image_tag: class: 'highlight-logo__image' }}
+        </div>
+      {%- endif -%}
+    </div>
+
+    <div class="card card--with-border highlight color-{{ section.settings.color_scheme }}">
+      <h3 class="h6">{{ 'demo.typographies' | t }}</h3>
+      <div class="highlight-icon-container">
+        <h1>{{ 'demo.title_1_preset_default' | t }}</h1>
+        <h2>{{ 'demo.title_2_preset_default' | t }}</h2>
+        <h3>{{ 'demo.title_3_preset_default' | t }}</h3>
+        <h4>{{ 'demo.title_4_preset_default' | t }}</h4>
+        <h5>{{ 'demo.title_5_preset_default' | t }}</h5>
+        <h6>{{ 'demo.title_6_preset_default' | t }}</h6>
+        <br>
+        <p class="text-large">{{ 'demo.text_paragraph_preset_default' | t }}</p>
+        <br>
+        <p>{{ 'demo.text_paragraph_preset_default' | t }}</p>
+        <br>
+        <p class="text-small">{{ 'demo.text_paragraph_preset_default' | t }}</p>
+      </div>
+    </div>
+
+    <div class="card card--with-border highlight color-{{ section.settings.color_scheme }}">
+      <h3 class="h6">{{ 'demo.icons_and_rating' | t }}</h3>
+      <div class="highlight-icon-container">
+        {% render 'icon', icon: 'add' %}
+        {% render 'icon', icon: 'all_inclusive' %}
+        {% render 'icon', icon: 'architecture' %}
+        {% render 'icon', icon: 'arrow_back' %}
+        {% render 'icon', icon: 'arrow_downward' %}
+        {% render 'icon', icon: 'arrow_forward' %}
+        {% render 'icon', icon: 'arrow_upward' %}
+        {% render 'icon', icon: 'barcode' %}
+        {% render 'icon', icon: 'block' %}
+        {% render 'icon', icon: 'bolt' %}
+        {% render 'icon', icon: 'bookmark' %}
+        {% render 'icon', icon: 'cake' %}
+        {% render 'icon', icon: 'celebration' %}
+        {% render 'icon', icon: 'check' %}
+        {% render 'icon', icon: 'checkroom' %}
+        {% render 'icon', icon: 'close' %}
+        {% render 'icon', icon: 'dark_mode' %}
+        {% render 'icon', icon: 'delete' %}
+        {% render 'icon', icon: 'diamond_shine' %}
+        {% render 'icon', icon: 'download' %}
+        {% render 'icon', icon: 'ecg_heart' %}
+        {% render 'icon', icon: 'eco' %}
+        {% render 'icon', icon: 'edit' %}
+        {% render 'icon', icon: 'experiment' %}
+        {% render 'icon', icon: 'favorite' %}
+        {% render 'icon', icon: 'forum' %}
+        {% render 'icon', icon: 'globe' %}
+        {% render 'icon', icon: 'home' %}
+        {% render 'icon', icon: 'info' %}
+        {% render 'icon', icon: 'key' %}
+        {% render 'icon', icon: 'keyboard_arrow_down' %}
+        {% render 'icon', icon: 'kid_star' %}
+        {% render 'icon', icon: 'language' %}
+        {% render 'icon', icon: 'local_mall' %}
+        {% render 'icon', icon: 'loyalty' %}
+        {% render 'icon', icon: 'mail' %}
+        {% render 'icon', icon: 'menu' %}
+        {% render 'icon', icon: 'mode_heat' %}
+        {% render 'icon', icon: 'notifications' %}
+        {% render 'icon', icon: 'open_in_new' %}
+        {% render 'icon', icon: 'person' %}
+        {% render 'icon', icon: 'phone_enabled' %}
+        {% render 'icon', icon: 'play_circle' %}
+        {% render 'icon', icon: 'remove' %}
+        {% render 'icon', icon: 'savings' %}
+        {% render 'icon', icon: 'search' %}
+        {% render 'icon', icon: 'sell' %}
+        {% render 'icon', icon: 'send' %}
+        {% render 'icon', icon: 'shopping_bag_speed' %}
+        {% render 'icon', icon: 'shopping_bag' %}
+        {% render 'icon', icon: 'shopping_basket' %}
+        {% render 'icon', icon: 'shopping_cart' %}
+        {% render 'icon', icon: 'shoppingmode' %}
+        {% render 'icon', icon: 'sprint' %}
+        {% render 'icon', icon: 'store' %}
+        {% render 'icon', icon: 'storefront' %}
+        {% render 'icon', icon: 'straighten' %}
+        {% render 'icon', icon: 'support_agent' %}
+        {% render 'icon', icon: 'support' %}
+        {% render 'icon', icon: 'target' %}
+        {% render 'icon', icon: 'toggle_on' %}
+        {% render 'icon', icon: 'verified' %}
+        {% render 'icon', icon: 'visibility' %}
+        {% render 'icon', icon: 'volunteer_activism' %}
+        {% render 'separator', margin_top: 15, margin_bottom: 15 %}
+        {% render 'rating-stars', rating: 5, rating_count: 123 %}
+        {% render 'rating-stars', rating: 4.5, rating_count: 123 %}
+        {% render 'rating-stars', rating: 4, rating_count: 123 %}
+        {% render 'rating-stars', rating: 3.5, rating_count: 123 %}
+        {% render 'rating-stars', rating: 3, rating_count: 123 %}
+        {% render 'rating-stars', rating: 2.5, rating_count: 123 %}
+        {% render 'rating-stars', rating: 2, rating_count: 123 %}
+        {% render 'rating-stars', rating: 1.5, rating_count: 123 %}
+        {% render 'rating-stars', rating: 1, rating_count: 123 %}
+        {% render 'rating-stars', rating: 0.5, rating_count: 123 %}
+        {% render 'rating-stars', rating: 0, rating_count: 123 %}
+      </div>
+    </div>
+
+    <div class="card card--with-border highlight color-{{ section.settings.color_scheme }}">
+      <h3 class="h6">{{ 'demo.buttons' | t }}</h3>
+      <div class="highlight-container">
+        {% assign button_with_icon_label = 'demo.button_with_icon_default' | t %}
+        {% assign button_full_width_label = 'demo.button_full_width_default' | t %}
+        {% assign button_small_label = 'demo.button_small_default' | t %}
+
+        {% render 'button', link: '#', label: button_full_width_label, button_shape: 'full-width' %}
+        {% render 'button', link: '#', label: 'Bouton', button_style: 'primary' %}
+        {% render 'button', link: '#', label: button_with_icon_label, button_style: 'primary', icon: 'search', icon_position: 'start' %}
+        {% render 'button', link: '#', button_style: 'primary', icon: 'search' %}
+        {% render 'button', link: '#', label: button_small_label, button_shape: 'small' %}
+      </div>
+      <div class="highlight-container">
+        {% assign button_secondary_label = 'demo.button_secondary_default' | t %}
+        {% render 'button', link: '#', label: button_secondary_label, button_style: 'secondary' %}
+        {% render 'button', link: '#', label: button_small_label, button_style: 'secondary', button_shape: 'small' %}
+        {% render 'button', link: '#', button_style: 'secondary', button_shape: 'small', icon: 'search' %}
+      </div>
+      <div class="highlight-container">
+        {% assign button_tertiary_label = 'demo.button_tertiary_default' | t %}
+        {% render 'button', link: '#', label: button_tertiary_label, button_style: 'tertiary' %}
+        {% render 'button', link: '#', label: button_tertiary_label, button_style: 'tertiary', icon: 'open_in_new', icon_position: 'end' %}
+        {% render 'button', link: '#', button_style: 'tertiary', button_shape: 'small', icon: 'open_in_new' %}
+      </div>
+    </div>
+
+    <div class="card card--with-border highlight color-{{ section.settings.color_scheme }}">
+      <h3 class="h6">{{ 'demo.accordions' | t }}</h3>
+      <div class="highlight-accordion-container">
+        {% content_for 'block', type: 'accordions', id: 'accordions-1' %}
+      </div>
+
+      {% render 'separator', margin_top: 10, margin_bottom: 10 %}
+
+      <h3 class="h6">{{ 'demo.popup' | t }}</h3>
+      <div class="highlight-badges-container">
+        {% content_for 'block', type: 'popup', id: 'popup-1' %}
+        {% content_for 'block', type: 'popup', id: 'popup-2' %}
+      </div>
+    </div>
+
+    <div class="card card--with-border highlight color-{{ section.settings.color_scheme }}">
+      <h3 class="h6">{{ 'demo.badges' | t }}</h3>
+      <div class="highlight-badges-container">
+        {% content_for 'block', type: 'badges', id: 'badges-1' %}
+        <br>
+        <h3 class="h6">{{ 'demo.product_badges' | t }}</h3>
+        <br>
+        <div class="badges">
+          <div class="badge color-{{ settings.badge_color_scheme_sold_out }}">
+            {{ 'products.sold_out' | t }}
+          </div>
+
+          <div class="badge color-{{ settings.badge_color_scheme_sales }}">
+            {{ 'products.sales' | t }}
+          </div>
+
+          <div class="badge color-{{ settings.badge_color_scheme_custom }}">
+            {{ 'demo.badge_custom_default' | t }}
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <div class="card card--with-border highlight color-{{ section.settings.color_scheme }}">
+      <h4 class="h6">{{ 'demo.checkboxes' | t }}</h4>
+      <div class="highlight-container">
+        {% render 'checkbox', checked: true, name: 'checkbox-1' %}
+        {% render 'checkbox', checked: false, name: 'checkbox-2' %}
+      </div>
+      {% assign checkbox_checked_label = 'demo.checkbox_checked_default' | t %}
+      {% assign checkbox_label = 'demo.checkbox_default' | t %}
+      {% assign checkbox_disabled_label = 'demo.checkbox_disabled_default' | t %}
+
+      {% render 'checkbox', label: checkbox_checked_label, checked: true, name: 'checkbox-3' %}
+      {% render 'checkbox', label: checkbox_label, checked: false, name: 'checkbox-4' %}
+      {% render 'checkbox', label: checkbox_disabled_label, checked: false, disabled: true, name: 'checkbox-5' %}
+
+      {% render 'separator', margin_top: 10, margin_bottom: 10 %}
+
+      <h4 class="h6">{{ 'demo.radio_buttons' | t }}</h4>
+      <div class="highlight-container">
+        {% render 'radio', checked: true, group: 'radio-group-1' %}
+        {% render 'radio', checked: false, group: 'radio-group-1' %}
+      </div>
+      {% assign radio_checked_label = 'demo.radio_checked_default' | t %}
+      {% assign radio_label = 'demo.radio_default' | t %}
+      {% assign radio_disabled_label = 'demo.radio_disabled_default' | t %}
+
+      {% render 'radio', label: radio_checked_label, checked: true, group: 'radio-group-2' %}
+      {% render 'radio', label: radio_label, checked: false, group: 'radio-group-2' %}
+      {% render 'radio', label: radio_disabled_label, checked: false, disabled: true, group: 'radio-group-2' %}
+    </div>
+
+    <div class="card card--with-border highlight color-{{ section.settings.color_scheme }}">
+      <h4 class="h6">{{ 'demo.selectors' | t }}</h4>
+      <div class="highlight-container">
+        {% assign options = 'Option 1,Option 2,Option 3' | split: ',' %}
+        {% render 'select', name: 'select-1', options: options %}
+        {% render 'select', name: 'select-2', options: options, disabled: true %}
+        {% render 'select', name: 'select-3', options: options, small: true %}
+      </div>
+
+      {% render 'separator', margin_top: 10, margin_bottom: 10 %}
+
+      <h4 class="h6">{{ 'demo.quantity_selector' | t }}</h4>
+      <div class="highlight-container">
+        {% render 'quantity-selector', value: 1, min: 1, max: 100, name: 'quantity-1' %}
+        {% render 'quantity-selector', value: 1, min: 1, max: 100, name: 'quantity-3', disabled: true, small: true %}
+        {% render 'quantity-selector', value: 1, min: 1, max: 100, name: 'quantity-4', small: true %}
+      </div>
+
+      {% render 'separator', margin_top: 10, margin_bottom: 10 %}
+
+      <h4 class="h6">{{ 'demo.input_fields' | t }}</h4>
+      <div class="highlight-container">
+        {% assign textfield_label = 'demo.textfield_default' | t %}
+        {% assign textfield_small_label = 'demo.textfield_small_default' | t %}
+        {% assign textfield_disabled_label = 'demo.textfield_disabled_default' | t %}
+
+        {% render 'textfield', label: textfield_label, name: 'textfield-1' %}
+        {% render 'textfield', label: textfield_small_label, name: 'textfield-2', small: true %}
+        {% render 'textfield', label: textfield_disabled_label, name: 'textfield-3', disabled: true %}
+      </div>
+    </div>
+
+    <div class="card card--with-border highlight color-{{ section.settings.color_scheme }}">
+      <h3 class="h6">{{ 'demo.variant_buttons' | t }}</h3>
+      <div class="highlight-container">
+        <div class="variant-picker__option-value">
+          <input type="radio" name="demo-option" id="demo-option-1" value="S" checked>
+          <label for="demo-option-1">S</label>
+        </div>
+        <div class="variant-picker__option-value">
+          <input type="radio" name="demo-option" id="demo-option-2" value="M">
+          <label for="demo-option-2">M</label>
+        </div>
+        <div class="variant-picker__option-value">
+          <input type="radio" name="demo-option" id="demo-option-3" value="L">
+          <label for="demo-option-3">L</label>
+        </div>
+        <div class="variant-picker__option-value">
+          <input type="radio" name="demo-option" id="demo-option-4" value="XL" aria-disabled="true">
+          <label for="demo-option-4">XL</label>
+        </div>
+      </div>
+
+      {% render 'separator', margin_top: 10, margin_bottom: 10 %}
+
+      <h3 class="h6">{{ 'demo.color_swatches' | t }}</h3>
+      <div class="highlight-container">
+        {%- capture swatches_images -%}
+          {% assign swatch_image_1_label = 'demo.swatch_image_1_default' | t %}
+          {% assign swatch_image_2_label = 'demo.swatch_image_2_default' | t %}
+          {% assign swatch_image_3_label = 'demo.swatch_image_3_default' | t %} 
+          {% render 'swatch', id: 'Image-1', name: 'Image', data_name: swatch_image_1_label, value: swatch_image_1_label, checked: true, background: "url('https://cdn.shopify.com/s/files/1/0571/7816/1213/files/images.jpg?v=1721719677')" %}
+          {% render 'swatch', id: 'Image-2', name: 'Image', data_name: swatch_image_2_label, value: swatch_image_2_label, background: "url('https://cdn.shopify.com/s/files/1/0571/7816/1213/files/depositphotos_20709361-stock-photo-leaf.webp?v=1721719677')" %}
+          {% render 'swatch', id: 'Image-3', name: 'Image', data_name: swatch_image_3_label, value: swatch_image_3_label, disabled: true, background: "url('https://cdn.shopify.com/s/files/1/0571/7816/1213/files/download.png?v=1737126182')" %}
+        {%- endcapture -%}
+        {% render 'swatches', swatches: swatches_images, size: 'big' %}
+      </div>
+      <div class="highlight-container">
+        {%- capture swatches_color_1 -%}
+          {% assign swatch_color_1_label = 'demo.swatch_color_1_default' | t %}
+          {% assign swatch_color_2_label = 'demo.swatch_color_2_default' | t %}
+          {% assign swatch_color_3_label = 'demo.swatch_color_3_default' | t %}
+          {% render 'swatch', id: 'Couleur-1-1', name: 'Couleur-1', data_name: swatch_color_1_label, value: swatch_color_1_label, checked: true, background: 'rgb(255 255 255)' %}
+          {% render 'swatch', id: 'Couleur-1-2', name: 'Couleur-1', data_name: swatch_color_2_label, value: swatch_color_2_label, background: 'rgb(252 149 146)' %}
+          {% render 'swatch', id: 'Couleur-1-3', name: 'Couleur-1', data_name: swatch_color_3_label, value: swatch_color_3_label, background: 'rgb(146 252 146)' %}
+        {%- endcapture -%}
+        {% render 'swatches', swatches: swatches_color_1 %}
+      </div>
+      <div class="highlight-container">
+        {%- capture swatches_color_2 -%}
+          {% render 'swatch', id: 'Couleur-2-1', name: 'Couleur-2', data_name: swatch_color_1_label, value: swatch_color_1_label, checked: true, background: 'rgb(255 255 255)' %}
+          {% render 'swatch', id: 'Couleur-2-2', name: 'Couleur-2', data_name: swatch_color_2_label, value: swatch_color_2_label, background: 'rgb(252 149 146)' %}
+          {% render 'swatch', id: 'Couleur-2-3', name: 'Couleur-2', data_name: swatch_color_3_label, value: swatch_color_3_label, background: 'rgb(146 252 146)' %}
+        {%- endcapture -%}
+        {% render 'swatches', swatches: swatches_color_2, size: 'small' %}
+      </div>
+      <div class="highlight-container">
+        {%- capture swatches_color_3 -%}
+          {% render 'swatch', id: 'Couleur-3-1', name: 'Couleur-3', data_name: swatch_color_1_label, value: swatch_color_1_label, checked: true, background: 'rgb(255 255 255)' %}
+          {% render 'swatch', id: 'Couleur-3-2', name: 'Couleur-3', data_name: swatch_color_2_label, value: swatch_color_2_label, background: 'rgb(252 149 146)' %}
+          {% render 'swatch', id: 'Couleur-3-3', name: 'Couleur-3', data_name: swatch_color_3_label, value: swatch_color_3_label, background: 'rgb(146 252 146)' %}
+        {%- endcapture -%}
+        {% render 'swatches', swatches: swatches_color_3, rounded: true %}
+      </div>
+      <div class="highlight-container">
+        {%- capture swatches_color_4 -%}
+          {% render 'swatch', id: 'Couleur-4-1', name: 'Couleur-4', data_name: swatch_color_1_label, value: swatch_color_1_label, checked: true, background: 'rgb(255 255 255)' %}
+          {% render 'swatch', id: 'Couleur-4-2', name: 'Couleur-4', data_name: swatch_color_2_label, value: swatch_color_2_label, background: 'rgb(252 149 146)' %}
+          {% render 'swatch', id: 'Couleur-4-3', name: 'Couleur-4', data_name: swatch_color_3_label, value: swatch_color_3_label, background: 'rgb(146 252 146)' %}
+        {%- endcapture -%}
+        {% render 'swatches', swatches: swatches_color_4, rounded: true, size: 'small' %}
+      </div>
+    </div>
+
+    <div class="card card--with-border highlight color-{{ section.settings.color_scheme }}">
+      <h3 class="h6">{{ 'demo.price' | t }}</h3>
+      <div class="highlight-badges-container paragraph">
+        {% render 'price', from_product: section.settings.product, sales_badge: 'none' %}
+        <br>
+        {% render 'price', from_product: section.settings.product, sales_badge: 'percentage' %}
+        <br>
+        {% render 'price', from_product: section.settings.product, sales_badge: 'amount' %}
+        <br>
+        {% render 'price', from_product: section.settings.product, sales_badge: 'percentage', show_sales_badge_text: true %}
+        <br>
+        {% render 'price', from_product: section.settings.product, sales_badge: 'amount', show_sales_badge_text: true %}
+      </div>
+    </div>
+
+    <div class="card card--with-border highlight color-{{ section.settings.color_scheme }}">
+      <h3 class="h6">{{ 'demo.tabs' | t }}</h3>
+      <div class="highlight-tabs-container">
+        {% content_for 'block', type: 'tabs', id: 'tabs-demo' %}
+      </div>
+    </div>
+  </div>
+</div>
+
+{% stylesheet %}
+  .highlights {
+    display: grid;
+    column-gap: var(--grid-gap-vertical);
+    row-gap: var(--grid-gap-horizontal);
+    grid-template-columns: repeat(3, 1fr);
+    margin-top: 1.5rem;
+  }
+
+  @media (width <= 1000px) {
+    .highlights {
+      grid-template-columns: 1fr;
+    }
+  }
+
+  .card_design_system {
+    border-left: 1px solid var(--color-foreground);
+    justify-content: center;
+    margin-top: 50px;
+    margin-bottom: 50px;
+    padding: 1.5rem 0 1.5rem 1.5rem;
+  }
+
+  .highlight {
+    display: flex;
+    flex-direction: column;
+  }
+
+  .highlight > * + * {
+    margin-top: 1rem;
+  }
+
+  .highlight-container {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 1rem;
+    align-items: flex-start;
+  }
+
+  .highlight-product-components {
+    display: flex;
+    flex-direction: column;
+    gap: 1.5rem;
+  }
+
+  .highlight-logos-container {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 1.5rem;
+  }
+
+  .highlight-logo img {
+    max-width: 200px;
+  }
+
+  .highlight-logo--favicon img {
+    width: 28px;
+  }
+{% endstylesheet %}
+
+{% schema %}
+{
+  "name": "Design System (demo)",
+  "disabled_on": {
+    "groups": ["header", "footer", "custom.cart_drawer", "custom.breadcrumbs"]
+  },
+  "settings": [
+    {
+      "type": "color_scheme",
+      "id": "color_scheme",
+      "label": "t:color_scheme",
+      "default": "scheme-2"
+    },
+    {
+      "type": "product",
+      "id": "product",
+      "label": "Produit de démonstration"
+    }
+  ],
+  "blocks": [
+    {
+      "type": "@theme"
+    },
+    {
+      "type": "@app"
+    }
+  ],
+  "presets": [
+    {
+      "name": "Design System (demo)",
+      "category": "Demo",
+      "blocks": [
+        {
+          "type": "accordions",
+          "static": true,
+          "id": "accordions-1",
+          "settings": {
+            "icon": "caret"
+          },
+          "blocks": [
+            {
+              "type": "_accordion",
+              "settings": {
+                "open_by_default": false,
+                "heading": "Politique de retour"
+              },
+              "blocks": [
+                {
+                  "type": "text",
+                  "settings": {
+                    "text": "<p>Notre objectif est que chaque client soit totalement satisfait de son achat. Si ce n'est pas le cas, faites-le nous savoir et nous ferons de notre mieux pour trouver une solution avec vous.</p>",
+                    "text_style": "paragraph",
+                    "alignment": "left"
+                  }
+                }
+              ]
+            },
+            {
+              "type": "_accordion",
+              "settings": {
+                "heading": "Livraison"
+              },
+              "blocks": [
+                {
+                  "type": "text",
+                  "settings": {
+                    "text": "<p>Nous travaillons rapidement pour envoyer votre commande dès que possible. Une fois votre commande expédiée, vous recevrez un email avec des informations supplémentaires. Les délais de livraison varient en fonction de votre emplacement.</p>",
+                    "text_style": "paragraph",
+                    "alignment": "left"
+                  }
+                }
+              ]
+            },
+            {
+              "type": "_accordion",
+              "settings": {
+                "heading": "Fabrication"
+              },
+              "blocks": [
+                {
+                  "type": "text",
+                  "settings": {
+                    "text": "<p>Nos produits sont fabriqués localement et à l'international. Nous sélectionnons soigneusement nos partenaires de fabrication pour garantir des produits de haute qualité à un prix juste.</p>",
+                    "text_style": "paragraph",
+                    "alignment": "left"
+                  }
+                }
+              ]
+            }
+          ]
+        },
+        {
+          "type": "badges",
+          "static": true,
+          "id": "badges-1",
+          "settings": {},
+          "blocks": [
+            {
+              "type": "_badge",
+              "settings": {
+                "text": "t:badges_primary",
+                "badge_style": "primary"
+              }
+            },
+            {
+              "type": "_badge",
+              "settings": {
+                "text": "t:badges_secondary",
+                "badge_style": "secondary"
+              }
+            }
+          ]
+        },
+        {
+          "type": "popup",
+          "static": true,
+          "id": "popup-1",
+          "settings": {
+            "button_label": "Guide des tailles",
+            "button_style": "secondary",
+            "icon": "open_in_new",
+            "icon_position": "end"
+          },
+          "blocks": [
+            {
+              "type": "text",
+              "settings": {
+                "text": "<h3>Guides des tailes</h3>",
+                "text_style": "h3"
+              }
+            },
+            {
+              "type": "text",
+              "settings": {
+                "text": "<p>Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum.</p>",
+                "text_style": "paragraph"
+              }
+            }
+          ]
+        },
+        {
+          "type": "popup",
+          "static": true,
+          "id": "popup-2",
+          "settings": {
+            "button_label": "Guide des tailles",
+            "button_style": "tertiary",
+            "icon": "open_in_new",
+            "icon_position": "end"
+          },
+          "blocks": [
+            {
+              "type": "text",
+              "settings": {
+                "text": "<h3>Guides des tailes</h3>",
+                "text_style": "h3"
+              }
+            },
+            {
+              "type": "text",
+              "settings": {
+                "text": "<p>Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum.</p>",
+                "text_style": "paragraph"
+              }
+            }
+          ]
+        },
+        {
+          "type": "tabs",
+          "static": true,
+          "id": "tabs-demo",
+          "settings": {
+            "display_type": "overflowing",
+            "wrap_content_in_card": false
+          },
+          "blocks": [
+            {
+              "type": "_tab",
+              "settings": {
+                "tab_name": "Onglet 1"
+              },
+              "blocks": [
+                {
+                  "type": "text",
+                  "settings": {
+                    "text": "<p>Contenu du premier onglet. Ceci est un exemple de texte pour démontrer le fonctionnement des onglets.</p>",
+                    "text_style": "paragraph"
+                  }
+                }
+              ]
+            },
+            {
+              "type": "_tab",
+              "settings": {
+                "tab_name": "Onglet 2"
+              },
+              "blocks": [
+                {
+                  "type": "text",
+                  "settings": {
+                    "text": "<p>Contenu du deuxième onglet. Le contenu change lorsque l'on clique sur un autre onglet.</p>",
+                    "text_style": "paragraph"
+                  }
+                }
+              ]
+            },
+            {
+              "type": "_tab",
+              "settings": {
+                "tab_name": "Onglet 3"
+              },
+              "blocks": [
+                {
+                  "type": "text",
+                  "settings": {
+                    "text": "<p>Contenu du troisième onglet.</p>",
+                    "text_style": "paragraph"
+                  }
+                }
+              ]
+            }
+          ]
+        }
+      ]
+    }
+  ]
+}
+{% endschema %}

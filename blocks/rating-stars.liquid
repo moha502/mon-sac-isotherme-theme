@@ -1,0 +1,186 @@
+{% doc %}
+  Affiche les étoiles de notation d'un produit.
+
+  @example
+  {% content_for 'block', type: 'rating-stars', id: 'rating_stars' %}
+{% enddoc %}
+
+{% liquid
+  assign product = block.settings.product
+
+  if product != blank
+    assign rating = product.metafields.reviews.rating.value | default: 0
+    assign rating_count = product.metafields.reviews.rating_count | default: 0
+
+    if product.metafields.reviews.rating.value == blank
+      assign rating = product.metafields.loox.avg_rating | default: 0
+      assign rating_count = product.metafields.loox.num_reviews | default: 0
+    endif
+  else
+    assign rating = block.settings.rating
+    assign rating_count = block.settings.review_count
+  endif
+%}
+
+{% assign show_rating = true %}
+
+{% if block.settings.product != blank and block.settings.hide_rating_when_no_reviews and rating_count == 0 %}
+  {% assign show_rating = false %}
+{% endif %}
+
+{% if show_rating %}
+  <div
+    style="margin-top: {{ block.settings.margin_top }}px; margin-bottom: {{ block.settings.margin_bottom }}px"
+    class="
+      {%- if block.settings.show_on_display == 'desktop_only' %} mobile-hide{% endif -%}
+      {%- if block.settings.show_on_display == 'mobile_only' %} desktop-hide{% endif -%}
+      {%- if block.settings.additional_class != blank %} {{ block.settings.additional_class }}{% endif -%}
+    "
+    {{ block.shopify_attributes }}
+  >
+    {% capture ratings_stars %}
+    {% if block.settings.show_review_count %}
+      {% render 'rating-stars', rating: rating, rating_count: rating_count, show_note: block.settings.show_note %}
+    {% else %}
+      {% render 'rating-stars', rating: rating, show_note: block.settings.show_note %}
+    {% endif %}
+  {% endcapture %}
+
+    {% if block.settings.link != blank %}
+      <a href="{{ block.settings.link }}" class="rating-stars__link">
+        {{ ratings_stars }}
+      </a>
+    {% else %}
+      {{ ratings_stars }}
+    {% endif %}
+  </div>
+{% endif %}
+
+{% stylesheet %}
+  .rating-stars__link {
+    text-decoration: none;
+    color: inherit;
+  }
+{% endstylesheet %}
+
+{% schema %}
+{
+  "name": "t:rating_stars",
+  "tag": null,
+  "settings": [
+    {
+      "type": "select",
+      "id": "show_on_display",
+      "label": "t:show_on_display",
+      "default": "desktop_and_mobile",
+      "options": [
+        { "value": "desktop_and_mobile", "label": "t:desktop_and_mobile" },
+        { "value": "desktop_only", "label": "t:desktop_only" },
+        { "value": "mobile_only", "label": "t:mobile_only" }
+      ]
+    },
+    {
+      "type": "header",
+      "content": "t:content"
+    },
+    {
+      "type": "product",
+      "id": "product",
+      "label": "t:product",
+      "info": "t:rating_stars_product_info"
+    },
+    {
+      "type": "checkbox",
+      "id": "hide_rating_when_no_reviews",
+      "label": "t:hide_rating_when_no_reviews",
+      "default": true,
+      "visible_if": "{{ block.settings.product != blank }}"
+    },
+    {
+      "type": "range",
+      "id": "rating",
+      "label": "t:rating",
+      "default": 4.5,
+      "min": 0,
+      "max": 5,
+      "step": 0.1,
+      "visible_if": "{{ block.settings.product == blank }}"
+    },
+    {
+      "type": "checkbox",
+      "id": "show_note",
+      "label": "t:show_note",
+      "default": true
+    },
+    {
+      "type": "checkbox",
+      "id": "show_review_count",
+      "label": "t:show_review_count",
+      "default": true
+    },
+    {
+      "type": "number",
+      "id": "review_count",
+      "label": "t:review_count",
+      "default": 123,
+      "placeholder": "{{ block.settings.show_review_count }}",
+      "visible_if": "{{ block.settings.product == blank and block.settings.show_review_count == true }}"
+    },
+    {
+      "type": "url",
+      "id": "link",
+      "label": "t:link",
+      "info": "t:rating_stars_url_info",
+      "visible_if": "{{ block.settings.show_review_count }}"
+    },
+    {
+      "type": "header",
+      "content": "t:margins"
+    },
+    {
+      "type": "range",
+      "id": "margin_top",
+      "label": "t:margin_top",
+      "step": 1,
+      "min": 0,
+      "max": 100,
+      "default": 0,
+      "unit": "px"
+    },
+    {
+      "type": "range",
+      "id": "margin_bottom",
+      "label": "t:margin_bottom",
+      "step": 1,
+      "min": 0,
+      "max": 100,
+      "default": 0,
+      "unit": "px"
+    },
+    {
+      "type": "header",
+      "content": "t:advanced_settings"
+    },
+    {
+      "type": "text",
+      "id": "additional_class",
+      "label": "t:additional_class",
+      "info": "t:additional_class_info"
+    },
+    {
+      "type": "header",
+      "content": "t:go_further"
+    },
+    {
+      "type": "paragraph",
+      "content": "t:go_further_description"
+    }
+  ],
+  "presets": [
+    {
+      "name": "t:rating_stars",
+      "category": "t:reviews"
+    }
+  ]
+}
+{% endschema %}

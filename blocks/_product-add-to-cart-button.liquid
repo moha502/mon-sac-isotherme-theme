@@ -1,0 +1,399 @@
+{% liquid
+  assign product = closest.product | default: product
+  if request.visual_preview_mode and product == blank
+    assign product = collections.all.products.first
+  endif
+%}
+
+{% if block.settings.enable_sticky_add_to_cart %}
+  <script src="{{ 'sticky-add-to-cart.js' | asset_url }}" type="module"></script>
+{% endif %}
+
+{% liquid
+  assign preorder = false
+  if block.settings.enable_preorder
+    if block.settings.enable_preorder_on_empty_stock_only
+      if product.selected_or_first_available_variant.inventory_quantity <= 0
+        assign preorder = true
+      endif
+    else
+      assign preorder = true
+    endif
+  endif
+%}
+
+{% capture add_to_cart_button %}
+  {% comment %} Fallback input pour éviter les soucis si le bloc "Sélecteur de variantes" est désactivé {% endcomment %}
+  <input type="hidden" name="id" value="{{ product.selected_or_first_available_variant.id }}">
+
+  <div
+    class="product-add-to-cart-button{%- if block.settings.additional_class != blank %} {{ block.settings.additional_class }}{% endif -%}"
+    data-ref="add-to-cart-button-container"
+    data-price="{{ product.selected_or_first_available_variant.price }}"
+    {% if product.selected_or_first_available_variant.compare_at_price > product.selected_or_first_available_variant.price
+    %}
+      data-compare-at-price="{{ product.selected_or_first_available_variant.compare_at_price }}"
+    {% endif %}
+    {{ block.shopify_attributes }}
+    {% if request.visual_preview_mode %}
+      data-visual-preview-mode
+    {% endif %}
+  >
+    {% if preorder %}
+      <input type="hidden" name="properties[{{ 'products.preorder_property' | t }}]" value="{{ block.settings.preorder_cart_message }}">
+    {% endif %}
+
+    {% # theme-check-disable %}
+    {% content_for 'block', type: '_product-quantity-selector', id: 'product-quantity-selector' %}
+    {% # theme-check-enable %}
+
+    {% if settings.activate_wishlist %}
+      {% # theme-check-disable %}
+      {% content_for 'block', type: '_add-to-wishlist-button', id: 'add-to-wishlist-button' %}
+      {% # theme-check-enable %}
+    {% endif %}
+    
+    <button
+      klaviyo-bis-trigger
+      type="submit"
+      data-ref="add-to-cart-button"
+      class="button button--{{ block.settings.button_style }} button--full-width"
+      name="add"
+      {% if product.selected_or_first_available_variant.available == false %}
+        disabled
+      {% endif %}
+    >
+      <span class="button__content">
+        {% if product.selected_or_first_available_variant.available == false %}
+          {{ 'products.add_to_cart_unavailable' | t }}
+        {% else %}
+          {% if settings.activate_custom_icons and block.settings.icon_custom != blank %}
+            {% assign icon = block.settings.icon_custom %}
+          {% elsif block.settings.icon != 'none' %}
+            {% assign icon = block.settings.icon %}
+          {% endif %}
+
+          {% if preorder %}
+            <span class="preorder-text">
+              {{ 'products.preorder' | t }}
+            </span>
+          {% else %}
+            {% if block.settings.icon_position == 'start' and icon != blank %}
+              {% render 'icon', icon: icon %}
+            {% endif %}
+
+            <span class="full-add-to-cart-text">
+              {{ 'products.add_to_cart' | t }}
+            </span>
+
+            <span class="small-add-to-cart-text">
+              {{ 'products.add' | t }}
+            </span>
+          {% endif %}
+
+          {% if block.settings.show_price %}
+            <span class="button__separator">|</span>
+            
+            {% render 'price', from_product: product, sales_badge: 'none' %}
+          {% endif %}
+
+          {% if block.settings.icon_position == 'end' and icon != blank and preorder == false %}
+            {% render 'icon', icon: icon %}
+          {% endif %}
+        {% endif %}
+      </span>
+
+      {% render 'loading-spinner' %}
+    </button>
+  </div>
+{% endcapture %}
+
+{% if block.settings.enable_sticky_add_to_cart %}
+  <sticky-add-to-cart class="sticky-add-to-cart" data-active="false">
+    <div class="sticky-add-to-cart__content">
+      {{- add_to_cart_button -}}
+    </div>
+  </sticky-add-to-cart>
+{% else %}
+  {{- add_to_cart_button -}}
+{% endif %}
+
+{% stylesheet %}
+  shopify-visual-preview-block-list .product-add-to-cart-button[data-visual-preview-mode] {
+    width: 400px;
+  }
+
+  .product-add-to-cart-button {
+    display: flex;
+    flex-direction: row;
+    gap: var(--gap-sm);
+    align-items: center;
+  }
+
+  .sticky-add-to-cart {
+    width: 100%;
+  }
+
+  .sticky-add-to-cart[data-active='false'] {
+    bottom: -150px;
+  }
+
+  .sticky-add-to-cart[data-active='true'] {
+    bottom: 0;
+    position: fixed;
+    left: 0;
+    padding: var(--padding-sm) 0;
+    z-index: 2;
+    border-top: var(--separator-border-width) solid var(--color-border);
+    transition: bottom 300ms ease-in-out;
+
+    .sticky-add-to-cart__content {
+      width: 100%;
+      max-width: var(--page-width);
+      margin: 0 auto;
+      padding: 0 var(--page-margin-mobile);
+    }
+  }
+
+  @media (width > 750px) {
+    .sticky-add-to-cart[data-active='true'] {
+      padding: var(--padding-md) 0;
+
+      .sticky-add-to-cart__content {
+        padding: 0 var(--page-margin-desktop);
+      }
+    }
+  }
+
+  .product-add-to-cart-button .button {
+    container-type: inline-size;
+  }
+
+  #klaviyo-bis-button-container {
+    margin-bottom: 0 !important;
+  }
+
+  #klaviyo-bis-button-container button {
+    appearance: none !important;
+    cursor: pointer !important;
+    text-decoration: none !important;
+    display: inline-flex !important;
+    justify-content: center !important;
+    align-items: center !important;
+    gap: 10px !important;
+    height: calc(var(--inputs-min-height) - (2 * var(--button-padding-vertical))) !important;
+    font-size: var(--button-font-size) !important;
+    outline: 1px solid transparent !important;
+    transition: all var(--animation-speed-medium) var(--animation-easing) !important;
+    padding: var(--button-padding-vertical) var(--button-padding-horizontal) !important;
+    color: var(--color-primary-button-text) !important;
+    background-color: var(--color-primary-button-background) !important;
+    border: var(--button-primary-border-width) solid var(--color-primary-button-border) !important;
+    border-radius: var(--button-border-radius) !important;
+    font-weight: var(--button-primary-font-weight) !important;
+    text-transform: var(--button-primary-text-transform) !important;
+    width: -webkit-fill-available !important;
+    font-family: var(--font-body--family) !important;
+    font-weight: 500 !important;
+  }
+
+  .product-add-to-cart-button .full-add-to-cart-text {
+    display: block;
+  }
+
+  .product-add-to-cart-button .small-add-to-cart-text {
+    display: none;
+  }
+
+  @container (width < 200px) {
+    .product-add-to-cart-button .button__separator,
+    .product-add-to-cart-button .price-container {
+      display: none;
+    }
+
+    .product-add-to-cart-button .full-add-to-cart-text {
+      display: block;
+    }
+
+    .product-add-to-cart-button .small-add-to-cart-text {
+      display: none;
+    }
+  }
+
+  @container (width < 270px) {
+    .product-add-to-cart-button .full-add-to-cart-text {
+      display: none;
+    }
+
+    .product-add-to-cart-button .small-add-to-cart-text {
+      display: block;
+    }
+  }
+{% endstylesheet %}
+
+{% schema %}
+{
+  "name": "t:button_add_to_cart",
+  "tag": null,
+  "blocks": [],
+  "settings": [
+    {
+      "type": "header",
+      "content": "t:klaviyo"
+    },
+    {
+      "type": "paragraph",
+      "content": "t:klaviyo_back_in_stock_info"
+    },
+    {
+      "type": "header",
+      "content": "t:style"
+    },
+    {
+      "type": "checkbox",
+      "id": "enable_sticky_add_to_cart",
+      "label": "t:enable_sticky_add_to_cart",
+      "default": false
+    },
+    {
+      "type": "select",
+      "id": "button_style",
+      "label": "t:button_style",
+      "options": [
+        {
+          "value": "primary",
+          "label": "t:primary"
+        },
+        {
+          "value": "secondary",
+          "label": "t:secondary"
+        }
+      ],
+      "default": "primary"
+    },
+    {
+      "type": "checkbox",
+      "id": "show_price",
+      "label": "Afficher le prix dans le bouton",
+      "default": true
+    },
+    {
+      "type": "header",
+      "content": "t:icon"
+    },
+    {
+      "type": "select",
+      "id": "icon",
+      "label": "t:icon",
+      "options": [
+        { "value": "none", "label": "t:none" },
+        { "value": "local_mall", "label": "t:icons_list.local_mall" },
+        { "value": "garden_cart", "label": "t:icons_list.garden_cart" },
+        { "value": "shopping_cart", "label": "t:icons_list.shopping_cart" },
+        { "value": "shop", "label": "t:icons_list.shop" },
+        { "value": "work", "label": "t:icons_list.work" },
+        { "value": "money_bag", "label": "t:icons_list.money_bag" },
+        { "value": "luggage", "label": "t:icons_list.luggage" },
+        { "value": "shopping_bag", "label": "t:icons_list.shopping_bag" },
+        { "value": "shopping_basket", "label": "t:icons_list.shopping_basket" },
+        { "value": "shopping_bag_speed", "label": "t:icons_list.shopping_bag_speed" },
+        { "value": "store", "label": "t:icons_list.store" },
+        { "value": "storefront", "label": "t:icons_list.storefront" },
+        { "value": "add", "label": "t:icons_list.add" },
+        { "value": "barcode", "label": "t:icons_list.barcode" },
+        { "value": "bolt", "label": "t:icons_list.bolt" }
+      ],
+      "default": "none"
+    },
+    {
+      "type": "paragraph",
+      "content": "t:icon_custom_info",
+      "visible_if": "{{ settings.activate_custom_icons == false }}"
+    },
+    {
+      "type": "text",
+      "id": "icon_custom",
+      "label": "t:icon_custom",
+      "info": "t:icon_from_material_symbols",
+      "visible_if": "{{ settings.activate_custom_icons }}"
+    },
+    {
+      "type": "select",
+      "id": "icon_position",
+      "label": "t:icon_position",
+      "visible_if": "{{ block.settings.icon != 'none' or block.settings.icon_custom != blank }}",
+      "options": [
+        { "value": "start", "label": "t:start" },
+        { "value": "end", "label": "t:end" }
+      ],
+      "default": "end"
+    },
+    {
+      "type": "header",
+      "content": "t:preorder"
+    },
+    {
+      "type": "paragraph",
+      "content": "t:preorder_info"
+    },
+    {
+      "type": "checkbox",
+      "id": "enable_preorder",
+      "label": "t:enable_preorder",
+      "info": "t:enable_preorder_info",
+      "default": false
+    },
+    {
+      "type": "checkbox",
+      "id": "enable_preorder_on_empty_stock_only",
+      "label": "t:enable_preorder_on_empty_stock_only",
+      "default": true,
+      "info": "t:enable_preorder_on_empty_stock_only_info",
+      "visible_if": "{{ block.settings.enable_preorder }}"
+    },
+    {
+      "type": "text",
+      "id": "preorder_cart_message",
+      "label": "t:preorder_cart_message",
+      "default": "t:preorder_cart_message_default",
+      "visible_if": "{{ block.settings.enable_preorder }}"
+    },
+    {
+      "type": "header",
+      "content": "t:advanced_settings"
+    },
+    {
+      "type": "text",
+      "id": "additional_class",
+      "label": "t:additional_class",
+      "info": "t:additional_class_info"
+    },
+    {
+      "type": "header",
+      "content": "t:go_further"
+    },
+    {
+      "type": "paragraph",
+      "content": "t:go_further_description"
+    }
+  ],
+  "presets": [
+    {
+      "name": "t:button_add_to_cart",
+      "category": "t:product_form",
+      "blocks": [
+        {
+          "type": "_product-quantity-selector",
+          "static": true,
+          "id": "product-quantity-selector"
+        },
+        {
+          "type": "_add-to-wishlist-button",
+          "static": true,
+          "id": "add-to-wishlist-button"
+        }
+      ]
+    }
+  ]
+}
+{% endschema %}

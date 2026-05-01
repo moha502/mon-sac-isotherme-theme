@@ -1,0 +1,118 @@
+{%- doc -%}
+  Affiche le prix d'un produit.
+
+  @param {product} [from_product] - Le produit à afficher
+  @param {number} [price] - Le prix à afficher, si le produit n'est pas renseigné
+  @param {number} [compare_price] - Le prix de comparaison à afficher, si le produit n'est pas renseigné
+  @param {string} [sales_badge] - Afficher le badge de réduction (none, percentage, amount)
+  @param {boolean} [show_sales_badge_text] - Afficher le texte du badge de réduction
+  @param {boolean} [show_unit_price] - Afficher le prix unitaire de la variante sélectionnée
+{%- enddoc -%}
+
+{%- liquid
+  assign show_sale_price_first = settings.show_sale_price_first
+  assign selected_variant = from_product.selected_or_first_available_variant
+  assign price_unformatted = selected_variant.price
+  assign compare_at_price_unformatted = selected_variant.compare_at_price
+  assign show_sales_badge_text = show_sales_badge_text | default: false
+
+  if from_product == blank and price != blank
+    assign price_unformatted = price
+  endif
+
+  if from_product == blank and compare_price != blank
+    assign compare_at_price_unformatted = compare_price
+  endif
+
+  if from_product == blank and price == blank
+    assign price_unformatted = 1900
+    assign compare_at_price_unformatted = 2900
+  endif
+
+  if settings.show_trailing_zeros
+    assign price = price_unformatted | money
+    assign compare_at_price = compare_at_price_unformatted | money
+  else
+    assign price = price_unformatted | money_without_trailing_zeros
+    assign compare_at_price = compare_at_price_unformatted | money_without_trailing_zeros
+  endif
+
+  if settings.show_trailing_zeros
+    assign savings = compare_at_price_unformatted | minus: price_unformatted | money
+  else
+    assign savings = compare_at_price_unformatted | minus: price_unformatted | money_without_trailing_zeros
+  endif
+
+  if sales_badge == 'percentage'
+    assign savings = compare_at_price_unformatted | minus: price_unformatted | times: 100.0 | divided_by: compare_at_price_unformatted | round | append: '%'
+  endif
+
+  assign show_compare_price = false
+  if compare_at_price_unformatted > price_unformatted
+    assign show_compare_price = true
+  endif
+
+  if show_unit_price and selected_variant.unit_price_measurement
+    if settings.show_trailing_zeros
+      assign formatted_unit_price = selected_variant.unit_price | money
+    else
+      assign formatted_unit_price = selected_variant.unit_price | money_without_trailing_zeros
+    endif
+  endif
+-%}
+
+<div class="product-price-container">
+  <div class="price-container">
+    <div class="prices">
+      {% if show_sale_price_first == false %}
+        <span class="compare-at-price" data-ref="compare-at-price" data-value="{{ compare_at_price_unformatted }}">
+          {%- if show_compare_price -%}
+            {{- compare_at_price -}}
+          {%- endif -%}
+        </span>
+      {% endif %}
+
+      <span class="price" data-ref="price" data-value="{{ price_unformatted }}">{{ price | default: '&nbsp;' }}</span>
+
+      {% if show_sale_price_first == true %}
+        <span class="compare-at-price" data-ref="compare-at-price" data-value="{{ compare_at_price_unformatted }}">
+          {%- if show_compare_price -%}
+            {{- compare_at_price -}}
+          {%- endif -%}
+        </span>
+      {% endif %}
+    </div>
+
+    {% if sales_badge != 'none' %}
+      <span class="badge">
+        <span class="badge__text">
+          {%- if show_sales_badge_text -%}{{- 'products.save' | t -}}{%- endif -%}
+        </span>
+        <span class="badge__savings" data-ref="difference-price-value" data-show-minus="{{ show_sales_badge_text | default: false }}">
+          {%- if show_compare_price -%}
+            {%- if show_sales_badge_text == false -%}-{%- endif -%}
+            {{- savings -}}
+          {%- endif -%}
+        </span>
+      </span>
+    {% endif %}
+  </div>
+
+  {%- if show_unit_price -%}
+    <div class="unit-price" data-ref="unit-price">
+      {%- if selected_variant.unit_price_measurement -%}
+        {{- formatted_unit_price }} /
+        {%- if selected_variant.unit_price_measurement.reference_value != 1 -%}
+          {{ selected_variant.unit_price_measurement.reference_value }}
+        {%- endif -%}
+        {{- selected_variant.unit_price_measurement.reference_unit -}}
+      {%- endif -%}
+    </div>
+  {%- endif -%}
+</div>
+
+{% stylesheet %}
+  .badge:has(.badge__savings:empty) {
+    display: none;
+  }
+{% endstylesheet %}

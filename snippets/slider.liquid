@@ -1,0 +1,58 @@
+{% doc %}
+  Affiche un slider de blocs avec une mise en page configurable.
+
+  @param {object} slides - Contenu du slider
+  @param {number} per_page_mobile - Nombre de produits à afficher sur mobile
+  @param {number} per_page_desktop - Nombre de produits à afficher sur desktop
+  @param {object} [block] - Bloc contenant les paramètres du slider
+  @param {number} [gap] - Espacement entre les produits
+  @param {boolean} [show_arrows] - Afficher les flèches de navigation
+  @param {string} [arrows_button_style] - Style des boutons des flèches de navigation
+  @param {boolean} [show_pagination] - Afficher la pagination
+  @param {boolean} [autoplay] - Activer l'autoplay
+  @param {number} [autoplay_speed] - Vitesse de lecture automatique en millisecondes
+  @param {boolean} [rewind] - Remettre à zéro le slider lorsqu'il arrive à la fin
+
+  @example
+  {% render 'slider', id: 'slider', slides: slides, per_page_mobile: 1, per_page_desktop: 4, gap: 20, show_arrows: true, show_pagination: true, autoplay: true, autoplay_speed: 5000, rewind: true %}
+{% enddoc %}
+
+<slider-component
+  data-per-page-mobile="{{ per_page_mobile }}"
+  data-per-page-desktop="{{ per_page_desktop }}"
+  data-gap="{{ gap }}"
+  data-show-arrows="{{ show_arrows }}"
+  data-show-pagination="{{ show_pagination }}"
+  data-show-pagination-mobile="{{ show_pagination }}"
+  data-autoplay="{{ autoplay }}"
+  data-autoplay-speed="{{ autoplay_speed }}"
+  data-rewind="{{ rewind }}"
+  {{ block.shopify_attributes }}
+  {% if per_page_mobile == '1.8' %}
+    class="slider-component--65-percent"
+  {% endif %}
+>
+  <div class="splide" data-ref="main-slider" role="group">
+    {% if show_arrows %}
+      <div class="splide__arrows {% if show_pagination %}splide__arrows--with-pagination{% endif %}">
+        <button class="splide__arrow splide__arrow--prev button button--{{ arrows_button_style }} button--small button--icon-only">
+          {% render 'icon', icon: 'arrow_back' %}
+        </button>
+        <button class="splide__arrow splide__arrow--next button button--{{ arrows_button_style }} button--small button--icon-only">
+          {% render 'icon', icon: 'arrow_forward' %}
+        </button>
+      </div>
+    {% endif %}
+    <div class="splide__track {% if show_pagination %}splide__track--with-pagination{% endif %}">
+      <ul class="splide__list">
+        {{ slides }}
+      </ul>
+    </div>
+  </div>
+</slider-component>
+
+{% stylesheet %}
+  slider-component {
+    position: relative;
+  }
+{% endstylesheet %}

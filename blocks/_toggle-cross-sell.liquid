@@ -1,0 +1,400 @@
+{% liquid
+  assign product_list = block.settings.product_list
+
+  if request.visual_preview_mode
+    assign product_list = collections.all.products | where: 'available'
+  endif
+
+  assign product_list_length = 0
+
+  for product in product_list
+    if product.available
+      assign product_list_length = product_list_length | plus: 1
+    endif
+  endfor
+%}
+
+{%- if product_list_length > 0 -%}
+  <script src="{{ 'toggle-cross-sell.js' | asset_url }}" type="module"></script>
+
+  <toggle-cross-sell-list
+    class="
+      toggle-cross-sell
+      {%- if block.settings.show_on_display == 'desktop_only' %} mobile-hide{% endif -%}
+      {%- if block.settings.show_on_display == 'mobile_only' %} desktop-hide{% endif -%}
+      {%- if block.settings.additional_class != blank %} {{ block.settings.additional_class }}{% endif -%}
+    "
+    style="--margin-top: {{ block.settings.margin_top }}px; --margin-bottom: {{ block.settings.margin_bottom }}px;"
+    data-ref="toggle-cross-sells"
+    {{ block.shopify_attributes }}
+    {% if request.visual_preview_mode %}
+      data-visual-preview-mode
+    {% endif %}
+  >
+    {% if block.settings.title != blank or block.settings.description != blank %}
+      <div class="toggle-cross-sell__content">
+        {% if block.settings.title != blank %}
+          <h3 class="toggle-cross-sell__title variant_label">{{ block.settings.title }} :</h3>
+        {% endif %}
+
+        {% if block.settings.description != blank %}
+          <div class="toggle-cross-sell__description">
+            {{ block.settings.description }}
+          </div>
+        {% endif %}
+      </div>
+    {% endif %}
+
+    <div class="toggle-cross-sell__products">
+      {%- for product in product_list -%}
+        {%- if product.available -%}
+          <toggle-cross-sell
+            class="toggle-cross-sell__product"
+            data-ref="toggle-cross-sell"
+            data-price="{{ product.selected_or_first_available_variant.price }}"
+            {%- if product.selected_or_first_available_variant.compare_at_price > product.selected_or_first_available_variant.price -%}
+              data-compare-at-price="{{ product.selected_or_first_available_variant.compare_at_price }}"
+            {%- endif -%}
+          >
+            <div class="toggle-cross-sell__product-container">
+              {%- if block.settings.show_image -%}
+                <div class="toggle-cross-sell__product-image" data-ref="toggle-cross-sell-image">
+                  <a href="{{ product.url }}">
+                    <img
+                      src="{{ product.featured_image | image_url: width: 110 }}"
+                      alt="{{ product.featured_image.alt }}"
+                      width="55"
+                      height="55"
+                    >
+                  </a>
+                </div>
+              {%- endif -%}
+
+              <div class="toggle-cross-sell__product-content {% if block.settings.show_image == false %}toggle-cross-sell__product-content--no-image{% endif %}">
+                <div class="toggle-cross-sell__product-header">
+                  <a href="{{ product.url }}" class="toggle-cross-sell__product-title">{{ product.title }}</a>
+
+                  <span class="toggle-cross-sell__product-price-container" data-ref="toggle-cross-sell-price">
+                    {% render 'price', from_product: product, sales_badge: 'none' %}
+                  </span>
+                </div>
+
+                {%- assign available_variants_length = 0 -%}
+                {%- for variant in product.variants -%}
+                  {%- if variant.available -%}
+                    {%- assign available_variants_length = available_variants_length | plus: 1 -%}
+                  {%- endif -%}
+                {%- endfor -%}
+
+                {%- if available_variants_length > 1 -%}
+                  <div class="select-wrapper">
+                    <select
+                      class="select select--small"
+                      data-ref="toggle-cross-sell-select"
+                      aria-label="{{ product.title }} select"
+                    >
+                      {%- for variant in product.variants -%}
+                        <option
+                          value="{{ variant.id }}"
+                          {%- if variant.featured_image != blank -%}
+                            data-variant-image="{{ variant.featured_image | image_url: width: 110 }}"
+                          {%- endif -%}
+                          data-price="{{ variant.price }}"
+                          {%- if variant.compare_at_price > variant.price -%}
+                            data-compare-at-price="{{ variant.compare_at_price }}"
+                          {%- endif -%}
+                          {% if variant.available == false %}
+                            disabled
+                          {% endif %}
+                        >
+                          {{ variant.title }}
+                        </option>
+                      {%- endfor -%}
+                    </select>
+
+                    <div class="select-wrapper__icon">
+                      {% render 'icon', icon: 'keyboard_arrow_down' %}
+                    </div>
+                  </div>
+                {%- endif -%}
+              </div>
+            </div>
+
+            {%- case block.settings.toggle_mode -%}
+              {%- when 'checkbox' -%}
+                {% assign data = 'data-variant-id="' | append: product.selected_or_first_available_variant.id | append: '"' %}
+                {% assign data = data | append: ' data-ref="toggle-cross-sell-checkbox"' %}
+                {% assign name = product.title | handleize | append: ' ' | append: 'checkbox' %}
+                {% assign aria_label = product.title | append: ' ' | append: 'checkbox' %}
+
+                {% render 'checkbox', checked: false, name: name, data: data, aria_label: aria_label %}
+
+              {%- when 'add_button' -%}
+                <button
+                  type="button"
+                  class="button button--small button--secondary"
+                  data-variant-id="{{ product.selected_or_first_available_variant.id }}"
+                  data-ref="toggle-cross-sell-button"
+                >
+                  <span class="toggle-cross-sell__text-add">
+                    {{ 'products.add' | t }}
+                  </span>
+                  <span class="toggle-cross-sell__text-added">
+                    {{ 'products.added' | t }}
+                  </span>
+                  <span class="toggle-cross-sell__text-remove">
+                    {{ 'products.remove' | t }}
+                  </span>
+                </button>
+            {%- endcase -%}
+          </toggle-cross-sell>
+        {%- endif -%}
+
+        {% if request.visual_preview_mode and forloop.index > 1 %}
+          {% break %}
+        {% endif %}
+      {%- endfor -%}
+    </div>
+  </toggle-cross-sell-list>
+{%- endif -%}
+
+{% stylesheet %}
+  .toggle-cross-sell {
+    display: block;
+    margin-top: var(--margin-top);
+    margin-bottom: var(--margin-bottom);
+  }
+
+  shopify-visual-preview-block-list .toggle-cross-sell[data-visual-preview-mode] {
+    width: 400px;
+  }
+
+  .product-form__form .toggle-cross-sell:not(:first-of-type) {
+    display: none;
+  }
+
+  .toggle-cross-sell__content {
+    margin-bottom: var(--margin-sm);
+  }
+
+  .toggle-cross-sell__description p {
+    margin: 0;
+    line-height: normal;
+    font-size: var(--font-body--size);
+  }
+
+  .toggle-cross-sell__products {
+    display: flex;
+    flex-direction: column;
+    gap: var(--gap-sm);
+    width: 100%;
+  }
+
+  .toggle-cross-sell__product {
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+    justify-content: space-between;
+    width: 100%;
+    /* min-height: 50px; */
+    gap: var(--gap-md);
+    overflow: hidden;
+    cursor: pointer;
+    border-radius: var(--card-border-radius);
+    padding: var(--padding-xs);
+    color: var(--color-input-text);
+    background-color: var(--color-input-background);
+    border: var(--inputs-border-width) solid var(--color-input-border);
+  }
+
+  .toggle-cross-sell__product:has(input[type='checkbox']:checked) {
+    border-color: var(--color-selected-input-border);
+  }
+
+  .toggle-cross-sell__product-image img {
+    display: block;
+    min-width: 55px;
+    width: 55px;
+    border-radius: calc(var(--card-border-radius) - var(--margin-sm));
+  }
+
+  .toggle-cross-sell__product-image--wide img {
+    object-fit: cover;
+    min-height: 100%;
+    border-radius: 0;
+  }
+
+  .toggle-cross-sell__product-container {
+    display: flex;
+    flex-direction: row;
+    cursor: auto;
+    gap: var(--gap-sm);
+  }
+
+  .toggle-cross-sell__product-content {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    gap: var(--gap-sm);
+  }
+
+  .toggle-cross-sell__product-content--no-image {
+    margin-left: var(--margin-sm);
+  }
+
+  .toggle-cross-sell__product-header {
+    display: flex;
+    gap: var(--gap-xs);
+    flex-wrap: wrap;
+    flex-direction: column;
+  }
+
+  .toggle-cross-sell__product-title {
+    margin: 0;
+    font-size: var(--font-body--size);
+    font-weight: 500;
+    text-decoration: none;
+    color: inherit;
+  }
+
+  .toggle-cross-sell__product-price-container {
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+    gap: var(--gap-sm);
+    font-size: var(--font-body--size-small);
+  }
+
+  .toggle-cross-sell__product .checkbox,
+  .toggle-cross-sell__product .button {
+    margin-right: var(--margin-sm);
+  }
+
+  .toggle-cross-sell__text-add,
+  .toggle-cross-sell__text-added,
+  .toggle-cross-sell__text-remove {
+    display: none;
+  }
+
+  .toggle-cross-sell__product .button.button--secondary .toggle-cross-sell__text-add {
+    display: block;
+  }
+
+  .toggle-cross-sell__product .button.button--active:not(:hover) .toggle-cross-sell__text-added {
+    display: block;
+  }
+
+  .toggle-cross-sell__product .button.button--active:hover .toggle-cross-sell__text-remove {
+    display: block;
+  }
+{% endstylesheet %}
+
+{% schema %}
+{
+  "name": "t:toggle_cross_sell",
+  "tag": null,
+  "settings": [
+    {
+      "type": "select",
+      "id": "show_on_display",
+      "label": "t:show_on_display",
+      "default": "desktop_and_mobile",
+      "options": [
+        { "value": "desktop_and_mobile", "label": "t:desktop_and_mobile" },
+        { "value": "desktop_only", "label": "t:desktop_only" },
+        { "value": "mobile_only", "label": "t:mobile_only" }
+      ]
+    },
+    {
+      "type": "header",
+      "content": "t:content"
+    },
+    {
+      "type": "inline_richtext",
+      "id": "title",
+      "label": "t:title",
+      "default": "t:toggle_choose_options_default"
+    },
+    {
+      "type": "richtext",
+      "id": "description",
+      "label": "t:description"
+    },
+    {
+      "type": "product_list",
+      "id": "product_list",
+      "label": "t:products"
+    },
+    {
+      "type": "select",
+      "id": "toggle_mode",
+      "options": [
+        {
+          "value": "checkbox",
+          "label": "t:checkbox"
+        },
+        {
+          "value": "add_button",
+          "label": "t:add_button"
+        }
+      ],
+      "default": "checkbox",
+      "label": "t:action_add"
+    },
+    {
+      "type": "checkbox",
+      "id": "show_image",
+      "default": true,
+      "label": "t:show_image"
+    },
+    {
+      "type": "header",
+      "content": "t:margins"
+    },
+    {
+      "type": "range",
+      "id": "margin_top",
+      "label": "t:margin_top",
+      "default": 0,
+      "min": 0,
+      "max": 100,
+      "step": 1,
+      "unit": "px"
+    },
+    {
+      "type": "range",
+      "id": "margin_bottom",
+      "label": "t:margin_bottom",
+      "default": 10,
+      "min": 0,
+      "max": 100,
+      "step": 1,
+      "unit": "px"
+    },
+    {
+      "type": "header",
+      "content": "t:advanced_settings"
+    },
+    {
+      "type": "text",
+      "id": "additional_class",
+      "label": "t:additional_class",
+      "info": "t:additional_class_info"
+    },
+    {
+      "type": "header",
+      "content": "t:go_further"
+    },
+    {
+      "type": "paragraph",
+      "content": "t:go_further_description"
+    }
+  ],
+  "presets": [
+    {
+      "name": "t:toggle_cross_sell",
+      "category": "t:product_form"
+    }
+  ]
+}
+{% endschema %}

@@ -1,0 +1,47 @@
+{% doc %}
+  Affiche une carte de collection.
+
+  @param collection - {Collection} La collection à afficher.
+  @param block - {Block} Le bloc à utiliser.
+  @param children - {String} Les enfants à afficher (blocs).
+
+  @example
+  {% render 'collection-card', collection: collection, block: block, children: children %}
+{% enddoc %}
+
+<a
+  href="{{ collection.url }}"
+  class="collection-card{% if block.settings.wrap_in_card %} card color-{{ block.settings.color_scheme }}{% endif %}"
+  style="--gap: {{ block.settings.layout_gap }}px;"
+  {{ block.shopify_attributes }}
+  {% if request.visual_preview_mode %}
+    data-visual-preview-mode
+  {% endif %}
+>
+  {{ children }}
+</a>
+
+{% stylesheet %}
+  .collection-card {
+    display: flex;
+    flex-direction: column;
+    gap: var(--gap);
+    width: 100%;
+    overflow: hidden;
+    text-decoration: none;
+    transition: transform 0.2s ease-in-out;
+    position: relative;
+    cursor: pointer;
+    color: var(--color-foreground);
+  }
+
+  .collection-card[data-visual-preview-mode] {
+    max-width: 280px;
+  }
+
+  @media (width > 750px) {
+    .collection-card:hover {
+      transform: translateY(-2px);
+    }
+  }
+{% endstylesheet %}

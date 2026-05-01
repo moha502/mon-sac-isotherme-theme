@@ -1,0 +1,113 @@
+{% doc %}
+  Affiche un groupe de blocs avec une mise en page configurable.
+
+  @example
+  {% content_for 'block', type: 'group', id: 'group' %}
+{% enddoc %}
+
+<li
+  class="splide__slide announcement{%- if block.settings.additional_class != blank %} {{ block.settings.additional_class }}{% endif -%}"
+  {{ block.shopify_attributes }}
+>
+  <div
+    class="slide"
+    style="      --gap: {{ block.settings.layout_gap }}px;"
+  >
+    {% content_for 'blocks' %}
+  </div>
+</li>
+
+{% stylesheet %}
+  .announcement .slide {
+    display: flex;
+    flex-direction: row;
+    flex-wrap: wrap;
+    justify-content: center;
+    align-items: center;
+    text-align: center;
+    gap: var(--gap);
+    margin: 0;
+    overflow: hidden;
+    width: 100%;
+    height: 100%;
+  }
+{% endstylesheet %}
+
+{% schema %}
+{
+  "name": "t:announcement",
+  "tag": null,
+  "blocks": [
+    {
+      "type": "text"
+    },
+    {
+      "type": "icon"
+    },
+    {
+      "type": "button"
+    },
+    {
+      "type": "badges"
+    },
+    {
+      "type": "popup"
+    },
+    {
+      "type": "rating-stars"
+    },
+    {
+      "type": "countdown"
+    }
+  ],
+  "settings": [
+    {
+      "type": "header",
+      "content": "t:layout"
+    },
+    {
+      "type": "range",
+      "id": "layout_gap",
+      "label": "t:layout_gap",
+      "default": 10,
+      "step": 1,
+      "min": 0,
+      "max": 30,
+      "unit": "px"
+    },
+    {
+      "type": "header",
+      "content": "t:advanced_settings"
+    },
+    {
+      "type": "text",
+      "id": "additional_class",
+      "label": "t:additional_class",
+      "info": "t:additional_class_info"
+    },
+    {
+      "type": "header",
+      "content": "t:go_further"
+    },
+    {
+      "type": "paragraph",
+      "content": "t:go_further_description"
+    }
+  ],
+  "presets": [
+    {
+      "name": "t:announcement",
+      "category": "t:announcement_bar",
+      "blocks": [
+        {
+          "type": "text",
+          "settings": {
+            "text": "t:announcement_default_text",
+            "text_style": "paragraph"
+          }
+        }
+      ]
+    }
+  ]
+}
+{% endschema %}

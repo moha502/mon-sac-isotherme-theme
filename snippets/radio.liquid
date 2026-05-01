@@ -1,0 +1,129 @@
+{% doc %}
+  Affiche un bouton radio.
+
+  @param {string} [label] - Le texte du bouton radio
+  @param {boolean} [checked] - Indique si le bouton radio est coché par défaut
+  @param {string} group - Le nom du groupe de boutons radio
+  @param {string} [value] - La valeur du bouton radio
+  @param {boolean} [disabled] - Indique si le bouton radio est désactivé
+  @param {string} [data] - Attribut data à ajouter au bouton radio
+
+  @example
+  {% render 'radio', label: 'Bouton radio', checked: true, group: 'radio-group-1' %}
+{% enddoc %}
+
+<label class="radio">
+  <input
+    type="radio"
+    name="{{ group }}"
+    {% if checked %}
+      checked
+    {% endif %}
+    {% if disabled %}
+      disabled
+    {% endif %}
+    {% if value %}
+      value="{{ value }}"
+    {% endif %}
+    {% if data %}
+      {{ data }}
+    {% endif %}
+  >
+  <span class="radio__label">{{ label }}</span>
+</label>
+
+{% stylesheet %}
+  .radio {
+    z-index: 0;
+    position: relative;
+    display: inline-block;
+    line-height: 1.5;
+  }
+
+  .radio > input {
+    appearance: none;
+    -moz-appearance: none;
+    -webkit-appearance: none;
+    z-index: -1;
+    position: absolute;
+    left: -10px;
+    top: -8px;
+    display: block;
+    margin: 0;
+    border-radius: 50%;
+    width: 40px;
+    height: 40px;
+    outline: none;
+    opacity: 0;
+    transform: scale(1);
+    pointer-events: none;
+    transition: opacity 0.3s, transform 0.2s;
+  }
+
+  .radio > .radio__label {
+    display: inline-block;
+    width: 100%;
+    cursor: pointer;
+    position: relative;
+    font-size: var(--font-body--size-emphasized);
+  }
+
+  .radio > .radio__label::before {
+    content: '';
+    display: inline-block;
+    box-sizing: border-box;
+    margin: 0px 10px 0px 0;
+    border: var(--inputs-border-width) solid var(--color-input-border);
+    border-radius: 50%;
+    width: 20px;
+    min-width: 20px;
+    height: 20px;
+    vertical-align: top;
+    transition: border-color 0.2s;
+    background-color: var(--color-input-background);
+  }
+
+  .radio > .radio__label::after {
+    content: '';
+    display: block;
+    position: absolute;
+    top: 0;
+    left: 0;
+    border-radius: 50%;
+    width: 10px;
+    height: 10px;
+    background-color: var(--color-input-text);
+    transform: translate(5px, 5px) scale(0);
+    transition: transform 0.2s;
+  }
+
+  .radio > input:checked + .radio__label::before {
+    border-color: var(--color-input-text);
+  }
+
+  .radio > input:checked + .radio__label::after {
+    transform: translate(5px, 5px) scale(1);
+  }
+
+  .radio > input:focus {
+    opacity: 0.12;
+  }
+
+  .radio > input:disabled {
+    opacity: 0;
+  }
+
+  .radio > input:disabled + .radio__label {
+    color: var(--color-input-text);
+    opacity: 0.5;
+    cursor: not-allowed;
+  }
+
+  .radio > input:disabled + .radio__label::before {
+    border-color: var(--color-input-border);
+  }
+
+  .radio > input:disabled + .radio__label::after {
+    background-color: currentColor;
+  }
+{% endstylesheet %}

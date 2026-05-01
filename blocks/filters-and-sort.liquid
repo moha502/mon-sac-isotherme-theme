@@ -1,0 +1,199 @@
+{% doc %}
+  Affiche les filtres et le tri pour une collection.
+{% enddoc %}
+
+<script src="{{ 'filter-and-sort.js' | asset_url }}" type="module"></script>
+
+{% assign show_filters = block.settings.show_filters %}
+{% assign show_sorting = block.settings.show_sorting %}
+
+<div
+  class="
+    filter-and-sort
+    filter-and-sort--{{ block.settings.display_mode }}
+    {%- if block.settings.sticky %} filter-and-sort--sticky{% endif -%}
+    {%- if block.settings.show_on_display == 'desktop_only' %} mobile-hide{% endif -%}
+    {%- if block.settings.show_on_display == 'mobile_only' %} desktop-hide{% endif -%}
+    {%- if block.settings.additional_class != blank %} {{ block.settings.additional_class }}{% endif -%}
+  "
+>
+  <filter-and-sort-component class="filter-and-sort__inline">
+    {% if show_filters and show_sorting %}
+      {% render 'filters-inline', collection: collection %}
+      {% render 'sort-inline', collection: collection %}
+    {% elsif show_filters and show_sorting == false %}
+      {% render 'filters-inline', collection: collection %}
+    {% elsif show_filters == false and show_sorting %}
+      <div class="filter-and-sort__sort-only">
+        {% render 'sort-inline', collection: collection %}
+      </div>
+    {% endif %}
+  </filter-and-sort-component>
+
+  <div class="filter-and-sort__sidebar">
+    {% if block.settings.wrap_in_card and block.settings.card_color_scheme %}
+      <div class="card color-{{ block.settings.card_color_scheme }}">
+        {% render 'filters-sidebar', collection: collection, show_sorting: show_sorting, show_filters: show_filters %}
+      </div>
+    {% else %}
+      {% render 'filters-sidebar', collection: collection, show_sorting: show_sorting, show_filters: show_filters %}
+    {% endif %}
+  </div>
+
+  <div class="filter-and-sort__mobile">
+    {% if show_filters %}
+      {% render 'filters-modal', collection: collection, show_sorting: show_sorting %}
+    {% elsif show_filters == false and show_sorting %}
+      <div class="filter-and-sort__sort-only">
+        {% render 'sort-inline', collection: collection %}
+      </div>
+    {% endif %}
+  </div>
+</div>
+
+{% stylesheet %}
+  .filter-and-sort--loading .filter-list,
+  .filter-and-sort--loading sort-component,
+  .filter-and-sort--loading sort-inline-component,
+  .filter-and-sort--loading .filters__clear-all {
+    opacity: 0.5;
+    pointer-events: none;
+  }
+
+  .filter-and-sort__inline,
+  .filter-and-sort__sidebar {
+    display: none;
+  }
+
+  .filter-and-sort__sort-only {
+    display: flex;
+    justify-content: flex-end;
+    width: 100%;
+  }
+
+  @media (width > 750px) {
+    .filter-and-sort:not(.filter-and-sort--menu) .filter-and-sort__mobile {
+      display: none;
+    }
+
+    .filter-and-sort--inline .filter-and-sort__inline {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      gap: var(--gap-sm);
+    }
+
+    .filter-and-sort--sidebar .filter-and-sort__sidebar {
+      display: block;
+    }
+
+    .filter-and-sort--sidebar.filter-and-sort--sticky .filter-and-sort__sidebar {
+      height: fit-content;
+      position: sticky;
+      top: calc(var(--header-height, 0px) + var(--padding-md));
+    }
+  }
+{% endstylesheet %}
+
+{% schema %}
+{
+  "name": "t:filters_and_sort",
+  "tag": null,
+  "settings": [
+    {
+      "type": "select",
+      "id": "show_on_display",
+      "label": "t:show_on_display",
+      "default": "desktop_and_mobile",
+      "options": [
+        { "value": "desktop_and_mobile", "label": "t:desktop_and_mobile" },
+        { "value": "desktop_only", "label": "t:desktop_only" },
+        { "value": "mobile_only", "label": "t:mobile_only" }
+      ]
+    },
+    {
+      "type": "header",
+      "content": "t:style"
+    },
+    {
+      "type": "select",
+      "id": "display_mode",
+      "label": "t:display_mode",
+      "options": [
+        {
+          "value": "inline",
+          "label": "t:inline"
+        },
+        {
+          "value": "sidebar",
+          "label": "t:sidebar"
+        },
+        {
+          "value": "menu",
+          "label": "t:menu"
+        }
+      ],
+      "default": "sidebar"
+    },
+    {
+      "type": "checkbox",
+      "id": "wrap_in_card",
+      "label": "t:wrap_in_card",
+      "default": false,
+      "visible_if": "{{ block.settings.display_mode == 'sidebar' }}"
+    },
+    {
+      "type": "color_scheme",
+      "id": "card_color_scheme",
+      "label": "t:color_scheme",
+      "default": "scheme-2",
+      "visible_if": "{{ block.settings.wrap_in_card }}"
+    },
+    {
+      "type": "checkbox",
+      "id": "sticky",
+      "label": "t:sticky_sidebar",
+      "default": false,
+      "visible_if": "{{ block.settings.display_mode == 'sidebar' }}"
+    },
+    {
+      "type": "header",
+      "content": "t:filters"
+    },
+    {
+      "type": "checkbox",
+      "id": "show_filters",
+      "label": "t:show_filters",
+      "default": true
+    },
+    {
+      "type": "header",
+      "content": "t:sorting"
+    },
+    {
+      "type": "checkbox",
+      "id": "show_sorting",
+      "label": "t:show_sorting",
+      "default": true
+    },
+    {
+      "type": "header",
+      "content": "t:advanced_settings"
+    },
+    {
+      "type": "text",
+      "id": "additional_class",
+      "label": "t:additional_class",
+      "info": "t:additional_class_info"
+    },
+    {
+      "type": "header",
+      "content": "t:go_further"
+    },
+    {
+      "type": "paragraph",
+      "content": "t:go_further_description"
+    }
+  ]
+}
+{% endschema %}

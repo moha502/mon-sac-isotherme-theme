@@ -1,0 +1,49 @@
+{% doc %}
+  Affiche une carte de produit.
+
+  @param product - {Product} Le produit à afficher.
+  @param block - {Block} Le bloc à utiliser.
+  @param children - {String} Les enfants à afficher (blocs).
+
+  @example
+  {% render 'product-card', product: product, block: block, children: children %}
+{% enddoc %}
+
+<script src="{{ 'product-card.js' | asset_url }}" type="module"></script>
+
+<product-card
+  class="product-card{% if block.settings.wrap_in_card %} card color-{{ block.settings.color_scheme }}{% endif %}"
+  style="--gap: {{ block.settings.layout_gap }}px;"
+  data-product-url="{{ product.url }}"
+  {{ block.shopify_attributes }}
+  {% if request.visual_preview_mode %}
+    data-visual-preview-mode
+  {% endif %}
+>
+  {{ children }}
+</product-card>
+
+{% stylesheet %}
+  .product-card {
+    display: flex;
+    flex-direction: column;
+    gap: var(--gap);
+    width: 100%;
+    height: 100%;
+    overflow: hidden;
+    text-decoration: none;
+    transition: transform 0.2s ease-in-out;
+    position: relative;
+    cursor: pointer;
+  }
+
+  .product-card[data-visual-preview-mode] {
+    max-width: 280px;
+  }
+
+  @media (width > 750px) {
+    .product-card:hover {
+      transform: translateY(-2px);
+    }
+  }
+{% endstylesheet %}

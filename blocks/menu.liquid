@@ -1,0 +1,241 @@
+<div
+  class="
+    menu-block
+    {%- if block.settings.show_on_display == 'desktop_only' %} mobile-hide{% endif -%}
+    {%- if block.settings.show_on_display == 'mobile_only' %} desktop-hide{% endif -%}
+    {%- if block.settings.additional_class != blank %} {{ block.settings.additional_class }}{% endif -%}
+  "
+  style="
+    --margin-top: {{ block.settings.margin_top }}px;
+    --margin-bottom: {{ block.settings.margin_bottom }}px;
+    --menu-direction: {{ block.settings.menu_direction }};
+    --alignment: {{ block.settings.alignment_desktop }};
+    --alignment-mobile: {{ block.settings.alignment_mobile }};
+  "
+  {{ block.shopify_attributes }}
+>
+  <div class="menu-block__content">
+    {% if block.settings.title != blank %}
+      <div class="text-block {{ block.settings.title_style }}">
+        {{ block.settings.title }}
+      </div>
+    {% endif %}
+
+    {% if block.settings.menu != blank %}
+      <ul class="menu-block__list">
+        {% for link in linklists[block.settings.menu].links %}
+          <li class="menu-block__item">
+            <a
+              href="{{ link.url }}"
+              class="menu-block__link{% if block.settings.underline_links %} menu-block__link--underlined{% endif %}"
+            >
+              {{- link.title -}}
+            </a>
+          </li>
+        {% endfor %}
+      </ul>
+    {% endif %}
+  </div>
+</div>
+
+{% stylesheet %}
+  .menu-block {
+    display: flex;
+    justify-content: var(--alignment-mobile);
+    margin: var(--margin-top) 0 var(--margin-bottom) 0;
+  }
+
+  @media (width > 750px) {
+    .menu-block {
+      justify-content: var(--alignment);
+    }
+  }
+
+  .menu-block__content {
+    display: flex;
+    flex-direction: column;
+    gap: var(--gap-md);
+  }
+
+  .menu-block__list {
+    list-style: none;
+    padding: 0;
+    margin: 0;
+    display: flex;
+    flex-direction: var(--menu-direction);
+    gap: var(--gap-md);
+    flex-wrap: wrap;
+  }
+
+  .menu-block__item {
+    margin: 0;
+  }
+
+  .menu-block__link {
+    text-decoration: none;
+    color: var(--color-foreground);
+    font-size: var(--font-body--size);
+    font-weight: var(--font-body--weight);
+    transition: var(--animation-link-hover);
+
+    &:hover {
+      opacity: var(--opacity-link-hover);
+    }
+  }
+
+  .menu-block__link--underlined {
+    text-decoration: underline;
+  }
+{% endstylesheet %}
+
+{% schema %}
+{
+  "name": "t:menu",
+  "tag": null,
+  "settings": [
+    {
+      "type": "select",
+      "id": "show_on_display",
+      "label": "t:show_on_display",
+      "default": "desktop_and_mobile",
+      "options": [
+        { "value": "desktop_and_mobile", "label": "t:desktop_and_mobile" },
+        { "value": "desktop_only", "label": "t:desktop_only" },
+        { "value": "mobile_only", "label": "t:mobile_only" }
+      ]
+    },
+    {
+      "type": "header",
+      "content": "t:layout"
+    },
+    {
+      "type": "select",
+      "id": "alignment_desktop",
+      "label": "t:alignment_desktop",
+      "default": "flex-start",
+      "options": [
+        { "value": "flex-start", "label": "t:flex-start" },
+        { "value": "center", "label": "t:centered" },
+        { "value": "flex-end", "label": "t:flex-end" }
+      ],
+      "visible_if": "{{ block.settings.show_on_display != 'mobile_only' }}"
+    },
+    {
+      "type": "select",
+      "id": "alignment_mobile",
+      "label": "t:alignment_mobile",
+      "default": "flex-start",
+      "options": [
+        { "value": "flex-start", "label": "t:flex-start" },
+        { "value": "center", "label": "t:centered" },
+        { "value": "flex-end", "label": "t:flex-end" }
+      ],
+      "visible_if": "{{ block.settings.show_on_display != 'desktop_only' }}"
+    },
+    {
+      "type": "header",
+      "content": "t:content"
+    },
+    {
+      "type": "richtext",
+      "id": "title",
+      "label": "t:title"
+    },
+    {
+      "type": "select",
+      "id": "title_style",
+      "label": "t:title_style",
+      "options": [
+        { "value": "h1", "label": "t:h1" },
+        { "value": "h2", "label": "t:h2" },
+        { "value": "h3", "label": "t:h3" },
+        { "value": "h4", "label": "t:h4" },
+        { "value": "h5", "label": "t:h5" },
+        { "value": "h6", "label": "t:h6" },
+        { "value": "paragraph", "label": "t:paragraph" }
+      ],
+      "default": "h6"
+    },
+    {
+      "type": "link_list",
+      "id": "menu",
+      "label": "t:menu",
+      "default": "main-menu"
+    },
+    {
+      "type": "select",
+      "id": "menu_direction",
+      "label": "t:menu_direction",
+      "default": "column",
+      "options": [
+        {
+          "value": "row",
+          "label": "t:horizontal"
+        },
+        {
+          "value": "column",
+          "label": "t:vertical"
+        }
+      ]
+    },
+    {
+      "type": "checkbox",
+      "id": "underline_links",
+      "label": "t:underline_links",
+      "default": false
+    },
+    {
+      "type": "header",
+      "content": "t:margins"
+    },
+    {
+      "type": "range",
+      "id": "margin_top",
+      "label": "t:margin_top",
+      "default": 0,
+      "min": 0,
+      "max": 100,
+      "step": 1,
+      "unit": "px"
+    },
+    {
+      "type": "range",
+      "id": "margin_bottom",
+      "label": "t:margin_bottom",
+      "default": 0,
+      "min": 0,
+      "max": 100,
+      "step": 1,
+      "unit": "px"
+    },
+    {
+      "type": "header",
+      "content": "t:advanced_settings"
+    },
+    {
+      "type": "text",
+      "id": "additional_class",
+      "label": "t:additional_class",
+      "info": "t:additional_class_info"
+    },
+    {
+      "type": "header",
+      "content": "t:go_further"
+    },
+    {
+      "type": "paragraph",
+      "content": "t:go_further_description"
+    }
+  ],
+  "presets": [
+    {
+      "name": "t:menu",
+      "category": "t:components",
+      "settings": {
+        "title": "t:menu_title_default",
+        "menu": "main-menu"
+      }
+    }
+  ]
+}
+{% endschema %}

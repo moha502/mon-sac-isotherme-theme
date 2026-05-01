@@ -1,0 +1,620 @@
+<script src="{{ "cross-sell.js" | asset_url }}" type="module"></script>
+
+{% liquid
+  assign bundle_products = block.settings.products
+
+  if request.visual_preview_mode
+    assign bundle_products = collections.all.products | where: 'available'
+  endif
+
+  # calcul des prix des produits
+  assign price = 0
+  assign compare_at_price = 0
+  assign bundle_size = 0
+  assign all_available = true
+
+  for bundle_product in bundle_products
+    # check si le produit est disponible
+    if bundle_product.selected_or_first_available_variant.available == false
+      assign all_available = false
+    endif
+
+    if forloop.index == 1
+      assign first_product = bundle_product
+    endif
+
+    assign bundle_size = bundle_size | plus: 1
+    assign price = price | plus: bundle_product.selected_or_first_available_variant.price
+
+    if bundle_product.selected_or_first_available_variant.compare_at_price > 0
+      assign compare_at_price = compare_at_price | plus: bundle_product.selected_or_first_available_variant.compare_at_price
+    else
+      assign compare_at_price = compare_at_price | plus: bundle_product.selected_or_first_available_variant.price
+    endif
+
+    if request.visual_preview_mode and forloop.first and block.settings.title != 'Bundle'
+      break
+    endif
+  endfor
+
+  # check si le block.settings.image est vide
+  assign show_dynamic_variant_image = true
+
+  if block.settings.image != blank
+    assign show_dynamic_variant_image = false
+  endif
+
+  if bundle_size > 1
+    assign show_dynamic_variant_image = false
+  endif
+%}
+
+{% if bundle_size > 0 %}
+  <cross-sell-component
+    data-dynamic-variant-image="{{ show_dynamic_variant_image }}"
+    data-product-handle="{{ first_product.handle }}"
+    style="
+      --margin-top: {{ block.settings.margin_top }}px;
+      --margin-bottom: {{ block.settings.margin_bottom }}px;
+      --image-width: {{ block.settings.image_width }}px;
+    "
+    class="
+      cross-sell--{{ block.settings.display_mode }}
+      {%- if block.settings.show_on_display == 'desktop_only' %} mobile-hide{% endif -%}
+      {%- if block.settings.show_on_display == 'mobile_only' %} desktop-hide{% endif -%}
+      {%- if block.settings.additional_class != blank %} {{ block.settings.additional_class }}{% endif -%}
+    "
+    {{ block.shopify_attributes }}
+    {% if request.visual_preview_mode %}
+      data-visual-preview-mode
+    {% endif %}
+  >
+    <div
+      class="cross-sell card{% if block.settings.show_card_border %} card--with-border{% endif %} color-{{ block.settings.color_scheme }}{% if block.settings.show_image == false %} cross-sell--no-image{% endif %}"
+    >
+      {% if block.settings.show_image %}
+        {% assign image_src = '' %}
+        {% assign image_alt = '' %}
+
+        {%- if block.settings.image != blank -%}
+          {% assign image_src = block.settings.image %}
+          {% assign image_alt = block.settings.image.alt %}
+        {%- else -%}
+          {%- if first_product.selected_or_first_available_variant.featured_image != blank -%}
+            {% assign image_src = first_product.selected_or_first_available_variant.featured_image %}
+            {% assign image_alt = first_product.selected_or_first_available_variant.featured_image.alt %}
+          {%- else -%}
+            {% assign image_src = first_product.featured_image %}
+            {% assign image_alt = first_product.featured_image.alt %}
+          {%- endif -%}
+        {%- endif -%}
+
+        <img
+          class="cross-sell__image"
+          src="{{ image_src | image_url: width: 300 }}"
+          width="100"
+          height="auto"
+          loading="lazy"
+          alt="{{ image_alt }}"
+          data-ref="cross-sell-image"
+        >
+      {% endif %}
+
+      <div class="cross-sell__content">
+        <div class="cross-sell__heading">
+          <div class="cross-sell__title-and-description">
+            <p class="cross-sell__title">
+              {% if block.settings.title != blank %}
+                {{ block.settings.title }}
+              {% else %}
+                {{ first_product.title }}
+              {% endif %}
+            </p>
+
+            {% if block.settings.price_position == 'below_title' %}
+              {% render 'price', price: price, compare_price: compare_at_price, sales_badge: 'none' %}
+            {% endif %}
+
+            {% if block.settings.description != blank %}
+              <div class="cross-sell__description">
+                {{ block.settings.description }}
+              </div>
+            {% endif %}
+          </div>
+
+          {% if block.settings.price_position == 'next_to_title' %}
+            {% render 'price', price: price, compare_price: compare_at_price, sales_badge: 'none' %}
+          {% endif %}
+        </div>
+
+        <div class="cross-sell__actions">
+          <div class="cross-sell__selects">
+            {% for bundle_product in bundle_products %}
+              <div class="cross-sell__select{% if bundle_product.variants.size == 1 %} hidden{% endif %}">
+                {% if block.settings.show_options_label %}
+                  <label class="cross-sell__select-label">
+                    {% for option in bundle_product.options_with_values %}
+                      {{ option.name -}}
+                      {%- if forloop.last == false %} / {% endif %}
+                      {%- if forloop.last %}:{% endif %}
+                    {% endfor -%}
+                  </label>
+                {% endif %}
+
+                <div class="select-wrapper select-wrapper--full-width">
+                  <select
+                    name="cross-sell__select-{{ bundle_product.id }}"
+                    class="select select--full-width select--small"
+                    {% if bundle_product.id %}
+                      id="{{ bundle_product.id }}"
+                    {% endif %}
+                    data-handle="{{ bundle_product.handle }}"
+                    data-ref="variant-select"
+                    data-price="{{ bundle_product.price }}"
+                    data-compare-at-price="{{ bundle_product.compare_at_price }}"
+                  >
+                    {% for variant in bundle_product.variants %}
+                      {% if variant.available %}
+                        <option
+                          value="{{ variant.id }}"
+                          data-price="{{ variant.price }}"
+                          data-compare-at-price="{{ variant.compare_at_price }}"
+                          {% if variant.featured_image != blank %}
+                            data-image="{{ variant.featured_image | image_url: width: 300 }}"
+                          {% endif %}
+                        >
+                          {{ variant.title }}
+                        </option>
+                      {% endif %}
+                    {% endfor %}
+                  </select>
+
+                  <div class="select-wrapper__icon">
+                    {% render 'icon', icon: 'keyboard_arrow_down' %}
+                  </div>
+                </div>
+              </div>
+
+              {% if forloop.first and request.visual_preview_mode and block.settings.title != 'Bundle' %}
+                {% break %}
+              {% endif %}
+            {% endfor %}
+          </div>
+
+          <div class="cross-sell__form" data-ref="add-to-cart-form">
+            <button
+              data-ref="add-to-cart-button"
+              class="button button--small{% if block.settings.button_content_type == 'icon' and block.settings.price_position != 'inside_cart_add_button' %} button--icon-only{% endif %}"
+              {% if all_available == false %}
+                disabled
+              {% endif %}
+            >
+              <span class="button__content">
+                {%- if all_available == false -%}
+                  {% if block.settings.button_content_type == 'icon' %}
+                    {% render 'icon', icon: 'block' %}
+                  {% else %}
+                    {{ 'products.add_to_cart_unavailable' | t }}
+                  {% endif %}
+                {%- else -%}
+                  {% if block.settings.button_content_type == 'icon' %}
+                    {% render 'icon', icon: block.settings.button_content_icon %}
+                  {% else %}
+                    {{ 'products.add' | t }}
+                  {% endif %}
+
+                  {% if block.settings.price_position == 'inside_cart_add_button' %}
+                    <span class="button__separator">|</span>
+
+                    {% render 'price', price: price, compare_price: compare_at_price, sales_badge: 'none' %}
+                  {% endif %}
+                {%- endif -%}
+              </span>
+
+              {% render 'loading-spinner' %}
+            </button>
+          </div>
+        </div>
+      </div>
+    </div>
+  </cross-sell-component>
+{% endif %}
+
+{% stylesheet %}
+  cross-sell-component {
+    display: block;
+    container-type: inline-size;
+    margin-top: var(--margin-top);
+    margin-bottom: var(--margin-bottom);
+    width: 100%;
+    --cross-sell-padding: 0.65rem;
+  }
+
+  shopify-visual-preview-block-list cross-sell-component.cross-sell--row[data-visual-preview-mode] {
+    width: 400px;
+  }
+
+  shopify-visual-preview-block-list cross-sell-component.cross-sell--column[data-visual-preview-mode] {
+    width: 200px;
+  }
+
+  .cross-sell {
+    display: grid;
+    grid-template-columns: auto 1fr 1fr;
+    gap: var(--padding-sm);
+    grid-template-areas: 'image content content';
+    padding: var(--cross-sell-padding);
+  }
+
+  .cart__footer .cross-sell {
+    border-radius: calc(var(--card-border-radius) - (var(--card-padding) * 0.5));
+  }
+
+  .cross-sell--column .cross-sell {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+
+    .cross-sell__content,
+    .cross-sell__actions,
+    .cross-sell__heading {
+      justify-content: center;
+      align-items: center;
+      flex-direction: column;
+      text-align: center;
+    }
+
+    .cross-sell__content,
+    .cross-sell__actions,
+    .cross-sell__form,
+    .cross-sell__form .button {
+      min-width: 100%;
+    }
+  }
+
+  .cross-sell--no-image {
+    grid-template-areas: 'content content content';
+  }
+
+  .cross-sell__image {
+    width: 100%;
+    grid-area: image;
+    max-width: var(--image-width);
+    aspect-ratio: 1/1;
+    object-fit: cover;
+    border-radius: calc(var(--card-border-radius) - var(--cross-sell-padding));
+  }
+
+  .cross-sell__content {
+    grid-area: content;
+    display: flex;
+    justify-content: space-between;
+    flex-direction: column;
+    gap: var(--padding-xs);
+  }
+
+  .cross-sell__heading {
+    display: flex;
+    flex-direction: row;
+    align-items: flex-start;
+    justify-content: space-between;
+    gap: var(--padding-xs);
+    /* flex-wrap: wrap; */
+  }
+
+  .cross-sell__heading .prices {
+    font-size: var(--font-body--size-small);
+    justify-content: flex-end;
+  }
+
+  .cross-sell__title-and-description {
+    display: flex;
+    flex-direction: column;
+    gap: var(--gap-xxs);
+  }
+
+  .cross-sell__title {
+    line-height: normal;
+    font-weight: 600;
+    font-size: var(--font-body--size);
+    margin: 0;
+  }
+
+  .cross-sell__description p {
+    margin: 0;
+    /* line-height: normal; */
+    font-size: var(--font-body--size-small);
+  }
+
+  .cross-sell__actions {
+    display: flex;
+    gap: var(--padding-xs);
+    flex-wrap: wrap;
+    justify-content: space-between;
+    align-items: flex-end;
+  }
+
+  .cross-sell__selects {
+    display: flex;
+    justify-content: flex-start;
+    flex-wrap: wrap;
+    width: 100%;
+    flex: 1;
+    gap: var(--gap-xs);
+  }
+
+  .cross-sell__select-label {
+    font-size: var(--font-body--size-small);
+    margin-bottom: var(--padding-xs);
+    line-height: normal;
+  }
+
+  .cross-sell__select {
+    display: flex;
+    flex-direction: column;
+    width: 100%;
+  }
+
+  /* .cross-sell__select:not(.hidden):not(:last-child) {
+    margin-right: var(--padding-sm);
+  } */
+
+  @container (width < 350px) {
+    .cross-sell--row .cross-sell {
+      gap: var(--gap-sm);
+    }
+
+    .cross-sell__actions .button:not(.button--icon-only) {
+      min-width: 60px;
+      padding: calc(var(--button-padding-vertical) / 2) calc(var(--button-padding-horizontal) * var(--small-multiplier) / 2);
+    }
+
+    .cross-sell--row .cross-sell__image {
+      max-width: 65px;
+    }
+  }
+
+  /* Ajustements pour les sliders */
+
+  .slider-block--with-pagination:has(cross-sell-component) {
+    padding-bottom: var(--margin-md);
+
+    .splide__pagination {
+      bottom: calc(-1 * var(--margin-md));
+    }
+
+    .splide__arrow {
+      transform: translateY(calc(-50%));
+    }
+  }
+
+  .slider-block:has(.splide__arrows):has(cross-sell-component) {
+    .splide__arrow--prev {
+      margin-left: -10px;
+    }
+
+    .splide__arrow--next {
+      margin-right: -10px;
+    }
+
+    .splide__slide {
+      padding: 0 20px;
+    }
+  }
+
+  .slider-block:has(.splide__arrow.button--tertiary):has(cross-sell-component) {
+    .splide__slide {
+      padding: 0 35px;
+    }
+  }
+{% endstylesheet %}
+
+{% schema %}
+{
+  "name": "t:cross_sell",
+  "tag": null,
+  "settings": [
+    {
+      "type": "select",
+      "id": "show_on_display",
+      "label": "t:show_on_display",
+      "default": "desktop_and_mobile",
+      "options": [
+        { "value": "desktop_and_mobile", "label": "t:desktop_and_mobile" },
+        { "value": "desktop_only", "label": "t:desktop_only" },
+        { "value": "mobile_only", "label": "t:mobile_only" }
+      ]
+    },
+    {
+      "type": "header",
+      "content": "t:style"
+    },
+    {
+      "type": "select",
+      "id": "display_mode",
+      "label": "t:display_mode",
+      "default": "row",
+      "options": [
+        {
+          "value": "row",
+          "label": "t:row"
+        },
+        {
+          "value": "column",
+          "label": "t:column"
+        }
+      ]
+    },
+    {
+      "type": "color_scheme",
+      "id": "color_scheme",
+      "label": "t:color_scheme",
+      "default": "scheme-1"
+    },
+    {
+      "type": "checkbox",
+      "id": "show_card_border",
+      "label": "t:show_card_border",
+      "default": true
+    },
+    {
+      "type": "header",
+      "content": "t:content"
+    },
+    {
+      "type": "product_list",
+      "id": "products",
+      "label": "t:products",
+      "info": "t:cross_sell_products_info"
+    },
+    {
+      "type": "inline_richtext",
+      "id": "title",
+      "label": "t:title_optional"
+    },
+    {
+      "type": "richtext",
+      "id": "description",
+      "label": "t:description_optional"
+    },
+    {
+      "type": "checkbox",
+      "id": "show_image",
+      "label": "t:show_image",
+      "default": true
+    },
+    {
+      "type": "range",
+      "id": "image_width",
+      "label": "t:image_width",
+      "default": 75,
+      "min": 60,
+      "max": 90,
+      "step": 5,
+      "unit": "px",
+      "visible_if": "{{ block.settings.show_image }}"
+    },
+    {
+      "type": "image_picker",
+      "id": "image",
+      "label": "t:image_optional",
+      "info": "t:image_cross_sell_optional_info",
+      "visible_if": "{{ block.settings.show_image }}"
+    },
+    {
+      "type": "checkbox",
+      "id": "show_options_label",
+      "label": "t:show_options_label",
+      "default": false
+    },
+    {
+      "type": "select",
+      "id": "price_position",
+      "label": "t:cross_sell_price_position",
+      "options": [
+        { "value": "next_to_title", "label": "t:next_to_title" },
+        { "value": "below_title", "label": "t:below_title" },
+        { "value": "inside_cart_add_button", "label": "t:inside_cart_add_button" }
+      ],
+      "default": "next_to_title"
+    },
+    {
+      "type": "select",
+      "id": "button_content_type",
+      "label": "t:button_content_type",
+      "options": [
+        { "value": "text", "label": "t:text" },
+        { "value": "icon", "label": "t:icon" }
+      ],
+      "default": "text"
+    },
+    {
+      "type": "select",
+      "id": "button_content_icon",
+      "label": "t:icon",
+      "options": [
+        { "value": "local_mall", "label": "t:icons_list.local_mall" },
+        { "value": "garden_cart", "label": "t:icons_list.garden_cart" },
+        { "value": "shopping_cart", "label": "t:icons_list.shopping_cart" },
+        { "value": "shop", "label": "t:icons_list.shop" },
+        { "value": "work", "label": "t:icons_list.work" },
+        { "value": "money_bag", "label": "t:icons_list.money_bag" },
+        { "value": "luggage", "label": "t:icons_list.luggage" },
+        { "value": "shopping_bag", "label": "t:icons_list.shopping_bag" },
+        { "value": "shopping_basket", "label": "t:icons_list.shopping_basket" },
+        { "value": "shopping_bag_speed", "label": "t:icons_list.shopping_bag_speed" },
+        { "value": "store", "label": "t:icons_list.store" },
+        { "value": "storefront", "label": "t:icons_list.storefront" },
+        { "value": "add", "label": "t:icons_list.add" },
+        { "value": "bolt", "label": "t:icons_list.bolt" }
+      ],
+      "default": "add",
+      "visible_if": "{{ block.settings.button_content_type == 'icon' }}"
+    },
+    {
+      "type": "header",
+      "content": "t:margins"
+    },
+    {
+      "type": "range",
+      "id": "margin_top",
+      "label": "t:margin_top",
+      "default": 0,
+      "min": 0,
+      "max": 100,
+      "step": 1,
+      "unit": "px"
+    },
+    {
+      "type": "range",
+      "id": "margin_bottom",
+      "label": "t:margin_bottom",
+      "default": 0,
+      "min": 0,
+      "max": 100,
+      "step": 1,
+      "unit": "px"
+    },
+    {
+      "type": "header",
+      "content": "t:advanced_settings"
+    },
+    {
+      "type": "text",
+      "id": "additional_class",
+      "label": "t:additional_class",
+      "info": "t:additional_class_info"
+    },
+    {
+      "type": "header",
+      "content": "t:go_further"
+    },
+    {
+      "type": "paragraph",
+      "content": "t:go_further_description"
+    }
+  ],
+  "presets": [
+    {
+      "name": "t:cross_sell",
+      "category": "t:cross_sell_and_upsell"
+    },
+    {
+      "name": "t:cross_sell_column",
+      "category": "t:cross_sell_and_upsell",
+      "settings": {
+        "display_mode": "column"
+      }
+    },
+    {
+      "name": "t:up_sell",
+      "category": "t:cross_sell_and_upsell",
+      "settings": {
+        "title": "t:cross_sell_bundle_title_default",
+        "description": "t:cross_sell_bundle_description_default"
+      }
+    }
+  ]
+}
+{% endschema %}

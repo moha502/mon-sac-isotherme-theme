@@ -1,0 +1,158 @@
+{% doc %}
+  Affiche un formulaire d'inscription à la newsletter.
+{% enddoc %}
+
+<div
+  class="
+    newsletter-signup
+    {%- if block.settings.show_on_display == 'desktop_only' %} mobile-hide{% endif -%}
+    {%- if block.settings.show_on_display == 'mobile_only' %} desktop-hide{% endif -%}
+    {%- if block.settings.additional_class != blank %} {{ block.settings.additional_class }}{% endif -%}
+  "
+  style="--margin-top: {{ block.settings.margin_top }}px; --margin-bottom: {{ block.settings.margin_bottom }}px;"
+  {{ block.shopify_attributes }}
+  {% if request.visual_preview_mode %}
+    data-visual-preview-mode
+  {% endif %}
+>
+  {% form 'customer', class: 'newsletter-signup__form' %}
+    <input type="hidden" name="contact[tags]" value="{{ block.settings.tag }}">
+
+    <div class="input-group">
+      {% render 'textfield',
+        label: block.settings.newsletter_label,
+        full_width: true,
+        id: 'email',
+        type: 'email',
+        name: 'contact[email]',
+        autocorrect: 'off',
+        autocapitalize: 'off',
+        autocomplete: 'email',
+        required: true
+      %}
+
+      <div class="input-group__action">
+        {% render 'button', type: 'submit', icon: 'send' %}
+      </div>
+    </div>
+
+    {%- if form.errors -%}
+      <div class="form-error">
+        {% render 'icon', icon: 'cancel' %}
+        {{- form.errors.translated_fields.email | capitalize }}
+        {{ form.errors.messages.email -}}
+      </div>
+    {%- endif -%}
+
+    {%- if form.posted_successfully? -%}
+      <div class="form-success">
+        {% render 'icon', icon: 'check_circle' %}
+        {{- 'newsletter.success' | t }}
+      </div>
+    {%- endif -%}
+  {% endform %}
+</div>
+
+{% stylesheet %}
+  shopify-visual-preview-block-list .newsletter-signup[data-visual-preview-mode] {
+    width: 300px;
+    max-width: 100%;
+  }
+
+  .newsletter-signup {
+    margin-top: var(--margin-top);
+    margin-bottom: var(--margin-bottom);
+    width: 100%;
+  }
+
+  .newsletter-signup__form {
+    display: flex;
+    flex-direction: column;
+    gap: var(--gap-sm);
+  }
+{% endstylesheet %}
+
+{% schema %}
+{
+  "name": "t:newsletter_signup",
+  "tag": null,
+  "settings": [
+    {
+      "type": "select",
+      "id": "show_on_display",
+      "label": "t:show_on_display",
+      "default": "desktop_and_mobile",
+      "options": [
+        { "value": "desktop_and_mobile", "label": "t:desktop_and_mobile" },
+        { "value": "desktop_only", "label": "t:desktop_only" },
+        { "value": "mobile_only", "label": "t:mobile_only" }
+      ]
+    },
+    {
+      "type": "text",
+      "id": "newsletter_label",
+      "label": "t:label",
+      "default": "t:newsletter_signup_placeholder_default"
+    },
+    {
+      "type": "text",
+      "id": "tag",
+      "label": "t:tag_newsletter",
+      "default": "newsletter",
+      "info": "t:tag_newsletter_info"
+    },
+    {
+      "type": "header",
+      "content": "t:margins"
+    },
+    {
+      "type": "range",
+      "id": "margin_top",
+      "label": "t:margin_top",
+      "default": 10,
+      "min": 0,
+      "max": 100,
+      "step": 1,
+      "unit": "px"
+    },
+    {
+      "type": "range",
+      "id": "margin_bottom",
+      "label": "t:margin_bottom",
+      "default": 10,
+      "min": 0,
+      "max": 100,
+      "step": 1,
+      "unit": "px"
+    },
+    {
+      "type": "header",
+      "content": "t:advanced_settings"
+    },
+    {
+      "type": "text",
+      "id": "additional_class",
+      "label": "t:additional_class",
+      "info": "t:additional_class_info"
+    },
+    {
+      "type": "header",
+      "content": "t:go_further"
+    },
+    {
+      "type": "paragraph",
+      "content": "t:go_further_description"
+    }
+  ],
+  "presets": [
+    {
+      "name": "t:newsletter_signup",
+      "category": "t:forms",
+      "settings": {
+        "margin_top": 10,
+        "margin_bottom": 10
+      }
+    }
+  ]
+}
+{% endschema %}

@@ -1,0 +1,64 @@
+<div class="filter-price-range">
+  <div class="filter-price-range__field">
+    {% liquid
+      assign id = 'Filter-' | append: filter.min_value.param_name
+      assign max = filter.range_max | money_without_currency
+      assign value = filter.min_value.value | money_without_currency
+      assign label = 'collections.filters.from' | t
+    %}
+
+    {% render 'textfield',
+      type: 'text',
+      name: filter.min_value.param_name,
+      value: value,
+      id: id,
+      min: 0,
+      max: max,
+      label: label,
+      small: true
+    %}
+
+    <span>{{ cart.currency.symbol }}</span>
+  </div>
+  <div class="filter-price-range__field">
+    {% liquid
+      assign id = 'Filter-' | append: filter.max_value.param_name
+      assign max = filter.range_max | money_without_currency
+      assign value = filter.max_value.value | money_without_currency
+      assign label = 'collections.filters.to' | t
+    %}
+
+    {% render 'textfield',
+      type: 'text',
+      name: filter.max_value.param_name,
+      value: value,
+      id: id,
+      min: 0,
+      max: max,
+      label: label,
+      small: true
+    %}
+
+    <span>{{ cart.currency.symbol }}</span>
+  </div>
+</div>
+
+{% stylesheet %}
+  .filter-price-range {
+    display: flex;
+    align-items: center;
+    flex-wrap: wrap;
+    gap: var(--gap-sm);
+  }
+
+  .filter-price-range__field {
+    display: flex;
+    align-items: center;
+    gap: var(--gap-sm);
+  }
+
+  .filter-price-range__field .textfield input {
+    width: 100px;
+    min-width: 100px;
+  }
+{% endstylesheet %}

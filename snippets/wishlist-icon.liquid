@@ -1,0 +1,14 @@
+<wishlist-header-icon class="header__icon header__icon-wishlist">
+  {% render 'icon', icon: 'favorite' %}
+  <span class="header__icon-count-bubble hidden" data-ref="wishlist-count-bubble">
+    <span class="header__icon-count-bubble-inner" data-ref="wishlist-count"></span>
+  </span>
+</wishlist-header-icon>
+
+{% stylesheet %}
+  .header__icon-wishlist {
+    position: relative;
+    cursor: pointer;
+    color: inherit;
+  }
+{% endstylesheet %}

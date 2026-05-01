@@ -1,0 +1,300 @@
+<script src="{{ 'stories.js' | asset_url }}" type="module"></script>
+
+<stories-component
+  class="
+    stories
+    {%- if block.settings.show_on_display == 'desktop_only' %} mobile-hide{% endif -%}
+    {%- if block.settings.show_on_display == 'mobile_only' %} desktop-hide{% endif -%}
+    {%- if block.settings.additional_class != blank %} {{ block.settings.additional_class }}{% endif -%}
+  "
+  style="
+    --margin-top: {{ block.settings.margin_top }}px;
+    --margin-bottom: {{ block.settings.margin_bottom }}px;
+    --alignment: {{ block.settings.alignment }};
+    --alignment-mobile: {{ block.settings.alignment_mobile }};
+  "
+  {{ block.shopify_attributes }}
+  {% if request.visual_preview_mode %}
+    data-visual-preview-mode
+  {% endif %}
+>
+  <div class="stories__container">
+    {% content_for 'blocks' %}
+  </div>
+
+  <dialog class="stories__modal" data-ref="stories-modal">
+    <div class="splide stories__slider" role="group" data-ref="stories-slider">
+      <div class="splide__arrows">
+        <button class="splide__arrow splide__arrow--prev">
+          {% render 'icon', icon: 'arrow_back' %}
+        </button>
+
+        <button class="splide__arrow splide__arrow--next">
+          {% render 'icon', icon: 'arrow_forward' %}
+        </button>
+      </div>
+
+      <div class="splide__track">
+        <ul class="splide__list stories__slider-list" data-ref="stories-slider-list"></ul>
+      </div>
+
+      <div class="stories__modal-close" data-ref="stories-modal-close">
+        {% render 'icon', icon: 'close' %}
+      </div>
+    </div>
+  </dialog>
+</stories-component>
+
+{% stylesheet %}
+  .stories {
+    margin-top: var(--margin-top);
+    margin-bottom: var(--margin-bottom);
+    display: block;
+  }
+
+  .stories__container {
+    display: flex;
+    flex-direction: row;
+    justify-content: var(--alignment-mobile);
+    gap: 20px;
+    overflow-x: auto;
+    scrollbar-width: none;
+    padding: 6px;
+  }
+
+  @media (width > 750px) {
+    .stories__container {
+      justify-content: var(--alignment);
+    }
+  }
+
+  .stories__modal {
+    padding: 0;
+    width: 100%;
+    max-width: 100vw;
+    height: 100vh;
+    background-color: transparent;
+    justify-content: center;
+    align-items: center;
+    overflow: hidden;
+  }
+
+  .stories__modal:focus-visible,
+  .stories__modal:focus {
+    outline: none;
+  }
+
+  .stories__modal::backdrop {
+    transition: backdrop-filter var(--animation-speed-medium) var(--animation-easing);
+    -webkit-backdrop-filter: brightness(1);
+    backdrop-filter: brightness(1);
+    background: rgba(var(--color-shadow));
+  }
+
+  .stories__modal[open]::backdrop {
+    animation: backdropFilter var(--animation-speed-medium) var(--animation-easing) forwards;
+    transition: opacity var(--animation-speed-medium) var(--animation-easing);
+  }
+
+  .stories__modal[open] {
+    display: flex;
+    animation: modalSlideInTop var(--animation-speed-medium) var(--animation-easing) forwards;
+  }
+
+  .stories__modal-close {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    width: 30px;
+    height: 30px;
+    border-radius: 50%;
+    background-color: #0000004d;
+    cursor: pointer;
+    transition: background-color 0.2s ease-in-out;
+    margin-bottom: 1em;
+    pointer-events: all;
+    backdrop-filter: blur(6.5px);
+    z-index: 40;
+    position: absolute;
+    top: 2rem;
+    right: 1rem;
+
+    .icon {
+      color: var(--color-background);
+    }
+  }
+
+  @media (width <= 750px) {
+    .stories__modal {
+      padding: 40px 20px 0;
+    }
+  }
+
+  .stories__slider {
+    margin: 0 calc(40px + 2rem);
+    height: 90vh;
+    max-width: 100%;
+    aspect-ratio: 3 / 5;
+
+    & > .splide__track > .splide__list > .splide__slide {
+      overflow: hidden;
+    }
+
+    & > .splide__track {
+      overflow: hidden;
+      height: 100%;
+      border-radius: var(--card-border-radius);
+    }
+
+    & .stories__slider-list > .splide__slide:not(.is-active) {
+      overflow: hidden;
+    }
+
+    & > .splide__arrows > .splide__arrow--prev {
+      left: calc(-40px - 1rem);
+    }
+
+    & > .splide__arrows > .splide__arrow--next {
+      right: calc(-40px - 1rem);
+    }
+
+    .splide__arrow:disabled {
+      opacity: 0.5;
+    }
+  }
+
+  @media (width <= 750px) {
+    .stories__slider {
+      margin: 0;
+      height: calc(100vh - 60px);
+    }
+  }
+{% endstylesheet %}
+
+{% schema %}
+{
+  "name": "t:stories",
+  "tag": null,
+  "blocks": [
+    {
+      "type": "_story"
+    }
+  ],
+  "settings": [
+    {
+      "type": "select",
+      "id": "show_on_display",
+      "label": "t:show_on_display",
+      "default": "desktop_and_mobile",
+      "options": [
+        { "value": "desktop_and_mobile", "label": "t:desktop_and_mobile" },
+        { "value": "desktop_only", "label": "t:desktop_only" },
+        { "value": "mobile_only", "label": "t:mobile_only" }
+      ]
+    },
+    {
+      "type": "header",
+      "content": "t:style"
+    },
+    {
+      "type": "select",
+      "id": "alignment",
+      "label": "t:alignment_desktop",
+      "default": "flex-start",
+      "options": [
+        {
+          "value": "flex-start",
+          "label": "t:flex-start"
+        },
+        {
+          "value": "center",
+          "label": "t:centered"
+        },
+        {
+          "value": "flex-end",
+          "label": "t:flex-end"
+        }
+      ]
+    },
+    {
+      "type": "select",
+      "id": "alignment_mobile",
+      "label": "t:alignment_mobile",
+      "default": "flex-start",
+      "options": [
+        {
+          "value": "flex-start",
+          "label": "t:flex-start"
+        },
+        {
+          "value": "center",
+          "label": "t:centered"
+        },
+        {
+          "value": "flex-end",
+          "label": "t:flex-end"
+        }
+      ]
+    },
+    {
+      "type": "header",
+      "content": "t:margins"
+    },
+    {
+      "type": "range",
+      "id": "margin_top",
+      "label": "t:margin_top",
+      "default": 10,
+      "min": 0,
+      "max": 100,
+      "step": 1,
+      "unit": "px"
+    },
+    {
+      "type": "range",
+      "id": "margin_bottom",
+      "label": "t:margin_bottom",
+      "default": 10,
+      "min": 0,
+      "max": 100,
+      "step": 1,
+      "unit": "px"
+    },
+    {
+      "type": "header",
+      "content": "t:advanced_settings"
+    },
+    {
+      "type": "text",
+      "id": "additional_class",
+      "label": "t:additional_class",
+      "info": "t:additional_class_info"
+    },
+    {
+      "type": "header",
+      "content": "t:go_further"
+    },
+    {
+      "type": "paragraph",
+      "content": "t:go_further_description"
+    }
+  ],
+  "presets": [
+    {
+      "name": "t:stories",
+      "category": "t:narrative",
+      "blocks": [
+        {
+          "type": "_story"
+        },
+        {
+          "type": "_story"
+        },
+        {
+          "type": "_story"
+        }
+      ]
+    }
+  ]
+}
+{% endschema %}

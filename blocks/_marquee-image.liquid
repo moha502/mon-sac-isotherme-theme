@@ -1,0 +1,186 @@
+{% liquid
+  assign ratio = 1
+
+  case block.settings.image_ratio
+    when 'landscape'
+      assign ratio = '4 / 3'
+    when 'portrait'
+      assign ratio = '4 / 5'
+    when 'adapt'
+      assign ratio = block.settings.image.aspect_ratio
+  endcase
+
+  if ratio == 0 or ratio == null
+    assign ratio = 1
+  endif
+%}
+
+{% capture style %}
+  --ratio: {{ ratio }};
+{% endcapture %}
+
+{% liquid
+  assign media_width_desktop = '100vw'
+  assign media_width_mobile = '100vw'
+  assign sizes = 'auto, (min-width: 750px) ' | append: media_width_desktop | append: ', ' | append: media_width_mobile
+  assign widths = '240, 352, 832, 1200, 1600, 1920, 2560, 3840'
+%}
+
+<div
+  class="
+    marquee-image-block marquee-image-block--{{ block.id }}
+    {%- if block.settings.show_on_display == 'desktop_only' %} mobile-hide{% endif -%}
+    {%- if block.settings.show_on_display == 'mobile_only' %} desktop-hide{% endif -%}
+    {%- if block.settings.additional_class != blank %} {{ block.settings.additional_class }}{% endif -%}
+  "
+  style="{{ style }} --width-desktop: {{ block.settings.image_width_desktop }}px; --width-mobile: {{ block.settings.image_width_mobile }}px;"
+  {{ block.shopify_attributes }}
+>
+  {%- if block.settings.image -%}
+    {% assign image_alt_default = 'placeholder.placeholder_image_alt' | t %}
+    {% assign image_alt = block.settings.image.alt | append: ' ' | append: image_alt_default %}
+    {% assign image_width = block.settings.image_width_desktop | times: 2 %}
+
+    {{
+      block.settings.image
+      | image_url: width: image_width
+      | image_tag:
+        width: block.settings.image.width,
+        widths: widths,
+        height: block.settings.image.height,
+        class: 'marquee-image-block__image',
+        sizes: sizes,
+        alt: image_alt
+    }}
+  {%- else -%}
+    <img
+      src="{{ 'placeholder-image.jpg' | asset_img_url: 'x1000' }}"
+      alt="placeholder image"
+      width="750"
+      height="750"
+      class="marquee-image-block__image"
+      loading="lazy"
+    >
+  {%- endif -%}
+</div>
+
+{% stylesheet %}
+  .marquee-image-block {
+    width: var(--width-mobile);
+
+    @media (width > 750px) {
+      width: var(--width-desktop);
+    }
+  }
+
+  .marquee-image-block--height-fill .marquee-image-block__image {
+    height: 100%;
+  }
+
+  .marquee-image-block__image {
+    object-fit: cover;
+    aspect-ratio: var(--ratio);
+    width: 100%;
+  }
+{% endstylesheet %}
+
+{% schema %}
+{
+  "name": "t:image",
+  "tag": null,
+  "settings": [
+    {
+      "type": "select",
+      "id": "show_on_display",
+      "label": "t:show_on_display",
+      "default": "desktop_and_mobile",
+      "options": [
+        { "value": "desktop_and_mobile", "label": "t:desktop_and_mobile" },
+        { "value": "desktop_only", "label": "t:desktop_only" },
+        { "value": "mobile_only", "label": "t:mobile_only" }
+      ]
+    },
+    {
+      "type": "image_picker",
+      "id": "image",
+      "label": "t:image",
+      "info": "t:image_info"
+    },
+    {
+      "type": "header",
+      "content": "t:size"
+    },
+    {
+      "type": "select",
+      "id": "image_ratio",
+      "label": "t:aspect_ratio",
+      "options": [
+        {
+          "value": "adapt",
+          "label": "t:auto"
+        },
+        {
+          "value": "portrait",
+          "label": "t:portrait"
+        },
+        {
+          "value": "square",
+          "label": "t:square"
+        },
+        {
+          "value": "landscape",
+          "label": "t:landscape"
+        }
+      ],
+      "default": "adapt"
+    },
+    {
+      "type": "range",
+      "id": "image_width_desktop",
+      "label": "t:image_width_desktop",
+      "default": 100,
+      "min": 10,
+      "max": 200,
+      "step": 2,
+      "unit": "px"
+    },
+    {
+      "type": "range",
+      "id": "image_width_mobile",
+      "label": "t:image_width_mobile",
+      "default": 100,
+      "min": 10,
+      "max": 200,
+      "step": 2,
+      "unit": "px"
+    },
+    {
+      "type": "header",
+      "content": "t:advanced_settings"
+    },
+    {
+      "type": "text",
+      "id": "additional_class",
+      "label": "t:additional_class",
+      "info": "t:additional_class_info"
+    },
+    {
+      "type": "header",
+      "content": "t:go_further"
+    },
+    {
+      "type": "paragraph",
+      "content": "t:go_further_description"
+    }
+  ],
+  "presets": [
+    {
+      "name": "t:image",
+      "category": "t:components",
+      "settings": {
+        "image_ratio": "adapt"
+      }
+    }
+  ]
+}
+{% endschema %}

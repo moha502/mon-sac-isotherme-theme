@@ -1,0 +1,247 @@
+{% doc %}
+  Affiche un avis avec une mise en page configurable.
+
+  @param block - {Block} Le bloc à utiliser.
+
+  @example
+  {% content_for 'block', type: 'review', id: 'review' %}
+{% enddoc %}
+
+{% capture review_rating %}
+  <div class="review__rating">
+    {% render 'rating-stars', rating: block.settings.rating %}
+  </div>
+{% endcapture %}
+
+{% capture review_image %}
+  {% if block.settings.image != blank %}
+    {{ block.settings.image | image_url: width: 500 | image_tag: class: 'review__image' }}
+  {% else %}
+    <img
+        src="{{ 'placeholder-image.jpg' | asset_img_url: 'x500' }}"
+        alt="placeholder image"
+        width="150"
+        height="150"
+        loading="lazy"
+        class="review__image"
+      >
+  {% endif %}
+{% endcapture %}
+
+{% capture review_video %}
+  {% if block.settings.source == 'uploaded' %}
+    {% render 'video',
+      video: block.settings.video,
+      video_autoplay: false,
+      video_loop: false,
+      video_preview_image: block.settings.video.preview_image,
+      enable_video_controls: true
+    %}
+  {% else %}
+    {% render 'video',
+      video_from_url: true,
+      video: block.settings.video_url.id,
+      video_autoplay: false,
+      video_loop: false,
+      video_type: block.settings.video_url.type,
+      enable_video_controls: true
+    %}
+  {% endif %}
+{% endcapture %}
+
+{% capture review_author %}
+  {% if block.settings.author != blank %}
+    <p class="review__author-name">{{ block.settings.author }}</p>
+  {% endif %}
+{% endcapture %}
+
+{% capture review_author_profile %}
+  {% if block.settings.author_profile != blank %}
+    {% render 'image', image: block.settings.author_profile, class: 'review__author-profile' %}
+  {% else %}
+    <img
+        src="{{ 'placeholder-image.jpg' | asset_img_url: 'x100' }}"
+        alt="placeholder image"
+        width="50"
+        height="50"
+        loading="lazy"
+        class="review__author-profile"
+      >
+  {% endif %}
+{% endcapture %}
+
+{% capture review_title %}
+  {% if block.settings.title != blank %}
+    <p class="review__title">{{ block.settings.title }}</p>
+  {% endif %}
+{% endcapture %}
+
+{% capture review_content %}
+  {% if block.settings.content != blank %}
+    <div class="review__content text-block">{{ block.settings.content }}</div>
+  {% endif %}
+{% endcapture %}
+
+{% capture review_date %}
+  {% if block.settings.date != blank %}
+    <p class="review__date">{{ block.settings.date }}</p>
+  {% endif %}
+{% endcapture %}
+
+{% case block.settings.display_type %}
+  {% when '1' %}
+    {{ review_rating }}
+    {{ review_author }}
+    {{ review_content }}
+    {{ review_date }}
+  {% when '2' %}
+    {{ review_rating }}
+    {{ review_title }}
+    {{ review_content }}
+    <div class="review__author-and-date">
+      {{ review_author }}
+      {{ review_date }}
+    </div>
+  {% when '3' %}
+    {{ review_image }}
+    {{ review_rating }}
+    {{ review_author }}
+    {{ review_content }}
+    {{ review_date }}
+  {% when '4' %}
+    <div class="review__content text-block">
+      {{ review_rating }}
+      {{ review_author }}
+      {{ review_content }}
+      {{ review_date }}
+    </div>
+    {{ review_image }}
+  {% when '5' %}
+    <div class="review__author-and-date-container">
+      {{ review_author_profile }}
+      <div class="review__author-and-date">
+        {{ review_author }}
+        {{ review_date }}
+      </div>
+    </div>
+    {{ review_rating }}
+    {{ review_title }}
+    {{ review_content }}
+  {% when '6' %}
+    {{ review_video }}
+    {{ review_rating }}
+    {{ review_author }}
+    {{ review_content }}
+    {{ review_date }}
+  {% else %}
+
+{% endcase %}
+
+{% stylesheet %}
+  .review {
+    display: flex;
+    flex-direction: column;
+    gap: var(--gap-sm);
+    overflow: hidden;
+    width: 100%;
+  }
+
+  shopify-visual-preview-block-list shopify-visual-preview-block-list .review[data-visual-preview-mode] {
+    width: 100%;
+    max-width: 400px;
+  }
+
+  .review__image {
+    object-fit: cover;
+    width: 100%;
+    overflow: auto;
+    border-radius: calc(var(--card-border-radius) - (var(--card-padding) * 0.5));
+  }
+
+  .review__image .placeholder-svg {
+    width: 100%;
+    height: 100%;
+    background-color: #f8f8f8;
+    border-radius: calc(var(--card-border-radius) - (var(--card-padding) * 0.5));
+  }
+
+  .review__title,
+  .review__author-name {
+    font-weight: 600;
+  }
+
+  .review__date {
+    font-style: italic;
+  }
+
+  .review--2 {
+    .review__author-and-date {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      gap: var(--gap-sm);
+      width: 100%;
+      margin-top: 10px;
+    }
+  }
+
+  .review--3 {
+    .review__image {
+      aspect-ratio: var(--image-ratio);
+    }
+
+    .review__image .placeholder-svg {
+      aspect-ratio: var(--image-ratio);
+    }
+  }
+
+  .review--4 {
+    flex-direction: row;
+    align-items: center;
+
+    .review__content {
+      width: 100%;
+      display: flex;
+      flex-direction: column;
+      gap: var(--gap-sm);
+    }
+
+    .review__image,
+    .review__image .placeholder-svg {
+      aspect-ratio: 1 / 1;
+    }
+  }
+
+  @media (width > 750px) {
+    .review--4 {
+      flex-direction: row;
+      align-items: center;
+    }
+  }
+
+  .review--5 {
+    .review__author-and-date-container {
+      display: flex;
+      flex-direction: row;
+      align-items: center;
+      gap: var(--gap-sm);
+      width: 100%;
+      margin-bottom: 10px;
+
+      .review__author-and-date {
+        display: flex;
+        flex-direction: column;
+        gap: var(--gap-xs);
+      }
+
+      .review__author-profile,
+      .review__author-profile svg {
+        width: 50px;
+        height: 50px;
+        background-color: #f8f8f8;
+        border-radius: calc(var(--card-border-radius) - (var(--card-padding) * 0.5));
+        object-fit: cover;
+      }
+    }
+  }
+{% endstylesheet %}

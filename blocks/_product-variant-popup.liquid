@@ -1,0 +1,294 @@
+{% doc %}
+  Affiche un popup sur une option de sélection de variantes.
+
+  @param option - {Object} - L'option de sélection de variantes.
+
+  @example
+  {% content_for 'block', type: 'product-variant-popup', id: 'product-variant-popup', option: option %}
+{% enddoc %}
+
+{% assign option_name = option.name | downcase %}
+{% assign show_on_option_name = block.settings.show_on_option_name | downcase %}
+
+{% if option_name == show_on_option_name %}
+  <dialog-component
+    {{ block.shopify_attributes }}
+    class="
+      {%- if block.settings.show_on_display == 'desktop_only' %} mobile-hide{% endif -%}
+      {%- if block.settings.show_on_display == 'mobile_only' %} desktop-hide{% endif -%}
+      {%- if block.settings.additional_class != blank %} {{ block.settings.additional_class }}{% endif -%}
+    "
+  >
+    <dialog
+      id="popup-{{ block.id }}"
+      class="dialog-modal card color-{{ block.settings.color_scheme }}{% if settings.popup_style_mobile == 'bottom' %} dialog-modal--bottom{% endif %}"
+      data-ref="popup-modal"
+    >
+      <div class="dialog-modal__content">
+        {% content_for 'blocks' %}
+      </div>
+
+      <div class="dialog-modal__close">
+        {% render 'button', block: block, icon: 'close', button_style: 'tertiary', button_shape: 'small', data: 'data-ref="popup-close"' %}
+      </div>
+    </dialog>
+
+    {% if settings.activate_custom_icons and block.settings.icon_custom != blank %}
+      {% assign icon = block.settings.icon_custom %}
+    {% elsif block.settings.icon != 'none' %}
+      {% assign icon = block.settings.icon %}
+    {% endif %}
+
+    {% if block.settings.popup_opener_type == 'button' %}
+      {% render 'button',
+        block: block,
+        icon: icon,
+        icon_position: block.settings.icon_position,
+        label: block.settings.button_label,
+        button_style: block.settings.button_style,
+        button_shape: 'small',
+        data: 'data-ref="popup-toggle"'
+      %}
+    {% else %}
+      <u class="link" data-ref="popup-toggle">{{ block.settings.button_label }}</u>
+    {% endif %}
+  </dialog-component>
+{%- endif %}
+
+{% schema %}
+{
+  "name": "t:popup",
+  "tag": null,
+  "blocks": [
+    {
+      "type": "@theme"
+    },
+    {
+      "type": "@app"
+    }
+  ],
+  "settings": [
+    {
+      "type": "select",
+      "id": "show_on_display",
+      "label": "t:show_on_display",
+      "default": "desktop_and_mobile",
+      "options": [
+        { "value": "desktop_and_mobile", "label": "t:desktop_and_mobile" },
+        { "value": "desktop_only", "label": "t:desktop_only" },
+        { "value": "mobile_only", "label": "t:mobile_only" }
+      ]
+    },
+    {
+      "type": "header",
+      "content": "t:button"
+    },
+    {
+      "type": "text",
+      "id": "show_on_option_name",
+      "label": "t:show_on_option_name",
+      "default": "t:show_on_option_name_default",
+      "info": "t:show_on_option_name_info"
+    },
+    {
+      "type": "select",
+      "id": "popup_opener_type",
+      "label": "t:popup_opener_type",
+      "options": [
+        { "value": "button", "label": "t:button" },
+        { "value": "link", "label": "t:link" }
+      ],
+      "default": "button"
+    },
+    {
+      "type": "select",
+      "id": "button_style",
+      "label": "t:button_style",
+      "options": [
+        { "value": "primary", "label": "t:buttons_primary" },
+        { "value": "secondary", "label": "t:buttons_secondary" },
+        { "value": "tertiary", "label": "t:buttons_tertiary" }
+      ],
+      "default": "tertiary",
+      "visible_if": "{{ block.settings.popup_opener_type == 'button' }}"
+    },
+    {
+      "type": "text",
+      "id": "button_label",
+      "label": "t:button_label",
+      "default": "t:button_label_size_guide_default"
+    },
+    {
+      "type": "select",
+      "id": "icon",
+      "label": "t:icon",
+      "options": [
+        { "value": "none", "label": "t:none" },
+        { "value": "home", "label": "t:icons_list.home" },
+        { "value": "genetics", "label": "t:icons_list.genetics" },
+        { "value": "alarm", "label": "t:icons_list.alarm" },
+        { "value": "lightbulb", "label": "t:icons_list.lightbulb" },
+        { "value": "anchor", "label": "t:icons_list.anchor" },
+        { "value": "verified", "label": "t:icons_list.verified" },
+        { "value": "support", "label": "t:icons_list.support" },
+        { "value": "explore", "label": "t:icons_list.explore" },
+        { "value": "featured_seasonal_and_gifts", "label": "t:icons_list.featured_seasonal_and_gifts" },
+        { "value": "delivery_truck_speed", "label": "t:icons_list.delivery_truck_speed" },
+        { "value": "delivery_truck_bolt", "label": "t:icons_list.delivery_truck_bolt" },
+        { "value": "package_2", "label": "t:icons_list.package_2" },
+        { "value": "redeem", "label": "t:icons_list.redeem" },
+        { "value": "priority", "label": "t:icons_list.priority" },
+        { "value": "school", "label": "t:icons_list.school" },
+        { "value": "target", "label": "t:icons_list.target" },
+        { "value": "checkroom", "label": "t:icons_list.checkroom" },
+        { "value": "notifications", "label": "t:icons_list.notifications" },
+        { "value": "barcode", "label": "t:icons_list.barcode" },
+        { "value": "savings", "label": "t:icons_list.savings" },
+        { "value": "favorite", "label": "t:icons_list.favorite" },
+        { "value": "volunteer_activism", "label": "t:icons_list.volunteer_activism" },
+        { "value": "check", "label": "t:icons_list.check" },
+        { "value": "architecture", "label": "t:icons_list.architecture" },
+        { "value": "edit", "label": "t:icons_list.edit" },
+        { "value": "close", "label": "t:icons_list.close" },
+        { "value": "diamond_shine", "label": "t:icons_list.diamond_shine" },
+        { "value": "forum", "label": "t:icons_list.forum" },
+        { "value": "bolt", "label": "t:icons_list.bolt" },
+        { "value": "ecg_heart", "label": "t:icons_list.ecg_heart" },
+        { "value": "send", "label": "t:icons_list.send" },
+        { "value": "experiment", "label": "t:icons_list.experiment" },
+        { "value": "star", "label": "t:icons_list.star" },
+        { "value": "kid_star", "label": "t:icons_list.kid_star" },
+        { "value": "star_half", "label": "t:icons_list.star_half" },
+        { "value": "sell", "label": "t:icons_list.sell" },
+        { "value": "celebration", "label": "t:icons_list.celebration" },
+        { "value": "eco", "label": "t:icons_list.eco" },
+        { "value": "loyalty", "label": "t:icons_list.loyalty" },
+        { "value": "mode_heat", "label": "t:icons_list.mode_heat" },
+        { "value": "arrow_back", "label": "t:icons_list.arrow_back" },
+        { "value": "arrow_downward", "label": "t:icons_list.arrow_downward" },
+        { "value": "arrow_forward", "label": "t:icons_list.arrow_forward" },
+        { "value": "arrow_upward", "label": "t:icons_list.arrow_upward" },
+        { "value": "cake", "label": "t:icons_list.cake" },
+        { "value": "globe", "label": "t:icons_list.globe" },
+        { "value": "all_inclusive", "label": "t:icons_list.all_inclusive" },
+        { "value": "info", "label": "t:icons_list.info" },
+        { "value": "language", "label": "t:icons_list.language" },
+        { "value": "play_circle", "label": "t:icons_list.play_circle" },
+        { "value": "search", "label": "t:icons_list.search" },
+        { "value": "dark_mode", "label": "t:icons_list.dark_mode" },
+        { "value": "store", "label": "t:icons_list.store" },
+        { "value": "storefront", "label": "t:icons_list.storefront" },
+        { "value": "bookmark", "label": "t:icons_list.bookmark" },
+        { "value": "menu", "label": "t:icons_list.menu" },
+        { "value": "remove", "label": "t:icons_list.remove" },
+        { "value": "music_note", "label": "t:icons_list.music_note" },
+        { "value": "cloud", "label": "t:icons_list.cloud" },
+        { "value": "visibility", "label": "t:icons_list.visibility" },
+        { "value": "open_in_new", "label": "t:icons_list.open_in_new" },
+        { "value": "local_mall", "label": "t:icons_list.local_mall" },
+        { "value": "pause_circle", "label": "t:icons_list.pause_circle" },
+        { "value": "attach_file", "label": "t:icons_list.attach_file" },
+        { "value": "add", "label": "t:icons_list.add" },
+        { "value": "delete", "label": "t:icons_list.delete" },
+        { "value": "ramen_dining", "label": "t:icons_list.ramen_dining" },
+        { "value": "straighten", "label": "t:icons_list.straighten" },
+        { "value": "moped_package", "label": "t:icons_list.moped_package" },
+        { "value": "encrypted", "label": "t:icons_list.encrypted" },
+        { "value": "sprint", "label": "t:icons_list.sprint" },
+        { "value": "support_agent", "label": "t:icons_list.support_agent" },
+        { "value": "apparel", "label": "t:icons_list.apparel" },
+        { "value": "camping", "label": "t:icons_list.camping" },
+        { "value": "chef_hat", "label": "t:icons_list.chef_hat" },
+        { "value": "air", "label": "t:icons_list.air" },
+        { "value": "lock", "label": "t:icons_list.lock" },
+        { "value": "download", "label": "t:icons_list.download" },
+        { "value": "key", "label": "t:icons_list.key" },
+        { "value": "mail", "label": "t:icons_list.mail" },
+        { "value": "phone_enabled", "label": "t:icons_list.phone_enabled" },
+        { "value": "shop", "label": "t:icons_list.shop" },
+        { "value": "toggle_on", "label": "t:icons_list.toggle_on" }
+      ],
+      "default": "straighten",
+      "visible_if": "{{ block.settings.popup_opener_type == 'button' }}"
+    },
+    {
+      "type": "paragraph",
+      "content": "t:icon_custom_info",
+      "visible_if": "{{ settings.activate_custom_icons == false and block.settings.popup_opener_type == 'button' }}"
+    },
+    {
+      "type": "text",
+      "id": "icon_custom",
+      "label": "t:icon_custom",
+      "info": "t:icon_from_material_symbols",
+      "visible_if": "{{ settings.activate_custom_icons and block.settings.icon != 'none' and block.settings.popup_opener_type == 'button' }}"
+    },
+    {
+      "type": "select",
+      "id": "icon_position",
+      "label": "t:icon_position",
+      "visible_if": "{{ block.settings.icon != 'none' and block.settings.popup_opener_type == 'button' }}",
+      "options": [
+        { "value": "start", "label": "t:start" },
+        { "value": "end", "label": "t:end" }
+      ],
+      "default": "end"
+    },
+    {
+      "type": "header",
+      "content": "t:popup"
+    },
+    {
+      "type": "color_scheme",
+      "id": "color_scheme",
+      "label": "t:color_scheme",
+      "default": "scheme-1"
+    },
+    {
+      "type": "header",
+      "content": "t:advanced_settings"
+    },
+    {
+      "type": "text",
+      "id": "additional_class",
+      "label": "t:additional_class",
+      "info": "t:additional_class_info"
+    },
+    {
+      "type": "header",
+      "content": "t:go_further"
+    },
+    {
+      "type": "paragraph",
+      "content": "t:go_further_description"
+    }
+  ],
+  "presets": [
+    {
+      "name": "t:popup",
+      "category": "t:components",
+      "settings": {
+        "button_label": "t:product_variant_popup_button_label_default",
+        "icon": "open_in_new"
+      },
+      "blocks": [
+        {
+          "type": "text",
+          "settings": {
+            "text": "t:product_variant_popup_title_default",
+            "text_style": "h3",
+            "margin_bottom": 10
+          }
+        },
+        {
+          "type": "text",
+          "settings": {
+            "text": "t:product_variant_popup_content_default",
+            "text_style": "paragraph"
+          }
+        }
+      ]
+    }
+  ]
+}
+{% endschema %}

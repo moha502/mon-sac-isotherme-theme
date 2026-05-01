@@ -1,0 +1,59 @@
+<div class="filters-sidebar">
+  <filter-and-sort-component>
+    {% if show_sorting %}
+      <p class="filters-sidebar__filter-label">{{ 'collections.sorting.sort_by' | t }}</p>
+
+      {% render 'sort-select', collection: collection %}
+
+      {% if show_filters %}
+        {% render 'separator', margin_bottom: 20, margin_top: 20 %}
+      {% endif %}
+    {% endif %}
+
+    {% if show_filters %}
+      <filter-component data-ref="filters-sidebar">
+        <form class="filters" data-ref="filters-form">
+          <div class="filters-sidebar__list">
+            {%- for filter in collection.filters -%}
+              <p class="filters-sidebar__filter-label">{{ filter.label }}</p>
+              {%- case filter.type -%}
+                {%- when 'boolean' -%}
+                  <div data-ref="filter-raw">
+                    {% render 'filter-boolean', filter: filter %}
+                  </div>
+
+                {%- when 'list' -%}
+                  <div data-ref="filter-raw">
+                    {% render 'filter-list', filter: filter %}
+                  </div>
+
+                {%- when 'price_range' -%}
+                  <div data-ref="filter-raw">
+                    {% render 'filter-price-range', filter: filter %}
+                  </div>
+              {%- endcase -%}
+
+              {% if forloop.last == false %}
+                {% render 'separator', margin_bottom: 20, margin_top: 20 %}
+              {% endif %}
+            {%- endfor -%}
+          </div>
+        </form>
+      </filter-component>
+    {% endif %}
+  </filter-and-sort-component>
+</div>
+
+{% stylesheet %}
+  .filters-sidebar__list {
+    display: flex;
+    flex-direction: column;
+  }
+
+  .filters-sidebar__filter-label {
+    display: block;
+    font-size: var(--font-body--size-emphasized);
+    font-weight: 600;
+    margin-bottom: var(--margin-sm);
+  }
+{% endstylesheet %}

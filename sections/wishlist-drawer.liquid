@@ -1,0 +1,179 @@
+<wishlist-drawer data-ref="wishlist-drawer">
+  <div class="wishlist-drawer__overlay" data-ref="wishlist-drawer-overlay">
+    <div class="wishlist-drawer__drawer color-{{ section.settings.color_scheme }}" data-ref="wishlist-drawer-content">
+      <div class="wishlist-drawer__header">
+        <h3 class="wishlist-drawer__title h6">{{ 'wishlist.title' | t }}</h3>
+        <button
+          class="button button--tertiary button--small button--icon-only"
+          type="button"
+          data-ref="wishlist-drawer-close"
+        >
+          {% render 'icon', icon: 'close' %}
+        </button>
+      </div>
+      <div class="wishlist-drawer__body">
+        <div class="wishlist-drawer__items" data-ref="wishlist-drawer-items"></div>
+        <div class="wishlist-drawer__empty" data-ref="wishlist-drawer-empty">
+          <p>{{ 'wishlist.empty' | t }}</p>
+        </div>
+      </div>
+    </div>
+  </div>
+</wishlist-drawer>
+
+<!-- Template pour les items de la wishlist -->
+<template id="wishlist-item-template">
+  <a href="#" class="wishlist-drawer__item" data-wishlist-item>
+    <img
+      class="wishlist-drawer__item-image"
+      data-wishlist-item-image
+      loading="lazy"
+      width="60"
+      height="60"
+    >
+    <div class="wishlist-drawer__item-info">
+      <h3 class="wishlist-drawer__item-title" data-wishlist-item-title></h3>
+    </div>
+    <button
+      class="button button--secondary button--small button--icon-only wishlist-drawer__item-remove"
+      type="button"
+      data-wishlist-item-remove
+    >
+      {% render 'icon', icon: 'delete' %}
+    </button>
+  </a>
+</template>
+
+{% stylesheet %}
+  .wishlist-drawer__overlay {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background: rgba(var(--color-shadow));
+    z-index: 1000;
+    opacity: 0;
+    visibility: hidden;
+    -webkit-backdrop-filter: brightness(1);
+    backdrop-filter: brightness(1);
+    transition: opacity var(--animation-speed) var(--animation-easing), visibility var(--animation-speed) var(--animation-easing);
+  }
+
+  .wishlist-drawer__overlay.is-open {
+    opacity: 1;
+    visibility: visible;
+    -webkit-backdrop-filter: brightness(0.75);
+    backdrop-filter: brightness(0.75);
+    transition: opacity var(--animation-speed) var(--animation-easing), visibility var(--animation-speed) var(--animation-easing),
+      -webkit-backdrop-filter var(--animation-speed) var(--animation-easing), backdrop-filter var(--animation-speed) var(--animation-easing);
+  }
+
+  .wishlist-drawer__drawer {
+    position: absolute;
+    top: 0;
+    right: 0;
+    width: 90vw;
+    max-width: 400px;
+    height: 100%;
+    background: var(--color-background);
+    box-shadow: var(--modal-shadow);
+    transform: translateX(100%);
+    display: flex;
+    flex-direction: column;
+  }
+
+  .wishlist-drawer__overlay.is-open .wishlist-drawer__drawer {
+    animation: modalSlideInRight var(--animation-speed) var(--animation-easing) forwards;
+  }
+
+  .wishlist-drawer__overlay.is-closing .wishlist-drawer__drawer {
+    animation: modalSlideOutRight var(--animation-speed) var(--animation-easing) forwards;
+  }
+
+  .wishlist-drawer__header {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    padding: var(--padding-xs);
+  }
+
+  .wishlist-drawer__title {
+    margin-left: var(--margin-sm);
+  }
+
+  .wishlist-drawer__body {
+    flex: 1;
+    overflow-y: auto;
+    padding: var(--padding-xs);
+  }
+
+  .wishlist-drawer__empty {
+    text-align: center;
+    padding: var(--padding-xl);
+    height: 100%;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+  }
+
+  .wishlist-drawer__item {
+    display: flex;
+    align-items: center;
+    gap: var(--padding-xs);
+    padding: var(--padding-xs);
+    text-decoration: none;
+    color: inherit;
+    transition: var(--animation-link-hover);
+  }
+
+  .wishlist-drawer__item:hover {
+    opacity: var(--opacity-link-hover);
+  }
+
+  .wishlist-drawer__item-image {
+    flex-shrink: 0;
+    width: 60px;
+    height: 60px;
+    object-fit: cover;
+    background-color: white;
+    border-radius: calc(var(--card-border-radius) - var(--padding-sm));
+  }
+
+  .wishlist-drawer__item-info {
+    flex: 1;
+    min-width: 0; /* Permet au texte de se tronquer si nécessaire */
+  }
+
+  .wishlist-drawer__item-title {
+    font-size: var(--font-body--size);
+    color: rgb(var(--color-foreground));
+    font-weight: 500;
+    line-height: normal;
+    margin-bottom: 0;
+  }
+
+  .wishlist-drawer__item-remove {
+    flex-shrink: 0;
+    margin-left: auto;
+    border: var(--inputs-border-width) solid var(--color-border);
+  }
+{% endstylesheet %}
+
+{% schema %}
+{
+  "name": "t:wishlist",
+  "settings": [
+    {
+      "type": "paragraph",
+      "content": "t:wishlist_drawer_info"
+    },
+    {
+      "type": "color_scheme",
+      "id": "color_scheme",
+      "label": "t:color_scheme",
+      "default": "scheme-1"
+    }
+  ]
+}
+{% endschema %}

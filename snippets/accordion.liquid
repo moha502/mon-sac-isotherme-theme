@@ -1,0 +1,145 @@
+{% doc %}
+  Affiche un accordéon.
+
+  @param {string} heading - Titre de l'accordéon
+  @param {string} heading_style - Style du texte du titre
+  @param {string} heading_tag - Balise SEO utilisée pour le titre
+  @param {string} content - Contenu à afficher
+  @param {boolean} [open_by_default] - Si l'accordéon est ouvert par défaut
+  @param {string} [icon] - Icône à afficher devant le titre
+
+  @example
+  {% render 'accordion', content: content, heading: 'Accordéon' %}
+{% enddoc %}
+
+{% assign open_by_default = open_by_default | default: false %}
+
+<accordion-row
+  class="accordion-animation"
+  {% if open_by_default %}
+    open-by-default-on-desktop open-by-default-on-mobile
+  {% endif %}
+>
+  <details class="accordion" data-ref="accordion-details">
+    <summary class="accordion__header">
+      <span class="accordion__heading">
+        {% if icon != blank and icon != 'none' %}
+          {% render 'icon', icon: icon %}
+        {% endif %}
+
+        {% case heading_tag %}
+          {% when 'h1' %}
+            <h1 class="accordion__heading-title {{ heading_style }}">
+              {{- heading -}}
+            </h1>
+          {% when 'h2' %}
+            <h2 class="accordion__heading-title {{ heading_style }}">
+              {{- heading -}}
+            </h2>
+          {% when 'h3' %}
+            <h3 class="accordion__heading-title {{ heading_style }}">
+              {{- heading -}}
+            </h3>
+          {% when 'h4' %}
+            <h4 class="accordion__heading-title {{ heading_style }}">
+              {{- heading -}}
+            </h4>
+          {% when 'h5' %}
+            <h5 class="accordion__heading-title {{ heading_style }}">
+              {{- heading -}}
+            </h5>
+          {% when 'h6' %}
+            <h6 class="accordion__heading-title {{ heading_style }}">
+              {{- heading -}}
+            </h6>
+          {% else %}
+            <p class="accordion__heading-title {{ heading_style }}">
+              {{- heading -}}
+            </p>
+        {% endcase %}
+      </span>
+      {% render 'icon', icon: 'keyboard_arrow_down' %}
+      <div class="accordion__icons-add">
+        {% render 'icon', icon: 'add' %}
+        {% render 'icon', icon: 'remove' %}
+      </div>
+    </summary>
+
+    <div class="accordion__content">
+      {{- content -}}
+    </div>
+  </details>
+</accordion-row>
+
+{% stylesheet %}
+  accordion-row:has(.accordion__heading-title:empty),
+  accordion-row:has(.accordion__content:empty) {
+    display: none;
+  }
+
+  .accordion__header {
+    display: flex;
+    align-items: center;
+    cursor: pointer;
+    list-style: none;
+    transition: margin 150ms ease-out;
+    padding: var(--padding-xs) 0;
+
+    /* Masquer la flèche par défaut sur tous les navigateurs */
+    &::-webkit-details-marker {
+      display: none;
+    }
+
+    &::marker {
+      display: none;
+    }
+
+    /* Fix spécifique pour iOS Safari */
+    &::-webkit-details-marker,
+    &::before {
+      display: none !important;
+    }
+  }
+
+  .accordion__header .icon,
+  .accordion__header .accordion__icons-add {
+    margin-inline-start: auto;
+    transition: transform var(--animation-speed-fast) var(--animation-easing);
+  }
+
+  .accordion[open] .accordion__header .icon--keyboard_arrow_down {
+    transform: rotate(180deg);
+  }
+
+  .accordion[open] .accordion__header .icon--add {
+    transform: rotate(90deg);
+  }
+
+  .accordion:not([open]) .accordion__header .icon--remove,
+  .accordion[open] .accordion__header .icon--add {
+    display: none;
+  }
+
+  .accordion[open] .accordion__header .icon--remove,
+  .accordion:not([open]) .accordion__header .icon--add {
+    display: block;
+  }
+
+  .accordion__heading {
+    font-size: var(--font-body--size-emphasized);
+    display: flex;
+    align-items: center;
+    gap: var(--gap-sm);
+  }
+
+  .accordion__heading .icon {
+    font-size: 20px !important;
+  }
+
+  .accordion__content {
+    padding: 0 0 var(--margin-md);
+    display: flex;
+    flex-direction: column;
+    gap: var(--gap-sm);
+  }
+{% endstylesheet %}

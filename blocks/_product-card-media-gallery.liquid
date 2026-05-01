@@ -1,0 +1,274 @@
+{% doc %}
+  Affiche une galerie de médias pour une carteproduit.
+{% enddoc %}
+
+{% assign product = closest.product -%}
+
+{% liquid
+  # Détermine l'image à afficher en priorité selon la variante filtrée
+  assign selected_variant = product.selected_or_first_available_variant
+  assign featured_media = product.featured_media
+
+  if selected_variant.featured_media != blank
+    assign featured_media = selected_variant.featured_media
+  endif
+%}
+
+<product-card-media-gallery
+  class="
+    product-card-media-gallery-block
+    {%- if block.settings.show_on_display == 'desktop_only' %} mobile-hide{% endif -%}
+    {%- if block.settings.show_on_display == 'mobile_only' %} desktop-hide{% endif -%}
+    {%- if block.settings.additional_class != blank %} {{ block.settings.additional_class }}{% endif -%}
+  "
+  {{ block.shopify_attributes }}
+  {% if request.visual_preview_mode %}
+    data-visual-preview-mode
+  {% endif %}
+>
+  {% if block.settings.show_slider and product.media.size > 1 %}
+    <slider-component
+      data-per-page-mobile="1"
+      data-per-page-desktop="1"
+      data-gap="5"
+      data-show-arrows="true"
+      data-show-pagination="false"
+      data-show-arrows-mobile="true"
+      data-show-pagination-mobile="false"
+      data-rewind="false"
+      style="--margin-top: 0px; --margin-bottom: 0px;"
+      class="product-card-media-gallery"
+    >
+      <div class="splide" role="group" data-ref="main-slider">
+        <div class="splide__arrows">
+          <button class="splide__arrow splide__arrow--prev">
+            {% render 'icon', icon: 'arrow_back' %}
+          </button>
+          <button class="splide__arrow splide__arrow--next">
+            {% render 'icon', icon: 'arrow_forward' %}
+          </button>
+        </div>
+
+        <div class="splide__track">
+          <ul class="splide__list">
+            {% comment %} Affiche l'image de la variante sélectionnée en premier {% endcomment %}
+            <li
+              class="
+                splide__slide
+                product-card-media-gallery__media
+                {%- if block.settings.media_rounded %} product-card-media-gallery__media--rounded{% endif -%}
+              "
+            >
+              {% if block.settings.media_ratio == 'adapt' %}
+                {% assign ratio = featured_media.aspect_ratio %}
+              {% else %}
+                {% assign ratio = block.settings.media_ratio %}
+              {% endif %}
+
+              {% render 'product-media', media: featured_media, show_video: false, ratio: ratio %}
+            </li>
+
+            {% comment %} Puis les autres médias (en excluant celui déjà affiché) {% endcomment %}
+            {% for media in product.media %}
+              {% if media.id != featured_media.id %}
+                <li
+                  class="
+                    splide__slide
+                    product-card-media-gallery__media
+                    {%- if block.settings.media_rounded %} product-card-media-gallery__media--rounded{% endif -%}
+                  "
+                >
+                  {% if block.settings.media_ratio == 'adapt' %}
+                    {% assign ratio = media.aspect_ratio %}
+                  {% else %}
+                    {% assign ratio = block.settings.media_ratio %}
+                  {% endif %}
+
+                  {% render 'product-media', media: media, show_video: false, ratio: ratio %}
+                </li>
+              {% endif %}
+            {% endfor %}
+          </ul>
+        </div>
+      </div>
+    </slider-component>
+  {% else %}
+    <div
+      class="
+        product-card-media-gallery__media
+        {%- if block.settings.media_rounded %} product-card-media-gallery__media--rounded{% endif -%}
+      "
+    >
+      {% if block.settings.media_ratio == 'adapt' %}
+        {% assign ratio = featured_media.aspect_ratio %}
+      {% else %}
+        {% assign ratio = block.settings.media_ratio %}
+      {% endif %}
+
+      {% render 'product-media', media: featured_media, show_video: false, ratio: ratio %}
+    </div>
+  {% endif %}
+
+  {% if block.settings.show_badges %}
+    {% render 'product-badges', product: product %}
+  {% endif %}
+
+  {% if settings.activate_wishlist %}
+    <div class="product-card-media-gallery__add-to-wishlist-button">
+      {% render 'add-to-wishlist-button', product: product, small: true, border: false, block: block %}
+    </div>
+  {% endif %}
+</product-card-media-gallery>
+
+{% stylesheet %}
+  .product-card-media-gallery-block {
+    position: relative;
+  }
+
+  .product-card-media-gallery .splide__slide {
+    margin-right: var(--card-padding) !important;
+  }
+
+  .product-card-media-gallery .splide__arrow {
+    background-color: transparent;
+    border: none;
+  }
+
+  .product-card-media-gallery__media {
+    height: 100%;
+  }
+
+  .product-card-media-gallery__media--rounded {
+    border-radius: var(--card-border-radius);
+    overflow: hidden;
+  }
+
+  .product-card.card .product-card-media-gallery__media--rounded {
+    border-radius: calc(var(--card-border-radius) - (var(--card-padding) * 0.5));
+  }
+
+  .slider-component--65-percent product-card-media-gallery .splide__list {
+    width: 100%;
+  }
+
+  .product-card-media-gallery__add-to-wishlist-button {
+    position: absolute;
+    display: flex;
+    flex-wrap: wrap;
+    gap: var(--gap-xs);
+    bottom: var(--padding-xs);
+    right: var(--padding-xs);
+    background-color: transparent;
+  }
+
+  .product-card-media-gallery__add-to-wishlist-button .button {
+    background-color: transparent;
+  }
+
+  @media (width > 750px) {
+    product-card-media-gallery .splide__arrow,
+    product-card-media-gallery .splide__arrow:disabled {
+      opacity: 0;
+      transition: opacity 0.2s ease-in-out;
+    }
+
+    product-card:hover product-card-media-gallery .splide__arrow {
+      opacity: 1;
+    }
+
+    product-card:hover product-card-media-gallery .splide__arrow:disabled {
+      opacity: 0.5;
+    }
+
+    .product-card-media-gallery__add-to-wishlist-button {
+      opacity: 0;
+      transition: opacity 0.2s ease-in-out;
+    }
+
+    .product-card:hover .product-card-media-gallery__add-to-wishlist-button {
+      opacity: 1;
+    }
+  }
+{% endstylesheet %}
+
+{% schema %}
+{
+  "name": "t:product_card_gallery",
+  "tag": null,
+  "settings": [
+    {
+      "type": "select",
+      "id": "show_on_display",
+      "label": "t:show_on_display",
+      "default": "desktop_and_mobile",
+      "options": [
+        { "value": "desktop_and_mobile", "label": "t:desktop_and_mobile" },
+        { "value": "desktop_only", "label": "t:desktop_only" },
+        { "value": "mobile_only", "label": "t:mobile_only" }
+      ]
+    },
+    {
+      "type": "checkbox",
+      "id": "show_slider",
+      "label": "t:show_slider",
+      "default": false
+    },
+    {
+      "type": "checkbox",
+      "id": "media_rounded",
+      "label": "t:media_rounded",
+      "default": true
+    },
+    {
+      "type": "checkbox",
+      "id": "show_badges",
+      "label": "t:show_badges",
+      "default": true
+    },
+    {
+      "type": "select",
+      "id": "media_ratio",
+      "label": "t:media_ratio",
+      "options": [
+        { "value": "1 / 1", "label": "t:square" },
+        { "value": "4 / 5", "label": "t:portrait" },
+        { "value": "4 / 3", "label": "t:landscape" },
+        { "value": "adapt", "label": "t:adapt" }
+      ],
+      "default": "1 / 1"
+    },
+    {
+      "type": "header",
+      "content": "t:badges"
+    },
+    {
+      "type": "paragraph",
+      "content": "t:product_card_gallery_badges_info"
+    },
+    {
+      "type": "header",
+      "content": "t:advanced_settings"
+    },
+    {
+      "type": "text",
+      "id": "additional_class",
+      "label": "t:additional_class",
+      "info": "t:additional_class_info"
+    },
+    {
+      "type": "header",
+      "content": "t:go_further"
+    },
+    {
+      "type": "paragraph",
+      "content": "t:go_further_description"
+    }
+  ],
+  "presets": [
+    {
+      "name": "t:product_card_gallery",
+      "category": "t:product"
+    }
+  ]
+}
+{% endschema %}

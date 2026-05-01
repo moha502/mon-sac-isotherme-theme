@@ -1,0 +1,304 @@
+{% capture blocks %}
+  {% content_for 'blocks' %}
+{% endcapture %}
+
+{% comment %} theme-check-disable {% endcomment %}
+{% capture media_gallery %}
+  {% content_for 'block', type: '_product-media-gallery', id: 'product_media_gallery', product: product %}
+{% endcapture %}
+{% comment %} theme-check-enable {% endcomment %}
+
+{% render 'product-section-content', media_gallery: media_gallery, blocks: blocks, product: product %}
+
+{% schema %}
+{
+  "name": "t:product",
+  "class": "shopify-section-product-section",
+  "limit": 1,
+  "blocks": [
+    {
+      "type": "@theme"
+    },
+    {
+      "type": "@app"
+    },
+    {
+      "type": "_product-form"
+    },
+    {
+      "type": "_fake-variant-picker"
+    }
+  ],
+  "settings": [
+    {
+      "type": "color_scheme",
+      "id": "color_scheme",
+      "label": "t:color_scheme",
+      "default": "scheme-1"
+    },
+    {
+      "type": "checkbox",
+      "id": "show_product_info_card",
+      "label": "t:show_product_info_card",
+      "default": false
+    },
+    {
+      "type": "color_scheme",
+      "id": "color_scheme_product_info",
+      "label": "t:color_scheme_product_info",
+      "default": "scheme-2",
+      "visible_if": "{{ section.settings.show_product_info_card }}"
+    },
+    {
+      "type": "header",
+      "content": "t:style_desktop"
+    },
+    {
+      "type": "select",
+      "id": "image_position",
+      "label": "t:image_carousel_position",
+      "options": [
+        { "value": "row", "label": "t:left" },
+        { "value": "row-reverse", "label": "t:right" }
+      ],
+      "default": "row"
+    },
+    {
+      "type": "range",
+      "id": "product_info_width",
+      "label": "t:product_info_width",
+      "default": 50,
+      "min": 30,
+      "max": 70,
+      "step": 5,
+      "unit": "%"
+    },
+    {
+      "type": "range",
+      "id": "gap",
+      "label": "t:gap",
+      "default": 50,
+      "min": 10,
+      "max": 100,
+      "step": 1,
+      "unit": "px"
+    },
+    {
+      "type": "checkbox",
+      "id": "carrousel_sticky",
+      "label": "t:carrousel_sticky",
+      "default": true
+    },
+    {
+      "type": "checkbox",
+      "id": "product_info_sticky",
+      "label": "t:product_info_sticky",
+      "default": true
+    },
+    {
+      "type": "header",
+      "content": "t:style_mobile"
+    },
+    {
+      "type": "checkbox",
+      "id": "carrousel_full_width",
+      "label": "t:carrousel_full_width",
+      "default": true
+    },
+    {
+      "type": "header",
+      "content": "t:paddings"
+    },
+    {
+      "type": "range",
+      "id": "padding_top",
+      "label": "t:padding_top",
+      "default": 50,
+      "min": 0,
+      "max": 100,
+      "step": 1,
+      "unit": "px"
+    },
+    {
+      "type": "range",
+      "id": "padding_bottom",
+      "label": "t:padding_bottom",
+      "default": 50,
+      "min": 0,
+      "max": 100,
+      "step": 1,
+      "unit": "px"
+    },
+    {
+      "type": "header",
+      "content": "t:margins"
+    },
+    {
+      "type": "range",
+      "id": "margin_top",
+      "label": "t:margin_top",
+      "default": 0,
+      "min": 0,
+      "max": 100,
+      "step": 1,
+      "unit": "px"
+    },
+    {
+      "type": "range",
+      "id": "margin_bottom",
+      "label": "t:margin_bottom",
+      "default": 0,
+      "min": 0,
+      "max": 100,
+      "step": 1,
+      "unit": "px"
+    },
+    {
+      "type": "header",
+      "content": "t:advanced_settings"
+    },
+    {
+      "type": "text",
+      "id": "anchor_id",
+      "label": "t:anchor_id",
+      "info": "t:anchor_id_info"
+    },
+    {
+      "type": "header",
+      "content": "t:go_further"
+    },
+    {
+      "type": "paragraph",
+      "content": "t:go_further_description"
+    }
+  ],
+  "enabled_on": {
+    "templates": ["product"]
+  },
+  "presets": [
+    {
+      "name": "t:product",
+      "settings": {
+        "color_scheme": "",
+        "show_product_info_card": false,
+        "color_scheme_product_info": "",
+        "image_position": "row",
+        "product_info_width": 50,
+        "gap": 50,
+        "margin_top": 0,
+        "margin_bottom": 0,
+        "padding_top": 30,
+        "padding_bottom": 60
+      },
+      "blocks": [
+        {
+          "type": "_product-media-gallery",
+          "static": true,
+          "id": "product_media_gallery",
+          "settings": {
+            "hide_variants": false,
+            "media_display": "carrousel",
+            "media_rounded": true,
+            "grid_columns": "2",
+            "grid_gap": 5,
+            "main_image_full_width": true,
+            "show_thumbnails": true,
+            "thumbnails_show_arrows": false,
+            "video_loop": true,
+            "enable_video_controls": false
+          }
+        },
+        {
+          "type": "rating-stars",
+          "name": "t:rating_stars",
+          "settings": {
+            "product": "{{ closest.product }}",
+            "rating": 4.5,
+            "show_review_count": true,
+            "review_count": 123,
+            "link": "",
+            "margin_top": 10,
+            "margin_bottom": 0
+          }
+        },
+        {
+          "type": "text",
+          "name": "t:title",
+          "settings": {
+            "text": "<h2>{{ closest.product.title }}</h2>",
+            "text_style": "h3",
+            "alignment": "left",
+            "margin_top": 0,
+            "margin_bottom": 0
+          }
+        },
+        {
+          "type": "product-price",
+          "name": "t:price",
+          "settings": {
+            "product": "{{ closest.product }}",
+            "sales_badge": "amount",
+            "show_sales_badge_text": false,
+            "text_style": "paragraph"
+          }
+        },
+        {
+          "type": "text",
+          "name": "t:text",
+          "settings": {
+            "text": "<p>Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat.</p>",
+            "text_style": "paragraph",
+            "alignment": "left",
+            "margin_top": 0,
+            "margin_bottom": 0
+          }
+        },
+        {
+          "type": "_product-form",
+          "name": "t:product_form",
+          "settings": {},
+          "blocks": [
+            {
+              "type": "_product-variant-picker",
+              "name": "t:product_variant_picker",
+              "settings": {
+                "show_option_name": true,
+                "variant_picker_type": "buttons",
+                "show_swatches": true,
+                "swatches_size": "normal",
+                "swatches_rounded": true,
+                "margin_top": 0,
+                "margin_bottom": 15
+              }
+            },
+            {
+              "type": "_product-add-to-cart-button",
+              "name": "t:button_add_to_cart",
+              "settings": {
+                "button_style": "primary",
+                "show_price": true
+              },
+              "blocks": [
+                {
+                  "type": "_product-quantity-selector",
+                  "static": true,
+                  "id": "product-quantity-selector",
+                  "settings": {}
+                }
+              ]
+            },
+            {
+              "type": "_accelerated-checkout",
+              "name": "t:accelerated_checkout",
+              "settings": {
+                "full_width": true,
+                "button_style": "primary"
+              }
+            }
+          ]
+        }
+      ]
+    }
+  ]
+}
+{% endschema %}

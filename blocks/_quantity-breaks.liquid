@@ -1,0 +1,489 @@
+{% liquid
+  assign product = closest.product | default: product
+  if request.visual_preview_mode and product == blank
+    assign product = collections.all.products.first
+  endif
+%}
+
+{% if block.blocks.size >= 2 %}
+  <script src="{{ 'quantity-breaks.js' | asset_url }}" type="module"></script>
+
+  <quantity-breaks
+    class="
+      quantity-breaks
+      {%- if block.settings.show_variant_picker %} quantity-breaks--with-variant-picker{% endif -%}
+      {%- if block.settings.show_on_display == 'desktop_only' %} mobile-hide{% endif -%}
+      {%- if block.settings.show_on_display == 'mobile_only' %} desktop-hide{% endif -%}
+      {%- if block.settings.additional_class != blank %} {{ block.settings.additional_class }}{% endif -%}
+    "
+    style="--margin-top: {{ block.settings.margin_top }}px; --margin-bottom: {{ block.settings.margin_bottom }}px;"
+    data-ref="quantity-breaks"
+    data-default-variant-id="{{ product.selected_or_first_available_variant.id }}"
+    data-quantity-selected-by-default="{{ block.settings.quantity_selected_by_default }}"
+    data-show-variant-picker="{% if block.settings.show_variant_picker %}true{% else %}false{% endif %}"
+    data-has-variants="{% if product.has_only_default_variant %}false{% else %}true{% endif %}"
+    data-show-variant-thumbnail="{% if block.settings.show_variant_thumbnail %}true{% else %}false{% endif %}"
+    data-applies-to="{{ block.settings.applies_to }}"
+    {{ block.shopify_attributes }}
+    {% if request.visual_preview_mode %}
+      data-visual-preview-mode
+    {% endif %}
+  >
+    {%- if block.settings.label != blank -%}
+      <p class="variant_label">{{ block.settings.label }}</p>
+    {%- endif -%}
+
+    <div class="quantity-breaks-container{% if block.settings.show_variant_picker %} quantity-breaks-container--row{% else %} quantity-breaks-container--{{ block.settings.display_mode }}{% endif %}">
+      {% content_for 'blocks' %}
+    </div>
+  </quantity-breaks>
+{% endif %}
+
+{% stylesheet %}
+  .quantity-breaks {
+    display: block;
+    margin-top: var(--margin-top);
+    margin-bottom: var(--margin-bottom);
+  }
+
+  shopify-visual-preview-block-list .quantity-breaks[data-visual-preview-mode] {
+    width: 450px;
+  }
+
+  .product-form__form .toggle-cross-sell:not(:first-of-type) {
+    display: none;
+  }
+
+  .quantity-breaks-container {
+    display: flex;
+    flex-direction: row;
+    gap: 10px;
+  }
+
+  .quantity-breaks-container.quantity-breaks-container--row {
+    flex-direction: column;
+  }
+
+  .product-section__product-info:has(.quantity-breaks) .product-quantity-selector-block,
+  .quantity-breaks--hidden {
+    display: none;
+  }
+
+  .product-section__product-info:has(.quantity-breaks--with-variant-picker) variant-picker,
+  .product-section__product-info:has(.quantity-breaks--with-variant-picker) .subscription {
+    display: none;
+  }
+{% endstylesheet %}
+
+{% schema %}
+{
+  "name": "t:quantity_breaks",
+  "tag": null,
+  "blocks": [
+    {
+      "type": "_quantity-breaks-item"
+    }
+  ],
+  "settings": [
+    {
+      "type": "select",
+      "id": "show_on_display",
+      "label": "t:show_on_display",
+      "default": "desktop_and_mobile",
+      "options": [
+        { "value": "desktop_and_mobile", "label": "t:desktop_and_mobile" },
+        { "value": "desktop_only", "label": "t:desktop_only" },
+        { "value": "mobile_only", "label": "t:mobile_only" }
+      ]
+    },
+    {
+      "type": "select",
+      "id": "applies_to",
+      "label": "t:quantity_breaks_applies_to",
+      "default": "both",
+      "info": "t:quantity_breaks_applies_to_info",
+      "options": [
+        { "value": "both", "label": "t:one_time_purchase_and_subscription" },
+        { "value": "one_time", "label": "t:one_time_purchase" },
+        { "value": "subscription", "label": "t:subscription" }
+      ],
+      "visible_if": "{{ block.settings.show_variant_picker == false }}"
+    },
+    {
+      "type": "paragraph",
+      "content": "t:quantity_breaks_guide"
+    },
+    {
+      "type": "header",
+      "content": "t:content"
+    },
+    {
+      "type": "text",
+      "id": "label",
+      "label": "t:label",
+      "default": "t:quantity_breaks_label_default"
+    },
+    {
+      "type": "checkbox",
+      "id": "show_variant_picker",
+      "label": "t:show_variant_picker",
+      "default": false,
+      "info": "t:show_variant_picker_info"
+    },
+    {
+      "type": "checkbox",
+      "id": "show_variant_thumbnail",
+      "label": "t:show_variant_thumbnail",
+      "default": true,
+      "visible_if": "{{ block.settings.show_variant_picker }}"
+    },
+    {
+      "type": "select",
+      "id": "display_mode",
+      "label": "t:display_mode",
+      "options": [
+        {
+          "value": "column",
+          "label": "t:column"
+        },
+        {
+          "value": "row",
+          "label": "t:row"
+        }
+      ],
+      "default": "column",
+      "visible_if": "{{ block.settings.show_variant_picker == false }}"
+    },
+    {
+      "type": "number",
+      "id": "quantity_selected_by_default",
+      "label": "t:quantity_selected_by_default",
+      "default": 1,
+      "info": "t:quantity_breaks_quantity_selected_by_default_info"
+    },
+    {
+      "type": "header",
+      "content": "t:margins"
+    },
+    {
+      "type": "range",
+      "id": "margin_top",
+      "label": "t:margin_top",
+      "default": 0,
+      "min": 0,
+      "max": 100,
+      "step": 1,
+      "unit": "px"
+    },
+    {
+      "type": "range",
+      "id": "margin_bottom",
+      "label": "t:margin_bottom",
+      "default": 10,
+      "min": 0,
+      "max": 100,
+      "step": 1,
+      "unit": "px"
+    },
+    {
+      "type": "header",
+      "content": "t:advanced_settings"
+    },
+    {
+      "type": "text",
+      "id": "additional_class",
+      "label": "t:additional_class",
+      "info": "t:additional_class_info"
+    },
+    {
+      "type": "header",
+      "content": "t:go_further"
+    },
+    {
+      "type": "paragraph",
+      "content": "t:go_further_description"
+    }
+  ],
+  "presets": [
+    {
+      "name": "t:quantity_breaks_rows",
+      "category": "t:product_form",
+      "settings": {
+        "show_on_display": "desktop_and_mobile",
+        "label": "t:quantity_breaks_label_default",
+        "display_mode": "row",
+        "show_variant_picker": false,
+        "quantity_selected_by_default": 1,
+        "margin_top": 0,
+        "margin_bottom": 10,
+        "additional_class": ""
+      },
+      "blocks": [
+        {
+          "type": "_quantity-breaks-item",
+          "name": "t:quantity_breaks_item",
+          "settings": {
+            "quantity": 1,
+            "discount_type": "none",
+            "discount_value": "",
+            "discount_percentage": 20,
+            "badge": "",
+            "badge_position": "top",
+            "badge_display": "normal",
+            "product_small_title": "t:name_of_product_default",
+            "product_small_title_plural": "t:name_of_product_plural_default",
+            "show_unit_price": false,
+            "unit_price_text": "t:unit_price_text_default",
+            "show_image": true,
+            "show_image_badge": true,
+            "image_badge_position": "bottomright"
+          }
+        },
+        {
+          "type": "_quantity-breaks-item",
+          "name": "t:quantity_breaks_item",
+          "settings": {
+            "quantity": 2,
+            "discount_type": "percentage",
+            "discount_value": "",
+            "discount_percentage": 5,
+            "badge": "t:quantity_breaks_badge_save_5_default",
+            "badge_position": "top",
+            "badge_display": "normal",
+            "product_small_title": "t:name_of_product_default",
+            "product_small_title_plural": "t:name_of_product_plural_default",
+            "show_unit_price": false,
+            "unit_price_text": "t:unit_price_text_default",
+            "show_image": true,
+            "show_image_badge": true,
+            "image_badge_position": "bottomright"
+          }
+        },
+        {
+          "type": "_quantity-breaks-item",
+          "name": "t:quantity_breaks_item",
+          "settings": {
+            "quantity": 3,
+            "discount_type": "percentage",
+            "discount_value": "",
+            "discount_percentage": 10,
+            "badge": "t:quantity_breaks_badge_save_10_default",
+            "badge_position": "top",
+            "badge_display": "normal",
+            "product_small_title": "t:name_of_product_default",
+            "product_small_title_plural": "t:name_of_product_plural_default",
+            "show_unit_price": false,
+            "unit_price_text": "t:unit_price_text_default",
+            "show_image": true,
+            "show_image_badge": true,
+            "image_badge_position": "bottomright"
+          }
+        }
+      ]
+    },
+    {
+      "name": "t:quantity_breaks_columns",
+      "category": "t:product_form",
+      "settings": {
+        "show_on_display": "desktop_and_mobile",
+        "label": "t:quantity_breaks_label_default",
+        "display_mode": "column",
+        "show_variant_picker": false,
+        "quantity_selected_by_default": 1,
+        "margin_top": 0,
+        "margin_bottom": 10,
+        "additional_class": ""
+      },
+      "blocks": [
+        {
+          "type": "_quantity-breaks-item",
+          "name": "t:quantity_breaks_item",
+          "settings": {
+            "quantity": 1,
+            "discount_type": "none",
+            "discount_value": "",
+            "discount_percentage": 20,
+            "badge": "",
+            "badge_position": "top",
+            "badge_display": "normal",
+            "product_small_title": "t:name_of_product_default",
+            "product_small_title_plural": "t:name_of_product_plural_default",
+            "show_unit_price": false,
+            "unit_price_text": "t:unit_price_text_default",
+            "show_image": true,
+            "show_image_badge": true,
+            "image_badge_position": "bottomright"
+          }
+        },
+        {
+          "type": "_quantity-breaks-item",
+          "name": "t:quantity_breaks_item",
+          "settings": {
+            "quantity": 2,
+            "discount_type": "percentage",
+            "discount_value": "",
+            "discount_percentage": 5,
+            "badge": "-5%",
+            "badge_position": "bottom",
+            "badge_display": "normal",
+            "product_small_title": "t:name_of_product_default",
+            "product_small_title_plural": "t:name_of_product_plural_default",
+            "show_unit_price": false,
+            "unit_price_text": "t:unit_price_text_default",
+            "show_image": true,
+            "show_image_badge": true,
+            "image_badge_position": "bottomright"
+          }
+        },
+        {
+          "type": "_quantity-breaks-item",
+          "name": "t:quantity_breaks_item",
+          "settings": {
+            "quantity": 3,
+            "discount_type": "percentage",
+            "discount_value": "",
+            "discount_percentage": 10,
+            "badge": "-10%",
+            "badge_position": "bottom",
+            "badge_display": "normal",
+            "product_small_title": "t:name_of_product_default",
+            "product_small_title_plural": "t:name_of_product_plural_default",
+            "show_unit_price": false,
+            "unit_price_text": "t:unit_price_text_default",
+            "show_image": true,
+            "show_image_badge": true,
+            "image_badge_position": "bottomright"
+          }
+        }
+      ]
+    },
+    {
+      "name": "t:buy_x_get_y_columns",
+      "category": "t:product_form",
+      "settings": {
+        "show_on_display": "desktop_and_mobile",
+        "label": "t:buy_x_get_y_label_default",
+        "show_variant_picker": false,
+        "show_variant_thumbnail": true,
+        "display_mode": "column",
+        "quantity_selected_by_default": 1,
+        "margin_top": 0,
+        "margin_bottom": 10,
+        "additional_class": ""
+      },
+      "blocks": [
+        {
+          "type": "_quantity-breaks-item",
+          "name": "t:quantity_breaks_item",
+          "settings": {
+            "quantity": 1,
+            "discount_type": "none",
+            "discount_value": "",
+            "discount_percentage": 20,
+            "badge": "",
+            "badge_position": "top",
+            "badge_display": "normal",
+            "product_small_title": "t:name_of_product_default",
+            "product_small_title_plural": "t:name_of_product_plural_default",
+            "badge_next_to_title": "",
+            "show_unit_price": false,
+            "unit_price_text": "t:unit_price_text_default",
+            "description": "",
+            "description_position": "below_price",
+            "show_image": false,
+            "show_image_badge": true,
+            "image_badge_position": "bottomright"
+          }
+        },
+        {
+          "type": "_quantity-breaks-item",
+          "name": "t:quantity_breaks_item",
+          "settings": {
+            "quantity": 3,
+            "discount_type": "value",
+            "discount_value": "31",
+            "discount_percentage": 5,
+            "badge": "t:buy_x_get_y_badge_1_default",
+            "badge_position": "top",
+            "badge_display": "overlap",
+            "product_small_title": "t:name_of_product_default",
+            "product_small_title_plural": "t:name_of_product_plural_default",
+            "badge_next_to_title": "",
+            "show_unit_price": false,
+            "unit_price_text": "t:unit_price_text_default",
+            "description": "t:buy_x_get_y_description_default",
+            "description_position": "above_price",
+            "show_image": false,
+            "show_image_badge": true,
+            "image_badge_position": "bottomright"
+          }
+        }
+      ]
+    },
+
+    {
+      "name": "t:buy_x_get_y_rows",
+      "category": "t:product_form",
+      "settings": {
+        "show_on_display": "desktop_and_mobile",
+        "label": "t:buy_x_get_y_label_default",
+        "show_variant_picker": false,
+        "show_variant_thumbnail": true,
+        "display_mode": "row",
+        "quantity_selected_by_default": 1,
+        "margin_top": 0,
+        "margin_bottom": 10,
+        "additional_class": ""
+      },
+      "blocks": [
+        {
+          "type": "_quantity-breaks-item",
+          "name": "t:quantity_breaks_item",
+          "settings": {
+            "quantity": 1,
+            "discount_type": "none",
+            "discount_value": "",
+            "discount_percentage": 20,
+            "badge": "",
+            "badge_position": "top",
+            "badge_display": "normal",
+            "product_small_title": "t:name_of_product_default",
+            "product_small_title_plural": "t:name_of_product_plural_default",
+            "badge_next_to_title": "",
+            "show_unit_price": false,
+            "unit_price_text": "t:unit_price_text_default",
+            "description": "",
+            "description_position": "below_price",
+            "show_image": true,
+            "show_image_badge": false,
+            "image_badge_position": "bottomright"
+          }
+        },
+        {
+          "type": "_quantity-breaks-item",
+          "name": "t:quantity_breaks_item",
+          "settings": {
+            "quantity": 3,
+            "discount_type": "value",
+            "discount_value": "31",
+            "discount_percentage": 5,
+            "badge": "t:buy_x_get_y_badge_2_plus_1_default",
+            "badge_position": "top",
+            "badge_display": "normal",
+            "product_small_title": "t:name_of_product_default",
+            "product_small_title_plural": "t:name_of_product_plural_default",
+            "badge_next_to_title": "t:buy_x_get_y_badge_next_to_title_default",
+            "show_unit_price": false,
+            "unit_price_text": "t:unit_price_text_default",
+            "description": "",
+            "description_position": "below_price",
+            "show_image": true,
+            "show_image_badge": false,
+            "image_badge_position": "bottomright"
+          }
+        }
+      ]
+    }
+  ]
+}
+{% endschema %}

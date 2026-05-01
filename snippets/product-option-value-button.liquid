@@ -1,0 +1,80 @@
+<div class="variant-picker__option-value">
+  <input
+    type="radio"
+    name="option-{{ option.name }}"
+    id="option-{{ option.name }}-{{ value }}"
+    value="{{ value }}"
+    {% if value.available == false %}
+      aria-disabled="true"
+    {% endif %}
+    data-option-value-id="{{ value.id }}"
+    {% if value.variant.id %}
+      data-variant-id="{{ value.variant.id }}"
+    {% endif %}
+    {% if value.selected %}
+      checked
+    {% endif %}
+  >
+  <label for="option-{{ option.name }}-{{ value }}">{{ value }}</label>
+</div>
+
+{% stylesheet %}
+  .variant-picker__option-value input {
+    clip: rect(0, 0, 0, 0);
+    overflow: hidden;
+    position: absolute;
+    height: 1px;
+    width: 1px;
+  }
+
+  .variant-picker__option-value input + label {
+    appearance: none;
+    cursor: pointer;
+    text-decoration: none;
+    display: inline-flex;
+    justify-content: center;
+    align-items: center;
+    gap: 10px;
+    min-height: var(--variant-button-min-height);
+    min-width: var(--variant-button-min-width);
+    max-width: max-content;
+    font-size: var(--variant-button-font-size);
+    outline: 1px solid transparent;
+    transition: all var(--animation-speed-medium) var(--animation-easing);
+    padding: var(--variant-button-padding-vertical) var(--variant-button-padding-horizontal);
+    color: var(--color-variant-text);
+    background-color: var(--color-variant-background);
+    border: var(--variant-button-border-width) solid var(--color-variant-border);
+    border-radius: var(--inputs-border-radius);
+    font-weight: var(--button-primary-font-weight);
+    text-transform: var(--button-primary-text-transform);
+    letter-spacing: var(--button-letter-spacing);
+  }
+
+  .variant-picker__option-value input:checked + label {
+    background-color: var(--color-selected-variant-background);
+    color: var(--color-selected-variant-text);
+    border-color: var(--color-selected-variant-border);
+  }
+
+  .variant-picker__option-value input[aria-disabled='true'] + label {
+    position: relative;
+    opacity: 0.5;
+    overflow: hidden;
+
+    &::before {
+      content: '';
+      position: absolute;
+      top: 50%;
+      left: 0;
+      width: 100%;
+      height: 1px;
+      background-color: var(--color-variant-border);
+      rotate: 20deg;
+    }
+  }
+
+  .variant-picker__option-value input[aria-disabled='true']:checked + label::before {
+    background-color: var(--color-selected-variant-text);
+  }
+{% endstylesheet %}

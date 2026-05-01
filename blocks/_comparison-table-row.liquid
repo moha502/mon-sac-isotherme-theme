@@ -1,0 +1,27 @@
+<tr>
+  {% content_for 'blocks' %}
+</tr>
+
+{% stylesheet %}
+  .comparison-table__table tr:not(:last-child) {
+    border-bottom: var(--separator-border-width) solid var(--color-border);
+  }
+{% endstylesheet %}
+
+{% schema %}
+{
+  "name": "t:row",
+  "tag": null,
+  "settings": [],
+  "blocks": [
+    {
+      "type": "_comparison-table-data"
+    }
+  ],
+  "presets": [
+    {
+      "name": "t:row"
+    }
+  ]
+}
+{% endschema %}

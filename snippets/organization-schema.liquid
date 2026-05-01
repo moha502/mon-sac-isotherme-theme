@@ -1,0 +1,50 @@
+<script type="application/ld+json">
+  {
+    "@context": "http://schema.org",
+    "@type": "Organization",
+    "name": {{ shop.name | json }},
+    "url": {{ request.origin | append: page.url | json }},
+    {%- if shop.description != blank %}
+    "description": {{ shop.description | json }},
+    {% endif -%}
+    {%- if shop.address.street != blank or shop.address.city != blank or shop.address.country != blank -%}
+    "address": {
+      "@type": "PostalAddress"
+      {%- if shop.address.street != blank %},"streetAddress": {{ shop.address.street | json }}{% endif -%}
+      {% if shop.address.city != blank -%},"addressLocality": {{ shop.address.city | json }}{%- endif -%}
+      {% if shop.address.province != blank -%},"addressRegion": {{ shop.address.province | json }}{%- endif -%}
+      {% if shop.address.zip != blank -%},"postalCode": {{ shop.address.zip | json }}{%- endif -%}
+      {% if shop.address.country != blank -%},"addressCountry": {{ shop.address.country | json }}{%- endif -%}
+    },
+    {%- endif -%}
+    {% if shop.phone != blank %}
+    "telephone": {{ shop.phone | json }},
+    {%- endif -%}
+    {% if shop.email != blank %}
+    "email": {{ shop.email | json }},
+    {%- endif -%}
+    {% if settings.logo %}
+    "logo": {{ settings.logo | image_url: width: 500 | prepend: "https:" | json }},
+    {%- endif -%}
+    {%- liquid
+      assign social_urls = ''
+      assign social_settings = 'facebook_url,instagram_url,x_url,youtube_url,tiktok_url,pinterest_url,linkedin_url,snapchat_url,threads_url,discord_url,whatsapp_url' | split: ','
+      for social_setting in social_settings
+        assign social_url = settings[social_setting]
+        if social_url != blank
+          if social_urls != ''
+            assign social_urls = social_urls | append: ','
+          endif
+          assign social_urls = social_urls | append: social_url
+        endif
+      endfor
+    -%}
+    {%- if social_urls != blank %}
+    "sameAs": [
+      {% assign social_urls_array = social_urls | split: ',' -%}
+      {% for url in social_urls_array -%}
+        {{ url | json }}{% unless forloop.last %},{% endunless %}
+      {% endfor -%}
+    ]{% endif %}
+  }
+</script>

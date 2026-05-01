@@ -1,0 +1,25 @@
+{% assign icon_fill = '0..1' %}
+{% assign icon_opsz = '20..48' %}
+
+{% comment %} Version optimisée pour la vitesse: {% endcomment %}
+{% comment %}
+  {% assign icon_fill = 0 %}
+  {% if settings.icon_fill %}
+    {% assign icon_fill = 1 %}
+  {% endif %}
+{% endcomment %}
+{% comment %} {% assign icon_opsz = '24' %} {% endcomment %}
+
+{% assign icon_list = 'account_box,account_circle,add,air,alarm,all_inclusive,anchor,apparel,architecture,arrow_back,arrow_downward,arrow_forward,arrow_range,arrow_upward,attach_file,barcode,block,bolt,bookmark,cake,camping,cancel,celebration,check,check_circle,checkroom,chef_hat,circle,close,cloud,custom,dark_mode,delete,delivery_truck_bolt,delivery_truck_speed,diamond_shine,download,ecg_heart,eco,edit,encrypted,error,experiment,explore,extention,face,face_2,face_3,face_4,face_5,face_6,favorite,featured_seasonal_and_gifts,forum,garden_cart,genetics,globe,home,info,key,keyboard_arrow_down,keyboard_arrow_left,keyboard_arrow_right,kid_star,language,lightbulb,local_mall,lock,loyalty,luggage,mail,menu,mode_heat,money_bag,mood,moped_package,music_note,none,notifications,notifications_none,open_in_new,package_2,page_info,pause_circle,person,person_2,person_3,person_4,phone_enabled,play_arrow,play_circle,priority,ramen_dining,redeem,remove,report,savings,school,search,sell,send,shop,shopping_bag,shopping_bag_speed,shopping_basket,shopping_cart,shoppingmode,sprint,star,star_half,star_rate,star_rate_half,store,storefront,straighten,support,support_agent,target,toggle_on,verified,visibility,volunteer_activism,work'
+  | strip
+%}
+
+{% comment %} theme-check-disable RemoteAsset {% endcomment %}
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="dns-prefetch" href="https://fonts.googleapis.com">
+
+<link
+  rel="stylesheet"
+  href="https://fonts.googleapis.com/css2?family=Material+Symbols+{{ settings.icon_style | capitalize }}:opsz,wght,FILL,GRAD@{{ icon_opsz }},{{ settings.icon_weight }},{{ icon_fill }},0&icon_names={{ icon_list }}&display=block"
+>
+{% comment %} theme-check-enable RemoteAsset {% endcomment %}

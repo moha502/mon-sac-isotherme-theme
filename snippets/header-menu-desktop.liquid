@@ -1,0 +1,248 @@
+<div class="header__menu-desktop">
+  <dropdown-group-component
+    class="header__menu-desktop-list{% if uppercase %} header__menu-desktop-list--uppercase{% endif %}"
+    style="--font-weight: {{ font_weight }};"
+  >
+    {{ advanced_megamenus }}
+
+    {% for link in menu.links %}
+      {% if link.links.size > 0 %}
+        <!-- Lien avec sous-menu -->
+        {% if section.settings.header_menu_style == 'dropdown' %}
+          <dropdown-component class="header__menu-item header__menu-item--dropdown">
+            <button
+              type="button"
+              class="dropdown-toggle header__menu-link header__menu-link--parent"
+              data-ref="dropdown-toggle"
+            >
+              <span class="header__menu-link-text">{{ link.title }}</span>
+              {% render 'icon', icon: 'keyboard_arrow_down' %}
+            </button>
+            <div class="dropdown-content color-{{ color_scheme }}" data-ref="dropdown-content">
+              {% for child_link in link.links %}
+                {% if child_link.links.size > 0 %}
+                  <!-- Sous-lien avec sous-sous-menu -->
+                  <div class="header__submenu-item accordion-animation">
+                    <details class="header__submenu-accordion">
+                      <summary class="header__submenu-link header__submenu-link--parent">
+                        <span>{{ child_link.title }}</span>
+                        {% render 'icon', icon: 'keyboard_arrow_down' %}
+                      </summary>
+                      <div class="header__subsubmenu">
+                        {% for grandchild_link in child_link.links %}
+                          <a href="{{ grandchild_link.url }}" class="header__submenu-link header__submenu-link--child">
+                            {{ grandchild_link.title }}
+                          </a>
+                        {% endfor %}
+                      </div>
+                    </details>
+                  </div>
+                {% else %}
+                  <!-- Sous-lien simple -->
+                  <a href="{{ child_link.url }}" class="header__submenu-link">
+                    {{ child_link.title }}
+                  </a>
+                {% endif %}
+              {% endfor %}
+            </div>
+          </dropdown-component>
+        {% elsif section.settings.header_menu_style == 'megamenu' %}
+          <dropdown-component class="header__menu-item header__menu-item--megamenu">
+            <button
+              type="button"
+              class="dropdown-toggle header__menu-link header__menu-link--parent"
+              data-ref="dropdown-toggle"
+            >
+              <span class="header__menu-link-text">{{ link.title }}</span>
+              {% render 'icon', icon: 'keyboard_arrow_down' %}
+            </button>
+            <div class="dropdown-content header__submenu--megamenu color-{{ color_scheme }}" data-ref="dropdown-content">
+              <div class="header__submenu--megamenu__content">
+                {% for child_link in link.links %}
+                  <div class="header__submenu--megamenu__item">
+                    <a href="{{ child_link.url }}" class="header__submenu-link header__submenu-link--parent">
+                      {{ child_link.title }}
+                    </a>
+
+                    {% for grandchild_link in child_link.links %}
+                      <a href="{{ grandchild_link.url }}" class="header__submenu-link">
+                        {{ grandchild_link.title }}
+                      </a>
+                    {% endfor %}
+                  </div>
+                {% endfor %}
+              </div>
+            </div>
+          </dropdown-component>
+        {% endif %}
+      {% else %}
+        <!-- Lien simple sans sous-menu -->
+        <a href="{{ link.url }}" class="header__menu-link">
+          <span class="header__menu-link-text">{{ link.title }}</span>
+        </a>
+      {% endif %}
+    {% endfor %}
+  </dropdown-group-component>
+</div>
+
+{% stylesheet %}
+  .header__menu-desktop {
+    display: none;
+  }
+
+  @media (width > 1000px) {
+    .header__menu-desktop {
+      display: flex;
+    }
+
+    .header__menu-desktop-list {
+      display: flex;
+      align-items: center;
+      flex-wrap: wrap;
+      column-gap: 1rem;
+      row-gap: 0.33rem;
+      height: 100%;
+    }
+
+    .header__menu-mobile {
+      display: none;
+    }
+  }
+
+  .header__menu-desktop-list--uppercase .header__menu-link-text {
+    text-transform: uppercase;
+  }
+
+  .header__menu-link-text {
+    font-weight: var(--font-weight);
+  }
+
+  /* Sous-menus */
+  .header__submenu-link--parent .icon {
+    transition: transform var(--animation-speed) var(--animation-easing);
+    font-size: 22px !important;
+  }
+
+  .header__submenu-accordion summary {
+    transition: var(--animation-link-hover);
+  }
+
+  .header__submenu-accordion summary:hover {
+    opacity: var(--opacity-link-hover);
+  }
+
+  /* Liens dans les sous-menus */
+  .header__submenu-link {
+    display: block;
+    padding: var(--padding-xs) 0;
+    font-size: var(--font-body--size);
+    text-decoration: none;
+    color: inherit;
+  }
+
+  .header__menu-item--dropdown .header__submenu-link {
+    padding: var(--padding-xs);
+    border-radius: calc(var(--inputs-border-radius) * var(--small-multiplier));
+    transition: background-color var(--animation-speed) var(--animation-easing);
+  }
+
+  .header__menu-item--dropdown .header__submenu-link:hover {
+    background-color: var(--color-input-border-low-opacity);
+  }
+
+  /* Accordéons dans les sous-menus */
+  .header__submenu-accordion {
+    width: 100%;
+  }
+
+  .header__submenu-accordion summary {
+    list-style: none;
+    cursor: pointer;
+  }
+
+  .header__submenu-accordion summary::-webkit-details-marker {
+    display: none;
+  }
+
+  .header__submenu-link--parent {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+  }
+
+  .header__submenu-accordion[open] > summary .icon {
+    transform: rotate(180deg);
+  }
+
+  .header__subsubmenu {
+    padding: 0 var(--padding-sm);
+  }
+
+  /* Megamenu */
+  .header__menu-item--megamenu {
+    position: static;
+  }
+
+  dropdown-component .dropdown-content.header__submenu--megamenu {
+    width: 100%;
+    top: calc(var(--header-offset-height) - var(--separator-border-width));
+    left: 0;
+    border: 0;
+    border-bottom: var(--separator-border-width) solid var(--color-border);
+    border-radius: 0;
+    display: none;
+  }
+
+  dropdown-component[data-open='true'] .dropdown-content.header__submenu--megamenu {
+    display: block;
+  }
+
+  .header__submenu--megamenu__content {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(150px, 1fr));
+    gap: var(--gap-md);
+    width: 100%;
+    max-width: var(--page-width);
+    margin: 0 auto;
+    padding: var(--padding-sm) var(--page-margin-desktop);
+    max-height: 80vh;
+    overflow-y: auto;
+  }
+
+  .header__submenu--megamenu__item {
+    flex: 1;
+  }
+
+  .header__submenu--megamenu__item .header__submenu-link {
+    font-size: var(--font-body--size);
+  }
+
+  .header__submenu--megamenu__item .header__submenu-link--parent {
+    font-size: var(--font-body--size-emphasized);
+    font-weight: 500;
+  }
+
+  .header__submenu-image-link {
+    display: flex;
+    flex-direction: column;
+    align-items: flex-start;
+    gap: var(--gap-sm);
+    transition: var(--animation-link-hover);
+
+    img {
+      width: 100%;
+      object-fit: cover;
+      border-radius: var(--card-border-radius);
+      aspect-ratio: var(--image-ratio);
+    }
+
+    &:hover {
+      opacity: var(--opacity-link-hover);
+    }
+  }
+
+  .header__submenu-image-title {
+    font-size: var(--font-body--size);
+    font-weight: 500;
+  }
+{% endstylesheet %}

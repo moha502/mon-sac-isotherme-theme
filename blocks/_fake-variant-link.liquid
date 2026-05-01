@@ -1,0 +1,70 @@
+{% if block.settings.link != blank and block.settings.text != blank %}
+  <a
+    href="{{ block.settings.link }}"
+    class="fake-variant-picker__variant {% if request.path == block.settings.link %}fake-variant-picker__variant--selected{% endif %}"
+    {{ block.shopify_attributes }}
+  >
+    {{ block.settings.text }}
+  </a>
+{% endif %}
+
+{% stylesheet %}
+  .fake-variant-picker__variant {
+    appearance: none;
+    cursor: pointer;
+    text-decoration: none;
+    display: inline-flex;
+    justify-content: center;
+    align-items: center;
+    gap: 10px;
+    min-height: var(--variant-button-min-height);
+    min-width: var(--variant-button-min-width);
+    max-width: max-content;
+    font-size: var(--variant-button-font-size);
+    outline: 1px solid transparent;
+    transition: all var(--animation-speed-medium) var(--animation-easing);
+    padding: var(--variant-button-padding-vertical) var(--variant-button-padding-horizontal);
+    color: var(--color-variant-text);
+    background-color: var(--color-variant-background);
+    border: var(--variant-button-border-width) solid var(--color-variant-border);
+    border-radius: var(--inputs-border-radius);
+    font-weight: var(--button-primary-font-weight);
+    text-transform: var(--button-primary-text-transform);
+    letter-spacing: var(--button-letter-spacing);
+  }
+
+  .fake-variant-picker__variant--selected {
+    background-color: var(--color-selected-variant-background);
+    color: var(--color-selected-variant-text);
+    border-color: var(--color-selected-variant-border);
+  }
+{% endstylesheet %}
+
+{% schema %}
+{
+  "name": "t:fake_variant_link",
+  "settings": [
+    {
+      "type": "text",
+      "id": "text",
+      "label": "t:text",
+      "default": "t:product"
+    },
+    {
+      "type": "url",
+      "id": "link",
+      "label": "t:link"
+    }
+  ],
+  "presets": [
+    {
+      "name": "t:fake_variant_link",
+      "category": "t:product_form",
+      "settings": {
+        "text": "t:product",
+        "link": "#"
+      }
+    }
+  ]
+}
+{% endschema %}

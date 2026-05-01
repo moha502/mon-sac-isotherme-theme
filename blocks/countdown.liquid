@@ -1,0 +1,339 @@
+<script src="{{ 'countdown.js' | asset_url }}" type="module"></script>
+
+<div
+  class="
+    countdown{% if block.settings.wrap_in_card %} card color-{{ block.settings.color_scheme }}{% endif %}
+    {%- if block.settings.show_on_display == 'desktop_only' %} mobile-hide{% endif -%}
+    {%- if block.settings.show_on_display == 'mobile_only' %} desktop-hide{% endif -%}
+    {%- if block.settings.additional_class != blank %} {{ block.settings.additional_class }}{% endif -%}
+  "
+  style="
+    --margin-top: {{ block.settings.margin_top }}px;
+    --margin-bottom: {{ block.settings.margin_bottom }}px;
+  "
+  data-ref="countdown"
+  {{ block.shopify_attributes }}
+  {% if request.visual_preview_mode %}
+    data-visual-preview-mode
+  {% endif %}
+>
+  <date-counter
+    data-end-date="{{ block.settings.date_end }}"
+    data-timer-ended-text="{{ block.settings.timer_ended_text }}"
+    style="
+      --countdown-timer-font-size: {{ block.settings.timer_font_size }}px;
+      --countdown-timer-font-weight: {{ block.settings.timer_font_weight }};
+    "
+  >
+    <div
+      class="countdown__timer countdown__timer--{{ block.settings.timer_style }}"
+      data-ref="countdown-timer"
+    >
+      <div class="countdown__timer-card{% unless block.settings.show_days %} hidden{% endunless %}">
+        <span data-ref="days" class="countdown__timer-value"></span>
+        <span class="countdown__timer-label">{{ 'timer.days' | t }}</span>
+      </div>
+      <div class="countdown__timer-card{% unless block.settings.show_hours %} hidden{% endunless %}">
+        <span data-ref="hours" class="countdown__timer-value"></span>
+        <span class="countdown__timer-label">{{ 'timer.hours' | t }}</span>
+      </div>
+      <div class="countdown__timer-card{% unless block.settings.show_minutes %} hidden{% endunless %}">
+        <span data-ref="minutes" class="countdown__timer-value"></span>
+        <span class="countdown__timer-label">{{ 'timer.minutes' | t }}</span>
+      </div>
+      <div class="countdown__timer-card{% unless block.settings.show_seconds %} hidden{% endunless %}">
+        <span data-ref="seconds" class="countdown__timer-value"></span>
+        <span class="countdown__timer-label">{{ 'timer.seconds' | t }}</span>
+      </div>
+    </div>
+
+    <div
+      class="countdown__timer-ended hidden"
+      data-show-message="{% if block.settings.ended_timer_style == 'hide_timer' %}false{% else %}true{% endif %}"
+      data-ref="timer-ended"
+    >
+      <p>{{ block.settings.timer_ended_text }}</p>
+    </div>
+  </date-counter>
+</div>
+
+{% stylesheet %}
+  .countdown {
+    margin-top: var(--margin-top);
+    margin-bottom: var(--margin-bottom);
+    padding: var(--padding-md);
+  }
+
+  .countdown:not(.card) {
+    padding: 0;
+    background-color: inherit;
+    color: inherit;
+  }
+
+  shopify-visual-preview-block-list .countdown[data-visual-preview-mode] {
+    width: 300px;
+  }
+
+  date-counter {
+    width: 100%;
+    height: 100%;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    gap: var(--gap-sm);
+    margin: 0;
+  }
+
+  .countdown__timer {
+    display: flex;
+    gap: var(--gap-sm);
+    width: 100%;
+    justify-content: center;
+  }
+
+  .countdown__timer-card:not(:last-child)::after {
+    content: '';
+    position: absolute;
+    right: calc(-1 * var(--gap-sm) / 2 - 1px);
+    top: calc(50%);
+    transform: translateY(-50%);
+    width: 1.5px;
+    border-radius: 3px;
+    height: 60%;
+    background-color: var(--color-foreground);
+    opacity: 0.2;
+  }
+
+  .countdown__timer--background .countdown__timer-card:not(:last-child)::after,
+  .countdown__timer--border .countdown__timer-card:not(:last-child)::after {
+    display: none;
+  }
+
+  .countdown__timer-card {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    width: fit-content;
+    position: relative;
+  }
+
+  .countdown__timer-value {
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    padding: 0 var(--padding-md) var(--padding-xxs);
+    height: calc(var(--countdown-timer-font-size) + var(--padding-xxs));
+    border-radius: 3px;
+    line-height: 1;
+    font-weight: var(--countdown-timer-font-weight);
+    font-size: var(--countdown-timer-font-size);
+  }
+
+  .countdown__timer--background .countdown__timer-value {
+    background-color: var(--color-foreground);
+    color: var(--color-background);
+    padding: var(--padding-sm);
+    margin-bottom: var(--margin-xs);
+  }
+
+  .countdown__timer--border .countdown__timer-value {
+    background-color: var(--color-background);
+    border: var(--container-border-width) solid var(--color-border);
+    padding: var(--padding-sm);
+    margin-bottom: var(--margin-xs);
+  }
+
+  .countdown__timer-label {
+    font-size: 10px;
+    text-align: center;
+    width: 100%;
+    overflow: hidden;
+    text-overflow: ellipsis;
+    opacity: 0.8;
+  }
+
+  .countdown__timer-ended p {
+    font-weight: 500;
+  }
+{% endstylesheet %}
+
+{% schema %}
+{
+  "name": "t:countdown",
+  "tag": null,
+  "settings": [
+    {
+      "type": "select",
+      "id": "show_on_display",
+      "label": "t:show_on_display",
+      "default": "desktop_and_mobile",
+      "options": [
+        { "value": "desktop_and_mobile", "label": "t:desktop_and_mobile" },
+        { "value": "desktop_only", "label": "t:desktop_only" },
+        { "value": "mobile_only", "label": "t:mobile_only" }
+      ]
+    },
+    {
+      "type": "header",
+      "content": "t:style"
+    },
+    {
+      "type": "checkbox",
+      "id": "wrap_in_card",
+      "label": "t:wrap_in_card",
+      "default": true
+    },
+    {
+      "type": "color_scheme",
+      "id": "color_scheme",
+      "label": "t:color_scheme",
+      "default": "scheme-3",
+      "visible_if": "{{ block.settings.wrap_in_card }}"
+    },
+    {
+      "type": "range",
+      "id": "timer_font_size",
+      "label": "t:font_size",
+      "min": 14,
+      "max": 50,
+      "step": 1,
+      "default": 20
+    },
+    {
+      "type": "range",
+      "id": "timer_font_weight",
+      "label": "t:font_weight",
+      "min": 400,
+      "max": 600,
+      "step": 100,
+      "default": 500
+    },
+    {
+      "type": "select",
+      "id": "timer_style",
+      "label": "t:timer_style",
+      "options": [
+        {
+          "value": "normal",
+          "label": "t:normal"
+        },
+        {
+          "value": "background",
+          "label": "t:background"
+        },
+        {
+          "value": "border",
+          "label": "t:border"
+        }
+      ],
+      "default": "normal"
+    },
+    {
+      "type": "header",
+      "content": "t:content"
+    },
+    {
+      "type": "text",
+      "id": "date_end",
+      "label": "t:date_end",
+      "default": "01/01/2028 00:00",
+      "info": "t:date_end_info"
+    },
+    {
+      "type": "checkbox",
+      "id": "show_days",
+      "label": "t:show_days",
+      "default": true
+    },
+    {
+      "type": "checkbox",
+      "id": "show_hours",
+      "label": "t:show_hours",
+      "default": true
+    },
+    {
+      "type": "checkbox",
+      "id": "show_minutes",
+      "label": "t:show_minutes",
+      "default": true
+    },
+    {
+      "type": "checkbox",
+      "id": "show_seconds",
+      "label": "t:show_seconds",
+      "default": true
+    },
+    {
+      "type": "select",
+      "id": "ended_timer_style",
+      "label": "t:ended_timer_style",
+      "options": [
+        {
+          "value": "message",
+          "label": "t:display_message"
+        },
+        {
+          "value": "hide_timer",
+          "label": "t:hide_timer"
+        }
+      ],
+      "default": "hide_timer"
+    },
+    {
+      "type": "text",
+      "id": "timer_ended_text",
+      "label": "t:timer_ended_text",
+      "default": "t:timer_ended_text_default",
+      "visible_if": "{{ block.settings.ended_timer_style == 'message' }}"
+    },
+    {
+      "type": "header",
+      "content": "t:margins"
+    },
+    {
+      "type": "range",
+      "id": "margin_top",
+      "label": "t:margin_top",
+      "default": 0,
+      "min": 0,
+      "max": 100,
+      "step": 1,
+      "unit": "px"
+    },
+    {
+      "type": "range",
+      "id": "margin_bottom",
+      "label": "t:margin_bottom",
+      "default": 0,
+      "min": 0,
+      "max": 100,
+      "step": 1,
+      "unit": "px"
+    },
+    {
+      "type": "header",
+      "content": "t:advanced_settings"
+    },
+    {
+      "type": "text",
+      "id": "additional_class",
+      "label": "t:additional_class",
+      "info": "t:additional_class_info"
+    },
+    {
+      "type": "header",
+      "content": "t:go_further"
+    },
+    {
+      "type": "paragraph",
+      "content": "t:go_further_description"
+    }
+  ],
+  "presets": [
+    {
+      "name": "t:countdown",
+      "category": "t:offers"
+    }
+  ]
+}
+{% endschema %}

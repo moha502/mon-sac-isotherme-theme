@@ -1,0 +1,57 @@
+{%- doc -%}
+  Affiche les badges sur les cartes de produits.
+
+  @param {object} product - Le produit
+
+  @example
+  {% render 'product-badges', product: product, settings: settings %}
+{%- enddoc -%}
+
+<div
+  class="product-badges product-badges--{{ settings.badge_position_on_cards }}"
+>
+  {%- if product.metafields.custom.badge -%}
+    <div class="badge color-{{ settings.badge_color_scheme_custom }}">
+      {{ product.metafields.custom.badge }}
+    </div>
+  {%- endif -%}
+
+  {%- if product.available == false and settings.show_sold_out_badge_on_cards -%}
+    <div class="badge color-{{ settings.badge_color_scheme_sold_out }}">
+      {{ 'products.sold_out' | t }}
+    </div>
+  {%- endif -%}
+
+  {%- if product.compare_at_price > product.price and settings.show_sales_badge_on_cards -%}
+    <div class="badge color-{{ settings.badge_color_scheme_sales }}">
+      {{ 'products.sales' | t }}
+    </div>
+  {%- endif -%}
+</div>
+
+{% stylesheet %}
+  .product-badges {
+    position: absolute;
+    display: flex;
+    flex-wrap: wrap;
+    gap: var(--gap-xs);
+  }
+
+  .product-badges--bottom-left {
+    bottom: var(--padding-sm);
+    left: var(--padding-sm);
+    justify-content: flex-start;
+  }
+
+  .product-badges--top-left {
+    top: var(--padding-sm);
+    left: var(--padding-sm);
+    justify-content: flex-start;
+  }
+
+  .product-badges--top-right {
+    top: var(--padding-sm);
+    right: var(--padding-sm);
+    justify-content: flex-end;
+  }
+{% endstylesheet %}

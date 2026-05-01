@@ -1,0 +1,114 @@
+/*
+ * ------------------------------------------------------------
+ * IMPORTANT: The contents of this file are auto-generated.
+ *
+ * This file may be updated by the Shopify admin theme editor
+ * or related systems. Please exercise caution as any changes
+ * made to this file may be overwritten.
+ * ------------------------------------------------------------
+ */
+{
+  "sections": {
+    "custom_section_kLfPKp": {
+      "type": "custom-section",
+      "blocks": {
+        "text_JadnEe": {
+          "type": "text",
+          "name": "t:title",
+          "settings": {
+            "show_on_display": "desktop_and_mobile",
+            "text": "<h1>Collections</h1>",
+            "text_style": "h2",
+            "font_weight": 400,
+            "alignment": "left",
+            "margin_top": 0,
+            "margin_bottom": 0,
+            "additional_class": ""
+          },
+          "blocks": {}
+        }
+      },
+      "block_order": ["text_JadnEe"],
+      "name": "Titre des collections",
+      "settings": {
+        "show_on_display": "desktop_and_mobile",
+        "section_width": "normal",
+        "color_scheme": "scheme-1",
+        "wrap_in_card": false,
+        "color_scheme_card": "",
+        "layout_type": "flex",
+        "layout_flex_direction_desktop": "column",
+        "layout_grid_columns_desktop": 3,
+        "layout_gap_desktop": 15,
+        "layout_wrap_desktop": "nowrap",
+        "layout_flex_justify_desktop": "flex-start",
+        "layout_flex_align_items_desktop": "flex-start",
+        "same_as_desktop": true,
+        "layout_flex_direction_mobile": "row",
+        "layout_gap_mobile": 20,
+        "layout_wrap_mobile": "nowrap",
+        "layout_flex_justify_mobile": "flex-start",
+        "layout_flex_align_items_mobile": "flex-start",
+        "layout_grid_columns_mobile": 1,
+        "padding_top": 60,
+        "padding_bottom": 0,
+        "margin_top": 0,
+        "margin_bottom": 0,
+        "additional_class": ""
+      }
+    },
+    "main": {
+      "type": "main-collections",
+      "blocks": {
+        "collection-card": {
+          "type": "_collection-card",
+          "static": true,
+          "settings": {
+            "wrap_in_card": false,
+            "color_scheme": "",
+            "layout_gap": 10
+          },
+          "blocks": {
+            "image_q7CGcG": {
+              "type": "image",
+              "name": "t:image",
+              "settings": {
+                "show_on_display": "desktop_and_mobile",
+                "image": "{{ closest.collection.image }}",
+                "link": "",
+                "image_ratio": "square",
+                "additional_class": ""
+              }
+            },
+            "text_nAaRae": {
+              "type": "text",
+              "name": "t:text",
+              "settings": {
+                "show_on_display": "desktop_and_mobile",
+                "text": "<p>{{ closest.collection.title }}</p>",
+                "text_style": "paragraph",
+                "font_weight": 500,
+                "alignment": "left",
+                "margin_top": 0,
+                "margin_bottom": 0,
+                "additional_class": ""
+              }
+            }
+          },
+          "block_order": ["image_q7CGcG", "text_nAaRae"]
+        }
+      },
+      "settings": {
+        "color_scheme": "scheme-1",
+        "collection_list": [],
+        "grid_columns": 3,
+        "grid_columns_mobile": "2",
+        "padding_top": 60,
+        "padding_bottom": 60,
+        "margin_top": 0,
+        "margin_bottom": 0
+      }
+    }
+  },
+  "order": ["custom_section_kLfPKp", "main"]
+}

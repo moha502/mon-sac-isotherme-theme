@@ -1,0 +1,60 @@
+<script type="importmap">
+  {
+    "imports": {
+      "@theme/utilities": "{{ 'utilities.js' | asset_url }}",
+      "@theme/events": "{{ 'events.js' | asset_url }}"
+    }
+  }
+</script>
+
+<link rel="modulepreload" fetchpriority="low" href="{{ 'utilities.js' | asset_url }}">
+<link rel="modulepreload" fetchpriority="low" href="{{ 'events.js' | asset_url }}">
+
+<script type="module" src="{{ 'header.js' | asset_url }}"></script>
+<script type="module" src="{{ 'splide.js' | asset_url }}"></script>
+<script type="module" src="{{ 'slider.js' | asset_url }}"></script>
+
+{% if settings.activate_wishlist %}
+  <script type="module" src="{{ 'wishlist.js' | asset_url }}"></script>
+{% endif %}
+
+<script type="module" fetchpriority="low" src="{{ 'toast-notification.js' | asset_url }}"></script>
+<script type="module" fetchpriority="low" src="{{ 'accordion.js' | asset_url }}"></script>
+<script type="module" fetchpriority="low" src="{{ 'quantity-selector.js' | asset_url }}"></script>
+<script type="module" fetchpriority="low" src="{{ 'dropdown.js' | asset_url }}"></script>
+<script type="module" fetchpriority="low" src="{{ 'popup.js' | asset_url }}"></script>
+
+<script>
+  const Theme = {
+    version: '2.3.1',
+    routes: {
+      root: '/',
+      cart_add_url: '{{ routes.cart_add_url | append: '.js' }}',
+      cart_change_url: '{{ routes.cart_change_url }}',
+      cart_update_url: '{{ routes.cart_update_url }}',
+      cart_url: '{{ routes.cart_url }}',
+      predictive_search_url: '{{ routes.predictive_search_url }}',
+      search_url: '{{ routes.search_url }}',
+    },
+    template: {
+      name: '{{ template.name }}',
+    },
+    translations: {
+      addToCartNotificationMessage: '{{ 'cart.product_added_to_cart' | t }}',
+      consoleLogFullstack: '{{ 'theme.consoleLogFullstack' | t }}',
+      consoleLogFullstackUrl: '{{ 'theme.consoleLogFullstackUrl' | t }}',
+      addToWishlistNotificationMessage: '{{ 'wishlist.product_added_to_wishlist' | t }}',
+      removeFromWishlistNotificationMessage: '{{ 'wishlist.product_removed_from_wishlist' | t }}',
+    },
+    moneyFormat: '{{ shop.money_format }}',
+    trailingZeros: {{ settings.show_trailing_zeros | json }},
+    currency: '{{ localization.country.currency.iso_code }}',
+    domain: '{{ shop.permanent_domain }}',
+  };
+</script>
+
+<script>
+  console.log(Theme.translations.consoleLogFullstack);
+  console.log('Version: ' + Theme.version);
+  console.log(Theme.translations.consoleLogFullstackUrl);
+</script>

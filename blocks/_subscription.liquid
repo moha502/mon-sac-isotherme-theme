@@ -1,0 +1,511 @@
+{% doc %}
+  Affiche un composant d'abonnement permettant de choisir entre achat unique et abonnement.
+  Utilise variant.selling_plan_allocations pour afficher uniquement les abonnements disponibles pour la variante.
+{% enddoc %}
+
+{% liquid
+  assign product = closest.product | default: product
+  if request.visual_preview_mode and product == blank
+    for p in collections.all.products
+      if p.selling_plan_groups.size > 0
+        assign product = p
+        break
+      endif
+    endfor
+  endif
+
+  assign selected_variant = product.selected_or_first_available_variant
+  assign variant_allocations = selected_variant.selling_plan_allocations
+  assign requires_selling_plan = product.requires_selling_plan
+
+  assign has_variant_subscriptions = false
+  if variant_allocations.size > 0
+    assign has_variant_subscriptions = true
+  endif
+%}
+
+{% comment %} Rendre le composant si le produit a des abonnements (même si la variante actuelle n'en a pas) {% endcomment %}
+{% if product != blank and product.selling_plan_groups.size > 0 %}
+  {% liquid
+    assign variant_price = selected_variant.price
+    assign variant_compare_at_price = selected_variant.compare_at_price | default: variant_price
+
+    # Calcul du prix avec le premier abonnement disponible pour cette variante (si disponible)
+    if has_variant_subscriptions
+      assign first_allocation = variant_allocations.first
+      assign first_selling_plan = first_allocation.selling_plan
+      assign first_adjustment = first_selling_plan.price_adjustments[0]
+      assign adjustment_type = first_adjustment.value_type | default: 'percentage'
+      assign adjustment_value = first_adjustment.value | default: 0
+
+      if adjustment_type == 'percentage'
+        assign discount_amount = variant_price | times: adjustment_value | divided_by: 100
+        assign subscription_price = variant_price | minus: discount_amount
+      elsif adjustment_type == 'fixed_amount'
+        assign subscription_price = variant_price | minus: adjustment_value
+      elsif adjustment_type == 'price'
+        assign subscription_price = adjustment_value
+      else
+        assign subscription_price = variant_price
+      endif
+    else
+      assign subscription_price = variant_price
+    endif
+  %}
+
+  <script src="{{ 'subscription.js' | asset_url }}" type="module"></script>
+
+  <subscription-component
+    class="
+      subscription
+      {%- if block.settings.show_on_display == 'desktop_only' %} mobile-hide{% endif -%}
+      {%- if block.settings.show_on_display == 'mobile_only' %} desktop-hide{% endif -%}
+      {%- if block.settings.additional_class != blank %} {{ block.settings.additional_class }}{% endif -%}
+    "
+    style="
+      --margin-top: {{ block.settings.margin_top }}px;
+      --margin-bottom: {{ block.settings.margin_bottom }}px;
+      --icon-font: 'Material Symbols {{ settings.icon_style | capitalize }}';
+      {%- unless has_variant_subscriptions -%}display: none;{%- endunless -%}
+    "
+    data-ref="subscription"
+    data-default-selected="{{ block.settings.default_selected }}"
+    data-sales-badge="{{ block.settings.sales_badge }}"
+    data-requires-selling-plan="{{ requires_selling_plan }}"
+    data-frequency-picker-type="{{ block.settings.frequency_picker_type }}"
+    {{ block.shopify_attributes }}
+    {% if request.visual_preview_mode %}
+      data-visual-preview-mode
+    {% endif %}
+  >
+    {% if has_variant_subscriptions %}
+      {%- if block.settings.label != blank -%}
+        <p class="variant_label">{{ block.settings.label }}</p>
+      {%- endif -%}
+
+      <input type="hidden" name="selling_plan" data-ref="selling-plan-input" value="">
+
+      {%- comment -%} Option Achat unique (masquée si l'option "Ne vendre ce produit qu'avec ces options d'achat" est activée) {%- endcomment -%}
+      {%- capture one_time_option -%}
+        {%- unless requires_selling_plan -%}
+          <label class="subscription__option card card--with-border" data-ref="one-time-card">
+            <div class="subscription__option-header">
+              {% assign radio_data = 'data-ref="one-time-option"' %}
+              {% render 'radio', label: block.settings.one_time_label, group: 'subscription_type', value: 'one_time', data: radio_data %}
+              <div class="subscription__option-price" data-ref="one-time-price">
+                {% render 'price', price: variant_price, compare_price: variant_compare_at_price, sales_badge: 'none' %}
+              </div>
+            </div>
+
+            {%- if block.settings.one_time_description != blank -%}
+              <div class="subscription__option-description">
+                {{ block.settings.one_time_description }}
+              </div>
+            {%- endif -%}
+          </label>
+        {%- endunless -%}
+      {%- endcapture -%}
+
+      {%- comment -%} Option Abonnement {%- endcomment -%}
+      {%- capture subscription_option -%}
+        <label class="subscription__option card card--with-border" data-ref="subscription-card">
+          <div class="subscription__option-header">
+            {% assign radio_data = 'data-ref="subscription-option"' %}
+            {% render 'radio', label: block.settings.subscription_label, group: 'subscription_type', value: 'subscription', data: radio_data %}
+            <div class="subscription__option-price" data-ref="subscription-price">
+              {% render 'price', price: subscription_price, compare_price: variant_compare_at_price, sales_badge: block.settings.sales_badge %}
+            </div>
+          </div>
+
+          {%- comment -%} Sélecteur de fréquence (masqué s'il n'y a qu'une option) {%- endcomment -%}
+          <div
+            class="subscription__frequency{% if variant_allocations.size <= 1 %} hidden{% endif %}"
+            data-ref="frequency-container"
+            style="display: none;"
+          >
+            {% if block.settings.frequency_picker_type == 'buttons' %}
+              <fieldset class="subscription__frequency-buttons" data-ref="frequency-fieldset">
+                {% for allocation in variant_allocations %}
+                  {% liquid
+                    assign selling_plan = allocation.selling_plan
+                    assign price_adjustment = selling_plan.price_adjustments[0]
+                    assign adjustment_type = price_adjustment.value_type | default: 'percentage'
+                    assign adjustment_value = price_adjustment.value | default: 0
+                  %}
+                  <div class="subscription__frequency-button">
+                    <input
+                      type="radio"
+                      name="frequency-{{ block.id }}"
+                      id="frequency-{{ selling_plan.id }}"
+                      value="{{ selling_plan.id }}"
+                      data-adjustment-type="{{ adjustment_type }}"
+                      data-adjustment-value="{{ adjustment_value }}"
+                      data-ref="frequency-input"
+                      {% if forloop.first %}
+                        checked
+                      {% endif %}
+                    >
+                    <label for="frequency-{{ selling_plan.id }}">{{ selling_plan.name }}</label>
+                  </div>
+                {% endfor %}
+              </fieldset>
+            {% else %}
+              <div class="select-wrapper select-wrapper--full-width">
+                <select class="select select--small" data-ref="frequency-select">
+                  {% for allocation in variant_allocations %}
+                    {% liquid
+                      assign selling_plan = allocation.selling_plan
+                      assign price_adjustment = selling_plan.price_adjustments[0]
+                      assign adjustment_type = price_adjustment.value_type | default: 'percentage'
+                      assign adjustment_value = price_adjustment.value | default: 0
+                    %}
+                    <option
+                      value="{{ selling_plan.id }}"
+                      data-adjustment-type="{{ adjustment_type }}"
+                      data-adjustment-value="{{ adjustment_value }}"
+                    >
+                      {{ selling_plan.name }}
+                    </option>
+                  {% endfor %}
+                </select>
+                <div class="select-wrapper__icon">
+                  {% render 'icon', icon: 'keyboard_arrow_down' %}
+                </div>
+              </div>
+            {% endif %}
+          </div>
+
+          {%- if block.settings.subscription_description != blank -%}
+            <div class="subscription__option-description">
+              {{ block.settings.subscription_description }}
+            </div>
+          {%- endif -%}
+        </label>
+      {%- endcapture -%}
+
+      <div class="subscription__options">
+        {%- if block.settings.options_order == 'subscription_first' -%}
+          {{ subscription_option }}
+          {{ one_time_option }}
+        {%- else -%}
+          {{ one_time_option }}
+          {{ subscription_option }}
+        {%- endif -%}
+      </div>
+    {% endif %}
+  </subscription-component>
+{% endif %}
+
+{% stylesheet %}
+  .subscription {
+    display: block;
+    margin-top: var(--margin-top);
+    margin-bottom: var(--margin-bottom);
+  }
+
+  shopify-visual-preview-block-list .subscription[data-visual-preview-mode] {
+    width: 450px;
+  }
+
+  /* Par défaut Shopify affiche un message de consentement sous le bouton d'achat rapide, on le cache */
+  #shopify-buyer-consent {
+    display: none;
+  }
+
+  .subscription__options {
+    display: flex;
+    flex-direction: column;
+    gap: var(--gap-sm);
+  }
+
+  .subscription__option {
+    display: flex;
+    flex-direction: column;
+    gap: var(--gap-sm);
+    padding: var(--padding-md);
+    cursor: pointer;
+    transition: border-color 0.2s ease;
+    color: var(--color-input-text);
+    background-color: var(--color-input-background);
+    border: var(--inputs-border-width) solid var(--color-input-border);
+  }
+
+  .subscription__option.subscription__option--selected {
+    border: var(--inputs-border-width) solid var(--color-selected-input-border);
+  }
+
+  .subscription__option-radio {
+    display: flex;
+    align-items: center;
+    gap: var(--gap-xs);
+  }
+
+  .subscription__option .radio > .radio__label {
+    font-size: var(--font-body--size);
+    font-weight: 500;
+  }
+
+  .subscription__option-header {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    gap: var(--gap-sm);
+    width: 100%;
+  }
+
+  .subscription__option-price {
+    flex-shrink: 0;
+  }
+
+  .subscription__option-price .prices {
+    font-size: var(--font-body--size);
+  }
+
+  .subscription__frequency {
+    width: 100%;
+  }
+
+  .subscription__frequency-buttons {
+    display: flex;
+    flex-wrap: wrap;
+    gap: var(--gap-sm);
+    border: none;
+    padding: 0;
+  }
+
+  .subscription__frequency-button input {
+    clip: rect(0, 0, 0, 0);
+    overflow: hidden;
+    position: absolute;
+    height: 1px;
+    width: 1px;
+  }
+
+  .subscription__frequency-button input + label {
+    appearance: none;
+    cursor: pointer;
+    text-decoration: none;
+    display: inline-flex;
+    justify-content: center;
+    align-items: center;
+    font-size: var(--variant-button-font-size);
+    transition: all var(--animation-speed-medium) var(--animation-easing);
+    color: var(--color-input-text);
+    background-color: var(--color-input-background);
+    border: var(--inputs-border-width) solid var(--color-input-border);
+    font-weight: var(--button-primary-font-weight);
+    text-transform: var(--button-primary-text-transform);
+    letter-spacing: var(--button-letter-spacing);
+    padding: calc(var(--button-padding-vertical) / 2) calc(var(--button-padding-horizontal) * var(--small-multiplier));
+    min-height: calc(var(--small-multiplier) * var(--inputs-min-height));
+    min-width: calc(var(--small-multiplier) * var(--inputs-min-width));
+    border-radius: calc(var(--small-multiplier) * var(--button-border-radius));
+  }
+
+  .subscription__frequency-button input:checked + label {
+    background-color: var(--color-selected-input-background);
+    color: var(--color-selected-input-text);
+    border-color: var(--color-selected-input-border);
+  }
+
+  .subscription__option-description p,
+  .subscription__option-description ul li,
+  .subscription__option-description ol li {
+    font-size: var(--font-body--size-small);
+  }
+
+  .subscription__option-description p {
+    margin: 0;
+  }
+
+  .subscription__option-description ul {
+    margin: 0;
+    padding-left: var(--padding-xs);
+    list-style: none;
+    display: flex;
+    flex-direction: column;
+    gap: var(--gap-xs);
+  }
+
+  .subscription__option-description ol {
+    margin: 0;
+    padding-left: calc(var(--padding-xs) * 2);
+  }
+
+  .subscription__option-description ul li {
+    position: relative;
+    padding-left: var(--padding-xs);
+  }
+
+  .subscription__option-description ul li::before {
+    font-family: var(--icon-font);
+    content: 'check';
+    position: absolute;
+    left: calc(-1 * var(--padding-xs));
+  }
+{% endstylesheet %}
+
+{% schema %}
+{
+  "name": "t:subscription",
+  "tag": null,
+  "settings": [
+    {
+      "type": "select",
+      "id": "show_on_display",
+      "label": "t:show_on_display",
+      "default": "desktop_and_mobile",
+      "options": [
+        { "value": "desktop_and_mobile", "label": "t:desktop_and_mobile" },
+        { "value": "desktop_only", "label": "t:desktop_only" },
+        { "value": "mobile_only", "label": "t:mobile_only" }
+      ]
+    },
+    {
+      "type": "paragraph",
+      "content": "t:subscription_guide"
+    },
+    {
+      "type": "header",
+      "content": "t:content"
+    },
+    {
+      "type": "text",
+      "id": "label",
+      "label": "t:label",
+      "default": "t:subscription_label_default"
+    },
+    {
+      "type": "select",
+      "id": "options_order",
+      "label": "t:subscription_options_order",
+      "default": "one_time_first",
+      "options": [
+        { "value": "one_time_first", "label": "t:subscription_one_time_first" },
+        { "value": "subscription_first", "label": "t:subscription_first" }
+      ]
+    },
+    {
+      "type": "select",
+      "id": "default_selected",
+      "label": "t:subscription_default_selected",
+      "default": "one_time",
+      "options": [
+        { "value": "one_time", "label": "t:subscription_one_time" },
+        { "value": "subscription", "label": "t:subscription_subscribe" }
+      ]
+    },
+    {
+      "type": "header",
+      "content": "t:subscription_one_time"
+    },
+    {
+      "type": "text",
+      "id": "one_time_label",
+      "label": "t:subscription_one_time_label",
+      "default": "t:subscription_one_time_label_default"
+    },
+    {
+      "type": "richtext",
+      "id": "one_time_description",
+      "label": "t:description"
+    },
+    {
+      "type": "header",
+      "content": "t:subscription_subscribe"
+    },
+    {
+      "type": "text",
+      "id": "subscription_label",
+      "label": "t:subscription_subscription_label",
+      "default": "t:subscription_subscription_label_default"
+    },
+    {
+      "type": "select",
+      "id": "frequency_picker_type",
+      "label": "t:frequency_picker_type",
+      "options": [
+        { "value": "buttons", "label": "t:buttons" },
+        { "value": "selects", "label": "t:selects" }
+      ],
+      "default": "selects"
+    },
+    {
+      "type": "select",
+      "id": "sales_badge",
+      "label": "t:sales_badge",
+      "default": "percentage",
+      "options": [
+        { "value": "none", "label": "t:none" },
+        { "value": "percentage", "label": "t:percentage" },
+        { "value": "amount", "label": "t:amount" }
+      ]
+    },
+    {
+      "type": "richtext",
+      "id": "subscription_description",
+      "label": "t:description",
+      "default": "t:subscription_description_default"
+    },
+    {
+      "type": "header",
+      "content": "t:margins"
+    },
+    {
+      "type": "range",
+      "id": "margin_top",
+      "label": "t:margin_top",
+      "default": 0,
+      "min": 0,
+      "max": 100,
+      "step": 1,
+      "unit": "px"
+    },
+    {
+      "type": "range",
+      "id": "margin_bottom",
+      "label": "t:margin_bottom",
+      "default": 10,
+      "min": 0,
+      "max": 100,
+      "step": 1,
+      "unit": "px"
+    },
+    {
+      "type": "header",
+      "content": "t:advanced_settings"
+    },
+    {
+      "type": "text",
+      "id": "additional_class",
+      "label": "t:additional_class",
+      "info": "t:additional_class_info"
+    },
+    {
+      "type": "header",
+      "content": "t:go_further"
+    },
+    {
+      "type": "paragraph",
+      "content": "t:go_further_description"
+    }
+  ],
+  "presets": [
+    {
+      "name": "t:subscription",
+      "category": "t:product_form",
+      "settings": {
+        "show_on_display": "desktop_and_mobile",
+        "label": "t:subscription_label_default",
+        "default_selected": "one_time",
+        "sales_badge": "percentage",
+        "one_time_label": "t:subscription_one_time_label_default",
+        "subscription_label": "t:subscription_subscription_label_default",
+        "margin_top": 0,
+        "margin_bottom": 10,
+        "additional_class": ""
+      }
+    }
+  ]
+}
+{% endschema %}

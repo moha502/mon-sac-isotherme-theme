@@ -1,0 +1,356 @@
+/*
+ * ------------------------------------------------------------
+ * IMPORTANT: The contents of this file are auto-generated.
+ *
+ * This file may be updated by the Shopify admin language editor
+ * or related systems. Please exercise caution as any changes
+ * made to this file may be overwritten.
+ * ------------------------------------------------------------
+ */
+{
+  "404": {
+    "back_to_shopping": "Torna allo shopping",
+    "not_found": "Pagina non trovata.",
+    "title": "404"
+  },
+  "accessibility": {
+    "country_region": "Paese/Regione",
+    "country_results_count": "[count] paesi trovati",
+    "find_country": "Trova un paese"
+  },
+  "actions": {
+    "reset": "Reimposta"
+  },
+  "blocks": {
+    "load_video": "Carica video {{ description }}",
+    "read_less": "Mostra meno",
+    "read_more": "Mostra di più"
+  },
+  "blog": {
+    "article_comments": "Commenti",
+    "article_metadata_html": "{{ date }} di {{ author }}",
+    "comment_form_body": "Commento",
+    "comment_form_email": "Email",
+    "comment_form_name": "Nome",
+    "comment_form_submit": "Pubblica",
+    "comment_form_title": "Aggiungi un commento",
+    "empty": "Nessun articolo trovato"
+  },
+  "breadcrumbs": {
+    "home": "Home"
+  },
+  "cart": {
+    "checkout": "Cassa",
+    "code_already_applied": "Questo codice sconto è già stato applicato",
+    "code_not_applicable": "Questo codice sconto non è applicabile",
+    "continue_shopping": "Continua lo shopping",
+    "discount": "Sconto",
+    "empty_title": "Il tuo carrello è vuoto",
+    "error_apply_discount": "Errore nell'applicazione del codice sconto",
+    "error_remove_discount": "Errore nella rimozione del codice sconto",
+    "estimated_total": "Totale stimato",
+    "please_insert_a_code": "Inserisci un codice",
+    "product_added_to_cart": "Prodotto aggiunto al carrello",
+    "remove": "Rimuovi",
+    "title": "Carrello",
+    "update": "Aggiorna"
+  },
+  "collections": {
+    "collections_empty": "Nessuna collezione trovata",
+    "empty": "Nessun prodotto trovato",
+    "filters": {
+      "clear": "Reimposta",
+      "filter": "Filtri",
+      "filter_and_sort": "Filtri e ordina",
+      "from": "Da",
+      "to": "a"
+    },
+    "sorting": {
+      "sort_by": "Ordina per"
+    },
+    "title": "Collezioni"
+  },
+  "contact": {
+    "email": "Email",
+    "first_name": "Nome",
+    "last_name": "Cognome",
+    "message": "Messaggio",
+    "phone": "Telefono",
+    "submit": "Invia",
+    "success": "Il tuo messaggio è stato inviato con successo."
+  },
+  "content": {
+    "language": "Lingua",
+    "localization_region_and_language": "Regione e lingua",
+    "no_results_found": "Nessun risultato trovato",
+    "search": "Cerca"
+  },
+  "customer": {
+    "account": {
+      "addresses": "Indirizzi",
+      "default_address": "Indirizzo predefinito",
+      "logout": "Esci",
+      "orders": "Ordini",
+      "return": "Ritorna",
+      "title": "Account",
+      "view_addresses": "Visualizza indirizzi"
+    },
+    "activate_account": {
+      "cancel": "Annulla",
+      "password": "Password",
+      "password_confirm": "Conferma password",
+      "submit": "Attiva account",
+      "subtext": "Inserisci la tua password qui sotto per attivare il tuo account.",
+      "title": "Attivazione account"
+    },
+    "addresses": {
+      "add_new": "Aggiungi un indirizzo",
+      "address1": "Indirizzo",
+      "address2": "Appartamento, suite, ecc.",
+      "cancel": "Annulla",
+      "city": "Città",
+      "company": "Azienda",
+      "country": "Paese",
+      "default_address": "Indirizzo predefinito",
+      "delete": "Elimina",
+      "delete_address": "Elimina indirizzo",
+      "edit": "Modifica",
+      "edit_address": "Modifica indirizzo",
+      "edit_default_address": "Modifica indirizzo predefinito",
+      "first_name": "Nome",
+      "last_name": "Cognome",
+      "phone": "Telefono",
+      "province": "Stato/Provincia",
+      "set_default": "Imposta come indirizzo predefinito",
+      "title": "Indirizzi",
+      "update": "Aggiorna",
+      "zip": "CAP/Codice postale"
+    },
+    "login": {
+      "cancel": "Annulla",
+      "create_account": "Crea un account",
+      "email": "Email",
+      "forgot_password": "Hai dimenticato la password?",
+      "guest_continue": "Continua come ospite",
+      "guest_title": "Account ospite",
+      "password": "Password",
+      "reset_password": "Reimposta password",
+      "reset_password_error": "Errore nel reimpostare la password",
+      "reset_password_success": "Password reimpostata con successo",
+      "submit": "Accedi",
+      "title": "Accesso"
+    },
+    "order": {
+      "billing_address": "Indirizzo di fatturazione",
+      "cancelled_html": "Annullato il {{ date }}",
+      "cancelled_reason": "Motivo dell'annullamento: {{ reason }}",
+      "date": "Data",
+      "date_html": "Ordinato il {{ date }}",
+      "discount": "Sconto",
+      "fulfilled_at_html": "Consegnato il {{ date }}",
+      "fulfillment_status": "Stato di evasione",
+      "payment_status": "Stato del pagamento",
+      "price": "Prezzo",
+      "product": "Prodotto",
+      "products": "Prodotti",
+      "quantity": "Quantità",
+      "return_to_account": "Torna all'account",
+      "shipping": "Spedizione",
+      "shipping_address": "Indirizzo di spedizione",
+      "sku": "SKU",
+      "subtotal": "Subtotale",
+      "tax": "Tasse",
+      "title": "Ordine {{ name }}",
+      "total": "Totale",
+      "total_due": "Totale dovuto",
+      "total_duties": "Dazi totali",
+      "total_refunded": "Totale rimborsato",
+      "track_shipment": "Traccia spedizione"
+    },
+    "orders": {
+      "date": "Data",
+      "fulfillment_status": "Stato di evasione",
+      "none": "Nessun ordine trovato",
+      "order": "Ordine",
+      "order_number": "Numero d'ordine",
+      "orders": "Ordini",
+      "payment_status": "Stato del pagamento",
+      "total": "Totale"
+    },
+    "register": {
+      "back_to_login": "Torna al login",
+      "email": "Email",
+      "first_name": "Nome",
+      "last_name": "Cognome",
+      "password": "Password",
+      "submit": "Crea account",
+      "subtext": "Inserisci le tue informazioni qui sotto per creare un account.",
+      "title": "Crea account"
+    },
+    "reset_password": {
+      "password": "Password",
+      "password_confirm": "Conferma password",
+      "submit": "Reimposta password",
+      "subtext": "Inserisci la tua nuova password qui sotto.",
+      "title": "Reimposta password"
+    }
+  },
+  "customers": {
+    "login": {
+      "email": "Email",
+      "password": "Password",
+      "submit": "Accedi",
+      "title": "Accesso"
+    }
+  },
+  "demo": {
+    "accordions": "Fisarmoniche",
+    "badges": "Badge",
+    "button_full_width_default": "Pulsante a larghezza intera",
+    "button_small_default": "Pulsante piccolo",
+    "button_with_icon_default": "Pulsante con icona",
+    "buttons": "Pulsanti",
+    "checkbox_checked_default": "Casella di controllo preselezionata",
+    "checkbox_default": "Casella di controllo",
+    "checkbox_disabled_default": "Casella di controllo disabilitata",
+    "checkboxes": "Caselle di controllo",
+    "color_swatches": "Campioni di colore",
+    "icons_and_rating": "Icone e stelle di valutazione",
+    "input_fields": "Campi di input",
+    "popup": "Pop-up",
+    "price": "Prezzo",
+    "radio_buttons": "Pulsanti di opzione",
+    "radio_checked_default": "Pulsante di opzione preselezionato",
+    "radio_default": "Pulsante di opzione",
+    "radio_disabled_default": "Pulsante di opzione disabilitato",
+    "selectors": "Selettori",
+    "swatch_color_1_default": "Colore 1",
+    "swatch_color_2_default": "Colore 2",
+    "swatch_color_3_default": "Colore 3",
+    "swatch_image_1_default": "Pistacchio",
+    "swatch_image_2_default": "Cioccolato",
+    "swatch_image_3_default": "Fragola",
+    "text_paragraph_preset_default": "Questo è un paragrafo, questo è un paragrafo, questo è un paragrafo, questo è un paragrafo, questo è un paragrafo.",
+    "textfield_default": "Campo di input",
+    "textfield_disabled_default": "Campo disabilitato",
+    "textfield_full_width_default": "Campo a larghezza intera",
+    "textfield_small_default": "Campo piccolo",
+    "title_1_preset_default": "Titolo H1",
+    "title_2_preset_default": "Titolo H2",
+    "title_3_preset_default": "Titolo H3",
+    "title_4_preset_default": "Titolo H4",
+    "title_5_preset_default": "Titolo H5",
+    "title_6_preset_default": "Titolo H6",
+    "typographies": "Tipografie",
+    "title": "Design System",
+    "description": "This section lets you preview the rendering of different components and theme styles.",
+    "description2": "When you're done configuring the theme, you can remove it.",
+    "badge_custom_default": "Custom badge",
+    "product_badges": "Product badges",
+    "button_tertiary_default": "Tertiary",
+    "button_secondary_default": "Secondary",
+    "checkboxes_and_radios": "Checkboxes & radio buttons",
+    "selectors_and_inputs": "Selectors & input fields",
+    "product_components": "Product components",
+    "tabs": "Tabs",
+    "variant_buttons": "Variant buttons",
+    "logos": "Logos",
+    "logo": "Logo",
+    "logo_inverse": "Inverse logo",
+    "favicon": "Favicon",
+    "quantity_selector": "Quantity selector",
+    "quantity_breaks": "Quantity discount",
+    "product_name": "product",
+    "products_name": "products",
+    "toggle_cross_sell": "Toggle cross-sell",
+    "cross_sell_product_1": "Protective case",
+    "cross_sell_product_2": "Charging cable",
+    "cross_sell_title": "Cross-sell",
+    "cross_sell_bundle_title": "Complete bundle",
+    "cross_sell_bundle_description": "Save by buying the bundle",
+    "subscription_title": "Subscription",
+    "subscription_one_time": "One-time purchase",
+    "subscription_subscribe": "Subscribe and save -10%"
+  },
+  "gift_card": {
+    "add_to_apple_wallet": "Aggiungi ad Apple Wallet",
+    "card": "Carta regalo",
+    "expired": "Questa carta regalo è scaduta",
+    "expires_on": "Scade il {{ expires_on }}",
+    "use_at_checkout": "Usa questa carta regalo alla cassa"
+  },
+  "header": {
+    "account": "Account",
+    "menu_close": "Chiudi menu",
+    "menu_open": "Apri menu",
+    "notification_image_alt": "Immagine di notifica"
+  },
+  "newsletter": {
+    "success": "Ora sei iscritto alla newsletter."
+  },
+  "password": {
+    "enter": "Entra nel negozio",
+    "password": "Password",
+    "title": "Questo negozio è privato"
+  },
+  "placeholder": {
+    "placeholder_banner_alt": "Banner",
+    "placeholder_image_alt": "Immagine",
+    "placeholder_video_alt": "Video"
+  },
+  "placeholders": {
+    "search": "Cerca"
+  },
+  "powered_by_fullstack": "Sito creato con il tema Fullstack",
+  "products": {
+    "add": "Aggiungi",
+    "add_to_cart": "Aggiungi al carrello",
+    "add_to_cart_unavailable": "Non disponibile",
+    "added": "Aggiunto",
+    "image_alt": "Immagine del prodotto",
+    "inventory_in_stock": "In magazzino",
+    "inventory_low_stock": "Scorte basse",
+    "inventory_low_stock_show_count": "{{ count }} articoli in magazzino",
+    "inventory_out_of_stock": "Esaurito",
+    "no_product": "Seleziona un prodotto nelle impostazioni della sezione",
+    "preorder": "Preordina",
+    "preorder_property": "Preordine",
+    "remove": "Rimuovi",
+    "reviews": "recensioni",
+    "sales": "In saldo",
+    "save": "Risparmia",
+    "sold_out": "Esaurito"
+  },
+  "search": {
+    "collections": "Collezioni",
+    "no_results_html": "Nessun risultato trovato per {{ terms }}",
+    "pages_and_articles": "Pagine e articoli",
+    "placeholder": "Cerca",
+    "products": "Prodotti",
+    "results_for_html": "{{ count }} risultati trovati per {{ terms }}",
+    "submit": "Cerca",
+    "title": "Cerca"
+  },
+  "theme": {
+    "consoleLogFullstack": "Questo negozio è alimentato dal Tema Fullstack.",
+    "consoleLogFullstackUrl": "Visita https://www.themefullstack.com per saperne di più."
+  },
+  "timer": {
+    "days": "Giorni",
+    "hours": "Ore",
+    "minutes": "Minuti",
+    "seconds": "Secondi"
+  },
+  "video": {
+    "pause": "Pausa",
+    "pause_video": "Metti in pausa il video",
+    "play": "Riproduci",
+    "play_video": "Riproduci il video"
+  },
+  "wishlist": {
+    "empty": "La tua lista dei desideri è vuota",
+    "product_added_to_wishlist": "Prodotto aggiunto alla lista dei desideri",
+    "product_removed_from_wishlist": "Prodotto rimosso dalla lista dei desideri",
+    "title": "Lista dei desideri"
+  }
+}

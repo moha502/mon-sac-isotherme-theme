@@ -1,0 +1,74 @@
+{% assign collection = closest.collection -%}
+
+{% capture children %}
+    {% content_for 'blocks', closest.collection: collection %}
+  {% endcapture %}
+
+{% render 'collection-card', children: children, collection: collection, block: block %}
+
+{% schema %}
+{
+  "name": "t:collection_card",
+  "tag": null,
+  "blocks": [
+    {
+      "type": "image"
+    },
+    {
+      "type": "text"
+    }
+  ],
+  "settings": [
+    {
+      "type": "header",
+      "content": "t:style"
+    },
+    {
+      "type": "checkbox",
+      "id": "wrap_in_card",
+      "label": "t:wrap_in_card",
+      "default": false
+    },
+    {
+      "type": "color_scheme",
+      "id": "color_scheme",
+      "label": "t:color_scheme",
+      "default": "scheme-2",
+      "visible_if": "{{ block.settings.wrap_in_card }}"
+    },
+    {
+      "type": "header",
+      "content": "t:layout"
+    },
+    {
+      "type": "range",
+      "id": "layout_gap",
+      "label": "t:layout_gap",
+      "default": 10,
+      "min": 0,
+      "max": 30,
+      "step": 1,
+      "unit": "px"
+    },
+    {
+      "type": "header",
+      "content": "t:go_further"
+    },
+    {
+      "type": "paragraph",
+      "content": "t:go_further_description"
+    }
+  ],
+  "presets": [
+    {
+      "name": "t:collection_card",
+      "category": "t:collection",
+      "settings": {
+        "wrap_in_card": false,
+        "color_scheme": "scheme-2",
+        "layout_gap": 10
+      }
+    }
+  ]
+}
+{% endschema %}

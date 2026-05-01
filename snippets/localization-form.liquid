@@ -1,0 +1,249 @@
+{%- doc -%}
+  Affiche soit le sélecteur de pays, soit le sélecteur de langue, soit les deux.
+
+  @param {boolean} show_country - Affiche le sélecteur de pays
+  @param {boolean} show_language - Affiche le sélecteur de langue
+  @param {boolean} [uppercase] - Indique si les éléments doivent être en majuscule
+  @param {number} [font_weight] - Poids de la police
+
+  @example
+  {% render 'localization-form', show_country: true, show_language: true %}
+{%- enddoc -%}
+
+{%- liquid
+  assign currencies = localization.available_countries | map: 'currency' | map: 'iso_code' | uniq
+
+  assign show_currencies = false
+  if currencies.size > 1
+    assign show_currencies = true
+  endif
+%}
+
+<script src="{{ 'localization-form.js' | asset_url }}" type="module"></script>
+
+<localization-form-component>
+  {%- form 'localization', id: 'LocalizationForm', class: 'localization-form' -%}
+    {% if show_country %}
+      <div class="localization-form__country-selector">
+        <ul role="list" class="localization-form__countries list-unstyled">
+          {%- for country in localization.available_countries -%}
+            <li
+              class="localization-form__country{% if country.iso_code == localization.country.iso_code %} localization-form__country--selected{% endif %}"
+              data-value="{{ country.iso_code }}"
+              id="{{ country.name }}"
+              role="option"
+              tabindex="-1"
+              data-ref="country-input-item"
+            >
+              {% render 'icon', icon: 'check' %}
+
+              <span class="country">{{- country.name }}</span>
+              <span
+                class="localization-form__country-currency"
+                {% unless show_currencies %}
+                  hidden
+                {% endunless %}
+              >
+                {{ country.currency.iso_code }}
+                {{ country.currency.symbol -}}
+              </span>
+            </li>
+          {%- endfor -%}
+        </ul>
+        <input type="hidden" name="country_code" value="{{ localization.country.iso_code }}" data-ref="country-input">
+      </div>
+    {% endif %}
+
+    {% if show_language %}
+      <div
+        class="localization-form__language-selector {% if show_country == true %}localization-form__language-selector--with-country{% endif %}{% if uppercase %} localization-form__language-selector--uppercase{% endif %}"
+        style="--font-weight: {{ font_weight }};"
+      >
+        {% if show_country == true %}
+          <span class="localization-form__language-select-label">{{ 'content.language' | t }}</span>
+        {% endif %}
+
+        <div class="localization-form__language-select-wrapper">
+          <select
+            class="localization-form__language-select"
+            name="language_code"
+            data-ref="language-input"
+          >
+            {%- for language in localization.available_languages -%}
+              <option
+                value="{{ language.iso_code }}"
+                lang="{{ language.iso_code }}"
+                {% if language.iso_code == localization.language.iso_code %}
+                  selected
+                {% endif %}
+              >
+                {{ language.endonym_name | capitalize }}
+              </option>
+            {%- endfor -%}
+          </select>
+          <div class="localization-form__language-select-wrapper__icon">
+            {% render 'icon', icon: 'keyboard_arrow_down' %}
+          </div>
+        </div>
+      </div>
+    {% endif %}
+  {%- endform -%}
+</localization-form-component>
+
+{% stylesheet %}
+  dropdown-localization-component {
+    position: relative;
+    color: var(--color-foreground);
+  }
+
+  /* Choix de pays */
+
+  .localization-form__country-selector {
+    overflow-y: auto;
+    max-height: 100%;
+    flex-grow: 1;
+    max-height: 20.5rem;
+  }
+
+  .localization-form__countries {
+    display: flex;
+    flex-direction: column;
+    gap: 3px;
+    position: relative;
+    width: 100%;
+    scroll-padding: var(--padding-xs) 0;
+    overflow-y: auto;
+    white-space: nowrap;
+  }
+
+  .localization-form__country {
+    border-radius: calc(var(--card-border-radius) - var(--padding-xs));
+    display: flex;
+    align-items: center;
+    padding: var(--padding-xs);
+    font-size: var(--font-body--size);
+    gap: 3px;
+    cursor: pointer;
+    transition: background-color var(--animation-speed) var(--animation-easing);
+  }
+
+  .localization-form__country:hover,
+  .localization-form__country:focus,
+  .localization-form__country--selected {
+    background-color: rgb(from var(--color-foreground) r g b / 5%);
+    font-weight: 500;
+  }
+
+  .localization-form__country .country {
+    flex: 1;
+  }
+
+  .localization-form__country .icon--check {
+    visibility: hidden;
+    font-size: 18px !important;
+  }
+
+  .localization-form__country--selected .icon--check {
+    visibility: visible;
+  }
+
+  .localization-form__country-currency {
+    width: max-content;
+    opacity: 0;
+    visibility: hidden;
+    transition: none;
+  }
+
+  .localization-form__country:hover .localization-form__country-currency,
+  .localization-form__country--selected .localization-form__country-currency {
+    opacity: 1;
+    transition: opacity var(--animation-speed-fast) var(--animation-easing);
+    visibility: visible;
+  }
+
+  /* Choix de langue */
+
+  .localization-form__language-selector {
+    display: flex;
+    position: relative;
+    align-items: center;
+    justify-content: space-between;
+    width: 100%;
+    font-size: var(--font-body--size);
+
+    &.localization-form__language-selector--with-country {
+      border-top: var(--separator-border-width) solid var(--color-border);
+      margin-top: var(--padding-xs);
+      padding: var(--padding-xs) var(--padding-xs) 0;
+
+      .localization-form__language-select-wrapper {
+        width: auto;
+      }
+    }
+
+    .icon--keyboard_arrow_down {
+      font-size: 22px !important;
+    }
+  }
+
+  .localization-form__language-select-label {
+    flex: 1;
+  }
+
+  .localization-form__language-select-wrapper {
+    position: relative;
+    display: inline-block;
+    width: 100%;
+  }
+
+  .localization-form__language-select {
+    -webkit-appearance: none;
+    -moz-appearance: none;
+    appearance: none;
+    height: 35px;
+    padding: 0 var(--inputs-padding);
+    padding-right: calc(var(--inputs-padding) * 2);
+    border: none;
+    border-radius: var(--inputs-border-radius);
+    color: var(--color-input-text);
+    background-color: var(--color-input-background);
+    cursor: pointer;
+    font-size: var(--inputs-font-size);
+    font-weight: var(--font-weight);
+    width: 100%;
+  }
+
+  .localization-form__language-selector--uppercase .localization-form__language-select {
+    text-transform: uppercase;
+  }
+
+  .localization-form__language-select:not(:disabled):hover,
+  .localization-form__language-select:not(:disabled):focus,
+  .localization-form__language-select:focus-visible,
+  .localization-form__language-select:focus {
+    outline: none;
+    margin: 0;
+    box-shadow: none;
+  }
+
+  .localization-form__language-select-wrapper__icon {
+    position: absolute;
+    top: 50%;
+    right: 0;
+    transform: translateY(-50%);
+    pointer-events: none;
+    color: var(--color-input-text);
+    height: 20px;
+  }
+
+  .localization-form__language-select-wrapper__icon .icon {
+    font-size: 20px !important;
+  }
+
+  @media (width <= 1000px) {
+    .localization-form__country-currency {
+      opacity: 1;
+      visibility: visible;
+    }
+  }
+{% endstylesheet %}

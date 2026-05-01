@@ -1,0 +1,587 @@
+{%- if section.settings.breadcrumbs_enabled -%}
+  {%- unless template == 'index' or template == 'cart' or template == '404' -%}
+    {% assign show_breadcrumbs_on_this_page = false %}
+    {% if section.settings.breadcrumbs_enabled_on_products and template.name == 'product' %}
+      {% assign show_breadcrumbs_on_this_page = true %}
+    {% elsif section.settings.breadcrumbs_enabled_on_pages and template.name == 'page' %}
+      {% assign show_breadcrumbs_on_this_page = true %}
+    {% elsif section.settings.breadcrumbs_enabled_on_collections and template.name == 'collection' %}
+      {% assign show_breadcrumbs_on_this_page = true %}
+    {% elsif section.settings.breadcrumbs_enabled_on_blogs and template.name == 'blog' %}
+      {% assign show_breadcrumbs_on_this_page = true %}
+    {% elsif section.settings.breadcrumbs_enabled_on_articles and template.name == 'article' %}
+      {% assign show_breadcrumbs_on_this_page = true %}
+    {% endif %}
+
+    {% if show_breadcrumbs_on_this_page %}
+      {% assign breadcrumbs_menu = linklists[section.settings.breadcrumbs_menu_definition].links %}
+      {% assign max_depth = 0 %}
+      {% if section.settings.prefer_shortest_path %}
+        {% assign previous_max_depth = 9 %}
+      {% else %}
+        {% assign previous_max_depth = 0 %}
+      {% endif %}
+      {% assign current_template_type = template | split: '.' | first %}
+      {% assign current_template = null %}
+      {% assign current_template_parents = null %}
+      {% assign link_found = false %}
+      {% assign link_depth1 = null %}
+      {% assign link_depth2 = null %}
+      {% assign link_depth3 = null %}
+
+      {% comment %}Determine page identifier based on page type{% endcomment %}
+      {% case current_template_type %}
+        {% when 'product' %}
+          {% assign current_template = product %}
+          {% assign current_template_parents = product.collections %}
+        {% when 'collection' %}
+          {% assign current_template = collection %}
+        {% when 'page' %}
+          {% assign current_template = page %}
+        {% when 'blog' %}
+          {% assign current_template = blog %}
+        {% when 'article' %}
+          {% assign current_template = article %}
+          {% assign article_handle_parts = article.handle | split: '/' %}
+          {% assign blog_handle_extracted = article_handle_parts[0] %}
+          {% assign template_type_other = true %}
+        {% else %}
+          {% comment %}
+            For all Other template types:
+              - policies (no actual template)
+              - search
+              - list-collections
+            Use built-in variables request.path and page_title
+          {% endcomment %}
+          {% assign template_type_other = true %}
+      {% endcase %}
+
+      {% for link in breadcrumbs_menu %}
+        {% assign current_depth = 1 %}
+        {% if link.object %}
+          {% if link.object.handle and current_template.handle and link.object.handle == current_template.handle %}
+            {% if link_found == false %}
+              {% assign max_depth = current_depth %}
+              {% assign previous_max_depth = max_depth %}
+              {% assign link_found = true %}
+            {% elsif section.settings.prefer_shortest_path and current_depth < previous_max_depth %}
+              {% assign link_depth1 = null %}
+              {% assign link_depth2 = null %}
+              {% assign link_depth3 = null %}
+              {% assign max_depth = current_depth %}
+              {% assign previous_max_depth = max_depth %}
+            {% elsif section.settings.prefer_shortest_path == false and current_depth > previous_max_depth %}
+              {% assign max_depth = current_depth %}
+              {% assign previous_max_depth = max_depth %}
+            {% endif %}
+          {% elsif current_template_parents %}
+            {% for parent in current_template_parents %}
+              {% if link.object.handle and parent.handle and link.object.handle == parent.handle %}
+                {% assign current_depth = current_depth | plus: 1 %}
+                {% if link_found == false %}
+                  {% assign link_depth1 = link %}
+                  {% assign max_depth = current_depth %}
+                  {% assign previous_max_depth = max_depth %}
+                  {% assign link_found = true %}
+                  {% break %}
+                {% elsif section.settings.prefer_shortest_path and current_depth < previous_max_depth %}
+                  {% assign link_depth1 = link %}
+                  {% assign link_depth2 = null %}
+                  {% assign link_depth3 = null %}
+                  {% assign max_depth = current_depth %}
+                  {% assign previous_max_depth = max_depth %}
+                  {% break %}
+                {% elsif section.settings.prefer_shortest_path == false and current_depth > previous_max_depth %}
+                  {% assign link_depth1 = link %}
+                  {% assign max_depth = current_depth %}
+                  {% assign previous_max_depth = max_depth %}
+                  {% break %}
+                {% endif %}
+              {% endif %}
+            {% endfor %}
+          {% elsif template_type_other %}
+            {% if current_template_type == 'article' %}
+              {% if link.object.handle and blog_handle_extracted and link.object.handle == blog_handle_extracted %}
+                {% assign current_depth = current_depth | plus: 1 %}
+                {% if link_found == false %}
+                  {% assign link_depth1 = link %}
+                  {% assign max_depth = current_depth %}
+                  {% assign previous_max_depth = max_depth %}
+                  {% assign link_found = true %}
+                {% elsif section.settings.prefer_shortest_path and current_depth < previous_max_depth %}
+                  {% assign link_depth1 = link %}
+                  {% assign link_depth2 = null %}
+                  {% assign link_depth3 = null %}
+                  {% assign max_depth = current_depth %}
+                  {% assign previous_max_depth = max_depth %}
+                {% elsif section.settings.prefer_shortest_path == false and current_depth > previous_max_depth %}
+                  {% assign link_depth1 = link %}
+                  {% assign max_depth = current_depth %}
+                  {% assign previous_max_depth = max_depth %}
+                {% endif %}
+              {% endif %}
+            {% else %}
+              {% if link.object.title == page_title %}
+                {% if link_found == false %}
+                  {% assign max_depth = current_depth %}
+                  {% assign previous_max_depth = max_depth %}
+                  {% assign link_found = true %}
+                {% elsif section.settings.prefer_shortest_path and current_depth < previous_max_depth %}
+                  {% assign link_depth1 = null %}
+                  {% assign link_depth2 = null %}
+                  {% assign link_depth3 = null %}
+                  {% assign max_depth = current_depth %}
+                  {% assign previous_max_depth = max_depth %}
+                {% elsif section.settings.prefer_shortest_path == false and current_depth > previous_max_depth %}
+                  {% assign max_depth = current_depth %}
+                  {% assign previous_max_depth = max_depth %}
+                {% endif %}
+              {% endif %}
+            {% endif %}
+          {% endif %}
+        {% endif %}
+        {% if link.links %}
+          {% for childlink in link.links %}
+            {% assign current_depth = 2 %}
+            {% if childlink.object %}
+              {% if childlink.object.handle
+                and current_template.handle
+                and childlink.object.handle == current_template.handle
+              %}
+                {% if link_found == false %}
+                  {% assign link_depth1 = link %}
+                  {% assign max_depth = current_depth %}
+                  {% assign previous_max_depth = max_depth %}
+                  {% assign link_found = true %}
+                {% elsif section.settings.prefer_shortest_path and current_depth < previous_max_depth %}
+                  {% assign link_depth1 = link %}
+                  {% assign link_depth2 = null %}
+                  {% assign link_depth3 = null %}
+                  {% assign max_depth = current_depth %}
+                  {% assign previous_max_depth = max_depth %}
+                {% elsif section.settings.prefer_shortest_path == false and current_depth > previous_max_depth %}
+                  {% assign link_depth1 = link %}
+                  {% assign max_depth = current_depth %}
+                  {% assign previous_max_depth = max_depth %}
+                {% endif %}
+              {% elsif current_template_parents %}
+                {% for parent in current_template_parents %}
+                  {% if childlink.object.handle and parent.handle and childlink.object.handle == parent.handle %}
+                    {% assign current_depth = current_depth | plus: 1 %}
+                    {% if link_found == false %}
+                      {% assign link_depth1 = link %}
+                      {% assign link_depth2 = childlink %}
+                      {% assign max_depth = current_depth %}
+                      {% assign previous_max_depth = max_depth %}
+                      {% assign link_found = true %}
+                      {% break %}
+                    {% elsif section.settings.prefer_shortest_path and current_depth < previous_max_depth %}
+                      {% assign link_depth1 = link %}
+                      {% assign link_depth2 = childlink %}
+                      {% assign link_depth3 = null %}
+                      {% assign max_depth = current_depth %}
+                      {% assign previous_max_depth = max_depth %}
+                      {% break %}
+                    {% elsif section.settings.prefer_shortest_path == false and current_depth > previous_max_depth %}
+                      {% assign link_depth1 = link %}
+                      {% assign link_depth2 = childlink %}
+                      {% assign max_depth = current_depth %}
+                      {% assign previous_max_depth = max_depth %}
+                      {% break %}
+                    {% endif %}
+                  {% endif %}
+                {% endfor %}
+              {% elsif template_type_other %}
+                {% if current_template_type == 'article' %}
+                  {% if link.object.handle and blog_handle_extracted and link.object.handle == blog_handle_extracted %}
+                    {% assign current_depth = current_depth | plus: 1 %}
+                    {% if link_found == false %}
+                      {% assign link_depth1 = link %}
+                      {% assign link_depth2 = childlink %}
+                      {% assign max_depth = current_depth %}
+                      {% assign previous_max_depth = max_depth %}
+                      {% assign link_found = true %}
+                    {% elsif section.settings.prefer_shortest_path and current_depth < previous_max_depth %}
+                      {% assign link_depth1 = link %}
+                      {% assign link_depth2 = childlink %}
+                      {% assign link_depth3 = null %}
+                      {% assign max_depth = current_depth %}
+                      {% assign previous_max_depth = max_depth %}
+                    {% elsif section.settings.prefer_shortest_path == false and current_depth > previous_max_depth %}
+                      {% assign link_depth1 = link %}
+                      {% assign link_depth2 = childlink %}
+                      {% assign max_depth = current_depth %}
+                      {% assign previous_max_depth = max_depth %}
+                    {% endif %}
+                  {% endif %}
+                {% else %}
+                  {% if link.object.title == page_title %}
+                    {% if link_found == false %}
+                      {% assign link_depth1 = link %}
+                      {% assign max_depth = current_depth %}
+                      {% assign previous_max_depth = max_depth %}
+                      {% assign link_found = true %}
+                    {% elsif section.settings.prefer_shortest_path and current_depth < previous_max_depth %}
+                      {% assign link_depth1 = link %}
+                      {% assign link_depth2 = null %}
+                      {% assign link_depth3 = null %}
+                      {% assign max_depth = current_depth %}
+                      {% assign previous_max_depth = max_depth %}
+                    {% elsif section.settings.prefer_shortest_path == false and current_depth > previous_max_depth %}
+                      {% assign link_depth1 = link %}
+                      {% assign max_depth = current_depth %}
+                      {% assign previous_max_depth = max_depth %}
+                    {% endif %}
+                  {% endif %}
+                {% endif %}
+              {% endif %}
+            {% endif %}
+            {% if childlink.links %}
+              {% for grandchildlink in childlink.links %}
+                {% if section.settings.prefer_shortest_path and link_found %}{% break %}{% endif %}
+                {% assign current_depth = 3 %}
+                {% if grandchildlink.object.handle
+                  and current_template.handle
+                  and grandchildlink.object.handle == current_template.handle
+                %}
+                  {% if link_found == false %}
+                    {% assign link_depth1 = link %}
+                    {% assign link_depth2 = childlink %}
+                    {% assign max_depth = current_depth %}
+                    {% assign previous_max_depth = max_depth %}
+                    {% assign link_found = true %}
+                  {% elsif section.settings.prefer_shortest_path and current_depth < previous_max_depth %}
+                    {% assign link_depth1 = link %}
+                    {% assign link_depth2 = childlink %}
+                    {% assign link_depth3 = null %}
+                    {% assign max_depth = current_depth %}
+                    {% assign previous_max_depth = max_depth %}
+                  {% elsif section.settings.prefer_shortest_path == false and current_depth > previous_max_depth %}
+                    {% assign link_depth1 = link %}
+                    {% assign link_depth2 = childlink %}
+                    {% assign max_depth = current_depth %}
+                    {% assign previous_max_depth = max_depth %}
+                  {% endif %}
+                {% elsif current_template_parents %}
+                  {% for parent in current_template_parents %}
+                    {% if grandchildlink.object.handle
+                      and parent.handle
+                      and grandchildlink.object.handle == parent.handle
+                    %}
+                      {% assign current_depth = current_depth | plus: 1 %}
+                      {% if link_found == false %}
+                        {% assign link_depth1 = link %}
+                        {% assign link_depth2 = childlink %}
+                        {% assign link_depth3 = grandchildlink %}
+                        {% assign max_depth = current_depth %}
+                        {% assign previous_max_depth = max_depth %}
+                        {% assign link_found = true %}
+                        {% break %}
+                      {% elsif section.settings.prefer_shortest_path and current_depth < previous_max_depth %}
+                        {% assign link_depth1 = link %}
+                        {% assign link_depth2 = childlink %}
+                        {% assign link_depth3 = grandchildlink %}
+                        {% assign max_depth = current_depth %}
+                        {% assign previous_max_depth = max_depth %}
+                        {% break %}
+                      {% elsif section.settings.prefer_shortest_path == false and current_depth > previous_max_depth %}
+                        {% assign link_depth1 = link %}
+                        {% assign link_depth2 = childlink %}
+                        {% assign link_depth3 = grandchildlink %}
+                        {% assign max_depth = current_depth %}
+                        {% assign previous_max_depth = max_depth %}
+                        {% break %}
+                      {% endif %}
+                    {% endif %}
+                  {% endfor %}
+                {% elsif template_type_other %}
+                  {% if current_template_type == 'article' %}
+                    {% if link.object.handle
+                      and blog_handle_extracted
+                      and link.object.handle == blog_handle_extracted
+                    %}
+                      {% assign current_depth = current_depth | plus: 1 %}
+                      {% if link_found == false %}
+                        {% assign link_depth1 = link %}
+                        {% assign link_depth2 = childlink %}
+                        {% assign link_depth3 = grandchildlink %}
+                        {% assign max_depth = current_depth %}
+                        {% assign previous_max_depth = max_depth %}
+                        {% assign link_found = true %}
+                      {% elsif section.settings.prefer_shortest_path and current_depth < previous_max_depth %}
+                        {% assign link_depth1 = link %}
+                        {% assign link_depth2 = childlink %}
+                        {% assign link_depth3 = grandchildlink %}
+                        {% assign max_depth = current_depth %}
+                        {% assign previous_max_depth = max_depth %}
+                      {% elsif section.settings.prefer_shortest_path == false and current_depth > previous_max_depth %}
+                        {% assign link_depth1 = link %}
+                        {% assign link_depth2 = childlink %}
+                        {% assign link_depth3 = grandchildlink %}
+                        {% assign max_depth = current_depth %}
+                        {% assign previous_max_depth = max_depth %}
+                      {% endif %}
+                    {% endif %}
+                  {% else %}
+                    {% if link.object.title == page_title %}
+                      {% if link_found == false %}
+                        {% assign link_depth1 = link %}
+                        {% assign link_depth2 = childlink %}
+                        {% assign max_depth = current_depth %}
+                        {% assign previous_max_depth = max_depth %}
+                        {% assign link_found = true %}
+                      {% elsif section.settings.prefer_shortest_path and current_depth < previous_max_depth %}
+                        {% assign link_depth1 = link %}
+                        {% assign link_depth2 = childlink %}
+                        {% assign link_depth3 = null %}
+                        {% assign max_depth = current_depth %}
+                        {% assign previous_max_depth = max_depth %}
+                      {% elsif section.settings.prefer_shortest_path == false and current_depth > previous_max_depth %}
+                        {% assign link_depth1 = link %}
+                        {% assign link_depth2 = childlink %}
+                        {% assign max_depth = current_depth %}
+                        {% assign previous_max_depth = max_depth %}
+                      {% endif %}
+                    {% endif %}
+                  {% endif %}
+                {% endif %}
+              {% endfor %}
+            {% endif %}
+          {% endfor %}
+        {% endif %}
+      {% endfor %}
+
+      <div
+        class="color-{{ section.settings.color_scheme }}"
+        style="
+          margin-top: {{ section.settings.margin_top }}px;
+          margin-bottom: {{ section.settings.margin_bottom }}px;
+        "
+      >
+        <nav class="breadcrumbs breadcrumbs--{{ section.settings.separator_shape }} page-width">
+          <ol class="breadcrumbs__list">
+            <li class="breadcrumbs__item">
+              <a class="breadcrumbs__link link" href="{{ request.locale.root_url }}">{{ 'breadcrumbs.home' | t }}</a>
+            </li>
+
+            {% if link_depth1 %}
+              <li class="breadcrumbs__item">
+                <a class="breadcrumbs__link link" href="{{ link_depth1.url }}">{{ link_depth1.title }}</a>
+              </li>
+            {% endif %}
+
+            {% if link_depth2 %}
+              <li class="breadcrumbs__item">
+                <a class="breadcrumbs__link link" href="{{ link_depth2.url }}">{{ link_depth2.title }}</a>
+              </li>
+            {% endif %}
+
+            {% if link_depth3 %}
+              <li class="breadcrumbs__item">
+                <a class="breadcrumbs__link link" href="{{ link_depth3.url }}">{{ link_depth3.title }}</a>
+              </li>
+            {% endif %}
+
+            {% if template_type_other %}
+              <li class="breadcrumbs__item">{{ page_title }}</li>
+            {% else %}
+              <li class="breadcrumbs__item">{{ current_template.title }}</li>
+            {% endif %}
+          </ol>
+        </nav>
+      </div>
+    {% endif %}
+  {% endunless %}
+{%- endif -%}
+
+{% stylesheet %}
+  .breadcrumbs {
+    padding-top: var(--padding-md);
+    padding-bottom: var(--padding-md);
+    margin-top: var(--margin-top);
+    margin-bottom: var(--margin-bottom);
+  }
+
+  .breadcrumbs__list {
+    list-style-type: none;
+    margin: 0;
+    padding: 0;
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+    flex-wrap: wrap;
+    gap: var(--gap-xs);
+  }
+
+  .breadcrumbs__item {
+    display: flex;
+    font-size: var(--font-body--size);
+    flex-direction: row;
+    align-items: center;
+    gap: var(--gap-xs);
+  }
+
+  .breadcrumbs__item:not(:last-child):after {
+    content: '';
+    display: inline-block;
+    position: relative;
+    vertical-align: middle;
+  }
+
+  .breadcrumbs--triangle .breadcrumbs__item:not(:last-child):after {
+    border-style: solid;
+    border-width: 0.1em 0.1em 0 0;
+    height: 0.35em;
+    width: 0.35em;
+    transform: rotate(45deg);
+  }
+
+  .breadcrumbs--slash .breadcrumbs__item:not(:last-child):after {
+    content: '/';
+  }
+
+  .breadcrumbs__link {
+    cursor: pointer;
+    display: inline-block;
+    border: none;
+    box-shadow: none;
+    text-decoration: none;
+    text-underline-offset: 0.3rem;
+    transition: var(--animation-link-hover);
+  }
+
+  .breadcrumbs__link:hover {
+    opacity: var(--opacity-link-hover);
+  }
+{% endstylesheet %}
+
+{% schema %}
+{
+  "name": "t:breadcrumbs",
+  "class": "section-breadcrumbs",
+  "settings": [
+    {
+      "type": "checkbox",
+      "id": "breadcrumbs_enabled",
+      "label": "t:breadcrumbs_enabled",
+      "default": false
+    },
+    {
+      "type": "checkbox",
+      "id": "breadcrumbs_enabled_on_products",
+      "label": "t:breadcrumbs_enabled_on_products",
+      "default": true,
+      "visible_if": "{{ section.settings.breadcrumbs_enabled }}"
+    },
+    {
+      "type": "checkbox",
+      "id": "breadcrumbs_enabled_on_pages",
+      "label": "t:breadcrumbs_enabled_on_pages",
+      "default": true,
+      "visible_if": "{{ section.settings.breadcrumbs_enabled }}"
+    },
+    {
+      "type": "checkbox",
+      "id": "breadcrumbs_enabled_on_collections",
+      "label": "t:breadcrumbs_enabled_on_collections",
+      "default": true,
+      "visible_if": "{{ section.settings.breadcrumbs_enabled }}"
+    },
+    {
+      "type": "checkbox",
+      "id": "breadcrumbs_enabled_on_blogs",
+      "label": "t:breadcrumbs_enabled_on_blogs",
+      "default": true,
+      "visible_if": "{{ section.settings.breadcrumbs_enabled }}"
+    },
+    {
+      "type": "checkbox",
+      "id": "breadcrumbs_enabled_on_articles",
+      "label": "t:breadcrumbs_enabled_on_articles",
+      "default": true,
+      "visible_if": "{{ section.settings.breadcrumbs_enabled }}"
+    },
+    {
+      "type": "link_list",
+      "id": "breadcrumbs_menu_definition",
+      "default": "main-menu",
+      "label": "t:breadcrumbs_menu_definition"
+    },
+
+    {
+      "type": "checkbox",
+      "id": "prefer_shortest_path",
+      "label": "t:breadcrumbs_prefer_shortest_path",
+      "default": true
+    },
+    {
+      "type": "header",
+      "content": "t:style"
+    },
+    {
+      "type": "select",
+      "id": "separator_shape",
+      "label": "t:breadcrumbs_separator_shape",
+      "options": [
+        {
+          "value": "triangle",
+          "label": ">"
+        },
+        {
+          "value": "slash",
+          "label": "/"
+        }
+      ],
+      "default": "triangle"
+    },
+    {
+      "type": "color_scheme",
+      "id": "color_scheme",
+      "label": "t:color_scheme",
+      "default": "scheme-1"
+    },
+    {
+      "type": "header",
+      "content": "t:margins"
+    },
+    {
+      "type": "range",
+      "id": "margin_top",
+      "label": "t:margin_top",
+      "step": 1,
+      "min": 0,
+      "max": 100,
+      "default": 0,
+      "unit": "px"
+    },
+    {
+      "type": "range",
+      "id": "margin_bottom",
+      "label": "t:margin_bottom",
+      "step": 1,
+      "min": 0,
+      "max": 100,
+      "default": 0,
+      "unit": "px"
+    },
+    {
+      "type": "header",
+      "content": "t:advanced_settings"
+    },
+    {
+      "type": "text",
+      "id": "additional_class",
+      "label": "t:additional_class",
+      "info": "t:additional_class_info"
+    },
+    {
+      "type": "header",
+      "content": "t:go_further"
+    },
+    {
+      "type": "paragraph",
+      "content": "t:go_further_description"
+    }
+  ]
+}
+{% endschema %}

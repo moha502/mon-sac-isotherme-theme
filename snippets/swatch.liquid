@@ -1,0 +1,143 @@
+{% doc %}
+  Affiche un swatch (échantillon de couleur ou d'image).
+
+  @param {string} id - L'ID unique pour l'input et le label.
+  @param {string} name - Le nom du groupe de radio-boutons.
+  @param {string} value - La valeur de l'option.
+  @param {string} [option_value_id] - L'ID de l'option.
+  @param {string} [variant_id] - L'ID de la variante.
+  @param {string} background - L'arrière-plan du swatch (URL d'image ou couleur).
+  @param {boolean} [checked] - Indique si l'option est sélectionnée.
+  @param {boolean} [disabled] - Indique si l'option est désactivée.
+  @param {boolean} [swatches_for_product_card] - Indique si le swatch est pour la carte produit.
+  @param {string} [product_variant_url] - L'URL de la variante.
+  @param {string} [data_name] - Nom de l'option.
+
+  @example
+  {% render 'swatch',
+    id: 'Color-1',
+    name: 'Color',
+    value: 'Red',
+    option_value_id: '12345678912',
+    variant_id: '4567890123456789',
+    background: 'rgb(255,0,0)',
+    checked: true
+  %}
+{% enddoc %}
+
+{%- liquid
+  assign swatch_classes = 'swatch'
+
+  if disabled
+    assign swatch_classes = swatch_classes | append: ' swatch--disabled'
+  endif
+-%}
+
+{% if swatches_for_product_card and product_variant_url %}
+  <span
+    data-href="{{ product_variant_url }}"
+    role="button"
+    tabindex="0"
+    class="swatch-link {{ swatch_classes }}"
+    {% if checked %}
+      aria-checked="true"
+    {% endif %}
+  >
+    <span style="--swatch-background: {{ background }};"></span>
+  </span>
+{% else %}
+  <input
+    class="swatch-input"
+    type="radio"
+    name="{{ name }}"
+    aria-label="{{ name }}"
+    id="{{ id }}"
+    value="{{ value }}"
+    {% if disabled %}
+      aria-disabled="true"
+    {% endif %}
+    {% if option_value_id %}
+      data-option-value-id="{{ option_value_id }}"
+    {% endif %}
+    {% if variant_id %}
+      data-variant-id="{{ variant_id }}"
+    {% endif %}
+    {% if checked %}
+      checked
+    {% endif %}
+    {% if data_name %}
+      data-name="{{ data_name }}"
+    {% endif %}
+  >
+  <label class="{{ swatch_classes }}" for="{{ id }}">
+    <span style="--swatch-background: {{ background }};"></span>
+  </label>
+{% endif %}
+
+{% stylesheet %}
+  .swatch-input {
+    clip: rect(0, 0, 0, 0);
+    overflow: hidden;
+    position: absolute;
+    width: 1px;
+    height: 1px;
+  }
+
+  .swatch-input + .swatch,
+  .swatch-link {
+    display: block;
+    border-radius: calc(var(--swatch-border-radius) - var(--swatch-outline-offset));
+    cursor: pointer;
+    outline-offset: var(--swatch-outline-offset);
+    margin: var(--swatches-border-width);
+    width: var(--swatch-size);
+    height: var(--swatch-size);
+    outline: var(--swatches-border-width) solid transparent;
+    transition: outline 0.1s ease-in-out;
+    forced-color-adjust: none;
+  }
+
+  .swatch-input:active + .swatch,
+  .swatch-input:checked + .swatch,
+  .swatch-link[aria-checked='true'],
+  .swatch-input:focus + .swatch,
+  .swatch-input:focus-visible + .swatch {
+    outline: var(--swatches-border-width) solid var(--color-selected-input-border);
+  }
+
+  .swatch-input:hover:not(:checked) + .swatch,
+  .swatch-link:hover:not([aria-checked='true']) {
+    outline: var(--swatches-border-width) solid var(--color-input-border-low-opacity);
+  }
+
+  .swatch span {
+    pointer-events: none;
+    position: relative;
+    overflow: hidden;
+    display: block;
+    width: var(--swatch-size);
+    height: var(--swatch-size);
+    background: var(--swatch-background);
+    background-size: cover;
+    background-origin: border-box;
+    border: 0.5px solid var(--color-input-border-low-opacity);
+    border-radius: calc(var(--swatch-border-radius) - var(--swatch-outline-offset));
+  }
+
+  .swatch--disabled span:after {
+    --crossed-line--size: 1px;
+    content: '';
+    position: absolute;
+    bottom: calc(var(--crossed-line--size) * -0.5);
+    left: 0;
+    width: calc(var(--swatch-size) * 1.414);
+    height: var(--crossed-line--size);
+    background-color: var(--color-foreground);
+    transform: rotate(-45deg);
+    transform-origin: left;
+  }
+
+  .swatch-input:checked + .swatch {
+    outline: var(--swatches-border-width) solid var(--color-selected-input-border);
+  }
+{% endstylesheet %}

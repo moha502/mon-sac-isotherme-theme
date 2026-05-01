@@ -1,0 +1,264 @@
+{% doc %}
+  Affiche le menu mobile.
+
+  @param menu_links - Les liens du menu.
+  @param localization_markup - Le markup de la localisation.
+  @param [uppercase] - Indique si les éléments doivent être en majuscule.
+  @param [font_weight] - Poids de la police.
+
+  @example
+  {% content_for 'block', type: '_header-drawer-menu', id: 'header-drawer-menu' %}
+{% enddoc %}
+
+<!-- Menu mobile overlay -->
+<div class="header__mobile-menu-overlay" data-ref="mobile-menu-overlay">
+  <div class="header__mobile-menu color-{{ block.settings.color_scheme }}" data-ref="mobile-menu">
+    <div class="header__mobile-menu-header">
+      <button
+        class="button button--tertiary button--small button--icon-only"
+        type="button"
+        data-ref="menu-close"
+      >
+        {% render 'icon', icon: 'close' %}
+      </button>
+    </div>
+    <nav class="header__mobile-menu-nav{% if uppercase %} header__mobile-menu-nav--uppercase{% endif %}" style="--font-weight: {{ font_weight }};">
+      {% content_for 'block', type: '_header-drawer-menu-header', id: 'header-drawer-menu-header' %}
+
+      {% for link in menu_links %}
+        {% if link.links.size > 0 %}
+          <!-- Lien avec sous-menu -->
+          <div class="accordion-animation">
+            <details class="header__mobile-menu-accordion">
+              <summary class="header__mobile-menu-link header__mobile-menu-link--parent">
+                <span class="header__mobile-menu-link-text">{{ link.title }}</span>
+                {% render 'icon', icon: 'keyboard_arrow_down' %}
+              </summary>
+              <div class="header__mobile-menu-submenu">
+                {% for child_link in link.links %}
+                  {% if child_link.links.size > 0 %}
+                    <!-- Sous-lien avec sous-sous-menu -->
+                    <div class="accordion-animation">
+                      <details class="header__mobile-menu-accordion">
+                        <summary class="header__mobile-menu-link header__mobile-menu-link--child">
+                          <span class="header__mobile-menu-link-text">{{ child_link.title }}</span>
+                          {% render 'icon', icon: 'keyboard_arrow_down' %}
+                        </summary>
+                        <div class="header__mobile-menu-submenu header__mobile-menu-submenu--level-2">
+                          {% for grandchild_link in child_link.links %}
+                            <a
+                              href="{{ grandchild_link.url }}"
+                              class="header__mobile-menu-link header__mobile-menu-link--grandchild"
+                            >
+                              {{ grandchild_link.title }}
+                            </a>
+                          {% endfor %}
+                        </div>
+                      </details>
+                    </div>
+                  {% else %}
+                    <!-- Sous-lien simple -->
+                    <a href="{{ child_link.url }}" class="header__mobile-menu-link header__mobile-menu-link--child">
+                      {{ child_link.title }}
+                    </a>
+                  {% endif %}
+                {% endfor %}
+              </div>
+            </details>
+          </div>
+        {% else %}
+          <!-- Lien simple sans sous-menu -->
+          <a href="{{ link.url }}" class="header__mobile-menu-link">
+            <span class="header__mobile-menu-link-text">{{ link.title }}</span>
+          </a>
+        {% endif %}
+      {% endfor %}
+
+      {% if shop.customer_accounts_enabled %}
+        <a href="{{ routes.account_url }}" class="header__mobile-menu-link">
+          <span class="header__mobile-menu-link-text">{{ 'header.account' | t }}</span>
+        </a>
+      {% endif %}
+
+      {% content_for 'block', type: '_header-drawer-menu-under-menu', id: 'header-drawer-menu-under-menu' %}
+    </nav>
+
+    {% if localization_markup %}
+      <div class="header__mobile-menu-footer">
+        {{ localization_markup }}
+      </div>
+    {% endif %}
+  </div>
+</div>
+
+{% stylesheet %}
+  /* Menu mobile */
+  .header__mobile-menu-overlay {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background: rgba(var(--color-shadow));
+    z-index: 1000;
+    opacity: 0;
+    visibility: hidden;
+    -webkit-backdrop-filter: brightness(1);
+    backdrop-filter: brightness(1);
+    transition: opacity var(--animation-speed) var(--animation-easing), visibility var(--animation-speed) var(--animation-easing);
+  }
+
+  .header__mobile-menu-overlay.is-open {
+    opacity: 1;
+    visibility: visible;
+    -webkit-backdrop-filter: brightness(0.75);
+    backdrop-filter: brightness(0.75);
+    transition: opacity var(--animation-speed) var(--animation-easing), visibility var(--animation-speed) var(--animation-easing),
+      -webkit-backdrop-filter var(--animation-speed) var(--animation-easing), backdrop-filter var(--animation-speed) var(--animation-easing);
+  }
+
+  .header__mobile-menu {
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 90vw;
+    max-width: 400px;
+    height: 100%;
+    background: var(--color-background);
+    box-shadow: var(--modal-shadow);
+    transform: translateX(-100%);
+    display: flex;
+    flex-direction: column;
+  }
+
+  .header__mobile-menu-overlay.is-open .header__mobile-menu {
+    animation: modalSlideInLeft var(--animation-speed) var(--animation-easing) forwards;
+  }
+
+  .header__mobile-menu-overlay.is-closing .header__mobile-menu {
+    animation: modalSlideOutLeft var(--animation-speed) var(--animation-easing) forwards;
+  }
+
+  .header__mobile-menu-header {
+    display: flex;
+    align-items: center;
+    justify-content: flex-start;
+    padding: var(--padding-xs);
+  }
+
+  .header__mobile-menu-footer {
+    padding: var(--padding-sm);
+    border-top: var(--separator-border-width) solid var(--color-border);
+  }
+
+  .header__mobile-menu-nav {
+    flex: 1;
+    padding: var(--padding-md);
+    display: flex;
+    flex-direction: column;
+    gap: var(--gap-xs);
+    overflow-y: auto;
+    overflow-x: hidden;
+  }
+
+  .header__mobile-menu-nav--uppercase .header__mobile-menu-link-text {
+    text-transform: uppercase;
+  }
+
+  .header__mobile-menu-link-text {
+    font-weight: var(--font-weight);
+  }
+
+  .header__mobile-menu-link {
+    display: block;
+    padding: var(--padding-sm);
+    text-decoration: none;
+    color: inherit;
+    font-size: var(--font-h6--size);
+    border-radius: var(--inputs-border-radius);
+    transition: background-color var(--animation-speed) var(--animation-easing);
+  }
+
+  .header__mobile-menu-link:hover {
+    background-color: var(--color-input-border-low-opacity);
+  }
+
+  /* Accordéons des sous-menus */
+  .header__mobile-menu-accordion {
+    width: 100%;
+  }
+
+  .header__mobile-menu-accordion summary {
+    list-style: none;
+    cursor: pointer;
+  }
+
+  .header__mobile-menu-accordion summary::-webkit-details-marker {
+    display: none;
+  }
+
+  .header__mobile-menu-link--parent,
+  .header__mobile-menu-link--child {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    width: 100%;
+  }
+
+  .header__mobile-menu-link--parent .icon,
+  .header__mobile-menu-link--child .icon {
+    transition: transform var(--animation-speed-fast) var(--animation-easing);
+    flex-shrink: 0;
+  }
+
+  .header__mobile-menu-accordion[open] > summary .icon {
+    transform: rotate(180deg);
+  }
+
+  .header__mobile-menu-submenu {
+    padding-left: var(--padding-sm);
+  }
+
+  /* Niveaux d'indentation */
+  .header__mobile-menu-link--child {
+    font-size: var(--font-body--size-emphasized);
+    padding-left: var(--padding-sm);
+  }
+
+  .header__mobile-menu-link--grandchild {
+    font-size: var(--font-body--size);
+    padding-left: var(--padding-sm);
+  }
+
+  .header__mobile-menu-submenu--level-2 {
+    padding-left: var(--padding-sm);
+  }
+{% endstylesheet %}
+
+{% schema %}
+{
+  "name": "t:header_drawer_menu",
+  "tag": null,
+  "blocks": [
+    {
+      "type": "_header-drawer-menu-header"
+    },
+    {
+      "type": "_header-drawer-menu-under-menu"
+    }
+  ],
+  "settings": [
+    {
+      "type": "color_scheme",
+      "id": "color_scheme",
+      "label": "t:color_scheme",
+      "default": "scheme-1"
+    }
+  ],
+  "presets": [
+    {
+      "name": "t:header_drawer_menu"
+    }
+  ]
+}
+{% endschema %}

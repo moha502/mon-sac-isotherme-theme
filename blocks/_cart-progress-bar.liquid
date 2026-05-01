@@ -1,0 +1,576 @@
+<div
+  class="
+    cart-progress-bar
+    {%- if block.settings.show_on_display == 'desktop_only' %} mobile-hide{% endif -%}
+    {%- if block.settings.show_on_display == 'mobile_only' %} desktop-hide{% endif -%}
+    {%- if block.settings.additional_class != blank %} {{ block.settings.additional_class }}{% endif -%}
+  "
+  style="--margin-top: {{ block.settings.margin_top }}px; --margin-bottom: {{ block.settings.margin_bottom }}px;"
+  {% if request.visual_preview_mode %}
+    data-visual-preview-mode
+  {% endif %}
+  {{ block.shopify_attributes }}
+>
+  {% if block.settings.progress_bar_based_on == 'value' %}
+    {% assign step1_value = block.settings.step1_value | times: 100.0 %}
+    {% assign step2_value = block.settings.step2_value | times: 100.0 %}
+    {% assign step3_value = block.settings.step3_value | times: 100.0 %}
+
+    {% assign phrase = block.settings.step_completed_text %}
+
+    {% assign progress_value_1 = 100 %}
+    {% assign progress_value_2 = 100 %}
+    {% assign progress_value_3 = 100 %}
+
+    {% capture check_icon %}
+      {% render 'icon', icon: 'check' %}
+    {% endcapture %}
+
+    {% if block.settings.step1_label != blank %}
+      {% assign step1_label = block.settings.step1_label | append: check_icon %}
+    {% endif %}
+    {% if block.settings.step2_label != blank %}
+      {% assign step2_label = block.settings.step2_label | append: check_icon %}
+    {% endif %}
+    {% if block.settings.step3_label != blank %}
+      {% assign step3_label = block.settings.step3_label | append: check_icon %}
+    {% endif %}
+
+    {% if cart.total_price < step1_value and step1_value != null %}
+      {% assign step1_label = block.settings.step1_label %}
+      {% assign step2_label = block.settings.step2_label %}
+      {% assign step3_label = block.settings.step3_label %}
+
+      {% assign progress_value_1 = cart.total_price | divided_by: step1_value | times: 100.0 %}
+      {% assign progress_value_2 = 0 %}
+      {% assign progress_value_3 = 0 %}
+
+      {% assign phrase = '' %}
+      {% assign missing_value = step1_value | minus: cart.total_price | money_with_currency %}
+      {% if block.settings.step1_text != blank %}
+        {% assign phrase = block.settings.step1_text | replace: '#', missing_value %}
+      {% endif %}
+    {% elsif cart.total_price < step2_value and cart.total_price >= step1_value and step2_value != null %}
+      {% assign step2_label = block.settings.step2_label %}
+      {% assign step3_label = block.settings.step3_label %}
+
+      {% assign progress_remainder = cart.total_price | minus: step1_value %}
+      {% assign step_value_range_2 = step2_value | minus: step1_value %}
+
+      {% assign progress_value_1 = 100 %}
+      {% assign progress_value_2 = progress_remainder | divided_by: step_value_range_2 | times: 100.0 %}
+      {% assign progress_value_3 = 0 %}
+
+      {% assign phrase = '' %}
+      {% assign missing_value = step2_value | minus: cart.total_price | money_with_currency %}
+      {% if block.settings.step2_text != blank %}
+        {% assign phrase = block.settings.step2_text | replace: '#', missing_value %}
+      {% endif %}
+    {% elsif cart.total_price < step3_value and cart.total_price >= step2_value and step3_value != null %}
+      {% assign step3_label = block.settings.step3_label %}
+      {% assign progress_remainder = cart.total_price | minus: step2_value %}
+      {% assign step_value_range_3 = step3_value | minus: step2_value %}
+
+      {% assign progress_value_1 = 100 %}
+      {% assign progress_value_2 = 100 %}
+      {% assign progress_value_3 = progress_remainder | divided_by: step_value_range_3 | times: 100.0 %}
+
+      {% assign phrase = '' %}
+      {% assign missing_value = step3_value | minus: cart.total_price | money_with_currency %}
+      {% if block.settings.step3_text != blank %}
+        {% assign phrase = block.settings.step3_text | replace: '#', missing_value %}
+      {% endif %}
+    {% endif %}
+  {% elsif block.settings.progress_bar_based_on == 'quantity' %}
+    {% assign step1_quantity = block.settings.step1_quantity %}
+    {% assign step2_quantity = block.settings.step2_quantity %}
+    {% assign step3_quantity = block.settings.step3_quantity %}
+
+    {% assign phrase = block.settings.step_completed_text %}
+
+    {% assign progress_value_1 = 100 %}
+    {% assign progress_value_2 = 100 %}
+    {% assign progress_value_3 = 100 %}
+
+    {% capture check_icon %}
+      {% render 'icon', icon: 'check' %}
+    {% endcapture %}
+
+    {% if block.settings.step1_label != blank %}
+      {% assign step1_label = block.settings.step1_label | append: check_icon %}
+    {% endif %}
+    {% if block.settings.step2_label != blank %}
+      {% assign step2_label = block.settings.step2_label | append: check_icon %}
+    {% endif %}
+    {% if block.settings.step3_label != blank %}
+      {% assign step3_label = block.settings.step3_label | append: check_icon %}
+    {% endif %}
+
+    {% assign number_of_products = 0 %}
+
+    {% if block.settings.collection != blank %}
+      {% for item in cart.items %}
+        {% for item_collection in item.product.collections %}
+          {% if item_collection == block.settings.collection %}
+            {% assign number_of_products = number_of_products | plus: item.quantity %}
+          {% endif %}
+        {% endfor %}
+      {% endfor %}
+    {% else %}
+      {% assign number_of_products = cart.item_count %}
+    {% endif %}
+  {% endif %}
+
+  {% if number_of_products < step1_quantity %}
+    {% assign step1_label = block.settings.step1_label %}
+    {% assign step2_label = block.settings.step2_label %}
+    {% assign step3_label = block.settings.step3_label %}
+
+    {% assign progress_value_1 = number_of_products | times: 1.0 | divided_by: step1_quantity | times: 100.0 %}
+    {% assign progress_value_2 = 0 %}
+    {% assign progress_value_3 = 0 %}
+
+    {% assign missing_value = step1_quantity | minus: number_of_products %}
+    {% assign phrase = block.settings.step1_text | replace: '#', missing_value %}
+  {% elsif number_of_products < step2_quantity and number_of_products >= step1_quantity and step2_quantity != null %}
+    {% assign step2_label = block.settings.step2_label %}
+    {% assign step3_label = block.settings.step3_label %}
+
+    {% assign quantity_in_this_step = number_of_products | minus: step1_quantity %}
+    {% assign needed_quantity_in_this_step = step2_quantity | minus: step1_quantity %}
+
+    {% assign progress_value_1 = 100 %}
+    {% assign progress_value_2 = quantity_in_this_step | times: 1.0 | divided_by: needed_quantity_in_this_step | times: 100.0 %}
+    {% assign progress_value_3 = 0 %}
+
+    {% assign missing_value = step2_quantity | minus: number_of_products %}
+    {% assign phrase = block.settings.step2_text | replace: '#', missing_value %}
+  {% elsif number_of_products < step3_quantity and number_of_products >= step2_quantity and step3_quantity != null %}
+    {% assign step3_label = block.settings.step3_label %}
+
+    {% assign quantity_in_this_step = number_of_products | minus: step2_quantity %}
+    {% assign needed_quantity_in_this_step = step3_quantity | minus: step2_quantity %}
+
+    {% assign progress_value_1 = 100 %}
+    {% assign progress_value_2 = 100 %}
+    {% assign progress_value_3 = quantity_in_this_step | times: 1.0 | divided_by: needed_quantity_in_this_step | times: 100.0 %}
+
+    {% assign missing_value = step3_quantity | minus: number_of_products %}
+    {% assign phrase = block.settings.step3_text | replace: '#', missing_value %}
+  {% endif %}
+
+  {% assign show_step1 = false %}
+
+  {% if block.settings.progress_bar_based_on == 'value'
+    and block.settings.step1_value != null
+    and block.settings.step1_value
+    and block.settings.step1_value != 0
+  %}
+    {% assign show_step1 = true %}
+  {% elsif block.settings.progress_bar_based_on == 'quantity'
+    and block.settings.step1_quantity != null
+    and block.settings.step1_quantity
+    and block.settings.step1_quantity != 0
+  %}
+    {% assign show_step1 = true %}
+  {% endif %}
+
+  {% if show_step1 %}
+    <div class="cart-progress-bar__container appear-animation appear-delay-1">
+      {% if phrase != ' ' %}
+        <p class="cart-progress-bar__label">{{ phrase }}</p>
+      {% endif %}
+      <div class="cart-progress-bar__bar-container">
+        <div class="cart-progress-bar__progress-group">
+          <progress
+            class="cart-progress-bar__progress cart-progress-bar__progress_1"
+            max="100"
+            value="{{ progress_value_1 }}"
+          ></progress>
+
+          {% if step1_label != blank -%}
+            <span class="cart-progress-bar__step-label">{{ step1_label }}</span>
+          {%- endif %}
+        </div>
+        {% assign show_step2 = false %}
+
+        {% if block.settings.progress_bar_based_on == 'value'
+          and block.settings.step2_value != null
+          and block.settings.step2_value
+          and block.settings.step2_value != 0
+        %}
+          {% assign show_step2 = true %}
+        {% elsif block.settings.progress_bar_based_on == 'quantity'
+          and block.settings.step2_quantity != null
+          and block.settings.step2_quantity
+          and block.settings.step2_quantity != 0
+        %}
+          {% assign show_step2 = true %}
+        {% endif %}
+
+        {% if show_step2 %}
+          <div class="cart-progress-bar__progress-group">
+            <progress
+              class="cart-progress-bar__progress cart-progress-bar__progress_2"
+              max="100"
+              value="{{ progress_value_2 }}"
+            ></progress>
+
+            {% if step2_label != blank -%}
+              <span class="cart-progress-bar__step-label">{{ step2_label }}</span>
+            {% endif %}
+          </div>
+        {% endif %}
+        {% assign show_step3 = false %}
+
+        {% if block.settings.progress_bar_based_on == 'value'
+          and block.settings.step3_value != null
+          and block.settings.step3_value
+          and block.settings.step3_value != 0
+        %}
+          {% assign show_step3 = true %}
+        {% elsif block.settings.progress_bar_based_on == 'quantity'
+          and block.settings.step3_quantity != null
+          and block.settings.step3_quantity
+          and block.settings.step3_quantity != 0
+        %}
+          {% assign show_step3 = true %}
+        {% endif %}
+
+        {% if show_step3 %}
+          <div class="cart-progress-bar__progress-group">
+            <progress
+              class="cart-progress-bar__progress cart-progress-bar__progress_3"
+              max="100"
+              value="{{ progress_value_3 }}"
+            ></progress>
+
+            {% if step3_label != blank -%}
+              <span class="cart-progress-bar__step-label">{{ step3_label }}</span>
+            {% endif %}
+          </div>
+        {% endif %}
+      </div>
+    </div>
+  {% endif %}
+</div>
+
+{% stylesheet %}
+  .cart-progress-bar {
+    margin-top: var(--margin-top);
+    margin-bottom: var(--margin-bottom);
+  }
+
+  .cart-progress-bar[data-visual-preview-mode] {
+    width: 350px;
+  }
+
+  .cart-progress-bar__label {
+    margin: 0;
+    margin-bottom: var(--margin-md);
+    letter-spacing: inherit;
+    cursor: default;
+    line-height: normal;
+    font-weight: 500;
+  }
+
+  .cart-progress-bar__bar-container {
+    margin-top: 5px;
+    display: -webkit-box;
+    display: -ms-flexbox;
+    display: flex;
+    gap: 2px;
+    -webkit-box-orient: horizontal;
+    -webkit-box-direction: normal;
+    -ms-flex-direction: row;
+    flex-direction: row;
+  }
+
+  .cart-progress-bar__progress-group {
+    display: -webkit-box;
+    display: -ms-flexbox;
+    display: flex;
+    -webkit-box-orient: vertical;
+    -webkit-box-direction: normal;
+    -ms-flex-direction: column;
+    flex-direction: column;
+    -webkit-box-align: center;
+    -ms-flex-align: center;
+    align-items: center;
+    width: -webkit-fill-available;
+  }
+
+  .cart-progress-bar__step-label {
+    display: flex;
+    align-items: center;
+    flex-wrap: wrap;
+    gap: 2px;
+    font-size: var(--font-body--size-small);
+    margin-top: 5px;
+  }
+
+  .cart-progress-bar__step-label .icon--check {
+    font-size: var(--font-body--size-small) !important;
+  }
+
+  .cart-progress-bar__progress {
+    -webkit-appearance: none;
+    -moz-appearance: none;
+    appearance: none;
+    width: 100%;
+    height: 5px;
+  }
+
+  .cart-progress-bar__progress[value]::-webkit-progress-bar {
+    background-color: rgb(from var(--color-primary-button-background) r g b / 15%);
+    border-radius: calc(var(--inputs-border-radius) * 20 / 100);
+  }
+
+  .cart-progress-bar__progress[value]::-webkit-progress-value {
+    -webkit-transition: width 0.5s;
+    transition: width 0.5s;
+    background-color: var(--color-primary-button-background);
+    border-radius: calc(var(--inputs-border-radius) * 20 / 100);
+  }
+
+  @-moz-document url-prefix() {
+    .cart-progress-bar__bar-container {
+      justify-content: center;
+    }
+
+    .cart-progress-bar__progress-group {
+      width: 100%;
+    }
+
+    .cart-progress-bar__progress[value]::-moz-progress-bar {
+      background: var(--color-primary-button-background);
+      border-radius: calc(var(--inputs-border-radius) * 20 / 100);
+    }
+
+    .cart-progress-bar__progress[value],
+    .cart-progress-bar__progress[value]::-moz-progress-bar {
+      border-radius: calc(var(--inputs-border-radius) * 20 / 100);
+    }
+
+    .cart-progress-bar__progress[value] {
+      border: none;
+      border-radius: calc(var(--inputs-border-radius) * 20 / 100);
+    }
+  }
+
+  .cart-progress-bar__bar-container:has(.cart-progress-bar__progress_2) {
+    .cart-progress-bar__progress_1[value]::-webkit-progress-bar,
+    .cart-progress-bar__progress_1[value]::-webkit-progress-value {
+      border-top-right-radius: 0;
+      border-bottom-right-radius: 0;
+    }
+  }
+
+  .cart-progress-bar__progress_2[value]::-webkit-progress-bar,
+  .cart-progress-bar__progress_2[value]::-webkit-progress-value {
+    border-top-left-radius: 0;
+    border-bottom-left-radius: 0;
+  }
+
+  .cart-progress-bar__bar-container:has(.cart-progress-bar__progress_3) {
+    .cart-progress-bar__progress_2[value]::-webkit-progress-bar,
+    .cart-progress-bar__progress_2[value]::-webkit-progress-value {
+      border-top-right-radius: 0;
+      border-bottom-right-radius: 0;
+    }
+  }
+
+  .cart-progress-bar__progress_3[value]::-webkit-progress-bar,
+  .cart-progress-bar__progress_3[value]::-webkit-progress-value {
+    border-top-left-radius: 0;
+    border-bottom-left-radius: 0;
+  }
+{% endstylesheet %}
+
+{% schema %}
+{
+  "name": "t:progress_bar",
+  "tag": null,
+  "settings": [
+    {
+      "type": "select",
+      "id": "show_on_display",
+      "label": "t:show_on_display",
+      "default": "desktop_and_mobile",
+      "options": [
+        { "value": "desktop_and_mobile", "label": "t:desktop_and_mobile" },
+        { "value": "desktop_only", "label": "t:desktop_only" },
+        { "value": "mobile_only", "label": "t:mobile_only" }
+      ]
+    },
+    {
+      "type": "select",
+      "id": "progress_bar_based_on",
+      "label": "t:progress_bar_based_on",
+      "options": [
+        {
+          "value": "value",
+          "label": "t:cart_value"
+        },
+        {
+          "value": "quantity",
+          "label": "t:cart_quantity"
+        }
+      ],
+      "default": "value"
+    },
+    {
+      "type": "collection",
+      "id": "collection",
+      "label": "t:collection",
+      "info": "t:progress_bar_collection_info"
+    },
+    {
+      "type": "header",
+      "content": "t:progress_bar_step1"
+    },
+    {
+      "type": "text",
+      "id": "step1_text",
+      "label": "t:progress_bar_step_text",
+      "default": "t:progress_bar_step1_text_default",
+      "info": "t:progress_bar_step_text_info"
+    },
+    {
+      "type": "number",
+      "id": "step1_value",
+      "label": "t:step_value",
+      "default": 30,
+      "info": "t:progress_bar_step_value_info",
+      "visible_if": "{{ block.settings.progress_bar_based_on == 'value' }}"
+    },
+    {
+      "type": "number",
+      "id": "step1_quantity",
+      "label": "t:step_value",
+      "default": 3,
+      "visible_if": "{{ block.settings.progress_bar_based_on == 'quantity' }}"
+    },
+    {
+      "type": "text",
+      "id": "step1_label",
+      "label": "t:progress_bar_step_label"
+    },
+    {
+      "type": "header",
+      "content": "t:progress_bar_step2"
+    },
+    {
+      "type": "text",
+      "id": "step2_text",
+      "label": "t:progress_bar_step_text",
+      "info": "t:progress_bar_step_text_info"
+    },
+    {
+      "type": "number",
+      "id": "step2_value",
+      "label": "t:step_value",
+      "info": "t:progress_bar_step_value_info",
+      "visible_if": "{{ block.settings.progress_bar_based_on == 'value' }}"
+    },
+    {
+      "type": "number",
+      "id": "step2_quantity",
+      "label": "t:step_value",
+      "visible_if": "{{ block.settings.progress_bar_based_on == 'quantity' }}"
+    },
+    {
+      "type": "text",
+      "id": "step2_label",
+      "label": "t:progress_bar_step_label"
+    },
+    {
+      "type": "header",
+      "content": "t:progress_bar_step3"
+    },
+    {
+      "type": "text",
+      "id": "step3_text",
+      "label": "t:progress_bar_step_text",
+      "info": "t:progress_bar_step_text_info"
+    },
+    {
+      "type": "number",
+      "id": "step3_value",
+      "label": "t:step_value",
+      "info": "t:progress_bar_step_value_info",
+      "visible_if": "{{ block.settings.progress_bar_based_on == 'value' }}"
+    },
+    {
+      "type": "number",
+      "id": "step3_quantity",
+      "label": "t:step_value",
+      "visible_if": "{{ block.settings.progress_bar_based_on == 'quantity' }}"
+    },
+    {
+      "type": "text",
+      "id": "step3_label",
+      "label": "t:progress_bar_step_label"
+    },
+    {
+      "type": "header",
+      "content": "t:progress_bar_completed"
+    },
+    {
+      "type": "text",
+      "id": "step_completed_text",
+      "label": "t:progress_bar_completed_phrase",
+      "default": "t:progress_bar_completed_default_phrase",
+      "info": "t:progress_bar_default_phrase_info"
+    },
+    {
+      "type": "header",
+      "content": "t:margins"
+    },
+    {
+      "type": "range",
+      "id": "margin_top",
+      "label": "t:margin_top",
+      "default": 0,
+      "min": 0,
+      "max": 100,
+      "step": 1,
+      "unit": "px"
+    },
+    {
+      "type": "range",
+      "id": "margin_bottom",
+      "label": "t:margin_bottom",
+      "default": 0,
+      "min": 0,
+      "max": 100,
+      "step": 1,
+      "unit": "px"
+    },
+    {
+      "type": "header",
+      "content": "t:advanced_settings"
+    },
+    {
+      "type": "text",
+      "id": "additional_class",
+      "label": "t:additional_class",
+      "info": "t:additional_class_info"
+    },
+    {
+      "type": "header",
+      "content": "t:go_further"
+    },
+    {
+      "type": "paragraph",
+      "content": "t:go_further_description"
+    }
+  ],
+  "presets": [
+    {
+      "name": "t:progress_bar",
+      "category": "t:offers"
+    }
+  ]
+}
+{% endschema %}

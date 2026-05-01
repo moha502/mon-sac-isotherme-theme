@@ -1,0 +1,205 @@
+/*
+ * ------------------------------------------------------------
+ * IMPORTANT: The contents of this file are auto-generated.
+ *
+ * This file may be updated by the Shopify admin theme editor
+ * or related systems. Please exercise caution as any changes
+ * made to this file may be overwritten.
+ * ------------------------------------------------------------
+ */
+{
+  "sections": {
+    "custom_section_XEFL7Q": {
+      "type": "custom-section",
+      "blocks": {
+        "text_HRPGKg": {
+          "type": "text",
+          "name": "t:title",
+          "settings": {
+            "show_on_display": "desktop_and_mobile",
+            "text": "<p>{{ closest.blog.title }}</p>",
+            "text_style": "h2",
+            "font_weight": 400,
+            "alignment": "left",
+            "margin_top": 0,
+            "margin_bottom": 0,
+            "additional_class": ""
+          },
+          "blocks": {}
+        }
+      },
+      "block_order": ["text_HRPGKg"],
+      "name": "t:custom_section",
+      "settings": {
+        "show_on_display": "desktop_and_mobile",
+        "section_width": "normal",
+        "color_scheme": "scheme-1",
+        "wrap_in_card": false,
+        "color_scheme_card": "",
+        "layout_type": "flex",
+        "layout_flex_direction_desktop": "column",
+        "layout_grid_columns_desktop": 3,
+        "layout_gap_desktop": 20,
+        "layout_wrap_desktop": "nowrap",
+        "layout_flex_justify_desktop": "flex-start",
+        "layout_flex_align_items_desktop": "flex-start",
+        "same_as_desktop": true,
+        "layout_flex_direction_mobile": "row",
+        "layout_gap_mobile": 20,
+        "layout_wrap_mobile": "nowrap",
+        "layout_flex_justify_mobile": "flex-start",
+        "layout_flex_align_items_mobile": "flex-start",
+        "layout_grid_columns_mobile": 1,
+        "padding_top": 60,
+        "padding_bottom": 0,
+        "margin_top": 0,
+        "margin_bottom": 0,
+        "additional_class": ""
+      }
+    },
+    "main": {
+      "type": "main-blog",
+      "blocks": {
+        "article-card": {
+          "type": "_article-card",
+          "static": true,
+          "settings": {
+            "wrap_in_card": false,
+            "color_scheme": "scheme-2",
+            "layout_gap": 15
+          },
+          "blocks": {
+            "image_CEPiBW": {
+              "type": "image",
+              "name": "t:image",
+              "settings": {
+                "show_on_display": "desktop_and_mobile",
+                "image": "{{ closest.article.image }}",
+                "link": "",
+                "image_ratio": "landscape",
+                "additional_class": ""
+              }
+            },
+            "article_card_group_fJ9waP": {
+              "type": "_article-group",
+              "name": "Informations sur l'article",
+              "settings": {
+                "show_on_display": "desktop_and_mobile",
+                "wrap_in_card": false,
+                "color_scheme": "scheme-3",
+                "layout_direction_desktop": "column",
+                "layout_gap_desktop": 5,
+                "layout_wrap_desktop": "nowrap",
+                "layout_justify_desktop": "flex-start",
+                "layout_align_items_desktop": "flex-start",
+                "same_as_desktop": true,
+                "layout_direction_mobile": "column",
+                "layout_gap_mobile": 10,
+                "layout_wrap_mobile": "nowrap",
+                "layout_justify_mobile": "flex-start",
+                "layout_align_items_mobile": "flex-start",
+                "margin_top": 0,
+                "margin_bottom": 0,
+                "additional_class": ""
+              },
+              "blocks": {
+                "text_niG7TH": {
+                  "type": "text",
+                  "name": "t:text",
+                  "settings": {
+                    "show_on_display": "desktop_and_mobile",
+                    "text": "<p>{{ closest.article.title }}</p>",
+                    "text_style": "paragraph",
+                    "font_weight": 500,
+                    "alignment": "left",
+                    "margin_top": 0,
+                    "margin_bottom": 0,
+                    "additional_class": ""
+                  }
+                },
+                "text_wLnqtK": {
+                  "type": "text",
+                  "name": "t:text",
+                  "settings": {
+                    "show_on_display": "desktop_and_mobile",
+                    "text": "<p>{{ closest.article.excerpt }}</p>",
+                    "text_style": "paragraph",
+                    "font_weight": 400,
+                    "alignment": "left",
+                    "margin_top": 0,
+                    "margin_bottom": 0,
+                    "additional_class": ""
+                  }
+                },
+                "article_card_group_4WRB9j": {
+                  "type": "_article-group",
+                  "name": "Auteur et date",
+                  "settings": {
+                    "show_on_display": "desktop_and_mobile",
+                    "wrap_in_card": false,
+                    "color_scheme": "scheme-2",
+                    "layout_direction_desktop": "row",
+                    "layout_gap_desktop": 10,
+                    "layout_wrap_desktop": "nowrap",
+                    "layout_justify_desktop": "space-between",
+                    "layout_align_items_desktop": "center",
+                    "same_as_desktop": true,
+                    "layout_direction_mobile": "column",
+                    "layout_gap_mobile": 10,
+                    "layout_wrap_mobile": "nowrap",
+                    "layout_justify_mobile": "flex-start",
+                    "layout_align_items_mobile": "flex-start",
+                    "margin_top": 10,
+                    "margin_bottom": 0,
+                    "additional_class": ""
+                  },
+                  "blocks": {
+                    "text_j3nebw": {
+                      "type": "text",
+                      "name": "t:text",
+                      "settings": {
+                        "show_on_display": "desktop_and_mobile",
+                        "text": "<p><em>{{ closest.article.author }}</em></p>",
+                        "text_style": "paragraph",
+                        "font_weight": 400,
+                        "alignment": "left",
+                        "margin_top": 0,
+                        "margin_bottom": 0,
+                        "additional_class": ""
+                      },
+                      "blocks": {}
+                    },
+                    "article_date_ckRJhi": {
+                      "type": "_article-date",
+                      "name": "t:article_date",
+                      "settings": {
+                        "show_on_display": "desktop_and_mobile",
+                        "margin_top": 0,
+                        "margin_bottom": 0,
+                        "additional_class": ""
+                      },
+                      "blocks": {}
+                    }
+                  },
+                  "block_order": ["text_j3nebw", "article_date_ckRJhi"]
+                }
+              },
+              "block_order": ["text_niG7TH", "text_wLnqtK", "article_card_group_4WRB9j"]
+            }
+          },
+          "block_order": ["image_CEPiBW", "article_card_group_fJ9waP"]
+        }
+      },
+      "settings": {
+        "color_scheme": "scheme-1",
+        "grid_columns": 3,
+        "grid_columns_mobile": "1",
+        "padding_top": 60,
+        "padding_bottom": 60,
+        "margin_top": 0,
+        "margin_bottom": 0
+      }
+    }
+  },
+  "order": ["custom_section_XEFL7Q", "main"]
+}

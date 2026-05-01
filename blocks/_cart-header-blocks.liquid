@@ -1,0 +1,94 @@
+<div
+  class="cart-header-blocks{% if block.settings.wrap_in_card %} card color-{{ block.settings.color_scheme }}{% endif %}"
+  style="--margin-top: {{ block.settings.margin_top }}px; --margin-bottom: {{ block.settings.margin_bottom }}px;"
+>
+  {% content_for 'blocks' %}
+</div>
+
+{% stylesheet %}
+  .cart-header-blocks {
+    margin-top: var(--margin-top);
+    margin-bottom: var(--margin-bottom);
+    display: flex;
+    flex-direction: column;
+    gap: var(--gap-sm);
+  }
+
+  .cart-drawer .cart-header-blocks:not(.card) > div:first-of-type {
+    margin-top: var(--padding-md);
+  }
+{% endstylesheet %}
+
+{% schema %}
+{
+  "name": "t:cart_header_blocks",
+  "tag": null,
+  "settings": [
+    {
+      "type": "checkbox",
+      "id": "wrap_in_card",
+      "label": "t:wrap_in_card",
+      "default": false
+    },
+    {
+      "type": "color_scheme",
+      "id": "color_scheme",
+      "label": "t:color_scheme",
+      "default": "scheme-2",
+      "visible_if": "{{ block.settings.wrap_in_card }}"
+    },
+    {
+      "type": "header",
+      "content": "t:margins"
+    },
+    {
+      "type": "range",
+      "id": "margin_top",
+      "label": "t:margin_top",
+      "default": 0,
+      "min": 0,
+      "max": 100,
+      "step": 1,
+      "unit": "px"
+    },
+    {
+      "type": "range",
+      "id": "margin_bottom",
+      "label": "t:margin_bottom",
+      "default": 0,
+      "min": 0,
+      "max": 100,
+      "step": 1,
+      "unit": "px"
+    }
+  ],
+  "blocks": [
+    {
+      "type": "text"
+    },
+    {
+      "type": "_cart-progress-bar"
+    },
+    {
+      "type": "separator"
+    },
+    {
+      "type": "slider"
+    },
+    {
+      "type": "reviews-badge"
+    },
+    {
+      "type": "countdown"
+    },
+    {
+      "type": "information-slider"
+    }
+  ],
+  "presets": [
+    {
+      "name": "t:cart_header_blocks"
+    }
+  ]
+}
+{% endschema %}

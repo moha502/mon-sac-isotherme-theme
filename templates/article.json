@@ -1,0 +1,429 @@
+/*
+ * ------------------------------------------------------------
+ * IMPORTANT: The contents of this file are auto-generated.
+ *
+ * This file may be updated by the Shopify admin theme editor
+ * or related systems. Please exercise caution as any changes
+ * made to this file may be overwritten.
+ * ------------------------------------------------------------
+ */
+{
+  "sections": {
+    "image_banner_wTegBQ": {
+      "type": "image-banner",
+      "blocks": {
+        "image_banner_ridfVi": {
+          "type": "_image-banner",
+          "name": "t:image_banner",
+          "settings": {
+            "media_type": "image",
+            "image": "{{ closest.article.image }}",
+            "source": "uploaded",
+            "video_url": "",
+            "color_scheme": "scheme-3",
+            "layout_justify": "center",
+            "layout_align_items": "flex-start",
+            "same_as_desktop": true,
+            "layout_justify_mobile": "center",
+            "layout_align_items_mobile": "flex-start",
+            "image_filter_opacity": 15,
+            "image_filter_color": "#000000",
+            "padding_horizontal": 0,
+            "padding_vertical": 40
+          },
+          "blocks": {}
+        }
+      },
+      "block_order": ["image_banner_ridfVi"],
+      "name": "t:image_banner",
+      "settings": {
+        "show_on_display": "desktop_and_mobile",
+        "full_width": true,
+        "color_scheme": "",
+        "show_arrows": false,
+        "show_pagination": true,
+        "autoplay": false,
+        "rewind": false,
+        "autoplay_speed": 4,
+        "padding_top": 0,
+        "padding_bottom": 0,
+        "margin_top": 0,
+        "margin_bottom": 0,
+        "additional_class": ""
+      }
+    },
+    "main": {
+      "type": "main-article",
+      "blocks": {
+        "text_Kq93UP": {
+          "type": "text",
+          "name": "t:title",
+          "settings": {
+            "show_on_display": "desktop_and_mobile",
+            "text": "<h1>{{ closest.article.title }}</h1>",
+            "text_style": "h2",
+            "font_weight": 400,
+            "alignment": "left",
+            "alignment_mobile": "left",
+            "show_read_more": false,
+            "read_more_length": 200,
+            "read_more_text": "Voir plus",
+            "read_less_text": "Voir moins",
+            "margin_top": 10,
+            "margin_bottom": 40,
+            "additional_class": ""
+          },
+          "blocks": {}
+        },
+        "article_group_TdkPUg": {
+          "type": "_article-group",
+          "name": "Auteur et date",
+          "settings": {
+            "show_on_display": "desktop_and_mobile",
+            "wrap_in_card": false,
+            "color_scheme": "",
+            "layout_direction_desktop": "row",
+            "layout_gap_desktop": 10,
+            "layout_wrap_desktop": "nowrap",
+            "layout_justify_desktop": "space-between",
+            "layout_align_items_desktop": "center",
+            "same_as_desktop": true,
+            "layout_direction_mobile": "column",
+            "layout_gap_mobile": 10,
+            "layout_wrap_mobile": "nowrap",
+            "layout_justify_mobile": "flex-start",
+            "layout_align_items_mobile": "flex-start",
+            "margin_top": 0,
+            "margin_bottom": 0,
+            "additional_class": ""
+          },
+          "blocks": {
+            "text_tDLKYW": {
+              "type": "text",
+              "name": "Auteur",
+              "settings": {
+                "show_on_display": "desktop_and_mobile",
+                "text": "<p><em>{{ closest.article.author }}</em></p>",
+                "text_style": "paragraph",
+                "font_weight": 400,
+                "alignment": "left",
+                "alignment_mobile": "left",
+                "show_read_more": false,
+                "read_more_length": 200,
+                "read_more_text": "Voir plus",
+                "read_less_text": "Voir moins",
+                "margin_top": 0,
+                "margin_bottom": 0,
+                "additional_class": ""
+              },
+              "blocks": {}
+            },
+            "article_date_nDMGQX": {
+              "type": "_article-date",
+              "name": "t:article_date",
+              "settings": {
+                "show_on_display": "desktop_and_mobile",
+                "margin_top": 0,
+                "margin_bottom": 0,
+                "additional_class": ""
+              },
+              "blocks": {}
+            }
+          },
+          "block_order": ["text_tDLKYW", "article_date_nDMGQX"]
+        },
+        "separator_qzyCt9": {
+          "type": "separator",
+          "name": "t:separator",
+          "settings": {
+            "show_on_display": "desktop_and_mobile",
+            "width": 100,
+            "margin_top": 30,
+            "margin_bottom": 30,
+            "additional_class": ""
+          },
+          "blocks": {}
+        },
+        "text_JWhMHd": {
+          "type": "text",
+          "name": "Contenu de l'article",
+          "settings": {
+            "show_on_display": "desktop_and_mobile",
+            "text": "{{ closest.article.content }}",
+            "text_style": "auto",
+            "font_weight": 400,
+            "alignment": "left",
+            "alignment_mobile": "left",
+            "show_read_more": false,
+            "read_more_length": 200,
+            "read_more_text": "Voir plus",
+            "read_less_text": "Voir moins",
+            "margin_top": 0,
+            "margin_bottom": 0,
+            "additional_class": ""
+          },
+          "blocks": {}
+        }
+      },
+      "block_order": ["text_Kq93UP", "article_group_TdkPUg", "separator_qzyCt9", "text_JWhMHd"],
+      "settings": {
+        "color_scheme": "scheme-1",
+        "padding_top": 60,
+        "padding_bottom": 60,
+        "margin_top": 0,
+        "margin_bottom": 0
+      }
+    },
+    "blog_featured_xFHxUe": {
+      "type": "blog-featured",
+      "blocks": {
+        "group_3fzJbx": {
+          "type": "group",
+          "name": "t:group",
+          "settings": {
+            "show_on_display": "desktop_and_mobile",
+            "wrap_in_card": false,
+            "color_scheme": "",
+            "show_card_border": false,
+            "layout_type": "flex",
+            "width_desktop": 100,
+            "layout_direction_desktop": "row",
+            "layout_grid_columns_desktop": 3,
+            "layout_gap_desktop": 10,
+            "layout_wrap_desktop": "nowrap",
+            "layout_justify_desktop": "space-between",
+            "layout_align_items_desktop": "center",
+            "same_as_desktop": true,
+            "width_mobile": 100,
+            "layout_direction_mobile": "column",
+            "layout_grid_columns_mobile": 1,
+            "layout_gap_mobile": 10,
+            "layout_wrap_mobile": "nowrap",
+            "layout_justify_mobile": "flex-start",
+            "layout_align_items_mobile": "flex-start",
+            "use_global_container_padding": true,
+            "padding_horizontal": 30,
+            "padding_vertical": 30,
+            "margin_top": 10,
+            "margin_bottom": 30,
+            "additional_class": ""
+          },
+          "blocks": {
+            "text_QMEJhz": {
+              "type": "text",
+              "name": "t:title",
+              "settings": {
+                "show_on_display": "desktop_and_mobile",
+                "text": "<p>{{ closest.blog.title }}</p>",
+                "text_style": "h3",
+                "font_weight": 400,
+                "alignment": "left",
+                "alignment_mobile": "left",
+                "show_read_more": false,
+                "read_more_length": 200,
+                "read_more_text": "Voir plus",
+                "read_less_text": "Voir moins",
+                "margin_top": 0,
+                "margin_bottom": 0,
+                "additional_class": ""
+              },
+              "blocks": {}
+            },
+            "button_JLnPUn": {
+              "type": "button",
+              "name": "t:button",
+              "settings": {
+                "show_on_display": "desktop_and_mobile",
+                "link": "{{ closest.blog.url }}",
+                "open_in_new_tab": false,
+                "label": "Voir tous",
+                "button_style": "secondary",
+                "button_shape": "small",
+                "icon": "arrow_forward",
+                "icon_custom": "",
+                "icon_position": "end",
+                "margin_top": 0,
+                "margin_bottom": 0,
+                "additional_class": ""
+              },
+              "blocks": {}
+            }
+          },
+          "block_order": ["text_QMEJhz", "button_JLnPUn"]
+        },
+        "article-card": {
+          "type": "_article-card",
+          "static": true,
+          "settings": {
+            "wrap_in_card": false,
+            "color_scheme": "scheme-2",
+            "layout_gap": 15
+          },
+          "blocks": {
+            "image_picMTN": {
+              "type": "image",
+              "name": "t:image",
+              "settings": {
+                "show_on_display": "desktop_and_mobile",
+                "image": "{{ closest.article.image }}",
+                "link": "",
+                "image_ratio": "landscape",
+                "image_width_desktop": 100,
+                "image_width_mobile": 100,
+                "additional_class": ""
+              },
+              "blocks": {}
+            },
+            "article_card_group_6KbAzY": {
+              "type": "_article-group",
+              "name": "Informations sur l'article",
+              "settings": {
+                "show_on_display": "desktop_and_mobile",
+                "wrap_in_card": false,
+                "color_scheme": "scheme-3",
+                "layout_direction_desktop": "column",
+                "layout_gap_desktop": 5,
+                "layout_wrap_desktop": "nowrap",
+                "layout_justify_desktop": "flex-start",
+                "layout_align_items_desktop": "flex-start",
+                "same_as_desktop": true,
+                "layout_direction_mobile": "column",
+                "layout_gap_mobile": 10,
+                "layout_wrap_mobile": "nowrap",
+                "layout_justify_mobile": "flex-start",
+                "layout_align_items_mobile": "flex-start",
+                "margin_top": 0,
+                "margin_bottom": 0,
+                "additional_class": ""
+              },
+              "blocks": {
+                "text_qDyPe3": {
+                  "type": "text",
+                  "name": "t:text",
+                  "settings": {
+                    "show_on_display": "desktop_and_mobile",
+                    "text": "<p>{{ closest.article.title }}</p>",
+                    "text_style": "paragraph",
+                    "font_weight": 500,
+                    "alignment": "left",
+                    "alignment_mobile": "left",
+                    "show_read_more": false,
+                    "read_more_length": 200,
+                    "read_more_text": "Voir plus",
+                    "read_less_text": "Voir moins",
+                    "margin_top": 0,
+                    "margin_bottom": 0,
+                    "additional_class": ""
+                  },
+                  "blocks": {}
+                },
+                "text_PKrMcg": {
+                  "type": "text",
+                  "name": "t:text",
+                  "settings": {
+                    "show_on_display": "desktop_and_mobile",
+                    "text": "<p>{{ closest.article.excerpt }}</p>",
+                    "text_style": "paragraph",
+                    "font_weight": 400,
+                    "alignment": "left",
+                    "alignment_mobile": "left",
+                    "show_read_more": false,
+                    "read_more_length": 200,
+                    "read_more_text": "Voir plus",
+                    "read_less_text": "Voir moins",
+                    "margin_top": 0,
+                    "margin_bottom": 0,
+                    "additional_class": ""
+                  },
+                  "blocks": {}
+                },
+                "article_card_group_wAtVYB": {
+                  "type": "_article-group",
+                  "name": "Auteur et date",
+                  "settings": {
+                    "show_on_display": "desktop_and_mobile",
+                    "wrap_in_card": false,
+                    "color_scheme": "scheme-2",
+                    "layout_direction_desktop": "row",
+                    "layout_gap_desktop": 10,
+                    "layout_wrap_desktop": "nowrap",
+                    "layout_justify_desktop": "space-between",
+                    "layout_align_items_desktop": "center",
+                    "same_as_desktop": true,
+                    "layout_direction_mobile": "column",
+                    "layout_gap_mobile": 10,
+                    "layout_wrap_mobile": "nowrap",
+                    "layout_justify_mobile": "flex-start",
+                    "layout_align_items_mobile": "flex-start",
+                    "margin_top": 10,
+                    "margin_bottom": 0,
+                    "additional_class": ""
+                  },
+                  "blocks": {
+                    "text_EWVMNB": {
+                      "type": "text",
+                      "name": "t:text",
+                      "settings": {
+                        "show_on_display": "desktop_and_mobile",
+                        "text": "<p><em>{{ closest.article.author }}</em></p>",
+                        "text_style": "paragraph",
+                        "font_weight": 400,
+                        "alignment": "left",
+                        "alignment_mobile": "left",
+                        "show_read_more": false,
+                        "read_more_length": 200,
+                        "read_more_text": "Voir plus",
+                        "read_less_text": "Voir moins",
+                        "margin_top": 0,
+                        "margin_bottom": 0,
+                        "additional_class": ""
+                      },
+                      "blocks": {}
+                    },
+                    "article_date_z6aGJF": {
+                      "type": "_article-date",
+                      "name": "t:article_date",
+                      "settings": {
+                        "show_on_display": "desktop_and_mobile",
+                        "margin_top": 0,
+                        "margin_bottom": 0,
+                        "additional_class": ""
+                      },
+                      "blocks": {}
+                    }
+                  },
+                  "block_order": ["text_EWVMNB", "article_date_z6aGJF"]
+                }
+              },
+              "block_order": ["text_qDyPe3", "text_PKrMcg", "article_card_group_wAtVYB"]
+            }
+          },
+          "block_order": ["image_picMTN", "article_card_group_6KbAzY"]
+        }
+      },
+      "block_order": ["group_3fzJbx"],
+      "name": "t:blog_featured",
+      "settings": {
+        "show_on_display": "desktop_and_mobile",
+        "blog": "news",
+        "max_articles": 3,
+        "color_scheme": "scheme-1",
+        "layout_type": "grid",
+        "grid_columns": 3,
+        "grid_columns_mobile": "1",
+        "slider_items": 4,
+        "slider_items_mobile": "2",
+        "show_arrows": true,
+        "arrows_button_style": "secondary",
+        "show_pagination": false,
+        "rewind": false,
+        "padding_top": 60,
+        "padding_bottom": 60,
+        "margin_top": 0,
+        "margin_bottom": 0,
+        "additional_class": ""
+      }
+    }
+  },
+  "order": ["image_banner_wTegBQ", "main", "blog_featured_xFHxUe"]
+}

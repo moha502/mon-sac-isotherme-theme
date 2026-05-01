@@ -1,0 +1,209 @@
+{% doc %}
+  Affiche un champ de saisie.
+
+  @param {string} label - Le texte du label
+  @param {string} name - Nom du champ
+  @param {string} [id] - Id du champ
+  @param {string} [value] - Valeur du champ
+  @param {string} [type] - Le type du champ (text, email, password, number, tel, url)
+  @param {boolean} [small] - Indique si le champ est petit
+  @param {boolean} [full_width] - Indique si le champ est pleine largeur
+  @param {boolean} [disabled] - Indique si le champ est désactivé
+  @param {string} [autocorrect] - Indique si le champ est autocorrecté
+  @param {string} [autocapitalize] - Indique si le champ est autocapitalisé
+  @param {string} [autocomplete] - Indique si le champ est auto-complété
+  @param {boolean} [required] - Indique si le champ est requis
+  @param {number} [min] - Valeur minimale du champ (si le type est number)
+  @param {number} [max] - Valeur maximale du champ (si le type est number)
+  @param {number} [minlength] - Nombre minimum de caractères (si le type est text)
+  @param {number} [maxlength] - Nombre maximum de caractères (si le type est text)
+  @param {string} [data] - Données du champ (data-*)
+
+  @example
+  {% render 'textfield', label: 'Champ de saisie', name: 'textfield-1' %}
+{% enddoc %}
+
+{% assign style_class = 'textfield' %}
+
+{% if small %}
+  {% assign style_class = style_class | append: ' textfield--small' %}
+{% endif %}
+
+{% if full_width %}
+  {% assign style_class = style_class | append: ' textfield--full-width' %}
+{% endif %}
+
+{% if disabled %}
+  {% assign style_class = style_class | append: ' textfield--disabled' %}
+{% endif %}
+
+<div class="{{ style_class }}">
+  <input
+    {% if type %}
+      type="{{ type }}"
+    {% else %}
+      type="text"
+    {% endif %}
+    name="{{ name }}"
+    id="{{ id | default: name }}"
+    placeholder="{{ label }}"
+    {% if disabled %}
+      disabled
+    {% endif %}
+    {% if value %}
+      value="{{ value }}"
+    {% endif %}
+    {% if autocorrect %}
+      autocorrect="{{ autocorrect }}"
+    {% endif %}
+    {% if autocapitalize %}
+      autocapitalize="{{ autocapitalize }}"
+    {% endif %}
+    {% if autocomplete %}
+      autocomplete="{{ autocomplete }}"
+    {% endif %}
+    {% if required %}
+      required
+    {% endif %}
+    {% if type == 'number' %}
+      {% if min %}
+        min="{{ min }}"
+      {% endif %}
+      {% if max %}
+        max="{{ max }}"
+      {% endif %}
+    {% else %}
+      {% if minlength %}
+        minlength="{{ minlength }}"
+      {% endif %}
+      {% if maxlength %}
+        maxlength="{{ maxlength }}"
+      {% endif %}
+    {% endif %}
+    {% if data %}
+      {{ data }}
+    {% endif %}
+  >
+  <label for="{{ id | default: name }}">{{ label }}</label>
+</div>
+
+{% stylesheet %}
+  .textfield {
+    position: relative;
+  }
+
+  .textfield input {
+    outline: none;
+    border: var(--inputs-border-width) solid var(--color-input-border);
+    border-radius: var(--inputs-border-radius);
+    padding: 1.25rem var(--inputs-padding) 0.375rem;
+    color: var(--color-input-text);
+    background-color: var(--color-input-background);
+    transition: 0.1s ease-out;
+    height: var(--inputs-min-height);
+    min-width: var(--inputs-min-width);
+    font-size: var(--inputs-font-size);
+  }
+
+  .textfield input::placeholder {
+    opacity: 0;
+  }
+
+  .textfield label {
+    position: absolute;
+    left: calc(var(--inputs-padding) + var(--inputs-border-width));
+    top: 50%;
+    transform: translateY(-50%);
+    font-size: var(--inputs-font-size);
+    color: var(--color-input-text);
+    transition: 0.1s ease-out;
+    transform-origin: left top;
+    pointer-events: none;
+  }
+
+  .textfield input:focus + label,
+  .textfield input:not(:placeholder-shown) + label {
+    top: 0.375rem;
+    transform: scale(0.75);
+  }
+
+  .textfield--small,
+  .textfield--small input {
+    height: calc(var(--small-multiplier) * var(--inputs-min-height));
+  }
+
+  .textfield--small input {
+    padding: 0 var(--inputs-padding);
+    border-radius: calc(var(--small-multiplier) * var(--inputs-border-radius));
+  }
+
+  .textfield--small label {
+    display: none;
+  }
+
+  .textfield--small input::placeholder {
+    opacity: 1;
+  }
+
+  .textfield--disabled input {
+    opacity: 0.5;
+    cursor: not-allowed;
+  }
+
+  .textfield--disabled label {
+    opacity: 0.5;
+  }
+
+  .textfield--full-width,
+  .textfield--full-width input {
+    width: 100%;
+  }
+
+  .textfield--error input {
+    border-color: var(--color-error);
+  }
+
+  .textfield--error label {
+    color: var(--color-error);
+  }
+
+  .input-group {
+    display: flex;
+    align-items: center;
+    border: var(--inputs-border-width) solid var(--color-input-border);
+    border-radius: var(--inputs-border-radius);
+    background-color: var(--color-input-background);
+    transition: border-color 0.1s ease-out;
+    width: 100%;
+
+    .textfield {
+      flex: 1;
+      min-width: 0;
+    }
+
+    .textfield input {
+      border-color: transparent;
+      background-color: transparent;
+      border-top-right-radius: 0;
+      border-bottom-right-radius: 0;
+    }
+  }
+
+  .input-group:focus-within {
+    border-color: var(--color-selected-input-border);
+  }
+
+  .input-group__action {
+    flex-shrink: 0;
+    display: flex;
+    align-items: center;
+
+    .button {
+      border-color: transparent;
+      background-color: transparent;
+      color: var(--color-input-text);
+      border-top-left-radius: 0;
+      border-bottom-left-radius: 0;
+    }
+  }
+{% endstylesheet %}

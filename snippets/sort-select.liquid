@@ -1,0 +1,27 @@
+<script src="{{ 'sort.js' | asset_url }}" type="module"></script>
+
+<sort-component>
+  {% assign sort_by = collection.sort_by | default: collection.default_sort_by %}
+
+  <div class="select-wrapper select-wrapper--full-width">
+    <select class="select" name="sort-by" id="sort-by" data-ref="sorting-select">
+      {% for option in collection.sort_options %}
+        <option
+          value="{{ option.value }}"
+          {% if option.value == sort_by %}
+            selected
+          {% endif %}
+        >
+          {{ option.name }}
+        </option>
+      {% endfor %}
+    </select>
+
+    <div class="select-wrapper__icon">
+      {% render 'icon', icon: 'keyboard_arrow_down' %}
+    </div>
+  </div>
+</sort-component>
+
+{% stylesheet %}
+{% endstylesheet %}

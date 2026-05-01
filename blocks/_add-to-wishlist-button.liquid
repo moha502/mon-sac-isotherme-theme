@@ -1,0 +1,26 @@
+{% liquid
+  assign product = closest.product | default: product
+  if request.visual_preview_mode and product == blank
+    assign product = collections.all.products.first
+  endif
+%}
+
+{% render 'add-to-wishlist-button', product: product, block: block %}
+
+{% schema %}
+{
+  "name": "t:add_to_wishlist_button",
+  "settings": [
+    {
+      "type": "paragraph",
+      "content": "t:please_activate_wishlist"
+    }
+  ],
+  "presets": [
+    {
+      "name": "t:add_to_wishlist_button",
+      "category": "t:product_form"
+    }
+  ]
+}
+{% endschema %}

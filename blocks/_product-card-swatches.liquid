@@ -1,0 +1,157 @@
+{% doc %}
+  Affiche les swatches pour un produit.
+{% enddoc %}
+
+<script src="{{ 'product-card-swatches.js' | asset_url }}" type="module"></script>
+
+{% assign product = closest.product %}
+
+{% comment %} Permet de n'afficher qu'une fois les swatches, sinon les swatches sont affichées sur toutes les options {% endcomment %}
+{% assign colorswatches_display = false %}
+
+{% for option in product.options_with_values %}
+  {% if colorswatches_display == false %}
+    {% liquid
+      assign native_swatches_count = option.values | map: 'swatch' | compact | size
+
+      assign custom_product_metafields_swatches_count = 0
+      for color in product.metafields.custom.colors.value
+        for value in option.values
+          if color.label == value
+            assign custom_product_metafields_swatches_count = custom_product_metafields_swatches_count | plus: 1
+          endif
+        endfor
+      endfor
+      for i in (1..5)
+        assign metafield_color_key = 'colors' | append: i
+        assign metafield_colors = product.metafields.custom[metafield_color_key].value
+        for color in metafield_colors
+          for value in option.values
+            if color.label == value
+              assign custom_product_metafields_swatches_count = custom_product_metafields_swatches_count | plus: 1
+            endif
+          endfor
+        endfor
+      endfor
+
+      assign custom_variants_metafields_swatches_count = 0
+      for product_variant in product.variants
+        if product_variant.metafields.color.hexcode != blank or product_variant.metafields.color.image != blank
+          assign custom_variants_metafields_swatches_count = custom_variants_metafields_swatches_count | plus: 1
+        endif
+      endfor
+    %}
+
+    <product-card-swatches
+      class="
+        product-card-swatches-block
+        {%- if block.settings.show_on_display == 'desktop_only' %} mobile-hide{% endif -%}
+        {%- if block.settings.show_on_display == 'mobile_only' %} desktop-hide{% endif -%}
+        {%- if block.settings.additional_class != blank %} {{ block.settings.additional_class }}{% endif -%}
+      "
+      {{ block.shopify_attributes }}
+      {% if request.visual_preview_mode %}
+        data-visual-preview-mode
+      {% endif %}
+    >
+      {% if native_swatches_count > 0 %}
+        {% assign colorswatches_display = true %}
+        {% render 'product-swatches',
+          option: option,
+          swatches_size: block.settings.swatches_size,
+          swatches_rounded: block.settings.swatches_rounded,
+          swatch_source: 'native',
+          swatches_for_product_card: true
+        %}
+      {% elsif custom_product_metafields_swatches_count > 0 %}
+        {% assign colorswatches_display = true %}
+        {% render 'product-swatches',
+          option: option,
+          swatches_size: block.settings.swatches_size,
+          swatches_rounded: block.settings.swatches_rounded,
+          swatch_source: 'custom_product_metafields',
+          swatches_for_product_card: true
+        %}
+      {% elsif custom_variants_metafields_swatches_count > 0 %}
+        {% assign colorswatches_display = true %}
+        {% render 'product-swatches',
+          option: option,
+          swatches_size: block.settings.swatches_size,
+          swatches_rounded: block.settings.swatches_rounded,
+          swatch_source: 'custom_variants_metafields',
+          swatches_for_product_card: true
+        %}
+      {% endif %}
+    </product-card-swatches>
+  {% endif %}
+{% endfor %}
+
+{% schema %}
+{
+  "name": "t:swatches",
+  "tag": null,
+  "settings": [
+    {
+      "type": "select",
+      "id": "show_on_display",
+      "label": "t:show_on_display",
+      "default": "desktop_and_mobile",
+      "options": [
+        { "value": "desktop_and_mobile", "label": "t:desktop_and_mobile" },
+        { "value": "desktop_only", "label": "t:desktop_only" },
+        { "value": "mobile_only", "label": "t:mobile_only" }
+      ]
+    },
+    {
+      "type": "select",
+      "id": "swatches_size",
+      "label": "t:swatches_size",
+      "options": [
+        {
+          "value": "small",
+          "label": "t:small"
+        },
+        {
+          "value": "normal",
+          "label": "t:normal"
+        },
+        {
+          "value": "big",
+          "label": "t:big"
+        }
+      ],
+      "default": "small"
+    },
+    {
+      "type": "checkbox",
+      "id": "swatches_rounded",
+      "label": "t:swatches_rounded",
+      "default": true
+    },
+    {
+      "type": "header",
+      "content": "t:advanced_settings"
+    },
+    {
+      "type": "text",
+      "id": "additional_class",
+      "label": "t:additional_class",
+      "info": "t:additional_class_info"
+    },
+    {
+      "type": "header",
+      "content": "t:go_further"
+    },
+    {
+      "type": "paragraph",
+      "content": "t:go_further_description"
+    }
+  ],
+  "presets": [
+    {
+      "name": "t:swatches",
+      "category": "t:product"
+    }
+  ]
+}
+{% endschema %}

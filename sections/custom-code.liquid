@@ -1,0 +1,88 @@
+<div
+  class="
+    custom-code-section
+    {%- if section.settings.show_on_display == 'desktop_only' %} mobile-hide{% endif -%}
+    {%- if section.settings.show_on_display == 'mobile_only' %} desktop-hide{% endif -%}
+    {{- section.settings.additional_class -}}
+  "
+  style="
+    --margin-top: {{ section.settings.margin_top }}px;
+    --margin-bottom: {{ section.settings.margin_bottom }}px;
+  "
+>
+  {{ section.settings.custom_liquid }}
+</div>
+
+{% stylesheet %}
+  .custom-code-section {
+    margin-top: var(--margin-top);
+    margin-bottom: var(--margin-bottom);
+  }
+{% endstylesheet %}
+
+{% schema %}
+{
+  "name": "t:custom_liquid",
+  "settings": [
+    {
+      "type": "select",
+      "id": "show_on_display",
+      "label": "t:show_on_display",
+      "default": "desktop_and_mobile",
+      "options": [
+        { "value": "desktop_and_mobile", "label": "t:desktop_and_mobile" },
+        { "value": "desktop_only", "label": "t:desktop_only" },
+        { "value": "mobile_only", "label": "t:mobile_only" }
+      ]
+    },
+    {
+      "type": "liquid",
+      "id": "custom_liquid",
+      "label": "t:custom_liquid"
+    },
+    {
+      "type": "header",
+      "content": "t:margins"
+    },
+    {
+      "type": "range",
+      "id": "margin_top",
+      "label": "t:margin_top",
+      "step": 1,
+      "min": 0,
+      "max": 100,
+      "default": 0,
+      "unit": "px"
+    },
+    {
+      "type": "range",
+      "id": "margin_bottom",
+      "label": "t:margin_bottom",
+      "step": 1,
+      "min": 0,
+      "max": 100,
+      "default": 0,
+      "unit": "px"
+    },
+    {
+      "type": "header",
+      "content": "t:advanced_settings"
+    },
+    {
+      "type": "text",
+      "id": "additional_class",
+      "label": "t:additional_class",
+      "info": "t:additional_class_info"
+    },
+    {
+      "type": "header",
+      "content": "t:go_further"
+    },
+    {
+      "type": "paragraph",
+      "content": "t:go_further_description"
+    }
+  ],
+  "presets": [{ "name": "t:custom_liquid", "category": "t:custom_code" }]
+}
+{% endschema %}

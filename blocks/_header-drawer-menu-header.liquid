@@ -1,0 +1,79 @@
+<div
+  class="header-drawer-menu-header{% if block.settings.wrap_in_card %} card color-{{ block.settings.color_scheme }}{% endif %}"
+  style="
+    --margin-top: {{ block.settings.margin_top }}px;
+    --margin-bottom: {{ block.settings.margin_bottom }}px;
+  "
+>
+  {% content_for 'blocks' %}
+</div>
+
+{% stylesheet %}
+  .header-drawer-menu-header {
+    margin-top: var(--margin-top);
+    margin-bottom: var(--margin-bottom);
+    display: flex;
+    flex-direction: column;
+    gap: var(--gap-sm);
+    margin-bottom: var(--margin-sm);
+  }
+{% endstylesheet %}
+
+{% schema %}
+{
+  "name": "t:header_drawer_menu_header",
+  "tag": null,
+  "blocks": [
+    {
+      "type": "@theme"
+    },
+    {
+      "type": "@app"
+    }
+  ],
+  "settings": [
+    {
+      "type": "checkbox",
+      "id": "wrap_in_card",
+      "label": "t:wrap_in_card",
+      "default": false
+    },
+    {
+      "type": "color_scheme",
+      "id": "color_scheme",
+      "label": "t:color_scheme",
+      "default": "scheme-2",
+      "visible_if": "{{ block.settings.wrap_in_card }}"
+    },
+    {
+      "type": "header",
+      "content": "t:margins"
+    },
+    {
+      "type": "range",
+      "id": "margin_top",
+      "label": "t:margin_top",
+      "default": 0,
+      "min": 0,
+      "max": 100,
+      "step": 1,
+      "unit": "px"
+    },
+    {
+      "type": "range",
+      "id": "margin_bottom",
+      "label": "t:margin_bottom",
+      "default": 0,
+      "min": 0,
+      "max": 100,
+      "step": 1,
+      "unit": "px"
+    }
+  ],
+  "presets": [
+    {
+      "name": "t:header_drawer_menu_header"
+    }
+  ]
+}
+{% endschema %}

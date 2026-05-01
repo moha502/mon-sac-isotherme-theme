@@ -1,0 +1,244 @@
+{% capture content %}
+  {% content_for 'blocks' %}
+{% endcapture %}
+
+<div
+  class="
+    accordion-block
+    {%- if block.settings.show_on_display == 'desktop_only' %} mobile-hide{% endif -%}
+    {%- if block.settings.show_on_display == 'mobile_only' %} desktop-hide{% endif -%}
+    {%- if block.settings.additional_class != blank %} {{ block.settings.additional_class }}{% endif -%}
+  "
+  {{ block.shopify_attributes }}
+>
+  {% if settings.activate_custom_icons and block.settings.icon_custom != blank %}
+    {% assign icon = block.settings.icon_custom %}
+  {% elsif block.settings.icon != 'none' %}
+    {% assign icon = block.settings.icon %}
+  {% endif %}
+
+  {% render 'accordion',
+    content: content,
+    heading: block.settings.heading,
+    heading_style: block.settings.heading_style,
+    heading_tag: block.settings.heading_tag,
+    open_by_default: block.settings.open_by_default,
+    icon: icon
+  %}
+</div>
+
+{% schema %}
+{
+  "name": "t:accordion",
+  "tag": null,
+  "blocks": [
+    {
+      "type": "@theme"
+    },
+    {
+      "type": "@app"
+    }
+  ],
+  "settings": [
+    {
+      "type": "select",
+      "id": "show_on_display",
+      "label": "t:show_on_display",
+      "default": "desktop_and_mobile",
+      "options": [
+        { "value": "desktop_and_mobile", "label": "t:desktop_and_mobile" },
+        { "value": "desktop_only", "label": "t:desktop_only" },
+        { "value": "mobile_only", "label": "t:mobile_only" }
+      ]
+    },
+    {
+      "type": "inline_richtext",
+      "id": "heading",
+      "label": "t:heading",
+      "default": "t:accordion_heading"
+    },
+    {
+      "type": "select",
+      "id": "heading_tag",
+      "label": "t:heading_tag",
+      "options": [
+        { "value": "h1", "label": "t:h1" },
+        { "value": "h2", "label": "t:h2" },
+        { "value": "h3", "label": "t:h3" },
+        { "value": "h4", "label": "t:h4" },
+        { "value": "h5", "label": "t:h5" },
+        { "value": "h6", "label": "t:h6" },
+        { "value": "p", "label": "t:paragraph" }
+      ],
+      "default": "p"
+    },
+    {
+      "type": "select",
+      "id": "heading_style",
+      "label": "t:heading_style",
+      "info": "t:heading_style_info",
+      "options": [
+        { "value": "auto", "label": "t:auto" },
+        { "value": "h1", "label": "t:h1" },
+        { "value": "h2", "label": "t:h2" },
+        { "value": "h3", "label": "t:h3" },
+        { "value": "h4", "label": "t:h4" },
+        { "value": "h5", "label": "t:h5" },
+        { "value": "h6", "label": "t:h6" },
+        { "value": "paragraph", "label": "t:paragraph" }
+      ],
+      "default": "paragraph"
+    },
+    {
+      "type": "checkbox",
+      "id": "open_by_default",
+      "label": "t:open_row_by_default",
+      "default": false
+    },
+    {
+      "type": "header",
+      "content": "t:icon"
+    },
+    {
+      "type": "select",
+      "id": "icon",
+      "label": "t:icon",
+      "options": [
+        { "value": "none", "label": "t:none" },
+        { "value": "home", "label": "t:icons_list.home" },
+        { "value": "genetics", "label": "t:icons_list.genetics" },
+        { "value": "alarm", "label": "t:icons_list.alarm" },
+        { "value": "lightbulb", "label": "t:icons_list.lightbulb" },
+        { "value": "anchor", "label": "t:icons_list.anchor" },
+        { "value": "verified", "label": "t:icons_list.verified" },
+        { "value": "support", "label": "t:icons_list.support" },
+        { "value": "explore", "label": "t:icons_list.explore" },
+        { "value": "featured_seasonal_and_gifts", "label": "t:icons_list.featured_seasonal_and_gifts" },
+        { "value": "delivery_truck_speed", "label": "t:icons_list.delivery_truck_speed" },
+        { "value": "delivery_truck_bolt", "label": "t:icons_list.delivery_truck_bolt" },
+        { "value": "package_2", "label": "t:icons_list.package_2" },
+        { "value": "redeem", "label": "t:icons_list.redeem" },
+        { "value": "priority", "label": "t:icons_list.priority" },
+        { "value": "school", "label": "t:icons_list.school" },
+        { "value": "target", "label": "t:icons_list.target" },
+        { "value": "checkroom", "label": "t:icons_list.checkroom" },
+        { "value": "notifications", "label": "t:icons_list.notifications" },
+        { "value": "barcode", "label": "t:icons_list.barcode" },
+        { "value": "savings", "label": "t:icons_list.savings" },
+        { "value": "favorite", "label": "t:icons_list.favorite" },
+        { "value": "volunteer_activism", "label": "t:icons_list.volunteer_activism" },
+        { "value": "check", "label": "t:icons_list.check" },
+        { "value": "architecture", "label": "t:icons_list.architecture" },
+        { "value": "edit", "label": "t:icons_list.edit" },
+        { "value": "close", "label": "t:icons_list.close" },
+        { "value": "diamond_shine", "label": "t:icons_list.diamond_shine" },
+        { "value": "forum", "label": "t:icons_list.forum" },
+        { "value": "bolt", "label": "t:icons_list.bolt" },
+        { "value": "ecg_heart", "label": "t:icons_list.ecg_heart" },
+        { "value": "send", "label": "t:icons_list.send" },
+        { "value": "experiment", "label": "t:icons_list.experiment" },
+        { "value": "star", "label": "t:icons_list.star" },
+        { "value": "kid_star", "label": "t:icons_list.kid_star" },
+        { "value": "star_half", "label": "t:icons_list.star_half" },
+        { "value": "sell", "label": "t:icons_list.sell" },
+        { "value": "celebration", "label": "t:icons_list.celebration" },
+        { "value": "eco", "label": "t:icons_list.eco" },
+        { "value": "loyalty", "label": "t:icons_list.loyalty" },
+        { "value": "mode_heat", "label": "t:icons_list.mode_heat" },
+        { "value": "arrow_back", "label": "t:icons_list.arrow_back" },
+        { "value": "arrow_downward", "label": "t:icons_list.arrow_downward" },
+        { "value": "arrow_forward", "label": "t:icons_list.arrow_forward" },
+        { "value": "arrow_upward", "label": "t:icons_list.arrow_upward" },
+        { "value": "cake", "label": "t:icons_list.cake" },
+        { "value": "globe", "label": "t:icons_list.globe" },
+        { "value": "all_inclusive", "label": "t:icons_list.all_inclusive" },
+        { "value": "info", "label": "t:icons_list.info" },
+        { "value": "language", "label": "t:icons_list.language" },
+        { "value": "play_circle", "label": "t:icons_list.play_circle" },
+        { "value": "search", "label": "t:icons_list.search" },
+        { "value": "dark_mode", "label": "t:icons_list.dark_mode" },
+        { "value": "store", "label": "t:icons_list.store" },
+        { "value": "storefront", "label": "t:icons_list.storefront" },
+        { "value": "bookmark", "label": "t:icons_list.bookmark" },
+        { "value": "menu", "label": "t:icons_list.menu" },
+        { "value": "remove", "label": "t:icons_list.remove" },
+        { "value": "music_note", "label": "t:icons_list.music_note" },
+        { "value": "cloud", "label": "t:icons_list.cloud" },
+        { "value": "visibility", "label": "t:icons_list.visibility" },
+        { "value": "open_in_new", "label": "t:icons_list.open_in_new" },
+        { "value": "local_mall", "label": "t:icons_list.local_mall" },
+        { "value": "pause_circle", "label": "t:icons_list.pause_circle" },
+        { "value": "attach_file", "label": "t:icons_list.attach_file" },
+        { "value": "add", "label": "t:icons_list.add" },
+        { "value": "delete", "label": "t:icons_list.delete" },
+        { "value": "ramen_dining", "label": "t:icons_list.ramen_dining" },
+        { "value": "moped_package", "label": "t:icons_list.moped_package" },
+        { "value": "encrypted", "label": "t:icons_list.encrypted" },
+        { "value": "sprint", "label": "t:icons_list.sprint" },
+        { "value": "support_agent", "label": "t:icons_list.support_agent" },
+        { "value": "apparel", "label": "t:icons_list.apparel" },
+        { "value": "camping", "label": "t:icons_list.camping" },
+        { "value": "chef_hat", "label": "t:icons_list.chef_hat" },
+        { "value": "air", "label": "t:icons_list.air" },
+        { "value": "lock", "label": "t:icons_list.lock" },
+        { "value": "download", "label": "t:icons_list.download" },
+        { "value": "key", "label": "t:icons_list.key" },
+        { "value": "mail", "label": "t:icons_list.mail" },
+        { "value": "phone_enabled", "label": "t:icons_list.phone_enabled" },
+        { "value": "shop", "label": "t:icons_list.shop" },
+        { "value": "toggle_on", "label": "t:icons_list.toggle_on" }
+      ],
+      "default": "none"
+    },
+    {
+      "type": "paragraph",
+      "content": "t:icon_custom_info",
+      "visible_if": "{{ settings.activate_custom_icons == false }}"
+    },
+    {
+      "type": "text",
+      "id": "icon_custom",
+      "label": "t:icon_custom",
+      "info": "t:icon_from_material_symbols",
+      "visible_if": "{{ settings.activate_custom_icons }}"
+    },
+    {
+      "type": "header",
+      "content": "t:advanced_settings"
+    },
+    {
+      "type": "text",
+      "id": "additional_class",
+      "label": "t:additional_class",
+      "info": "t:additional_class_info"
+    },
+    {
+      "type": "header",
+      "content": "t:go_further"
+    },
+    {
+      "type": "paragraph",
+      "content": "t:go_further_description"
+    }
+  ],
+  "presets": [
+    {
+      "name": "t:accordion",
+      "category": "t:components",
+      "settings": {
+        "heading": "t:accordion_heading_default"
+      },
+      "blocks": [
+        {
+          "type": "text",
+          "settings": {
+            "text": "t:accordion_text_default",
+            "text_style": "paragraph",
+            "alignment": "left"
+          }
+        }
+      ]
+    }
+  ]
+}
+{% endschema %}

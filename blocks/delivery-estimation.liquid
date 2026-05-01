@@ -1,0 +1,296 @@
+<script src="{{ 'delivery-estimation.js' | asset_url }}" type="module"></script>
+
+{%- liquid
+  assign shop_locale = shop.locale | default: 'fr'
+-%}
+
+<delivery-estimation
+  class="
+    delivery-estimation
+    {%- if block.settings.show_on_display == 'desktop_only' %} mobile-hide{% endif -%}
+    {%- if block.settings.show_on_display == 'mobile_only' %} desktop-hide{% endif -%}
+    {%- if block.settings.additional_class != blank %} {{ block.settings.additional_class }}{% endif -%}
+  "
+  style="
+    --margin-top: {{ block.settings.margin_top }}px;
+    --margin-bottom: {{ block.settings.margin_bottom }}px;
+    --alignment: {{ block.settings.alignment_desktop }};
+    --alignment-mobile: {{ block.settings.alignment_mobile }};
+  "
+  data-locale="{{ shop_locale }}"
+  data-min-days="{{ block.settings.minimum_delivery_days }}"
+  data-max-days="{{ block.settings.maximum_delivery_days }}"
+  data-no-saturday="{{ block.settings.no_delivery_on_saturday }}"
+  data-no-sunday="{{ block.settings.no_delivery_on_sunday }}"
+  data-date-format="{{ block.settings.date_format }}"
+  data-show-weekday="{{ block.settings.show_weekday }}"
+  data-cutoff-hour="{{ block.settings.cutoff_hour }}"
+  {{ block.shopify_attributes }}
+  {% if request.visual_preview_mode %}
+    data-visual-preview-mode
+  {% endif %}
+>
+  <p class="delivery-estimation__content" data-ref="delivery-content">
+    {% if settings.activate_custom_icons and block.settings.icon_custom != blank %}
+      {% assign icon = block.settings.icon_custom %}
+    {% elsif block.settings.icon != 'none' %}
+      {% assign icon = block.settings.icon %}
+    {% endif %}
+
+    {% if icon != blank %}
+      {% render 'icon', icon: icon %}
+    {% endif %}
+
+    <span data-ref="delivery-text">{{ block.settings.delivery_estimation_text }}</span>
+    <span data-ref="min-date"></span>
+    <span data-ref="between-text">{{ block.settings.translation_between_dates }}</span>
+    <span data-ref="max-date"></span>
+  </p>
+</delivery-estimation>
+
+{% stylesheet %}
+  .delivery-estimation {
+    display: block;
+    font-size: var(--font-body--size);
+    margin-top: var(--margin-top);
+    margin-bottom: var(--margin-bottom);
+  }
+
+  shopify-visual-preview-block-list .delivery-estimation[data-visual-preview-mode] {
+    width: 300px;
+  }
+
+  .delivery-estimation__content {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 0.25rem;
+    align-items: center;
+    justify-content: var(--alignment-mobile);
+
+    .icon {
+      font-size: 18px !important;
+      width: 18px !important;
+      height: 18px !important;
+      margin-right: var(--margin-xs);
+    }
+  }
+
+  @media (width > 750px) {
+    .delivery-estimation__content {
+      justify-content: var(--alignment);
+    }
+  }
+{% endstylesheet %}
+
+{% schema %}
+{
+  "name": "t:delivery_estimation",
+  "settings": [
+    {
+      "type": "select",
+      "id": "show_on_display",
+      "label": "t:show_on_display",
+      "default": "desktop_and_mobile",
+      "options": [
+        { "value": "desktop_and_mobile", "label": "t:desktop_and_mobile" },
+        { "value": "desktop_only", "label": "t:desktop_only" },
+        { "value": "mobile_only", "label": "t:mobile_only" }
+      ]
+    },
+    {
+      "type": "header",
+      "content": "t:icon"
+    },
+    {
+      "type": "select",
+      "id": "icon",
+      "label": "t:icon",
+      "options": [
+        { "value": "none", "label": "t:none" },
+        { "value": "alarm", "label": "t:icons_list.alarm" },
+        { "value": "bolt", "label": "t:icons_list.bolt" },
+        { "value": "check", "label": "t:icons_list.check" },
+        { "value": "delivery_truck_bolt", "label": "t:icons_list.delivery_truck_bolt" },
+        { "value": "delivery_truck_speed", "label": "t:icons_list.delivery_truck_speed" },
+        { "value": "explore", "label": "t:icons_list.explore" },
+        { "value": "info", "label": "t:icons_list.info" },
+        { "value": "moped_package", "label": "t:icons_list.moped_package" },
+        { "value": "package_2", "label": "t:icons_list.package_2" },
+        { "value": "priority", "label": "t:icons_list.priority" },
+        { "value": "sell", "label": "t:icons_list.sell" },
+        { "value": "send", "label": "t:icons_list.send" },
+        { "value": "sprint", "label": "t:icons_list.sprint" },
+        { "value": "target", "label": "t:icons_list.target" },
+        { "value": "download", "label": "t:icons_list.download" },
+        { "value": "key", "label": "t:icons_list.key" },
+        { "value": "mail", "label": "t:icons_list.mail" },
+        { "value": "phone_enabled", "label": "t:icons_list.phone_enabled" },
+        { "value": "shop", "label": "t:icons_list.shop" },
+        { "value": "toggle_on", "label": "t:icons_list.toggle_on" }
+      ],
+      "default": "moped_package"
+    },
+    {
+      "type": "paragraph",
+      "content": "t:icon_custom_info",
+      "visible_if": "{{ settings.activate_custom_icons == false }}"
+    },
+    {
+      "type": "text",
+      "id": "icon_custom",
+      "label": "t:icon_custom",
+      "info": "t:icon_from_material_symbols",
+      "visible_if": "{{ settings.activate_custom_icons }}"
+    },
+    {
+      "type": "header",
+      "content": "t:style"
+    },
+    {
+      "type": "select",
+      "id": "alignment_desktop",
+      "label": "t:alignment_desktop",
+      "default": "flex-start",
+      "options": [
+        { "value": "flex-start", "label": "t:flex-start" },
+        { "value": "center", "label": "t:centered" },
+        { "value": "flex-end", "label": "t:flex-end" }
+      ],
+      "visible_if": "{{ block.settings.show_on_display != 'mobile_only' }}"
+    },
+    {
+      "type": "select",
+      "id": "alignment_mobile",
+      "label": "t:alignment_mobile",
+      "default": "flex-start",
+      "options": [
+        { "value": "flex-start", "label": "t:flex-start" },
+        { "value": "center", "label": "t:centered" },
+        { "value": "flex-end", "label": "t:flex-end" }
+      ],
+      "visible_if": "{{ block.settings.show_on_display != 'desktop_only' }}"
+    },
+    {
+      "type": "header",
+      "content": "t:delivery_delays"
+    },
+    {
+      "type": "select",
+      "id": "date_format",
+      "options": [
+        {
+          "value": "numbers",
+          "label": "t:numbers"
+        },
+        {
+          "value": "in_letters",
+          "label": "t:in_letters"
+        }
+      ],
+      "default": "in_letters",
+      "label": "t:date_format"
+    },
+    {
+      "type": "checkbox",
+      "id": "show_weekday",
+      "default": true,
+      "label": "t:show_weekday"
+    },
+    {
+      "type": "number",
+      "id": "minimum_delivery_days",
+      "default": 3,
+      "label": "t:minimum_delivery_days"
+    },
+    {
+      "type": "number",
+      "id": "maximum_delivery_days",
+      "default": 5,
+      "label": "t:maximum_delivery_days"
+    },
+    {
+      "type": "number",
+      "id": "cutoff_hour",
+      "label": "t:cutoff_hour",
+      "info": "t:cutoff_hour_info",
+      "default": 14
+    },
+    {
+      "type": "checkbox",
+      "id": "no_delivery_on_saturday",
+      "default": false,
+      "label": "t:no_delivery_on_saturday"
+    },
+    {
+      "type": "checkbox",
+      "id": "no_delivery_on_sunday",
+      "default": false,
+      "label": "t:no_delivery_on_sunday"
+    },
+    {
+      "type": "header",
+      "content": "t:translations"
+    },
+    {
+      "type": "text",
+      "id": "delivery_estimation_text",
+      "default": "t:delivery_estimation_text_default",
+      "label": "t:delivery_estimation_text"
+    },
+    {
+      "type": "text",
+      "id": "translation_between_dates",
+      "default": "t:translation_between_dates_default",
+      "label": "t:translation_between_dates"
+    },
+    {
+      "type": "header",
+      "content": "t:margins"
+    },
+    {
+      "type": "range",
+      "id": "margin_top",
+      "label": "t:margin_top",
+      "default": 0,
+      "min": 0,
+      "max": 100,
+      "step": 1,
+      "unit": "px"
+    },
+    {
+      "type": "range",
+      "id": "margin_bottom",
+      "label": "t:margin_bottom",
+      "default": 0,
+      "min": 0,
+      "max": 100,
+      "step": 1,
+      "unit": "px"
+    },
+    {
+      "type": "header",
+      "content": "t:advanced_settings"
+    },
+    {
+      "type": "text",
+      "id": "additional_class",
+      "label": "t:additional_class",
+      "info": "t:additional_class_info"
+    },
+    {
+      "type": "header",
+      "content": "t:go_further"
+    },
+    {
+      "type": "paragraph",
+      "content": "t:go_further_description"
+    }
+  ],
+  "presets": [
+    {
+      "name": "t:delivery_estimation",
+      "category": "t:product"
+    }
+  ]
+}
+{% endschema %}

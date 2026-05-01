@@ -1,0 +1,823 @@
+<script src="{{ 'cart-drawer.js' | asset_url }}" type="module"></script>
+
+<cart-drawer
+  class="cart-drawer{% if cart == empty %} cart-drawer--empty{% endif %}"
+  data-ref="cart-drawer"
+  data-section-id="{{ section.id }}"
+  style="--cart-drawer-width: {{ section.settings.cart_drawer_width_on_desktop }}px;"
+>
+  <div
+    class="
+      cart-drawer__inner cart-drawer--{{ section.settings.cart_style }}
+      {% if section.settings.cart_style == 'floating' or section.settings.cart_style == 'rounded' %} card{% endif %}
+      color-{{ section.settings.color_scheme_body }}
+      {% if section.settings.full_width_on_mobile %} cart-drawer--full-width-on-mobile{% endif %}
+    "
+    tabindex="-1"
+  >
+    {%- capture drawer_close -%}
+      <button class="button button--tertiary button--small button--icon-only cart-drawer__close" type="button" onclick="this.closest('cart-drawer').close()">
+        {% render 'icon', icon: 'close' %}
+      </button>
+    {%- endcapture -%}
+
+    <div class="cart-drawer__header color-{{ section.settings.color_scheme_header }}">
+      <div class="cart-drawer__header_title">
+        <p class="h6">
+          {{- 'cart.title' | t -}}
+          {%- if section.settings.show_cart_count %} ({{ cart.item_count }}){%- endif -%}
+        </p>
+
+        {{ drawer_close }}
+      </div>
+
+      {% content_for 'block', type: '_cart-header-blocks', id: 'cart_header_blocks' %}
+    </div>
+
+    <div class="cart-drawer__body">
+      <form action="{{ routes.cart_url }}" method="post" id="cart_drawer_form">
+        <div class="cart-drawer__items">
+          {%- for item in cart.items -%}
+            <cart-drawer-item
+              data-index="{{ item.index | plus: 1 }}"
+              class="cart-drawer__item color-{{ section.settings.color_scheme_elements }}{% if section.settings.show_remove_button == false %} cart-drawer__item--no-remove-button{% endif %}{% if section.settings.color_scheme_elements != section.settings.color_scheme_body %} card{% endif %}"
+              data-ref="cart-item"
+              data-product-handle="{{ item.product.handle }}"
+              style="--product-image-ratio: {{ section.settings.products_media_ratio }};"
+            >
+              {% if item.image %}
+                <a href="{{ item.url }}">
+                  <img
+                    src="{{ item.image | image_url: width: 150 }}"
+                    alt="{{ item.product.title }}"
+                    width="85"
+                    height="{{ 85 | divided_by: item.image.aspect_ratio | ceil }}"
+                  >
+                </a>
+              {% else %}
+                <a href="{{ item.url }}">
+                  <img
+                    src="{{ 'placeholder-product.jpg' | asset_img_url: 'x150' }}"
+                    alt="placeholder product"
+                    width="85"
+                    height="85"
+                  >
+                </a>
+              {% endif %}
+
+              <div class="cart-drawer__item-wrapper">
+                <div class="cart-drawer__item-content">
+                  <a href="{{ item.url }}" class="cart-drawer__item-name">
+                    {{- item.product.title | escape -}}
+                  </a>
+
+                  {%- if item.product.has_only_default_variant == false -%}
+                    <div class="cart-drawer__item-options">
+                      {%- for option in item.options_with_values -%}
+                        {%- if section.settings.show_variant_options_labels == false -%}
+                          <span>
+                            {{- option.value -}}
+                            {%- unless forloop.last %}, {% endunless -%}
+                          </span>
+                        {%- else -%}
+                          <div class="cart-drawer__item-option">
+                            <span>{{ option.name }} :</span>
+                            <span>{{ option.value -}}</span>
+                          </div>
+                        {%- endif -%}
+                      {%- endfor -%}
+                    </div>
+                  {%- endif -%}
+
+                  {%- for property in item.properties -%}
+                    {%- if forloop.first -%}
+                      <div class="cart-drawer__item-options">
+                        {%- for property in item.properties -%}
+                          {%- assign property_first_char = property.first | slice: 0 -%}
+                          {%- if property.last != blank and property_first_char != '_' -%}
+                            <div class="cart-drawer__item-option">
+                              <span>{{ property.first }} :</span>
+                              <span>
+                                {%- if property.last contains '/uploads/' -%}
+                                  <a href="{{ property.last }}" target="_blank">
+                                    {{- property.last | split: '/' | last -}}
+                                  </a>
+                                {%- else -%}
+                                  {{ property.last }}
+                                {%- endif -%}
+                              </span>
+                            </div>
+                          {%- endif -%}
+                        {%- endfor -%}
+                      </div>
+                    {%- endif -%}
+                  {%- endfor -%}
+
+                  {%- if item.selling_plan_allocation.selling_plan != blank -%}
+                    <div class="cart-drawer__item-options">
+                      <p class="cart-drawer__item-option">
+                        {{ item.selling_plan_allocation.selling_plan.name }}
+                      </p>
+                    </div>
+                  {%- endif -%}
+
+                  <div class="cart-drawer__item-prices">
+                    <div class="cart-drawer__item-price">
+                      {% assign compare_price = item.original_price %}
+                      {% if item.variant.compare_at_price > item.original_price %}
+                        {% assign compare_price = item.variant.compare_at_price %}
+                      {% endif %}
+
+                      {%- if compare_price > item.final_price -%}
+                        {% render 'price', price: item.final_price, compare_price: compare_price, sales_badge: 'none' %}
+                      {%- else -%}
+                        {% render 'price', price: item.final_price, sales_badge: 'none' %}
+                      {%- endif -%}
+
+                      <div class="cart-drawer__item-discounts">
+                        {%- for discount in item.line_level_discount_allocations -%}
+                          <span class="cart-drawer__item-discount badge badge--secondary badge--small">
+                            {% render 'icon', icon: 'shoppingmode' %}
+                            <span>{{ discount.discount_application.title }}</span>
+                          </span>
+                        {%- endfor -%}
+                      </div>
+                    </div>
+                  </div>
+                </div>
+
+                <div class="cart-drawer__item-actions">
+                  <div class="cart-drawer__item-actions-wrapper">
+                    {%- if section.settings.show_remove_button -%}
+                      {% assign data_variant_id = 'data-variant-id="' | append: item.variant.id | append: '"' %}
+                      {% assign data_ref = 'data-ref="remove-item"' %}
+                      {% assign data = data_variant_id | append: data_ref %}
+
+                      {% render 'button', button_shape: 'small', button_style: 'secondary', data: data, icon: 'delete' %}
+                    {%- endif -%}
+
+                    {% assign data_ref = 'data-ref="quantity-selector-input"' %}
+                    {% assign data_buttons = 'data-ref="quantity-selector-button"' %}
+
+                    {% assign max_quantity = item.variant.inventory_quantity %}
+                    {% if item.variant.inventory_policy == 'continue' %}
+                      {% assign max_quantity = 0 %}
+                    {% endif %}
+
+                    {% render 'quantity-selector',
+                      small: true,
+                      name: 'updates[]',
+                      value: item.quantity,
+                      min: -1,
+                      max: max_quantity,
+                      data_input: data_ref,
+                      data_buttons: data_buttons
+                    %}
+                  </div>
+                </div>
+              </div>
+            </cart-drawer-item>
+          {%- endfor -%}
+        </div>
+      </form>
+    </div>
+
+    <div class="cart-drawer__footer color-{{ section.settings.color_scheme_footer }}">
+      {% content_for 'block', type: '_cart-footer-resume-blocks', id: 'cart_footer_resume_blocks' %}
+
+      <div class="cart-drawer__ctas">
+        <button
+          type="submit"
+          data-ref="checkout-button"
+          class="button button--full-width"
+          name="checkout"
+          form="cart_drawer_form"
+          {% if cart == empty %}
+            disabled
+          {% endif %}
+        >
+          <span>{{ 'cart.checkout' | t }}</span>
+          {% render 'loading-spinner' %}
+        </button>
+      </div>
+
+      {% content_for 'block', type: '_cart-drawer-footer-blocks', id: 'cart_footer_blocks' %}
+    </div>
+
+    {%- if cart.empty? -%}
+      <div class="cart-drawer__inner-empty">
+        <p class="h4">{{ 'cart.empty_title' | t }}</p>
+        {{ drawer_close }}
+        {% content_for 'block', type: '_cart-drawer-empty-blocks', id: 'cart_drawer_empty_blocks' %}
+      </div>
+    {%- endif -%}
+  </div>
+</cart-drawer>
+
+{% stylesheet %}
+  :root {
+    --cart-item-image-width: 80px;
+  }
+
+  cart-drawer {
+    position: fixed;
+    z-index: 10000;
+    left: 0;
+    top: 0;
+    width: 100vw;
+    height: 100%;
+    display: flex;
+    justify-content: flex-end;
+    background: rgba(var(--color-shadow));
+    opacity: 0;
+    visibility: hidden;
+    -webkit-backdrop-filter: brightness(1);
+    backdrop-filter: brightness(1);
+    transition: opacity var(--animation-speed) var(--animation-easing), visibility var(--animation-speed) var(--animation-easing);
+  }
+
+  cart-drawer.is-open {
+    opacity: 1;
+    visibility: visible;
+    -webkit-backdrop-filter: brightness(0.75);
+    backdrop-filter: brightness(0.75);
+    transition: opacity var(--animation-speed) var(--animation-easing), visibility var(--animation-speed) var(--animation-easing),
+      -webkit-backdrop-filter var(--animation-speed) var(--animation-easing), backdrop-filter var(--animation-speed) var(--animation-easing);
+  }
+
+  cart-drawer.is-open .cart-drawer__inner {
+    animation: modalSlideInRight var(--animation-speed) var(--animation-easing) forwards;
+  }
+
+  cart-drawer.is-closing .cart-drawer__inner {
+    animation: modalSlideOutRight var(--animation-speed) var(--animation-easing) forwards;
+  }
+
+  .cart-drawer__inner {
+    height: 100%;
+    width: var(--cart-drawer-width);
+    max-width: calc(100vw - 30px);
+    padding: 0 var(--padding-md);
+    overflow: hidden;
+    display: flex;
+    flex-direction: column;
+    transform: translateX(100%);
+    background-color: var(--color-background);
+    color: var(--color-foreground);
+    box-shadow: var(--modal-shadow);
+  }
+
+  @media (width <= 750px) {
+    .cart-drawer__inner.cart-drawer--full-width-on-mobile {
+      width: 100%;
+      max-width: 100%;
+    }
+  }
+
+  @media (width <= 350px) {
+    .cart-drawer__inner {
+      width: 100%;
+    }
+  }
+
+  .cart-drawer .splide:not(.is-overflow) .splide__pagination {
+    display: flex;
+  }
+
+  .cart-drawer .slider-block--with-pagination {
+    padding-bottom: var(--margin-md);
+  }
+
+  .cart-drawer .splide__pagination {
+    bottom: calc(-1 * var(--margin-md));
+  }
+
+  .cart-drawer--floating {
+    margin: 15px;
+    height: calc(100% - 30px);
+  }
+
+  .cart-drawer--rounded.card {
+    border-top-right-radius: 0;
+    border-bottom-right-radius: 0;
+  }
+
+  .cart-drawer__inner-empty {
+    height: 100%;
+    padding: 0 var(--padding-sm);
+    overflow: hidden;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    gap: var(--gap-lg);
+  }
+
+  .cart-drawer__inner-empty > p {
+    text-align: center;
+  }
+
+  .cart-drawer__inner-empty .cart-drawer__close {
+    right: var(--padding-sm);
+    position: absolute;
+    top: var(--padding-sm);
+  }
+
+  @media screen and (max-width: 350px) {
+    .cart-drawer__inner {
+      max-width: calc(100vw - 10px);
+    }
+
+    .cart-drawer--floating {
+      margin: 5px;
+      height: calc(100% - 10px);
+    }
+  }
+
+  /* Cart Drawer Empty State */
+
+  .cart-drawer--empty .cart-drawer__header,
+  .cart-drawer--empty .cart-drawer__body,
+  .cart-drawer--empty .cart-drawer__footer {
+    display: none;
+  }
+
+  cart-drawer:not(.cart-drawer--empty) .cart-drawer__inner-empty {
+    display: none;
+  }
+
+  /* Cart Drawer Header */
+
+  .cart-drawer__header {
+    position: relative;
+    padding: var(--padding-md);
+    border-bottom: var(--separator-border-width) solid var(--color-border);
+    margin-left: calc(-1 * var(--padding-md));
+    width: calc(100% + (2 * var(--padding-md)));
+  }
+
+  .cart-drawer__header_title {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+  }
+
+  .cart-drawer__header h2 {
+    margin: 0;
+    display: flex;
+    align-items: center;
+    gap: 5px;
+    color: rgb(var(--color-foreground));
+  }
+
+  /* Cart Drawer Content */
+
+  .cart-drawer__items {
+    display: flex;
+    flex-direction: column;
+  }
+
+  .cart-drawer__items--disabled {
+    pointer-events: none;
+  }
+
+  /* Cart Drawer Footer */
+
+  .cart-drawer__footer {
+    border-top: var(--separator-border-width) solid var(--color-border);
+    padding: var(--padding-md);
+    position: sticky;
+    bottom: 0;
+    background-color: var(--color-background);
+    width: calc(100% + (2 * var(--padding-md)));
+    margin-left: calc(-1 * var(--padding-md));
+  }
+
+  .cart-drawer__footer > *:not(:last-child) {
+    margin-bottom: var(--padding-sm);
+  }
+
+  .cart-drawer__footer .accordion__header {
+    padding: 0;
+  }
+
+  .cart-drawer__footer .accordion__content {
+    padding: var(--padding-sm) 0;
+  }
+
+  /* Totals */
+
+  .cart-drawer__totals,
+  .cart-drawer__reductions {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    justify-content: space-between;
+  }
+
+  .cart-drawer__totals > * {
+    color: rgb(var(--color-foreground));
+    margin: 0;
+    line-height: 1;
+  }
+
+  .cart-drawer__reductions p,
+  .cart-drawer__totals p {
+    font-weight: 500;
+    margin: 0;
+    line-height: normal;
+  }
+
+  .cart-drawer__reductions p,
+  .cart-drawer__totals p,
+  .cart-drawer__reductions-value,
+  .cart-drawer__totals-value {
+    font-size: var(--font-body--size-emphasized);
+  }
+
+  /* CTAs */
+
+  .cart-drawer__ctas {
+    text-align: center;
+    display: flex;
+    gap: 10px;
+  }
+
+  .cart-drawer__ctas button {
+    width: 100%;
+  }
+
+  /* Items */
+
+  .cart-drawer__body {
+    overflow-y: auto;
+    overflow-x: hidden;
+    flex: 1;
+    padding-right: calc(var(--padding-sm) / 2);
+    margin-right: calc(-1 * (var(--padding-sm) / 2));
+    padding-top: var(--padding-md);
+  }
+
+  .cart-item__error {
+    display: flex;
+    align-items: flex-start;
+    width: min-content;
+    min-width: 100%;
+  }
+
+  .cart-drawer__body::-webkit-scrollbar {
+    width: 3px;
+  }
+
+  /* Item */
+
+  .cart-drawer__item {
+    background-color: var(--color-background);
+    color: var(--color-foreground);
+    margin-bottom: var(--margin-lg);
+    display: flex;
+    gap: var(--gap-sm);
+    align-items: flex-start;
+    max-width: 100%;
+  }
+
+  .cart-drawer__item--loading {
+    opacity: 0.5;
+    pointer-events: none;
+  }
+
+  .cart-drawer__item:last-child {
+    margin-bottom: var(--padding-sm);
+  }
+
+  .cart-drawer__item > a {
+    display: flex;
+    align-items: center;
+  }
+
+  .cart-drawer__item img {
+    width: var(--cart-item-image-width);
+    object-fit: cover;
+    aspect-ratio: var(--product-image-ratio);
+    background-color: white;
+    max-width: fit-content;
+    border-radius: calc(var(--card-border-radius) - var(--padding-sm));
+  }
+
+  .cart-drawer__item.card {
+    padding: var(--padding-sm);
+
+    img {
+      border-radius: calc(var(--card-border-radius) - var(--padding-sm));
+    }
+  }
+
+  .cart-drawer__item-options,
+  .cart-drawer__item-options p {
+    line-height: normal;
+    font-size: var(--font-body--size-small);
+    word-break: break-word;
+    color: rgba(var(--color-foreground), 0.8);
+  }
+
+  .cart-drawer__item-options .cart-drawer__item-option:not(:last-child) {
+    margin-bottom: var(--padding-xs);
+  }
+
+  .cart-drawer__item-option {
+    margin: 0;
+  }
+
+  .cart-drawer__item-content {
+    display: flex;
+    flex-direction: column;
+    gap: 7px;
+    margin-top: 5px;
+  }
+
+  .cart-drawer__item-wrapper {
+    display: flex;
+    justify-content: space-between;
+    width: 100%;
+    min-height: var(--cart-item-image-width);
+    gap: var(--gap-sm);
+  }
+
+  .cart-drawer__item-name {
+    text-decoration: none;
+    display: block;
+    width: calc(100% + 60px);
+    font-size: var(--font-body--size);
+    color: rgb(var(--color-foreground));
+    font-weight: 500;
+    line-height: normal;
+    margin-bottom: 0;
+    transition: var(--animation-link-hover);
+
+    &:hover {
+      opacity: var(--opacity-link-hover);
+    }
+  }
+
+  .cart-drawer__item-prices {
+    position: relative;
+    width: 100%;
+  }
+
+  .cart-drawer__item-prices.loading {
+    width: max-content;
+  }
+
+  .cart-drawer__item-price {
+    display: flex;
+    align-items: center;
+    gap: var(--gap-xs);
+    flex-wrap: wrap;
+    font-size: var(--font-body--size-small);
+    color: rgb(var(--color-foreground));
+  }
+
+  .cart-drawer__item-price > * {
+    display: block;
+    margin: 0;
+    padding: 0;
+    line-height: normal;
+  }
+
+  .cart-drawer__item-discounted-prices {
+    display: flex;
+    align-self: center;
+    gap: 6px;
+    line-height: normal;
+  }
+
+  .cart-drawer__item-compare-price {
+    opacity: 0.7;
+  }
+
+  .cart-drawer__item--no-remove-button .cart-drawer__item-actions-wrapper {
+    justify-content: flex-end;
+  }
+
+  .cart-drawer__item--no-remove-button .cart-drawer__item-name {
+    width: calc(100% + var(--cart-item-image-width));
+  }
+
+  @media screen and (max-width: 350px) {
+    .cart-drawer__item--no-remove-button .cart-drawer__item-name {
+      width: calc(100% + 75px);
+    }
+  }
+
+  @media screen and (max-width: 350px) {
+    .cart-drawer__item img {
+      width: var(--cart-item-image-width);
+      max-height: calc(var(--cart-item-image-width) * 1.2);
+    }
+
+    .cart-drawer__item-content {
+      gap: 5px;
+    }
+
+    .cart-drawer__item-wrapper {
+      min-height: calc(var(--cart-item-image-width) * 1.2);
+    }
+    .cart-drawer__item-name {
+      width: calc(100% + 50px);
+    }
+
+    .cart-drawer__item-prices {
+      width: 100%;
+    }
+  }
+
+  /* Quantity & Remove Button */
+
+  .cart-drawer__item-actions {
+    display: flex;
+    flex-direction: column;
+    gap: 8px;
+  }
+
+  .cart-drawer__item-actions-wrapper {
+    display: flex;
+    align-items: flex-end;
+    justify-content: space-between;
+    flex-direction: column;
+    height: 100%;
+    gap: 5px;
+  }
+
+  @media screen and (max-width: 749px) {
+    .cart-drawer__item-actions-wrapper {
+      flex-wrap: wrap;
+    }
+  }
+
+  /* Discounts */
+
+  .cart-drawer__discounts {
+    margin-bottom: 0;
+  }
+
+  .cart-drawer__discount {
+    margin-bottom: var(--padding-sm);
+  }
+
+  .cart-drawer__item-discounts,
+  .cart-drawer__discounts {
+    font-size: 12px;
+    margin: 0;
+    padding: 0;
+    display: flex;
+    flex-wrap: wrap;
+    gap: 5px;
+  }
+
+  .cart-drawer__item-discount,
+  .cart-drawer__discount {
+    min-width: max-content;
+    gap: var(--gap-xs);
+  }
+
+  .cart-drawer__item-discount .icon {
+    font-size: 14px !important;
+  }
+
+  .icon-discount {
+    color: rgb(var(--color-foreground));
+    width: 12px;
+    height: 12px;
+    margin-right: 7px;
+  }
+
+  .cart-drawer__item-discount span {
+    max-width: 70px;
+    text-overflow: ellipsis;
+    white-space: nowrap;
+    overflow: hidden;
+  }
+
+  @media screen and (max-width: 750px) {
+    .cart-drawer__discounts {
+      overflow: scroll;
+      flex-wrap: nowrap;
+    }
+
+    .cart-drawer__discounts::-webkit-scrollbar {
+      height: 3px;
+    }
+  }
+{% endstylesheet %}
+
+{% schema %}
+{
+  "name": "t:cart_drawer",
+  "class": "cart-drawer",
+  "settings": [
+    {
+      "type": "select",
+      "id": "cart_style",
+      "label": "t:cart_drawer_style",
+      "options": [
+        {
+          "value": "defaut",
+          "label": "t:default"
+        },
+        {
+          "value": "floating",
+          "label": "t:floating"
+        },
+        {
+          "value": "rounded",
+          "label": "t:rounded"
+        }
+      ],
+      "default": "floating"
+    },
+    {
+      "type": "select",
+      "id": "cart_drawer_width_on_desktop",
+      "label": "t:cart_drawer_width_on_desktop",
+      "options": [
+        { "value": "440", "label": "t:default" },
+        { "value": "490", "label": "t:larger" },
+        { "value": "550", "label": "t:largest" }
+      ],
+      "default": "440"
+    },
+    {
+      "type": "checkbox",
+      "id": "full_width_on_mobile",
+      "label": "t:full_width_on_mobile",
+      "default": false
+    },
+    {
+      "type": "select",
+      "id": "products_media_ratio",
+      "label": "t:products_media_ratio",
+      "options": [
+        { "value": "1 / 1", "label": "t:square" },
+        { "value": "4 / 5", "label": "t:portrait" },
+        { "value": "4 / 3", "label": "t:landscape" },
+        { "value": "adapt", "label": "t:adapt" }
+      ],
+      "default": "1 / 1"
+    },
+    {
+      "type": "checkbox",
+      "id": "show_variant_options_labels",
+      "label": "t:show_variant_options_labels",
+      "default": false
+    },
+    {
+      "type": "checkbox",
+      "id": "show_remove_button",
+      "label": "t:show_remove_button",
+      "default": true
+    },
+    {
+      "type": "checkbox",
+      "id": "show_cart_count",
+      "label": "t:show_cart_count",
+      "default": true
+    },
+    {
+      "type": "header",
+      "content": "t:color_scheme"
+    },
+    {
+      "type": "color_scheme",
+      "id": "color_scheme_header",
+      "label": "t:color_scheme_cart_header",
+      "default": "scheme-1"
+    },
+    {
+      "type": "color_scheme",
+      "id": "color_scheme_body",
+      "label": "t:color_scheme_cart_body",
+      "default": "scheme-1"
+    },
+    {
+      "type": "color_scheme",
+      "id": "color_scheme_elements",
+      "label": "t:color_scheme_cart_elements",
+      "default": "scheme-1"
+    },
+    {
+      "type": "color_scheme",
+      "id": "color_scheme_footer",
+      "label": "t:color_scheme_cart_footer",
+      "default": "scheme-1"
+    },
+    {
+      "type": "header",
+      "content": "t:go_further"
+    },
+    {
+      "type": "paragraph",
+      "content": "t:go_further_description"
+    }
+  ]
+}
+{% endschema %}

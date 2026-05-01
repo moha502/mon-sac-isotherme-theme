@@ -1,0 +1,103 @@
+{%- if block.settings.title != blank and block.settings.link != blank -%}
+  <li class="header-notification">
+    <a href="{{ block.settings.link }}" class="header-notification-link">
+      {%- if block.settings.image != blank -%}
+        {% assign default_alt = 'header.notification_image_alt' | t %}
+        <img
+          src="{{ block.settings.image | image_url: width: 100 }}"
+          alt="{{ block.settings.image.alt | default: default_alt }}"
+          width="50"
+          height="50"
+          class="header-notification-image"
+        >
+      {%- endif -%}
+
+      <div class="header-notification-content">
+        <p class="header-notification-title">{{ block.settings.title }}</p>
+
+        {%- if block.settings.description != blank -%}
+          <div class="header-notification-description">
+            {{ block.settings.description }}
+          </div>
+        {%- endif -%}
+      </div>
+    </a>
+  </li>
+{%- endif -%}
+
+{% stylesheet %}
+  .header-notification {
+    width: 100%;
+    padding: var(--padding-xs);
+    background: rgb(var(--color-background));
+    border-radius: calc(var(--card-border-radius) - var(--padding-xs));
+    transition: background-color var(--animation-speed) var(--animation-easing);
+    font-size: var(--font-body--size);
+  }
+
+  .header-notification:hover {
+    background-color: rgb(from var(--color-foreground) r g b / 5%);
+    font-weight: 500;
+  }
+
+  .header-notification-link {
+    display: flex;
+    align-items: center;
+    gap: var(--gap-sm);
+    text-decoration: none;
+    color: rgb(var(--color-foreground));
+    width: 100%;
+  }
+
+  .header-notification-image {
+    width: 50px;
+    height: 50px;
+    object-fit: cover;
+    object-position: center center;
+    border-radius: calc(var(--card-border-radius) - (var(--card-padding) * 0.67));
+  }
+
+  .header-notification-title {
+    font-weight: 500;
+  }
+{% endstylesheet %}
+
+{% schema %}
+{
+  "name": "t:header_notification",
+  "tag": null,
+  "settings": [
+    {
+      "type": "image_picker",
+      "id": "image",
+      "label": "t:image",
+      "info": "t:header_notification_image_info"
+    },
+    {
+      "type": "inline_richtext",
+      "id": "title",
+      "label": "t:title"
+    },
+    {
+      "type": "richtext",
+      "id": "description",
+      "label": "t:description"
+    },
+    {
+      "type": "url",
+      "id": "link",
+      "label": "t:link"
+    }
+  ],
+  "presets": [
+    {
+      "name": "t:header_notification",
+      "settings": {
+        "title": "Nouveauté : Produit",
+        "description": "<p>Description de la nouveauté</p>",
+        "link": "#"
+      }
+    }
+  ]
+}
+{% endschema %}

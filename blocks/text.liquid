@@ -1,0 +1,380 @@
+{% doc %}
+  Affiche du texte.
+
+  @example
+  {% content_for 'block', type: 'text', id: 'text' %}
+{% enddoc %}
+
+{% if block.settings.show_read_more %}
+  <script src="{{ 'see-more.js' | asset_url }}" type="module"></script>
+{% endif %}
+
+{% if block.settings.text != blank %}
+  <div
+    class="
+      text-block {{ block.settings.text_style }} text-block-{{ block.settings.alignment }}-desktop text-block-{{ block.settings.alignment_mobile }}-mobile
+      {%- if block.settings.truncate %} text-block--truncated{% endif -%}
+      {%- if block.settings.show_on_display == 'desktop_only' %} mobile-hide{% endif -%}
+      {%- if block.settings.show_on_display == 'mobile_only' %} desktop-hide{% endif -%}
+      {%- if block.settings.additional_class != blank %} {{ block.settings.additional_class }}{% endif -%}
+    "
+    style="
+      --text-align: {{ block.settings.alignment }};
+      --text-align-mobile: {{ block.settings.alignment_mobile }};
+      --margin-top: {{ block.settings.margin_top }}px;
+      --margin-bottom: {{ block.settings.margin_bottom }}px;
+      --font-weight: {{ block.settings.font_weight }};
+      {% if block.settings.paragraph_font_size == 'small' %}
+        --font-size: var(--font-body--size-small);
+      {% elsif block.settings.paragraph_font_size == 'normal' %}
+        --font-size: var(--font-body--size);
+      {% elsif block.settings.paragraph_font_size == 'large' %}
+        --font-size: var(--font-body--size-emphasized);
+      {% endif %}
+      {% if block.settings.truncate %}
+        --truncate-length: {{ block.settings.truncate_length }};
+      {% endif %}
+    "
+    {{ block.shopify_attributes }}
+    {% if request.visual_preview_mode %}
+      data-visual-preview-mode
+    {% endif %}
+  >
+    {% if block.settings.show_read_more %}
+      <see-more-component
+        data-read-more-length="{{ block.settings.read_more_length }}"
+      >
+        <div class="see-more__content" data-ref="see-more-content">
+          {{ block.settings.text }}
+        </div>
+        <button class="see-more__toggle" type="button" data-ref="see-more-toggle">
+          <span
+            class="see-more__toggle-text"
+            data-more-text="{{ block.settings.read_more_text }}"
+            data-less-text="{{ block.settings.read_less_text }}"
+            data-ref="see-more-toggle-text"
+          >
+            {{- block.settings.read_more_text -}}
+          </span>
+        </button>
+      </see-more-component>
+    {% else %}
+      {{ block.settings.text }}
+    {% endif %}
+  </div>
+{% endif %}
+
+{% stylesheet %}
+  .text-block {
+    text-align: var(--text-align-mobile);
+    align-content: center;
+    margin-top: var(--margin-top);
+    margin-bottom: var(--margin-bottom);
+  }
+
+  @media (width > 750px) {
+    .text-block {
+      text-align: var(--text-align);
+    }
+  }
+
+  shopify-visual-preview-block-list .text-block[data-visual-preview-mode] {
+    max-width: 400px;
+  }
+
+  .text-block.paragraph > *,
+  .see-more__content > * {
+    font-weight: var(--font-weight);
+    font-size: var(--font-size);
+  }
+
+  .text-block a {
+    color: inherit;
+  }
+
+  see-more-component {
+    display: block;
+    margin-block: 0 !important;
+  }
+
+  .see-more__content {
+    position: relative;
+  }
+
+  .see-more__content > * {
+    margin-block: var(--margin-md) 0;
+  }
+
+  .see-more__content {
+    /* Solution principale avec mask CSS */
+    mask: linear-gradient(to bottom, black calc(100% - 40px), transparent 100%);
+    -webkit-mask: linear-gradient(to bottom, black calc(100% - 40px), transparent 100%);
+    transition: mask 0.3s ease, -webkit-mask 0.3s ease;
+  }
+
+  /* Fallback pour les navigateurs qui ne supportent pas mask */
+  @supports not (mask: linear-gradient(black, transparent)) {
+    .see-more__content::after {
+      content: '';
+      position: absolute;
+      bottom: 0;
+      left: 0;
+      right: 0;
+      height: 40px;
+      background: linear-gradient(transparent, color-mix(in srgb, var(--color-background) 90%, transparent));
+      opacity: 1;
+      transition: opacity 0.3s ease;
+      pointer-events: none;
+    }
+
+    .see-more__content--expanded::after,
+    .see-more__content--no-overflow::after {
+      opacity: 0;
+    }
+  }
+
+  .see-more__content--expanded,
+  .see-more__content--no-overflow {
+    mask: none;
+    -webkit-mask: none;
+  }
+
+  .see-more__toggle {
+    background: none;
+    border: none;
+    color: var(--color-foreground);
+    cursor: pointer;
+    font-size: 0.9em;
+    font-weight: 500;
+    margin-top: 0.5rem;
+    padding: 0.25rem 0;
+    text-decoration: underline;
+    transition: var(--animation-link-hover);
+  }
+
+  .see-more__toggle:hover {
+    opacity: var(--opacity-link-hover);
+  }
+
+  .see-more__toggle-text {
+    display: inline-block;
+    text-decoration: underline;
+  }
+
+  .text-block--truncated {
+    display: -webkit-box;
+    -webkit-line-clamp: var(--truncate-length);
+    -webkit-box-orient: vertical;
+    overflow: hidden;
+    text-overflow: ellipsis;
+  }
+{% endstylesheet %}
+
+{% schema %}
+{
+  "name": "t:text",
+  "tag": null,
+  "settings": [
+    {
+      "type": "select",
+      "id": "show_on_display",
+      "label": "t:show_on_display",
+      "default": "desktop_and_mobile",
+      "options": [
+        { "value": "desktop_and_mobile", "label": "t:desktop_and_mobile" },
+        { "value": "desktop_only", "label": "t:desktop_only" },
+        { "value": "mobile_only", "label": "t:mobile_only" }
+      ]
+    },
+    {
+      "type": "header",
+      "content": "t:content"
+    },
+    {
+      "type": "richtext",
+      "id": "text",
+      "label": "t:text",
+      "default": "t:text_default_content"
+    },
+    {
+      "type": "paragraph",
+      "content": "t:text_info_seo"
+    },
+    {
+      "type": "paragraph",
+      "content": "t:text_info_seo2"
+    },
+    {
+      "type": "header",
+      "content": "t:text_style_header"
+    },
+    {
+      "type": "select",
+      "id": "text_style",
+      "label": "t:text_style",
+      "info": "t:text_style_info",
+      "options": [
+        { "value": "auto", "label": "t:auto" },
+        { "value": "h1", "label": "t:h1" },
+        { "value": "h2", "label": "t:h2" },
+        { "value": "h3", "label": "t:h3" },
+        { "value": "h4", "label": "t:h4" },
+        { "value": "h5", "label": "t:h5" },
+        { "value": "h6", "label": "t:h6" },
+        { "value": "paragraph", "label": "t:paragraph" }
+      ],
+      "default": "h1"
+    },
+    {
+      "type": "select",
+      "id": "paragraph_font_size",
+      "label": "t:font_size",
+      "default": "normal",
+      "options": [
+        { "value": "small", "label": "t:smaller" },
+        { "value": "normal", "label": "t:normal" },
+        { "value": "large", "label": "t:larger" }
+      ],
+      "visible_if": "{{  block.settings.text_style == 'paragraph' }}"
+    },
+    {
+      "type": "range",
+      "id": "font_weight",
+      "label": "t:font_weight",
+      "default": 400,
+      "min": 100,
+      "max": 900,
+      "step": 100,
+      "visible_if": "{{  block.settings.text_style == 'paragraph' }}"
+    },
+    {
+      "type": "text_alignment",
+      "id": "alignment",
+      "label": "t:alignment",
+      "default": "left"
+    },
+    {
+      "type": "text_alignment",
+      "id": "alignment_mobile",
+      "label": "t:alignment_mobile",
+      "default": "left"
+    },
+    {
+      "type": "header",
+      "content": "t:read_more",
+      "visible_if": "{{ block.settings.truncate == false }}"
+    },
+    {
+      "type": "checkbox",
+      "id": "show_read_more",
+      "default": false,
+      "label": "t:show_read_more",
+      "visible_if": "{{ block.settings.truncate == false }}"
+    },
+    {
+      "type": "range",
+      "id": "read_more_length",
+      "min": 50,
+      "max": 500,
+      "step": 10,
+      "unit": "px",
+      "label": "t:read_more_length",
+      "default": 50,
+      "visible_if": "{{ block.settings.show_read_more }}"
+    },
+    {
+      "type": "text",
+      "id": "read_more_text",
+      "label": "t:read_more_text",
+      "default": "t:read_more",
+      "visible_if": "{{ block.settings.show_read_more }}"
+    },
+    {
+      "type": "text",
+      "id": "read_less_text",
+      "label": "t:read_less_text",
+      "default": "t:read_less",
+      "visible_if": "{{ block.settings.show_read_more }}"
+    },
+    {
+      "type": "header",
+      "content": "t:truncate",
+      "visible_if": "{{ block.settings.show_read_more == false }}"
+    },
+    {
+      "type": "checkbox",
+      "id": "truncate",
+      "label": "t:truncate_text",
+      "default": false,
+      "visible_if": "{{ block.settings.show_read_more == false }}"
+    },
+    {
+      "type": "range",
+      "id": "truncate_length",
+      "min": 1,
+      "max": 10,
+      "step": 1,
+      "label": "t:truncate_length",
+      "default": 2,
+      "visible_if": "{{ block.settings.truncate }}"
+    },
+    {
+      "type": "header",
+      "content": "t:margins"
+    },
+    {
+      "type": "range",
+      "id": "margin_top",
+      "label": "t:margin_top",
+      "default": 0,
+      "min": 0,
+      "max": 100,
+      "step": 1,
+      "unit": "px"
+    },
+    {
+      "type": "range",
+      "id": "margin_bottom",
+      "label": "t:margin_bottom",
+      "default": 0,
+      "min": 0,
+      "max": 100,
+      "step": 1,
+      "unit": "px"
+    },
+    {
+      "type": "header",
+      "content": "t:advanced_settings"
+    },
+    {
+      "type": "text",
+      "id": "additional_class",
+      "label": "t:additional_class",
+      "info": "t:additional_class_info"
+    },
+    {
+      "type": "header",
+      "content": "t:go_further"
+    },
+    {
+      "type": "paragraph",
+      "content": "t:go_further_description"
+    }
+  ],
+  "presets": [
+    {
+      "name": "t:title",
+      "category": "t:components",
+      "settings": { "text_style": "h1", "text": "t:text_title_preset_default" }
+    },
+    {
+      "name": "t:text",
+      "category": "t:components",
+      "settings": {
+        "text_style": "paragraph",
+        "text": "t:text_paragraph_preset_default"
+      }
+    }
+  ]
+}
+{% endschema %}

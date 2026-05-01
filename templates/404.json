@@ -1,0 +1,98 @@
+/*
+ * ------------------------------------------------------------
+ * IMPORTANT: The contents of this file are auto-generated.
+ *
+ * This file may be updated by the Shopify admin theme editor
+ * or related systems. Please exercise caution as any changes
+ * made to this file may be overwritten.
+ * ------------------------------------------------------------
+ */
+{
+  "sections": {
+    "main": {
+      "type": "custom-section",
+      "blocks": {
+        "text_3Dx7Ue": {
+          "type": "text",
+          "name": "t:title",
+          "settings": {
+            "show_on_display": "desktop_and_mobile",
+            "text": "<h1>404</h1>",
+            "text_style": "h1",
+            "font_weight": 400,
+            "alignment": "center",
+            "alignment_mobile": "center",
+            "margin_top": 0,
+            "margin_bottom": 0,
+            "additional_class": ""
+          },
+          "blocks": {}
+        },
+        "text_YktYzA": {
+          "type": "text",
+          "name": "t:text",
+          "settings": {
+            "show_on_display": "desktop_and_mobile",
+            "text": "<p>Page non trouvée</p>",
+            "text_style": "paragraph",
+            "font_weight": 600,
+            "alignment": "center",
+            "alignment_mobile": "center",
+            "margin_top": 0,
+            "margin_bottom": 0,
+            "additional_class": ""
+          },
+          "blocks": {}
+        },
+        "button_nEQ4R9": {
+          "type": "button",
+          "name": "t:button",
+          "settings": {
+            "show_on_display": "desktop_and_mobile",
+            "link": "",
+            "open_in_new_tab": false,
+            "label": "Retour sur l'accueil",
+            "button_style": "primary",
+            "button_shape": "default",
+            "icon": "arrow_back",
+            "icon_custom": "",
+            "icon_position": "start",
+            "margin_top": 20,
+            "margin_bottom": 0,
+            "additional_class": ""
+          },
+          "blocks": {}
+        }
+      },
+      "block_order": ["text_3Dx7Ue", "text_YktYzA", "button_nEQ4R9"],
+      "name": "404",
+      "settings": {
+        "show_on_display": "desktop_and_mobile",
+        "section_width": "normal",
+        "color_scheme": "scheme-1",
+        "wrap_in_card": false,
+        "color_scheme_card": "",
+        "layout_type": "flex",
+        "layout_flex_direction_desktop": "column",
+        "layout_grid_columns_desktop": 3,
+        "layout_gap_desktop": 20,
+        "layout_wrap_desktop": "nowrap",
+        "layout_flex_justify_desktop": "center",
+        "layout_flex_align_items_desktop": "center",
+        "same_as_desktop": true,
+        "layout_flex_direction_mobile": "row",
+        "layout_gap_mobile": 20,
+        "layout_wrap_mobile": "nowrap",
+        "layout_flex_justify_mobile": "flex-start",
+        "layout_flex_align_items_mobile": "flex-start",
+        "layout_grid_columns_mobile": 1,
+        "padding_top": 100,
+        "padding_bottom": 100,
+        "margin_top": 0,
+        "margin_bottom": 0,
+        "additional_class": ""
+      }
+    }
+  },
+  "order": ["main"]
+}

@@ -1,0 +1,83 @@
+{% liquid
+  assign product = closest.product | default: product
+  if request.visual_preview_mode and product == blank
+    assign product = collections.all.products.first
+  endif
+%}
+
+<div
+  class="
+    product-quantity-selector-block
+    {%- if block.settings.show_on_display == 'desktop_only' %} mobile-hide{% endif -%}
+    {%- if block.settings.show_on_display == 'mobile_only' %} desktop-hide{% endif -%}
+    {%- if block.settings.additional_class != blank %} {{ block.settings.additional_class }}{% endif -%}
+  "
+  data-ref="product-quantity-selector"
+  {{ block.shopify_attributes }}
+  {% if request.visual_preview_mode %}
+    data-visual-preview-mode
+  {% endif %}
+>
+  {% assign disabled = true %}
+  {% if product.selected_or_first_available_variant.available %}
+    {% assign disabled = false %}
+  {% endif %}
+
+  {% assign max_quantity = product.selected_or_first_available_variant.inventory_quantity %}
+  {% if product.selected_or_first_available_variant.inventory_policy == 'continue' %}
+    {% assign max_quantity = 0 %}
+  {% endif %}
+
+  {% render 'quantity-selector', value: 1, min: 1, max: max_quantity, name: 'quantity', disabled: disabled %}
+</div>
+
+{% stylesheet %}
+  shopify-visual-preview-block-list .product-quantity-selector-block[data-visual-preview-mode] {
+    width: 100px;
+  }
+{% endstylesheet %}
+
+{% schema %}
+{
+  "name": "t:quantity_selector",
+  "tag": null,
+  "blocks": [],
+  "settings": [
+    {
+      "type": "select",
+      "id": "show_on_display",
+      "label": "t:show_on_display",
+      "default": "desktop_and_mobile",
+      "options": [
+        { "value": "desktop_and_mobile", "label": "t:desktop_and_mobile" },
+        { "value": "desktop_only", "label": "t:desktop_only" },
+        { "value": "mobile_only", "label": "t:mobile_only" }
+      ]
+    },
+    {
+      "type": "header",
+      "content": "t:advanced_settings"
+    },
+    {
+      "type": "text",
+      "id": "additional_class",
+      "label": "t:additional_class",
+      "info": "t:additional_class_info"
+    },
+    {
+      "type": "header",
+      "content": "t:go_further"
+    },
+    {
+      "type": "paragraph",
+      "content": "t:go_further_description"
+    }
+  ],
+  "presets": [
+    {
+      "name": "t:quantity_selector",
+      "category": "t:product_form"
+    }
+  ]
+}
+{% endschema %}

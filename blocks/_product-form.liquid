@@ -1,0 +1,107 @@
+<script src="{{ 'product-form.js' | asset_url }}" type="module"></script>
+
+{% liquid
+  assign product = closest.product | default: product
+  if request.visual_preview_mode and product == blank
+    assign product = collections.all.products.first
+  endif
+%}
+
+{% if product != blank %}
+  <product-form
+    data-ref="product-form"
+    {{ block.shopify_attributes }}
+    {% if request.visual_preview_mode %}
+      data-visual-preview-mode
+    {% endif %}
+  >
+    {% form 'product', product, class: 'product-form__form' %}
+      {% content_for 'blocks' %}
+
+      {% content_for 'block', type: '_product-add-to-cart-button', id: 'product-add-to-cart-button' %}
+      {% content_for 'block', type: '_accelerated-checkout', id: 'accelerated-checkout' %}
+    {% endform %}
+  </product-form>
+{% endif %}
+
+{% stylesheet %}
+  shopify-visual-preview-block-list product-form[data-visual-preview-mode] {
+    width: 400px;
+  }
+
+  .product-form__form {
+    display: flex;
+    flex-direction: column;
+    gap: var(--gap-sm);
+  }
+{% endstylesheet %}
+
+{% schema %}
+{
+  "name": "t:product_form",
+  "tag": null,
+  "blocks": [
+    {
+      "type": "_product-variant-picker"
+    },
+    {
+      "type": "_custom_product_field"
+    },
+    {
+      "type": "_product-add-to-cart-button"
+    },
+    {
+      "type": "_accelerated-checkout"
+    },
+    {
+      "type": "product-inventory"
+    },
+    {
+      "type": "_toggle-cross-sell"
+    },
+    {
+      "type": "_quantity-breaks"
+    },
+    {
+      "type": "_subscription"
+    },
+    {
+      "type": "text"
+    },
+    {
+      "type": "icon-with-text"
+    },
+    {
+      "type": "separator"
+    },
+    {
+      "type": "@app"
+    },
+    {
+      "type": "delivery-estimation"
+    }
+  ],
+  "settings": [],
+  "presets": [
+    {
+      "name": "t:product_form",
+      "category": "t:product_form",
+      "blocks": [
+        {
+          "type": "_product-variant-picker"
+        },
+        {
+          "type": "_product-add-to-cart-button",
+          "static": true,
+          "id": "product-add-to-cart-button"
+        },
+        {
+          "type": "_accelerated-checkout",
+          "static": true,
+          "id": "accelerated-checkout"
+        }
+      ]
+    }
+  ]
+}
+{% endschema %}

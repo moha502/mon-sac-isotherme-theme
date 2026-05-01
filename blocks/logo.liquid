@@ -1,0 +1,170 @@
+{% assign logo = settings.logo %}
+{% if block.settings.inverse %}
+  {% assign logo = settings.logo_inverse %}
+{% endif %}
+
+{% capture logo_markup %}
+  {% if logo %}
+    {% assign source_logo_height = block.settings.logo_height | times: 3 %}
+    {% assign logo_width = block.settings.logo_height | times: logo.aspect_ratio | round %}
+    <img
+      src="{{ logo | image_url: height: source_logo_height }}"
+      alt="{{ shop.name }}"
+      width="{{ logo_width }}"
+      height="{{ block.settings.logo_height }}"
+      style="height: {{ block.settings.logo_height }}px"
+      class="
+        block__logo-image
+        {%- if block.settings.show_on_display == 'desktop_only' %} mobile-hide{% endif -%}
+        {%- if block.settings.show_on_display == 'mobile_only' %} desktop-hide{% endif -%}
+        {%- if block.settings.additional_class != blank %} {{ block.settings.additional_class }}{% endif -%}
+      "
+    >
+  {% else %}
+    <span
+      class="
+        block__logo-name
+        {%- if block.settings.show_on_display == 'desktop_only' %} mobile-hide{% endif -%}
+        {%- if block.settings.show_on_display == 'mobile_only' %} desktop-hide{% endif -%}
+        {%- if block.settings.additional_class != blank %} {{ block.settings.additional_class }}{% endif -%}
+      "
+    >
+      {{- shop.name -}}
+    </span>
+  {% endif %}
+{% endcapture %}
+
+{% if block.settings.activate_link %}
+  <a
+    href="{{ routes.root_url }}"
+    class="block__logo h5"
+    style="
+      --margin-top: {{ block.settings.margin_top }}px;
+      --margin-bottom: {{ block.settings.margin_bottom }}px;
+    "
+    {{ block.shopify_attributes }}
+  >
+    {{ logo_markup }}
+  </a>
+{% else %}
+  <div
+    class="block__logo h5"
+    style="
+      --margin-top: {{ block.settings.margin_top }}px;
+      --margin-bottom: {{ block.settings.margin_bottom }}px;
+    "
+    {{ block.shopify_attributes }}
+  >
+    {{ logo_markup }}
+  </div>
+{% endif %}
+
+{% stylesheet %}
+  .block__logo {
+    margin-top: var(--margin-top);
+    margin-bottom: var(--margin-bottom);
+  }
+{% endstylesheet %}
+
+{% schema %}
+{
+  "name": "t:logo",
+  "tag": null,
+  "settings": [
+    {
+      "type": "select",
+      "id": "show_on_display",
+      "label": "t:show_on_display",
+      "default": "desktop_and_mobile",
+      "options": [
+        { "value": "desktop_and_mobile", "label": "t:desktop_and_mobile" },
+        { "value": "desktop_only", "label": "t:desktop_only" },
+        { "value": "mobile_only", "label": "t:mobile_only" }
+      ]
+    },
+    {
+      "type": "header",
+      "content": "t:style"
+    },
+    {
+      "type": "range",
+      "id": "logo_height",
+      "label": "t:logo_height",
+      "default": 25,
+      "min": 20,
+      "max": 50,
+      "step": 1,
+      "unit": "px"
+    },
+    {
+      "type": "header",
+      "content": "t:content"
+    },
+    {
+      "type": "paragraph",
+      "content": "t:logo_comes_from_theme_settings"
+    },
+    {
+      "type": "checkbox",
+      "label": "t:use_inverse_logo",
+      "id": "inverse",
+      "default": false,
+      "visible_if": "{{ settings.logo_inverse }}"
+    },
+    {
+      "type": "checkbox",
+      "label": "t:activate_link_on_logo",
+      "id": "activate_link",
+      "default": true
+    },
+    {
+      "type": "header",
+      "content": "t:margins"
+    },
+    {
+      "type": "range",
+      "id": "margin_top",
+      "label": "t:margin_top",
+      "default": 0,
+      "min": 0,
+      "max": 100,
+      "step": 1,
+      "unit": "px"
+    },
+    {
+      "type": "range",
+      "id": "margin_bottom",
+      "label": "t:margin_bottom",
+      "default": 0,
+      "min": 0,
+      "max": 100,
+      "step": 1,
+      "unit": "px"
+    },
+    {
+      "type": "header",
+      "content": "t:advanced_settings"
+    },
+    {
+      "type": "text",
+      "id": "additional_class",
+      "label": "t:additional_class",
+      "info": "t:additional_class_info"
+    },
+    {
+      "type": "header",
+      "content": "t:go_further"
+    },
+    {
+      "type": "paragraph",
+      "content": "t:go_further_description"
+    }
+  ],
+  "presets": [
+    {
+      "name": "t:logo",
+      "category": "t:components"
+    }
+  ]
+}
+{% endschema %}

@@ -1,0 +1,102 @@
+{% doc %}
+  Destiné à être utilisé dans un bloc bouton.
+
+  @param {object} [block] - Le bloc
+  @param {string} [link] - Lien à afficher, remplacera celui du bloc
+  @param {string} [label] - Texte à afficher, remplacera celui du bloc
+  @param {string} [icon] - Icône à afficher, remplacera celle du bloc
+  @param {string} [icon_position] - Position de l'icône (start, end)
+  @param {string} [button_style] - Style du bouton (primary, secondary, tertiary)
+  @param {string} [button_shape] - Forme du bouton (normal, small, full-width)
+  @param {string} [class] - Classes à ajouter au bouton
+  @param {string} [data] - Données à ajouter au bouton
+  @param {string} [type] - Type du bouton (submit, button, reset)
+  @param {string} [name] - Nom du bouton (add, remove, ...)
+
+  @example
+  {% render 'button', link: '/collections/all' %}
+{% enddoc %}
+
+{% assign style_class = 'button' %}
+
+{% if button_style == 'secondary' %}
+  {% assign style_class = style_class | append: ' button--secondary' %}
+{% endif %}
+
+{% if button_style == 'tertiary' %}
+  {% assign style_class = style_class | append: ' button--tertiary' %}
+{% endif %}
+
+{% if button_shape == 'small' %}
+  {% assign style_class = style_class | append: ' button--small' %}
+{% elsif button_shape == 'full-width' %}
+  {% assign style_class = style_class | append: ' button--full-width' %}
+{% endif %}
+
+{% if icon != blank and label == blank %}
+  {% assign style_class = style_class | append: ' button--icon-only' %}
+{% endif %}
+
+{% if class != blank %}
+  {% assign style_class = style_class | append: ' ' | append: class %}
+{% endif %}
+
+{% capture button_content %}
+  {% capture icon %}
+    {%- if icon != blank and icon != 'none' -%}
+      {% render 'icon', icon: icon %}
+    {%- endif -%}
+  {% endcapture %}
+
+  {%- if icon_position == 'start' -%}
+    {{- icon -}}
+  {%- endif -%}
+
+  {{- label -}}
+
+  {%- if icon_position == 'end' or icon_position == blank -%}
+    {{- icon -}}
+  {%- endif -%}
+{% endcapture %}
+
+{% if link == blank %}
+  <button
+    class="{{ style_class }}"
+    {%- if data != blank -%}
+      {{ data }}
+    {%- endif -%}
+    {% if type %}
+      type="{{ type }}"
+    {% endif %}
+    {% if name %}
+      name="{{ name }}"
+    {% endif %}
+    {{ block.shopify_attributes }}
+  >
+    {{- button_content -}}
+  </button>
+{% else %}
+  <a
+    {% if link == blank %}
+      role="link"
+      aria-disabled="true"
+      disabled
+    {% else %}
+      href="{{ link }}"
+    {% endif %}
+    class="{{ style_class }}"
+    {%- if block.settings.open_in_new_tab -%}
+      target="_blank"
+      rel="noopener noreferrer"
+    {%- endif -%}
+    {%- if data != blank -%}
+      {{ data }}
+    {%- endif -%}
+    {% if name %}
+      name="{{ name }}"
+    {% endif %}
+    {{ block.shopify_attributes }}
+  >
+    {{- button_content -}}
+  </a>
+{% endif %}

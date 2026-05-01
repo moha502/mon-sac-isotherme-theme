@@ -1,0 +1,162 @@
+<script src="{{ 'login-page.js' | asset_url }}" defer></script>
+
+<login-page class="customer-login  color-{{ section.settings.color_scheme }}">
+  <div class="page-width">
+    <div class="customer-login__login" data-ref="login-form">
+      <h1 class="h2 text-center">{{ 'customer.login.title' | t }}</h1>
+
+      {%- form 'customer_login', novalidate: 'novalidate', class: 'customer-login__login-form' -%}
+        {% assign email_label = 'customer.login.email' | t %}
+
+        {% render 'textfield',
+          label: email_label,
+          name: 'customer[email]',
+          id: 'CustomerEmail',
+          type: 'email',
+          autocomplete: 'email',
+          full_width: true
+        %}
+
+        {%- if form.password_needed -%}
+          {% assign password_label = 'customer.login.password' | t %}
+
+          {% render 'textfield',
+            label: password_label,
+            name: 'customer[password]',
+            id: 'CustomerPassword',
+            type: 'password',
+            autocomplete: 'current-password',
+            full_width: true
+          %}
+
+          <a class="link" href="#recover" data-ref="reset-password-link">
+            {{- 'customer.login.forgot_password' | t -}}
+          </a>
+        {%- endif -%}
+
+        {%- if form.errors -%}
+          <div class="form-error">
+            {% render 'icon', icon: 'cancel' %}
+            {{ form.errors.messages.form }}
+          </div>
+        {%- endif -%}
+
+        <div class="customer-login__form-actions">
+          {% assign submit_label = 'customer.login.submit' | t %}
+
+          {% render 'button', label: submit_label, type: 'submit', button_shape: 'full-width' %}
+
+          <a class="button button--secondary button--full-width" href="{{ routes.account_register_url }}">
+            {{ 'customer.login.create_account' | t }}
+          </a>
+        </div>
+      {%- endform -%}
+
+      {%- if shop.checkout.guest_login -%}
+        <div>
+          <h2 class="h3 text-center">{{ 'customer.login.guest_title' | t }}</h2>
+
+          {%- form 'guest_login' -%}
+            {% assign guest_continue_label = 'customer.login.guest_continue' | t %}
+
+            {% render 'button', label: guest_continue_label, type: 'submit', button_shape: 'full-width' %}
+          {%- endform -%}
+        </div>
+      {%- endif -%}
+    </div>
+
+    <div class="customer-login__reset-password hidden" data-ref="reset-password-form">
+      <h2 class="text-center">{{ 'customer.login.reset_password' | t }}</h2>
+
+      {%- form 'recover_customer_password', class: 'customer-login__reset-password-form' -%}
+        {% assign recover_success = form.posted_successfully? %}
+
+        <div class="field">
+          {% render 'textfield', label: email_label, name: 'email', id: 'RecoverEmail', type: 'email', autocomplete: 'email', full_width: true %}
+        </div>
+
+        {%- if form.errors -%}
+          <div class="form-error">
+            {% render 'icon', icon: 'cancel' %}
+            {{ form.errors.messages.form }}
+          </div>
+        {%- endif -%}
+
+        <div class="customer-login__form-actions">
+          {% assign reset_password_label = 'customer.login.reset_password' | t %}
+
+          {% render 'button', label: reset_password_label, type: 'submit', button_shape: 'full-width' %}
+
+          <a class="button button--secondary button--full-width" href="#login" data-ref="come-back-to-login-link">
+            {{- 'customer.login.cancel' | t -}}
+          </a>
+        </div>
+      {%- endform -%}
+    </div>
+
+    {%- if recover_success == true -%}
+      <div class="form-success">
+        {% render 'icon', icon: 'check_circle' %}
+        {{ 'customer.login.reset_password_success' | t }}
+      </div>
+    {%- endif -%}
+  </div>
+</login-page>
+
+{% stylesheet %}
+  .customer-login {
+    display: flex;
+    flex-direction: column;
+    gap: var(--gap-md);
+    width: 100%;
+    padding: 50px 0;
+  }
+
+  .customer-login__login,
+  .customer-login__reset-password {
+    max-width: 400px;
+    width: 100%;
+    margin: 0 auto;
+  }
+
+  .customer-login__login-form,
+  .customer-login__reset-password-form {
+    display: flex;
+    flex-direction: column;
+    gap: var(--gap-md);
+    margin-top: var(--margin-lg);
+  }
+
+  .customer-login__form-actions {
+    margin-top: var(--margin-md);
+    display: flex;
+    flex-direction: column;
+    gap: var(--gap-sm);
+  }
+{% endstylesheet %}
+
+{% schema %}
+{
+  "name": "t:login",
+  "settings": [
+    {
+      "type": "header",
+      "content": "t:style"
+    },
+    {
+      "type": "color_scheme",
+      "id": "color_scheme",
+      "label": "t:color_scheme",
+      "default": "scheme-1"
+    },
+    {
+      "type": "header",
+      "content": "t:go_further"
+    },
+    {
+      "type": "paragraph",
+      "content": "t:go_further_description"
+    }
+  ]
+}
+{% endschema %}

@@ -1,0 +1,132 @@
+<div
+  class="
+    tab
+    {%- if block.settings.show_on_display == 'desktop_only' %} mobile-hide{% endif -%}
+    {%- if block.settings.show_on_display == 'mobile_only' %} desktop-hide{% endif -%}
+    {%- if block.settings.additional_class != blank %} {{ block.settings.additional_class }}{% endif -%}
+  "
+  {{ block.shopify_attributes }}
+  data-ref="tab"
+>
+  <div class="tab__tab">
+    <button class="tab__button">
+      {{ block.settings.tab_name }}
+    </button>
+  </div>
+
+  <template>
+    <div data-ref="tab-content">
+      {% content_for 'blocks' %}
+    </div>
+  </template>
+</div>
+
+{% stylesheet %}
+  .tab__button {
+    appearance: none;
+    cursor: pointer;
+    text-decoration: none;
+    display: inline-flex;
+    justify-content: center;
+    align-items: center;
+    gap: 10px;
+    min-height: var(--tab-button-min-height);
+    width: max-content;
+    font-size: var(--tab-button-font-size);
+    outline: 1px solid transparent;
+    transition: all var(--animation-speed-medium) var(--animation-easing);
+    padding: var(--tab-button-padding-vertical) var(--tab-button-padding-horizontal);
+    color: var(--color-tab-text);
+    background-color: var(--color-tab-background);
+    border: var(--tab-button-border-width) solid var(--color-tab-border);
+    border-radius: calc(var(--small-multiplier) * var(--button-border-radius));
+    font-weight: var(--button-primary-font-weight);
+    text-transform: var(--button-primary-text-transform);
+    letter-spacing: var(--button-letter-spacing);
+  }
+
+  .tab.active .tab__button {
+    background-color: var(--color-selected-tab-background);
+    color: var(--color-selected-tab-text);
+    border-color: var(--color-selected-tab-border);
+  }
+{% endstylesheet %}
+
+{% schema %}
+{
+  "name": "t:tab",
+  "tag": null,
+  "blocks": [
+    {
+      "type": "@theme"
+    },
+    {
+      "type": "@app"
+    }
+  ],
+  "settings": [
+    {
+      "type": "select",
+      "id": "show_on_display",
+      "label": "t:show_on_display",
+      "default": "desktop_and_mobile",
+      "options": [
+        { "value": "desktop_and_mobile", "label": "t:desktop_and_mobile" },
+        { "value": "desktop_only", "label": "t:desktop_only" },
+        { "value": "mobile_only", "label": "t:mobile_only" }
+      ]
+    },
+    {
+      "type": "text",
+      "id": "tab_name",
+      "label": "t:tab_name",
+      "default": "t:tab"
+    },
+    {
+      "type": "header",
+      "content": "t:advanced_settings"
+    },
+    {
+      "type": "text",
+      "id": "additional_class",
+      "label": "t:additional_class",
+      "info": "t:additional_class_info"
+    },
+    {
+      "type": "header",
+      "content": "t:go_further"
+    },
+    {
+      "type": "paragraph",
+      "content": "t:go_further_description"
+    }
+  ],
+  "presets": [
+    {
+      "name": "t:tab",
+      "category": "t:tabs",
+      "settings": {
+        "tab_name": "t:tab"
+      },
+      "blocks": [
+        {
+          "type": "text",
+          "name": "t:text",
+          "settings": {
+            "show_on_display": "desktop_and_mobile",
+            "text": "<p>Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat.</p><p>Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum.</p>",
+            "show_read_more": false,
+            "read_more_length": 200,
+            "text_style": "paragraph",
+            "font_weight": 400,
+            "alignment": "left",
+            "margin_top": 0,
+            "margin_bottom": 0,
+            "additional_class": ""
+          }
+        }
+      ]
+    }
+  ]
+}
+{% endschema %}

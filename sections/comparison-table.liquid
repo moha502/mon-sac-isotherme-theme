@@ -1,0 +1,635 @@
+<div
+  {% if section.settings.anchor_id != blank %}
+    id="{{ section.settings.anchor_id }}"
+  {% endif %}
+  class="
+    comparison-table color-{{ section.settings.color_scheme }}
+    {%- if section.settings.show_on_display == 'desktop_only' %} mobile-hide{% endif -%}
+    {%- if section.settings.show_on_display == 'mobile_only' %} desktop-hide{% endif -%}
+    {{ section.settings.additional_class }}
+  "
+  style="
+    --margin-top: {{ section.settings.margin_top }}px;
+    --margin-bottom: {{ section.settings.margin_bottom }}px;
+  "
+>
+  <div
+    class="
+      comparison-table__inner page-width
+      {% if section.settings.section_width == 'narrow' %} page-width--narrow{% endif %}
+    "
+    style="
+      --padding-top: {{ section.settings.padding_top }}px;
+      --padding-bottom: {{ section.settings.padding_bottom }}px;
+    "
+  >
+    {% content_for 'block', type: 'text', id: 'title' %}
+
+    <div class="comparison-table__table-wrapper">
+      <table
+        class="comparison-table__table highlight-column-{{ section.settings.highlighted_column }} color-{{ section.settings.color_scheme_table }}"
+        style="
+          --color-highlighted-column: {{ section.settings.color_highlighted_column }};
+          --color-highlighted-background-column: {{ section.settings.color_highlighted_background_column }};
+          --cell-min-width-mobile: {{ section.settings.cell_min_width_mobile }}px;
+        "
+      >
+        {% content_for 'blocks' %}
+      </table>
+    </div>
+  </div>
+</div>
+
+{% stylesheet %}
+  .comparison-table {
+    margin-top: var(--margin-top);
+    margin-bottom: var(--margin-bottom);
+  }
+
+  .comparison-table__inner {
+    padding-top: var(--padding-top);
+    padding-bottom: var(--padding-bottom);
+  }
+
+  .comparison-table__table-wrapper {
+    overflow-x: auto;
+  }
+
+  .comparison-table__table {
+    border-collapse: collapse;
+    width: 100%;
+    background-color: transparent;
+    /* table-layout: fixed; */
+  }
+{% endstylesheet %}
+
+{% schema %}
+{
+  "name": "t:comparison_table",
+  "disabled_on": {
+    "groups": ["header", "footer", "custom.cart_drawer", "custom.breadcrumbs"]
+  },
+  "settings": [
+    {
+      "type": "select",
+      "id": "show_on_display",
+      "label": "t:show_on_display",
+      "default": "desktop_and_mobile",
+      "options": [
+        { "value": "desktop_and_mobile", "label": "t:desktop_and_mobile" },
+        { "value": "desktop_only", "label": "t:desktop_only" },
+        { "value": "mobile_only", "label": "t:mobile_only" }
+      ]
+    },
+    {
+      "type": "header",
+      "content": "t:style"
+    },
+    {
+      "type": "select",
+      "id": "section_width",
+      "label": "t:section_width",
+      "default": "normal",
+      "options": [
+        { "value": "narrow", "label": "t:narrow" },
+        { "value": "normal", "label": "t:normal" }
+      ]
+    },
+    {
+      "type": "color_scheme",
+      "id": "color_scheme",
+      "label": "t:color_scheme",
+      "default": "scheme-2"
+    },
+    {
+      "type": "color_scheme",
+      "id": "color_scheme_table",
+      "label": "t:color_scheme_table",
+      "default": "scheme-1"
+    },
+    {
+      "type": "range",
+      "id": "cell_min_width_mobile",
+      "label": "t:cell_min_width_mobile",
+      "default": 120,
+      "min": 40,
+      "max": 160,
+      "step": 10,
+      "unit": "px"
+    },
+
+    {
+      "type": "number",
+      "id": "highlighted_column",
+      "label": "t:highlighted_column",
+      "default": 2,
+      "info": "t:highlighted_column_info"
+    },
+    {
+      "type": "color",
+      "id": "color_highlighted_column",
+      "label": "t:color_highlighted_column",
+      "default": "#000000",
+      "visible_if": "{{ section.settings.highlighted_column != 0 }}"
+    },
+    {
+      "type": "color",
+      "id": "color_highlighted_background_column",
+      "label": "t:color_highlighted_background_column",
+      "default": "#ffffff",
+      "visible_if": "{{ section.settings.highlighted_column != 0 }}"
+    },
+    {
+      "type": "header",
+      "content": "t:paddings"
+    },
+    {
+      "type": "range",
+      "id": "padding_top",
+      "label": "t:padding_top",
+      "default": 50,
+      "min": 0,
+      "max": 100,
+      "step": 1,
+      "unit": "px"
+    },
+    {
+      "type": "range",
+      "id": "padding_bottom",
+      "label": "t:padding_bottom",
+      "default": 50,
+      "min": 0,
+      "max": 100,
+      "step": 1,
+      "unit": "px"
+    },
+    {
+      "type": "header",
+      "content": "t:margins"
+    },
+    {
+      "type": "range",
+      "id": "margin_top",
+      "label": "t:margin_top",
+      "default": 0,
+      "min": 0,
+      "max": 100,
+      "step": 1,
+      "unit": "px"
+    },
+    {
+      "type": "range",
+      "id": "margin_bottom",
+      "label": "t:margin_bottom",
+      "default": 0,
+      "min": 0,
+      "max": 100,
+      "step": 1,
+      "unit": "px"
+    },
+    {
+      "type": "header",
+      "content": "t:advanced_settings"
+    },
+    {
+      "type": "text",
+      "id": "anchor_id",
+      "label": "t:anchor_id",
+      "info": "t:anchor_id_info"
+    },
+    {
+      "type": "text",
+      "id": "additional_class",
+      "label": "t:additional_class",
+      "info": "t:additional_class_info"
+    },
+    {
+      "type": "header",
+      "content": "t:go_further"
+    },
+    {
+      "type": "paragraph",
+      "content": "t:go_further_description"
+    }
+  ],
+  "blocks": [
+    {
+      "type": "_comparison-table-row"
+    },
+    {
+      "type": "text"
+    }
+  ],
+  "presets": [
+    {
+      "name": "t:comparison_table",
+      "category": "t:narrative",
+      "settings": {
+        "show_on_display": "desktop_and_mobile",
+        "section_width": "narrow",
+        "color_scheme": "scheme-2",
+        "color_scheme_table": "scheme-1",
+        "highlighted_column": 2,
+        "color_highlighted_column": "#000000",
+        "color_highlighted_background_column": "#ffffff",
+        "padding_top": 60,
+        "padding_bottom": 60,
+        "margin_top": 0,
+        "margin_bottom": 0,
+        "additional_class": ""
+      },
+      "blocks": [
+        {
+          "type": "_comparison-table-row",
+          "name": "t:row",
+          "settings": {},
+          "blocks": [
+            {
+              "type": "_comparison-table-data",
+              "name": "t:cell",
+              "settings": {}
+            },
+            {
+              "type": "_comparison-table-data",
+              "name": "t:cell",
+              "settings": {},
+              "blocks": [
+                {
+                  "type": "logo",
+                  "name": "t:logo",
+                  "settings": {
+                    "show_on_display": "desktop_and_mobile",
+                    "logo_height": 25,
+                    "inverse": false,
+                    "margin_top": 0,
+                    "margin_bottom": 0,
+                    "additional_class": ""
+                  }
+                }
+              ]
+            },
+            {
+              "type": "_comparison-table-data",
+              "name": "t:cell",
+              "settings": {},
+              "blocks": [
+                {
+                  "type": "text",
+                  "name": "t:text",
+                  "settings": {
+                    "show_on_display": "desktop_and_mobile",
+                    "text": "t:comparison_table_other_theme_default",
+                    "show_read_more": false,
+                    "read_more_length": 200,
+                    "text_style": "paragraph",
+                    "font_weight": 400,
+                    "alignment": "center",
+                    "alignment_mobile": "center",
+                    "margin_top": 0,
+                    "margin_bottom": 0,
+                    "additional_class": ""
+                  }
+                }
+              ]
+            }
+          ]
+        },
+        {
+          "type": "_comparison-table-row",
+          "name": "t:row",
+          "settings": {},
+          "blocks": [
+            {
+              "type": "_comparison-table-data",
+              "name": "t:cell",
+              "settings": {},
+              "blocks": [
+                {
+                  "type": "text",
+                  "name": "t:text",
+                  "settings": {
+                    "show_on_display": "desktop_and_mobile",
+                    "text": "t:comparison_table_best_rated_theme_default",
+                    "show_read_more": false,
+                    "read_more_length": 200,
+                    "text_style": "paragraph",
+                    "font_weight": 400,
+                    "alignment": "left",
+                    "margin_top": 0,
+                    "margin_bottom": 0,
+                    "additional_class": ""
+                  }
+                }
+              ]
+            },
+            {
+              "type": "_comparison-table-data",
+              "name": "t:cell",
+              "settings": {},
+              "blocks": [
+                {
+                  "type": "rating-stars",
+                  "name": "t:rating_stars",
+                  "settings": {
+                    "show_on_display": "desktop_and_mobile",
+                    "product": "",
+                    "rating": 5,
+                    "show_note": true,
+                    "show_review_count": true,
+                    "review_count": 100,
+                    "link": "",
+                    "margin_top": 0,
+                    "margin_bottom": 0,
+                    "additional_class": ""
+                  }
+                }
+              ]
+            },
+            {
+              "type": "_comparison-table-data",
+              "name": "t:cell",
+              "settings": {},
+              "blocks": [
+                {
+                  "type": "rating-stars",
+                  "name": "t:rating_stars",
+                  "settings": {
+                    "show_on_display": "desktop_and_mobile",
+                    "product": "",
+                    "rating": 4,
+                    "show_note": true,
+                    "show_review_count": true,
+                    "review_count": 40,
+                    "link": "",
+                    "margin_top": 0,
+                    "margin_bottom": 0,
+                    "additional_class": ""
+                  }
+                }
+              ]
+            }
+          ]
+        },
+        {
+          "type": "_comparison-table-row",
+          "name": "t:row",
+          "settings": {},
+          "blocks": [
+            {
+              "type": "_comparison-table-data",
+              "name": "t:cell",
+              "settings": {},
+              "blocks": [
+                {
+                  "type": "text",
+                  "name": "t:text",
+                  "settings": {
+                    "show_on_display": "desktop_and_mobile",
+                    "text": "t:comparison_table_uses_blocks_default",
+                    "show_read_more": false,
+                    "read_more_length": 200,
+                    "text_style": "paragraph",
+                    "font_weight": 400,
+                    "alignment": "left",
+                    "margin_top": 0,
+                    "margin_bottom": 0,
+                    "additional_class": ""
+                  }
+                }
+              ]
+            },
+            {
+              "type": "_comparison-table-data",
+              "name": "t:cell",
+              "settings": {},
+              "blocks": [
+                {
+                  "type": "icon",
+                  "name": "t:icon",
+                  "settings": {
+                    "show_on_display": "desktop_and_mobile",
+                    "icon": "check",
+                    "icon_custom": "",
+                    "icon_size": 32,
+                    "additional_class": ""
+                  }
+                }
+              ]
+            },
+            {
+              "type": "_comparison-table-data",
+              "name": "t:cell",
+              "settings": {},
+              "blocks": [
+                {
+                  "type": "icon",
+                  "name": "t:icon",
+                  "settings": {
+                    "show_on_display": "desktop_and_mobile",
+                    "icon": "close",
+                    "icon_custom": "",
+                    "icon_size": 32,
+                    "additional_class": ""
+                  }
+                }
+              ]
+            }
+          ]
+        },
+        {
+          "type": "_comparison-table-row",
+          "name": "t:row",
+          "settings": {},
+          "blocks": [
+            {
+              "type": "_comparison-table-data",
+              "name": "t:cell",
+              "settings": {},
+              "blocks": [
+                {
+                  "type": "text",
+                  "name": "t:text",
+                  "settings": {
+                    "show_on_display": "desktop_and_mobile",
+                    "text": "t:comparison_table_modern_design_default",
+                    "show_read_more": false,
+                    "read_more_length": 200,
+                    "text_style": "paragraph",
+                    "font_weight": 400,
+                    "alignment": "left",
+                    "margin_top": 0,
+                    "margin_bottom": 0,
+                    "additional_class": ""
+                  }
+                }
+              ]
+            },
+            {
+              "type": "_comparison-table-data",
+              "name": "t:cell",
+              "settings": {},
+              "blocks": [
+                {
+                  "type": "icon",
+                  "name": "t:icon",
+                  "settings": {
+                    "show_on_display": "desktop_and_mobile",
+                    "icon": "check",
+                    "icon_custom": "",
+                    "icon_size": 32,
+                    "additional_class": ""
+                  }
+                }
+              ]
+            },
+            {
+              "type": "_comparison-table-data",
+              "name": "t:cell",
+              "settings": {},
+              "blocks": [
+                {
+                  "type": "icon",
+                  "name": "t:icon",
+                  "settings": {
+                    "show_on_display": "desktop_and_mobile",
+                    "icon": "close",
+                    "icon_custom": "",
+                    "icon_size": 32,
+                    "additional_class": ""
+                  }
+                }
+              ]
+            }
+          ]
+        },
+        {
+          "type": "_comparison-table-row",
+          "name": "t:row",
+          "settings": {},
+          "blocks": [
+            {
+              "type": "_comparison-table-data",
+              "name": "t:cell",
+              "settings": {},
+              "blocks": [
+                {
+                  "type": "text",
+                  "name": "t:text",
+                  "settings": {
+                    "show_on_display": "desktop_and_mobile",
+                    "text": "t:comparison_table_3000_stores_default",
+                    "show_read_more": false,
+                    "read_more_length": 200,
+                    "text_style": "paragraph",
+                    "font_weight": 400,
+                    "alignment": "left",
+                    "margin_top": 0,
+                    "margin_bottom": 0,
+                    "additional_class": ""
+                  }
+                }
+              ]
+            },
+            {
+              "type": "_comparison-table-data",
+              "name": "t:cell",
+              "settings": {},
+              "blocks": [
+                {
+                  "type": "icon",
+                  "name": "t:icon",
+                  "settings": {
+                    "show_on_display": "desktop_and_mobile",
+                    "icon": "check",
+                    "icon_custom": "",
+                    "icon_size": 32,
+                    "additional_class": ""
+                  }
+                }
+              ]
+            },
+            {
+              "type": "_comparison-table-data",
+              "name": "t:cell",
+              "settings": {},
+              "blocks": [
+                {
+                  "type": "icon",
+                  "name": "t:icon",
+                  "settings": {
+                    "show_on_display": "desktop_and_mobile",
+                    "icon": "close",
+                    "icon_custom": "",
+                    "icon_size": 32,
+                    "additional_class": ""
+                  }
+                }
+              ]
+            }
+          ]
+        },
+        {
+          "type": "_comparison-table-row",
+          "name": "t:row",
+          "settings": {},
+          "blocks": [
+            {
+              "type": "_comparison-table-data",
+              "name": "t:cell",
+              "settings": {}
+            },
+            {
+              "type": "_comparison-table-data",
+              "name": "t:cell",
+              "settings": {},
+              "blocks": [
+                {
+                  "type": "button",
+                  "name": "t:button",
+                  "settings": {
+                    "show_on_display": "desktop_and_mobile",
+                    "link": "https://www.themefullstack.com/",
+                    "open_in_new_tab": true,
+                    "label": "t:comparison_table_get_theme_button_default",
+                    "button_style": "primary",
+                    "button_shape": "full-width",
+                    "icon": "none",
+                    "icon_custom": "",
+                    "icon_position": "end",
+                    "margin_top": 0,
+                    "margin_bottom": 0,
+                    "additional_class": ""
+                  }
+                }
+              ]
+            },
+            {
+              "type": "_comparison-table-data",
+              "name": "t:cell",
+              "settings": {}
+            }
+          ]
+        },
+        {
+          "type": "text",
+          "id": "title",
+          "static": true,
+          "settings": {
+            "show_on_display": "desktop_and_mobile",
+            "text": "t:comparison_table_why_choose_title_default",
+            "show_read_more": false,
+            "read_more_length": 200,
+            "text_style": "h3",
+            "font_weight": 400,
+            "alignment": "center",
+            "alignment_mobile": "center",
+            "margin_top": 0,
+            "margin_bottom": 40,
+            "additional_class": ""
+          }
+        }
+      ]
+    }
+  ]
+}
+{% endschema %}

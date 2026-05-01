@@ -1,0 +1,76 @@
+<dropdown-component class="dropdown-notifications">
+  <button type="button" class="dropdown-toggle" data-ref="dropdown-toggle">
+    {% render 'icon', icon: 'notifications_none', class: 'header-notifications__icon' %}
+
+    {%- if block.settings.enable_notifications_bubble and block.blocks.size > 0 -%}
+      <div class="header__icon-count-bubble">
+        <span class="header__icon-count-bubble-inner">
+          {{ block.blocks.size }}
+        </span>
+      </div>
+    {%- endif -%}
+  </button>
+
+  <div
+    class="dropdown-content dropdown-content--open-left dropdown-notifications-content color-scheme-1"
+    data-ref="dropdown-content"
+  >
+    <ul class="header-notifications__list" role="list">
+      {% content_for 'blocks' %}
+    </ul>
+  </div>
+</dropdown-component>
+
+{% stylesheet %}
+  .header-notifications {
+    line-height: 0;
+    position: relative;
+  }
+
+  .header-notifications__icon {
+    position: relative;
+    display: inline-block;
+    cursor: pointer;
+  }
+
+  .header-notifications__popup {
+    border: var(--container-border-width) solid var(--color-border);
+    position: absolute;
+    top: 100%;
+    right: 0;
+    min-width: 240px;
+    max-height: 350px;
+    overflow-y: auto;
+    padding: var(--padding-sm);
+  }
+
+  .header-notifications__list {
+    display: flex;
+    flex-direction: column;
+    width: 100%;
+    list-style: none;
+    margin: 0;
+    padding: 0;
+    gap: var(--gap-sm);
+  }
+{% endstylesheet %}
+
+{% schema %}
+{
+  "name": "t:header_notifications",
+  "tag": null,
+  "settings": [
+    {
+      "type": "checkbox",
+      "id": "enable_notifications_bubble",
+      "label": "t:show_bubble",
+      "default": true
+    }
+  ],
+  "blocks": [
+    {
+      "type": "_header-notification"
+    }
+  ]
+}
+{% endschema %}

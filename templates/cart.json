@@ -1,0 +1,210 @@
+/*
+ * ------------------------------------------------------------
+ * IMPORTANT: The contents of this file are auto-generated.
+ *
+ * This file may be updated by the Shopify admin theme editor
+ * or related systems. Please exercise caution as any changes
+ * made to this file may be overwritten.
+ * ------------------------------------------------------------
+ */
+{
+  "sections": {
+    "main": {
+      "type": "cart",
+      "blocks": {
+        "cart_header_blocks": {
+          "type": "_cart-header-blocks",
+          "static": true,
+          "settings": {
+            "wrap_in_card": true,
+            "color_scheme": "scheme-2",
+            "margin_top": 15,
+            "margin_bottom": 0
+          },
+          "blocks": {
+            "cart_progress_bar_kkwckk": {
+              "type": "_cart-progress-bar",
+              "name": "t:progress_bar",
+              "settings": {
+                "show_on_display": "desktop_and_mobile",
+                "progress_bar_based_on": "value",
+                "collection": "",
+                "step1_text": "Plus que # et la livraison est offerte !",
+                "step1_value": 30,
+                "step1_quantity": 1,
+                "step1_label": "",
+                "step2_text": "",
+                "step2_value": 0,
+                "step2_label": "",
+                "step3_text": "",
+                "step3_label": "",
+                "step_completed_text": "Félicitations vous bénéficiez de la livraison offerte !",
+                "margin_top": 0,
+                "margin_bottom": 0,
+                "additional_class": ""
+              },
+              "blocks": {}
+            }
+          },
+          "block_order": ["cart_progress_bar_kkwckk"]
+        },
+        "cart_footer_resume_blocks": {
+          "type": "_cart-footer-resume-blocks",
+          "static": true,
+          "settings": {
+            "wrap_in_card": false,
+            "color_scheme": "",
+            "margin_top": 0,
+            "margin_bottom": 0
+          },
+          "blocks": {
+            "discount_code_3WJdxK": {
+              "type": "_discount-code",
+              "name": "t:discount_code",
+              "settings": {
+                "style": "normal",
+                "accordion_heading": "Ajouter un code de réduction",
+                "button_text": "Appliquer",
+                "placeholder": "Code de réduction",
+                "margin_top": 0,
+                "margin_bottom": 10,
+                "additional_class": ""
+              },
+              "blocks": {}
+            }
+          },
+          "block_order": ["discount_code_3WJdxK"]
+        },
+        "cart_footer_blocks": {
+          "type": "_cart-footer-blocks",
+          "static": true,
+          "settings": {
+            "wrap_in_card": false,
+            "color_scheme": "",
+            "margin_top": 0,
+            "margin_bottom": 0
+          },
+          "blocks": {
+            "cart_accelerated_checkout_pCRFtz": {
+              "type": "_cart-accelerated-checkout",
+              "name": "t:accelerated_checkout_button",
+              "settings": {
+                "show_on_display": "desktop_and_mobile",
+                "button_style": "primary",
+                "margin_top": 0,
+                "margin_bottom": 0,
+                "additional_class": ""
+              },
+              "blocks": {}
+            },
+            "payment_methods_TfmeJy": {
+              "type": "payment-methods",
+              "name": "t:payment_methods",
+              "settings": {
+                "show_on_display": "desktop_and_mobile",
+                "alignment_desktop": "flex-start",
+                "alignment_mobile": "center",
+                "icon_size": 35,
+                "margin_top": 10,
+                "margin_bottom": 20,
+                "additional_class": ""
+              },
+              "blocks": {}
+            },
+            "accordions_UBXTAD": {
+              "type": "accordions",
+              "name": "t:accordions",
+              "settings": {
+                "show_on_display": "desktop_and_mobile",
+                "icon": "caret",
+                "dividers": true,
+                "additional_class": ""
+              },
+              "blocks": {
+                "accordion_eYqGh9": {
+                  "type": "_accordion",
+                  "settings": {
+                    "show_on_display": "desktop_and_mobile",
+                    "heading": "Politique de retour",
+                    "open_by_default": false,
+                    "icon": "none",
+                    "icon_custom": "",
+                    "additional_class": ""
+                  },
+                  "blocks": {
+                    "text_9gnHYi": {
+                      "type": "text",
+                      "settings": {
+                        "show_on_display": "desktop_and_mobile",
+                        "text": "<p>Notre objectif est que chaque client soit totalement satisfait de son achat. Si ce n'est pas le cas, faites-le nous savoir et nous ferons de notre mieux pour trouver une solution avec vous.</p>",
+                        "text_style": "paragraph",
+                        "paragraph_font_size": "normal",
+                        "font_weight": 400,
+                        "alignment": "left",
+                        "alignment_mobile": "left",
+                        "show_read_more": false,
+                        "read_more_length": 200,
+                        "read_more_text": "Voir plus",
+                        "read_less_text": "Voir moins",
+                        "margin_top": 0,
+                        "margin_bottom": 0,
+                        "additional_class": ""
+                      },
+                      "blocks": {}
+                    }
+                  },
+                  "block_order": ["text_9gnHYi"]
+                },
+                "accordion_dYtf9Y": {
+                  "type": "_accordion",
+                  "settings": {
+                    "show_on_display": "desktop_and_mobile",
+                    "heading": "Livraison",
+                    "open_by_default": false,
+                    "icon": "none",
+                    "icon_custom": "",
+                    "additional_class": ""
+                  },
+                  "blocks": {
+                    "text_jGApxp": {
+                      "type": "text",
+                      "settings": {
+                        "show_on_display": "desktop_and_mobile",
+                        "text": "<p>Nous travaillons rapidement pour envoyer votre commande dès que possible. Une fois votre commande expédiée, vous recevrez un email avec des informations supplémentaires. Les délais de livraison varient en fonction de votre emplacement.</p>",
+                        "text_style": "paragraph",
+                        "paragraph_font_size": "normal",
+                        "font_weight": 400,
+                        "alignment": "left",
+                        "alignment_mobile": "left",
+                        "show_read_more": false,
+                        "read_more_length": 200,
+                        "read_more_text": "Voir plus",
+                        "read_less_text": "Voir moins",
+                        "margin_top": 0,
+                        "margin_bottom": 0,
+                        "additional_class": ""
+                      },
+                      "blocks": {}
+                    }
+                  },
+                  "block_order": ["text_jGApxp"]
+                }
+              },
+              "block_order": ["accordion_eYqGh9", "accordion_dYtf9Y"]
+            }
+          },
+          "block_order": ["cart_accelerated_checkout_pCRFtz", "payment_methods_TfmeJy", "accordions_UBXTAD"]
+        }
+      },
+      "settings": {
+        "color_scheme": "scheme-1",
+        "show_variant_options_labels": false,
+        "show_remove_button": true,
+        "show_cart_count": true,
+        "padding_top": 60,
+        "padding_bottom": 60
+      }
+    }
+  },
+  "order": ["main"]
+}

@@ -1,0 +1,46 @@
+{% doc %}
+  Affiche un bouton d'ajout à la wishlist.
+
+  @param product - {Product} Le produit à afficher.
+  @param block - {Block} Le bloc à utiliser.
+  @param [small] - {Boolean} Indique si le bouton est petit.
+  @param [border] - {Boolean} Indique si le bouton a un border.
+
+  @example
+  {% render 'add-to-wishlist-button', product: product, block: block %}
+{% enddoc %}
+
+<add-to-wishlist-button
+  class="button{% if border == false %} button--tertiary{% else %} button--secondary{% endif %}{% if small %} button--small{% endif %} button--icon-only add-to-wishlist-button"
+  {% if product %}
+    data-product-id="{{ product.id }}"
+    data-product-title="{{ product.title | escape }}"
+    data-product-handle="{{ product.handle }}"
+    data-product-url="{{ product.url }}"
+    data-product-image="{{ product.featured_image | image_url: width: 100 }}"
+  {% endif %}
+  {{ block.shopify_attributes }}
+  {% if request.visual_preview_mode %}
+    data-visual-preview-mode
+  {% endif %}
+>
+  {% render 'icon',
+    icon: 'favorite',
+    class: 'add-to-wishlist-button__icon add-to-wishlist-button__icon--unfilled',
+    data: 'data-ref="add-to-wishlist-button-icon"'
+  %}
+</add-to-wishlist-button>
+
+{% stylesheet %}
+  .product-quantity-selector-block[data-visual-preview-mode] {
+    width: 100px;
+  }
+
+  .add-to-wishlist-button__icon {
+    font-variation-settings: 'FILL' 0, 'wght' var(--icon-weight), 'GRAD' 0, 'opsz' 24;
+  }
+
+  .add-to-wishlist-button__icon--filled {
+    font-variation-settings: 'FILL' 1, 'wght' var(--icon-weight), 'GRAD' 0, 'opsz' 24;
+  }
+{% endstylesheet %}

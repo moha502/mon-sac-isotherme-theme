@@ -1,0 +1,180 @@
+<div
+  class="
+    powered-by-fullstack
+    {%- if block.settings.show_on_display == 'desktop_only' %} mobile-hide{% endif -%}
+    {%- if block.settings.show_on_display == 'mobile_only' %} desktop-hide{% endif -%}
+    {%- if block.settings.additional_class != blank %} {{ block.settings.additional_class }}{% endif -%}
+  "
+  style="
+    --alignment: {{ block.settings.alignment_desktop }};
+    --alignment-mobile: {{ block.settings.alignment_mobile }};
+  "
+>
+  {% if block.settings.mode == 'minimal' %}
+    <a href="https://themefullstack.com" target="_blank" class="powered-by-fullstack-minimal">
+      {{- 'powered_by_fullstack' | t -}}
+    </a>
+  {% else %}
+    <a href="https://themefullstack.com" target="_blank" class="powered-by-fullstack-badge">
+      <img
+        src="{{ 'powered-by-fullstack.svg' | asset_url }}"
+        alt="Powered by Fullstack"
+        width="120"
+        height="31"
+        loading="lazy"
+      >
+    </a>
+  {% endif %}
+</div>
+
+{% stylesheet %}
+  .powered-by-fullstack {
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+    width: 100%;
+    justify-content: var(--alignment-mobile);
+  }
+
+  @media (width > 750px) {
+    .powered-by-fullstack {
+      justify-content: var(--alignment);
+    }
+  }
+
+  .powered-by-fullstack-minimal {
+    color: var(--color-foreground);
+    font-size: var(--font-body--size);
+    text-decoration: underline;
+    transition: var(--animation-link-hover);
+
+    &:hover {
+      opacity: var(--opacity-link-hover);
+    }
+  }
+
+  .powered-by-fullstack-badge {
+    border: 1px solid lightgray;
+    border-radius: 4px;
+    padding: 5px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    transition: all 0.5s ease;
+    background-color: white;
+    position: relative;
+    overflow: hidden;
+    margin: 2px;
+    width: 120px;
+  }
+
+  .powered-by-fullstack-badge::before {
+    content: '';
+    position: absolute;
+    top: -50%;
+    left: -100%;
+    width: 200%;
+    height: 200%;
+    background: linear-gradient(0deg, transparent, transparent 30%, rgba(255, 255, 255, 0.5));
+    transform: rotate(-45deg);
+    transition: all 0.5s ease;
+    opacity: 0;
+  }
+
+  .powered-by-fullstack-badge:hover {
+    transform: scale(1.02);
+    box-shadow: 0 0 5px rgba(0, 0, 0, 0.1);
+  }
+
+  .powered-by-fullstack-badge:hover::before {
+    opacity: 1;
+    transform: rotate(-45deg) translateY(150%);
+  }
+{% endstylesheet %}
+
+{% schema %}
+{
+  "name": "t:powered_by_fullstack",
+  "settings": [
+    {
+      "type": "paragraph",
+      "content": "t:powered_by_fullstack_info"
+    },
+    {
+      "type": "select",
+      "id": "show_on_display",
+      "label": "t:show_on_display",
+      "default": "desktop_and_mobile",
+      "options": [
+        { "value": "desktop_and_mobile", "label": "t:desktop_and_mobile" },
+        { "value": "desktop_only", "label": "t:desktop_only" },
+        { "value": "mobile_only", "label": "t:mobile_only" }
+      ]
+    },
+    {
+      "type": "select",
+      "id": "mode",
+      "label": "t:mode",
+      "default": "badge",
+      "options": [
+        {
+          "value": "minimal",
+          "label": "t:minimal"
+        },
+        {
+          "value": "badge",
+          "label": "t:badge"
+        }
+      ]
+    },
+    {
+      "type": "select",
+      "id": "alignment_desktop",
+      "label": "t:alignment_desktop",
+      "default": "flex-start",
+      "options": [
+        { "value": "flex-start", "label": "t:flex-start" },
+        { "value": "center", "label": "t:centered" },
+        { "value": "flex-end", "label": "t:flex-end" }
+      ],
+      "visible_if": "{{ block.settings.show_on_display != 'mobile_only' }}"
+    },
+    {
+      "type": "select",
+      "id": "alignment_mobile",
+      "label": "t:alignment_mobile",
+      "default": "flex-start",
+      "options": [
+        { "value": "flex-start", "label": "t:flex-start" },
+        { "value": "center", "label": "t:centered" },
+        { "value": "flex-end", "label": "t:flex-end" }
+      ],
+      "visible_if": "{{ block.settings.show_on_display != 'desktop_only' }}"
+    },
+    {
+      "type": "header",
+      "content": "t:advanced_settings"
+    },
+    {
+      "type": "text",
+      "id": "additional_class",
+      "label": "t:additional_class",
+      "info": "t:additional_class_info"
+    },
+    {
+      "type": "header",
+      "content": "t:go_further"
+    },
+    {
+      "type": "paragraph",
+      "content": "t:go_further_description"
+    }
+  ],
+  "presets": [
+    {
+      "name": "t:powered_by_fullstack",
+      "category": "t:footer"
+    }
+  ]
+}
+{% endschema %}

@@ -1,0 +1,133 @@
+<div
+  class="fake-variant-picker{%- if block.settings.additional_class != blank %} {{ block.settings.additional_class }}{% endif -%}"
+  style="
+    --margin-top: {{ block.settings.margin_top }}px;
+    --margin-bottom: {{ block.settings.margin_bottom }}px;
+  "
+  {{ block.shopify_attributes }}
+>
+  {% if block.settings.label != blank %}
+    <p class="fake-variant-picker__label variant_label">{{ block.settings.label }} :</p>
+  {% endif %}
+
+  <div class="fake-variant-picker__variants">
+    {% content_for 'blocks' %}
+  </div>
+</div>
+
+{% stylesheet %}
+  .fake-variant-picker {
+    margin-top: var(--margin-top);
+    margin-bottom: var(--margin-bottom);
+  }
+
+  .fake-variant-picker__variants {
+    display: flex;
+    flex-wrap: wrap;
+    gap: var(--gap-sm);
+  }
+{% endstylesheet %}
+
+{% schema %}
+{
+  "name": "t:fake_variant_picker",
+  "tag": null,
+  "blocks": [
+    {
+      "type": "_fake-variant-link"
+    }
+  ],
+  "settings": [
+    {
+      "type": "header",
+      "content": "t:content"
+    },
+    {
+      "type": "text",
+      "id": "label",
+      "label": "t:label",
+      "default": "t:variant"
+    },
+    {
+      "type": "header",
+      "content": "t:margins"
+    },
+    {
+      "type": "range",
+      "id": "margin_top",
+      "label": "t:margin_top",
+      "default": 0,
+      "min": 0,
+      "max": 100,
+      "step": 1,
+      "unit": "px"
+    },
+    {
+      "type": "range",
+      "id": "margin_bottom",
+      "label": "t:margin_bottom",
+      "default": 5,
+      "min": 0,
+      "max": 100,
+      "step": 1,
+      "unit": "px"
+    },
+    {
+      "type": "header",
+      "content": "t:advanced_settings"
+    },
+    {
+      "type": "text",
+      "id": "additional_class",
+      "label": "t:additional_class",
+      "info": "t:additional_class_info"
+    },
+    {
+      "type": "header",
+      "content": "t:go_further"
+    },
+    {
+      "type": "paragraph",
+      "content": "t:go_further_description"
+    }
+  ],
+  "presets": [
+    {
+      "name": "t:fake_variant_picker",
+      "category": "t:product_form",
+      "settings": {
+        "label": "Fausses variantes",
+        "margin_top": 0,
+        "margin_bottom": 0,
+        "additional_class": ""
+      },
+      "blocks": [
+        {
+          "type": "_fake-variant-link",
+          "name": "t:fake_variant_link",
+          "settings": {
+            "text": "Produit 1",
+            "link": "#"
+          }
+        },
+        {
+          "type": "_fake-variant-link",
+          "name": "t:fake_variant_link",
+          "settings": {
+            "text": "Produit 2",
+            "link": "#"
+          }
+        },
+        {
+          "type": "_fake-variant-link",
+          "name": "t:fake_variant_link",
+          "settings": {
+            "text": "Produit 3",
+            "link": "#"
+          }
+        }
+      ]
+    }
+  ]
+}
+{% endschema %}

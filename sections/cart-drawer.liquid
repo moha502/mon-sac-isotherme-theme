@@ -35,7 +35,11 @@
     </div>
 
     <div class="cart-drawer__body">
-      <form action="{{ routes.cart_url }}" method="post" id="cart_drawer_form">
+     <!-- TIMER PANIER -->
+<div class="cart-drawer__timer">
+  Mon panier expirera dans <span id="cart-timer">15:00</span>
+</div>
+ <form action="{{ routes.cart_url }}" method="post" id="cart_drawer_form">
         <div class="cart-drawer__items">
           {%- for item in cart.items -%}
             <cart-drawer-item
@@ -213,12 +217,72 @@
     {%- endif -%}
   </div>
 </cart-drawer>
+<script>
+document.addEventListener("DOMContentLoaded", function () {
+  let duration = 15 * 60;
+  let display = document.getElementById("cart-timer");
 
+  if (!display) return;
+
+  let timer = duration;
+
+  setInterval(function () {
+    let minutes = Math.floor(timer / 60);
+    let seconds = timer % 60;
+
+    minutes = minutes < 10 ? "0" + minutes : minutes;
+    seconds = seconds < 10 ? "0" + seconds : seconds;
+
+    display.textContent = minutes + ":" + seconds;
+
+    if (--timer < 0) {
+      timer = 0;
+      fetch('/cart/clear.js', { method: 'POST' })
+        .then(() => location.reload());
+    }
+  }, 1000);
+});
+<script>
+document.addEventListener("DOMContentLoaded", function () {
+  let duration = 15 * 60; // 15 minutes
+  let display = document.getElementById("cart-timer");
+
+  if (!display) return;
+
+  let timer = duration;
+
+  setInterval(function () {
+    let minutes = Math.floor(timer / 60);
+    let seconds = timer % 60;
+
+    minutes = minutes < 10 ? "0" + minutes : minutes;
+    seconds = seconds < 10 ? "0" + seconds : seconds;
+
+    display.textContent = minutes + ":" + seconds;
+
+    if (--timer < 0) {
+      fetch('/cart/clear.js', { method: 'POST' })
+        .then(() => location.reload());
+    }
+  }, 1000);
+});
+</script>
 {% stylesheet %}
   :root {
     --cart-item-image-width: 80px;
   }
+.cart-drawer__timer {
+  margin-bottom: 10px;
+  padding: 10px;
+  font-size: 13px;
+  text-align: center;
+  border: 1px solid rgba(var(--color-foreground), 0.2);
+  background: rgba(var(--color-foreground), 0.05);
+}
 
+#cart-timer {
+  font-weight: bold;
+}
   cart-drawer {
     position: fixed;
     z-index: 10000;

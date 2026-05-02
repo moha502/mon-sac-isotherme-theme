@@ -210,3 +210,31 @@ class CartDrawerItem extends HTMLElement {
 if (!customElements.get('cart-drawer-item')) {
   customElements.define('cart-drawer-item', CartDrawerItem);
 }
+// ===== TIMER PANIER =====
+function startCartTimer() {
+  let display = document.getElementById("cart-timer");
+  if (!display) return;
+
+  let duration = 15 * 60;
+  let timer = duration;
+
+  setInterval(function () {
+    let minutes = Math.floor(timer / 60);
+    let seconds = timer % 60;
+
+    minutes = minutes < 10 ? "0" + minutes : minutes;
+    seconds = seconds < 10 ? "0" + seconds : seconds;
+
+    display.textContent = minutes + ":" + seconds;
+
+    if (--timer < 0) {
+      fetch('/cart/clear.js', { method: 'POST' })
+        .then(() => location.reload());
+    }
+  }, 1000);
+}
+
+// détecte ouverture du drawer
+document.addEventListener("click", function () {
+  setTimeout(startCartTimer, 300);
+});

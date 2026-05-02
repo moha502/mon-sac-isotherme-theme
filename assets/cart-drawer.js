@@ -210,15 +210,23 @@ class CartDrawerItem extends HTMLElement {
 if (!customElements.get('cart-drawer-item')) {
   customElements.define('cart-drawer-item', CartDrawerItem);
 }
-// ===== TIMER PANIER =====
+// ===== TIMER PANIER FIX =====
+
+let cartTimerInterval = null;
+
 function startCartTimer() {
   let display = document.getElementById("cart-timer");
   if (!display) return;
 
+  // STOP anciens timers
+  if (cartTimerInterval) {
+    clearInterval(cartTimerInterval);
+  }
+
   let duration = 15 * 60;
   let timer = duration;
 
-  setInterval(function () {
+  cartTimerInterval = setInterval(function () {
     let minutes = Math.floor(timer / 60);
     let seconds = timer % 60;
 
@@ -228,13 +236,24 @@ function startCartTimer() {
     display.textContent = minutes + ":" + seconds;
 
     if (--timer < 0) {
+      clearInterval(cartTimerInterval);
       fetch('/cart/clear.js', { method: 'POST' })
         .then(() => location.reload());
     }
   }, 1000);
 }
 
-// détecte ouverture du drawer
+// détecte ouverture du panier UNE SEULE FOIS
+let cartTimerStarted = false;
+
 document.addEventListener("click", function () {
-  setTimeout(startCartTimer, 300);
+  if (cartTimerStarted) return;
+
+  setTimeout(() => {
+    let display = document.getElementById("cart-timer");
+    if (display) {
+      startCartTimer();
+      cartTimerStarted = true;
+    }
+  }, 300);
 });

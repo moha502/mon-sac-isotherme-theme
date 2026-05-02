@@ -243,29 +243,33 @@ document.addEventListener("DOMContentLoaded", function () {
   }, 1000);
 });
 <script>
-document.addEventListener("DOMContentLoaded", function () {
-  let duration = 15 * 60; // 15 minutes
-  let display = document.getElementById("cart-timer");
+(function () {
+  function startTimer() {
+    let display = document.getElementById("cart-timer");
+    if (!display) return;
 
-  if (!display) return;
+    let duration = 15 * 60;
+    let timer = duration;
 
-  let timer = duration;
+    setInterval(function () {
+      let minutes = Math.floor(timer / 60);
+      let seconds = timer % 60;
 
-  setInterval(function () {
-    let minutes = Math.floor(timer / 60);
-    let seconds = timer % 60;
+      minutes = minutes < 10 ? "0" + minutes : minutes;
+      seconds = seconds < 10 ? "0" + seconds : seconds;
 
-    minutes = minutes < 10 ? "0" + minutes : minutes;
-    seconds = seconds < 10 ? "0" + seconds : seconds;
+      display.textContent = minutes + ":" + seconds;
 
-    display.textContent = minutes + ":" + seconds;
+      if (--timer < 0) {
+        fetch('/cart/clear.js', { method: 'POST' })
+          .then(() => location.reload());
+      }
+    }, 1000);
+  }
 
-    if (--timer < 0) {
-      fetch('/cart/clear.js', { method: 'POST' })
-        .then(() => location.reload());
-    }
-  }, 1000);
-});
+  // Lance le timer après un petit délai (le temps que le drawer s'affiche)
+  setTimeout(startTimer, 500);
+})();
 </script>
 {% stylesheet %}
   :root {

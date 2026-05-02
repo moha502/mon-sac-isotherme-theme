@@ -1,1 +1,173 @@
-{"type":"custom.cart_drawer","name":"t:cart_drawer","sections":{"cart-drawer":{"type":"cart-drawer","blocks":{"cart_header_blocks":{"type":"_cart-header-blocks","static":true,"settings":{"wrap_in_card":false,"color_scheme":"","margin_top":0,"margin_bottom":0},"blocks":{"cart_progress_bar_dtN84U":{"type":"_cart-progress-bar","name":"t:progress_bar","settings":{"show_on_display":"desktop_and_mobile","progress_bar_based_on":"value","collection":"","step1_text":"Plus que # et la livraison est offerte !","step1_value":30,"step1_quantity":3,"step1_label":"","step2_text":"","step2_quantity":0,"step2_label":"","step3_text":"","step3_quantity":0,"step3_label":"","step_completed_text":"Félicitations vous bénéficiez de la livraison offerte !","margin_top":0,"margin_bottom":0,"additional_class":""},"blocks":{}}},"block_order":["cart_progress_bar_dtN84U"]},"cart_footer_resume_blocks":{"type":"_cart-footer-resume-blocks","static":true,"settings":{"wrap_in_card":false,"color_scheme":"","margin_top":0,"margin_bottom":0},"blocks":{"discount_code_GBacFY":{"type":"_discount-code","name":"t:discount_code","settings":{"style":"in_accordion","accordion_heading":"Ajouter un code de réduction","button_text":"Appliquer","placeholder":"Code de réduction","margin_top":0,"margin_bottom":10,"additional_class":""},"blocks":{}}},"block_order":["discount_code_GBacFY"]},"cart_footer_blocks":{"type":"_cart-drawer-footer-blocks","static":true,"settings":{"wrap_in_card":false,"color_scheme":"","margin_top":0,"margin_bottom":0},"blocks":{"payment_methods_WRBbVe":{"type":"payment-methods","name":"t:payment_methods","settings":{"show_on_display":"desktop_only","alignment_desktop":"center","alignment_mobile":"center","icon_size":35,"margin_top":5,"margin_bottom":5,"additional_class":""},"blocks":{}}},"block_order":["payment_methods_WRBbVe"]},"cart_drawer_empty_blocks":{"type":"_cart-drawer-empty-blocks","static":true,"settings":{"show_continue_shopping_button":true,"wrap_in_card":false,"color_scheme":"","margin_top":0,"margin_bottom":0},"blocks":{}}},"settings":{"cart_style":"defaut","cart_drawer_width_on_desktop":"440","full_width_on_mobile":false,"products_media_ratio":"1 \/ 1","show_variant_options_labels":false,"show_remove_button":true,"show_cart_count":true,"color_scheme_header":"scheme-1","color_scheme_body":"","color_scheme_elements":"scheme-1","color_scheme_footer":"scheme-1"}}},"order":["cart-drawer"]}
+/*
+ * ------------------------------------------------------------
+ * IMPORTANT: The contents of this file are auto-generated.
+ *
+ * This file may be updated by the Shopify admin theme editor
+ * or related systems. Please exercise caution as any changes
+ * made to this file may be overwritten.
+ * ------------------------------------------------------------
+ */
+{
+  "type": "custom.cart_drawer",
+  "name": "t:cart_drawer",
+  "sections": {
+    "cart-drawer": {
+      "type": "cart-drawer",
+      "blocks": {
+        "cart_header_blocks": {
+          "type": "_cart-header-blocks",
+          "static": true,
+          "settings": {
+            "wrap_in_card": false,
+            "color_scheme": "",
+            "margin_top": 0,
+            "margin_bottom": 0
+          },
+          "blocks": {
+            "cart_progress_bar_dtN84U": {
+              "type": "_cart-progress-bar",
+              "name": "t:progress_bar",
+              "settings": {
+                "show_on_display": "desktop_and_mobile",
+                "progress_bar_based_on": "value",
+                "collection": "",
+                "step1_text": "Plus que # et la livraison est offerte !",
+                "step1_value": 30,
+                "step1_quantity": 3,
+                "step1_label": "",
+                "step2_text": "",
+                "step2_quantity": 0,
+                "step2_label": "",
+                "step3_text": "",
+                "step3_quantity": 0,
+                "step3_label": "",
+                "step_completed_text": "Félicitations vous bénéficiez de la livraison offerte !",
+                "margin_top": 0,
+                "margin_bottom": 0,
+                "additional_class": ""
+              },
+              "blocks": {}
+            }
+          },
+          "block_order": [
+            "cart_progress_bar_dtN84U"
+          ]
+        },
+        "cart_footer_resume_blocks": {
+          "type": "_cart-footer-resume-blocks",
+          "static": true,
+          "settings": {
+            "wrap_in_card": false,
+            "color_scheme": "",
+            "margin_top": 0,
+            "margin_bottom": 0
+          },
+          "blocks": {
+            "cross_sell_6A4GpG": {
+              "type": "cross-sell",
+              "name": "t:cross_sell",
+              "settings": {
+                "show_on_display": "desktop_and_mobile",
+                "display_mode": "row",
+                "color_scheme": "",
+                "show_card_border": true,
+                "products": [
+                  "new-1l-water-bottle-with-time-stamp-bpa-free-reusable-fitness-sports-outdoor-travel-leakproof-water-cup-frosted-kettle",
+                  "adult-bento-box-all-inone-japanese-stackable-lunch-box-with-removable-cutlery-set-and-sealing-tape-microwave-and-dishwasher-safe",
+                  "portable-ice-pack-reusable-freezer-ice-cooling-pack-long-lasting-cooling-water-fill-box-for-fresh-food-storage-refrigeration"
+                ],
+                "title": "",
+                "description": "",
+                "show_image": true,
+                "image_width": 75,
+                "show_options_label": false,
+                "price_position": "next_to_title",
+                "button_content_type": "text",
+                "button_content_icon": "add",
+                "margin_top": 0,
+                "margin_bottom": 0,
+                "additional_class": ""
+              },
+              "blocks": {}
+            },
+            "discount_code_GBacFY": {
+              "type": "_discount-code",
+              "name": "t:discount_code",
+              "settings": {
+                "style": "in_accordion",
+                "accordion_heading": "Ajouter un code de réduction",
+                "button_text": "Appliquer",
+                "placeholder": "Code de réduction",
+                "margin_top": 0,
+                "margin_bottom": 10,
+                "additional_class": ""
+              },
+              "blocks": {}
+            }
+          },
+          "block_order": [
+            "cross_sell_6A4GpG",
+            "discount_code_GBacFY"
+          ]
+        },
+        "cart_footer_blocks": {
+          "type": "_cart-drawer-footer-blocks",
+          "static": true,
+          "settings": {
+            "wrap_in_card": false,
+            "color_scheme": "",
+            "margin_top": 0,
+            "margin_bottom": 0
+          },
+          "blocks": {
+            "payment_methods_WRBbVe": {
+              "type": "payment-methods",
+              "name": "t:payment_methods",
+              "settings": {
+                "show_on_display": "desktop_only",
+                "alignment_desktop": "center",
+                "alignment_mobile": "center",
+                "icon_size": 35,
+                "margin_top": 5,
+                "margin_bottom": 5,
+                "additional_class": ""
+              },
+              "blocks": {}
+            }
+          },
+          "block_order": [
+            "payment_methods_WRBbVe"
+          ]
+        },
+        "cart_drawer_empty_blocks": {
+          "type": "_cart-drawer-empty-blocks",
+          "static": true,
+          "settings": {
+            "show_continue_shopping_button": true,
+            "wrap_in_card": false,
+            "color_scheme": "",
+            "margin_top": 0,
+            "margin_bottom": 0
+          },
+          "blocks": {}
+        }
+      },
+      "settings": {
+        "cart_style": "defaut",
+        "cart_drawer_width_on_desktop": "440",
+        "full_width_on_mobile": false,
+        "products_media_ratio": "1 / 1",
+        "show_variant_options_labels": false,
+        "show_remove_button": true,
+        "show_cart_count": true,
+        "color_scheme_header": "scheme-1",
+        "color_scheme_body": "",
+        "color_scheme_elements": "scheme-1",
+        "color_scheme_footer": "scheme-1"
+      }
+    }
+  },
+  "order": [
+    "cart-drawer"
+  ]
+}

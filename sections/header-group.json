@@ -1,1 +1,266 @@
-{"type":"header","name":"t:header","sections":{"announcement_bar_r8QCCw":{"type":"announcement-bar","blocks":{"announcement_y7tnxm":{"type":"_announcement","settings":{"layout_gap":10,"additional_class":""},"blocks":{"text_Lk3QUw":{"type":"text","settings":{"show_on_display":"desktop_and_mobile","text":"<p>Offre de lancement -20%<\/p>","text_style":"paragraph","paragraph_font_size":"normal","font_weight":400,"alignment":"center","alignment_mobile":"center","show_read_more":false,"read_more_length":200,"read_more_text":"Voir plus","read_less_text":"Voir moins","truncate":false,"truncate_length":2,"margin_top":0,"margin_bottom":0,"additional_class":""},"blocks":{}}},"block_order":["text_Lk3QUw"]},"announcement_VprFGF":{"type":"_announcement","settings":{"layout_gap":10,"additional_class":""},"blocks":{"text_ndz4fN":{"type":"text","settings":{"show_on_display":"desktop_and_mobile","text":"<p>Livraison offerte dès [X]€ d'achat<\/p>","text_style":"paragraph","paragraph_font_size":"normal","font_weight":400,"alignment":"center","alignment_mobile":"center","show_read_more":false,"read_more_length":200,"read_more_text":"Voir plus","read_less_text":"Voir moins","truncate":false,"truncate_length":2,"margin_top":0,"margin_bottom":0,"additional_class":""},"blocks":{}}},"block_order":["text_ndz4fN"]},"announcement_TVKVNW":{"type":"_announcement","settings":{"layout_gap":10,"additional_class":""},"blocks":{"text_P6mECF":{"type":"text","settings":{"show_on_display":"desktop_and_mobile","text":"<p>Paiements en 3x, cadeau offert...<\/p>","text_style":"paragraph","paragraph_font_size":"normal","font_weight":400,"alignment":"center","alignment_mobile":"center","show_read_more":false,"read_more_length":200,"read_more_text":"Voir plus","read_less_text":"Voir moins","truncate":false,"truncate_length":2,"margin_top":0,"margin_bottom":0,"additional_class":""},"blocks":{}}},"block_order":["text_P6mECF"]}},"block_order":["announcement_y7tnxm","announcement_VprFGF","announcement_TVKVNW"],"name":"t:announcement_bar","settings":{"show_on_display":"desktop_and_mobile","color_scheme":"","show_arrows":true,"arrows_button_style":"secondary","rewind":true,"autoplay":true,"autoplay_speed":4,"padding_top":10,"padding_bottom":10,"additional_class":""}},"header":{"type":"header","blocks":{"button-header":{"type":"button","disabled":true,"static":true,"settings":{"show_on_display":"desktop_and_mobile","link":"","open_in_new_tab":false,"label":"S'abonner","button_style":"secondary","button_shape":"small","icon":"none","icon_custom":"","icon_position":"start","margin_top":0,"margin_bottom":0,"additional_class":""},"blocks":{}},"header-advanced-megamenus":{"type":"_header-advanced-megamenus","static":true,"settings":{},"blocks":{}},"header-notifications":{"type":"_header-notifications","disabled":true,"static":true,"settings":{"enable_notifications_bubble":true},"blocks":{}},"header-drawer-menu":{"type":"_header-drawer-menu","static":true,"settings":{"color_scheme":"scheme-1"},"blocks":{"header-drawer-menu-header":{"type":"_header-drawer-menu-header","static":true,"settings":{"wrap_in_card":false,"color_scheme":"","margin_top":0,"margin_bottom":0},"blocks":{}},"header-drawer-menu-under-menu":{"type":"_header-drawer-menu-under-menu","static":true,"settings":{"wrap_in_card":false,"color_scheme":"","margin_top":0,"margin_bottom":0},"blocks":{}}},"block_order":[]}},"settings":{"color_scheme":"scheme-1","header_layout":"logo_left","header_height":65,"enable_sticky_header":true,"enable_transparent_header":false,"transparent_header_color_scheme":"scheme-3","show_bottom_border":true,"use_inverse_logo":false,"logo_height":28,"logo_height_mobile":24,"header_menu_style":"dropdown","menu_font_weight":400,"uppercase_menu_items":false,"menu":"main-menu","menu_2":"","menu_mobile":"","show_search":true,"enable_predictive_search":true,"show_country":true,"show_country_icon":true,"show_language":true,"cart_icon":"local_mall","account_icon":"account_circle"}},"1776250091cc735111":{"type":"_blocks","settings":{}},"177756806578277031":{"type":"_blocks","blocks":{"ai_gen_block_ef0943d_BAi3xz":{"type":"ai_gen_block_ef0943d","settings":{"title":"Nos avantages","bullet_1":"Livraison gratuite en France","bullet_2":"Garantie 2 ans","bullet_3":"Matériaux de qualité premium","bullet_4":"","bullet_5":"","image_border_radius":0,"desktop_width_percent":100,"vertical_alignment":"center","gap":40,"content_gap":20,"list_gap":10,"title_size":32,"title_color":"#1a1a1a","text_size":16,"text_color":"#1a1a1a","icon_size":24,"icon_color":"#7a9e7e"},"blocks":{}}},"block_order":["ai_gen_block_ef0943d_BAi3xz"],"settings":{}},"1777568951ba28afc4":{"type":"_blocks","settings":{}},"1777569010b4daa735":{"type":"_blocks","settings":{}},"1777569224eab481b0":{"type":"_blocks","settings":{}}},"order":["announcement_bar_r8QCCw","header","1776250091cc735111","177756806578277031","1777568951ba28afc4","1777569010b4daa735","1777569224eab481b0"]}
+/*
+ * ------------------------------------------------------------
+ * IMPORTANT: The contents of this file are auto-generated.
+ *
+ * This file may be updated by the Shopify admin theme editor
+ * or related systems. Please exercise caution as any changes
+ * made to this file may be overwritten.
+ * ------------------------------------------------------------
+ */
+{
+  "type": "header",
+  "name": "t:header",
+  "sections": {
+    "announcement_bar_r8QCCw": {
+      "type": "announcement-bar",
+      "blocks": {
+        "announcement_y7tnxm": {
+          "type": "_announcement",
+          "settings": {
+            "layout_gap": 10,
+            "additional_class": ""
+          },
+          "blocks": {
+            "text_Lk3QUw": {
+              "type": "text",
+              "settings": {
+                "show_on_display": "desktop_and_mobile",
+                "text": "<p>Offre de lancement -20%</p>",
+                "text_style": "paragraph",
+                "paragraph_font_size": "normal",
+                "font_weight": 400,
+                "alignment": "center",
+                "alignment_mobile": "center",
+                "show_read_more": false,
+                "read_more_length": 200,
+                "read_more_text": "Voir plus",
+                "read_less_text": "Voir moins",
+                "truncate": false,
+                "truncate_length": 2,
+                "margin_top": 0,
+                "margin_bottom": 0,
+                "additional_class": ""
+              },
+              "blocks": {}
+            }
+          },
+          "block_order": [
+            "text_Lk3QUw"
+          ]
+        },
+        "announcement_VprFGF": {
+          "type": "_announcement",
+          "settings": {
+            "layout_gap": 10,
+            "additional_class": ""
+          },
+          "blocks": {
+            "text_ndz4fN": {
+              "type": "text",
+              "settings": {
+                "show_on_display": "desktop_and_mobile",
+                "text": "<p>Livraison offerte dès [X]€ d'achat</p>",
+                "text_style": "paragraph",
+                "paragraph_font_size": "normal",
+                "font_weight": 400,
+                "alignment": "center",
+                "alignment_mobile": "center",
+                "show_read_more": false,
+                "read_more_length": 200,
+                "read_more_text": "Voir plus",
+                "read_less_text": "Voir moins",
+                "truncate": false,
+                "truncate_length": 2,
+                "margin_top": 0,
+                "margin_bottom": 0,
+                "additional_class": ""
+              },
+              "blocks": {}
+            }
+          },
+          "block_order": [
+            "text_ndz4fN"
+          ]
+        },
+        "announcement_TVKVNW": {
+          "type": "_announcement",
+          "settings": {
+            "layout_gap": 10,
+            "additional_class": ""
+          },
+          "blocks": {
+            "text_P6mECF": {
+              "type": "text",
+              "settings": {
+                "show_on_display": "desktop_and_mobile",
+                "text": "<p>Paiements en 3x, cadeau offert...</p>",
+                "text_style": "paragraph",
+                "paragraph_font_size": "normal",
+                "font_weight": 400,
+                "alignment": "center",
+                "alignment_mobile": "center",
+                "show_read_more": false,
+                "read_more_length": 200,
+                "read_more_text": "Voir plus",
+                "read_less_text": "Voir moins",
+                "truncate": false,
+                "truncate_length": 2,
+                "margin_top": 0,
+                "margin_bottom": 0,
+                "additional_class": ""
+              },
+              "blocks": {}
+            }
+          },
+          "block_order": [
+            "text_P6mECF"
+          ]
+        }
+      },
+      "block_order": [
+        "announcement_y7tnxm",
+        "announcement_VprFGF",
+        "announcement_TVKVNW"
+      ],
+      "name": "t:announcement_bar",
+      "settings": {
+        "show_on_display": "desktop_and_mobile",
+        "color_scheme": "",
+        "show_arrows": true,
+        "arrows_button_style": "secondary",
+        "rewind": true,
+        "autoplay": true,
+        "autoplay_speed": 4,
+        "padding_top": 10,
+        "padding_bottom": 10,
+        "additional_class": ""
+      }
+    },
+    "header": {
+      "type": "header",
+      "blocks": {
+        "button-header": {
+          "type": "button",
+          "disabled": true,
+          "static": true,
+          "settings": {
+            "show_on_display": "desktop_and_mobile",
+            "link": "",
+            "open_in_new_tab": false,
+            "label": "S'abonner",
+            "button_style": "secondary",
+            "button_shape": "small",
+            "icon": "none",
+            "icon_custom": "",
+            "icon_position": "start",
+            "margin_top": 0,
+            "margin_bottom": 0,
+            "additional_class": ""
+          },
+          "blocks": {}
+        },
+        "header-advanced-megamenus": {
+          "type": "_header-advanced-megamenus",
+          "static": true,
+          "settings": {},
+          "blocks": {}
+        },
+        "header-notifications": {
+          "type": "_header-notifications",
+          "disabled": true,
+          "static": true,
+          "settings": {
+            "enable_notifications_bubble": true
+          },
+          "blocks": {}
+        },
+        "header-drawer-menu": {
+          "type": "_header-drawer-menu",
+          "static": true,
+          "settings": {
+            "color_scheme": "scheme-1"
+          },
+          "blocks": {
+            "header-drawer-menu-header": {
+              "type": "_header-drawer-menu-header",
+              "static": true,
+              "settings": {
+                "wrap_in_card": false,
+                "color_scheme": "",
+                "margin_top": 0,
+                "margin_bottom": 0
+              },
+              "blocks": {}
+            },
+            "header-drawer-menu-under-menu": {
+              "type": "_header-drawer-menu-under-menu",
+              "static": true,
+              "settings": {
+                "wrap_in_card": false,
+                "color_scheme": "",
+                "margin_top": 0,
+                "margin_bottom": 0
+              },
+              "blocks": {}
+            }
+          },
+          "block_order": []
+        }
+      },
+      "settings": {
+        "color_scheme": "scheme-1",
+        "header_layout": "logo_left",
+        "header_height": 65,
+        "enable_sticky_header": true,
+        "enable_transparent_header": false,
+        "transparent_header_color_scheme": "scheme-3",
+        "show_bottom_border": true,
+        "use_inverse_logo": false,
+        "logo_height": 28,
+        "logo_height_mobile": 24,
+        "header_menu_style": "dropdown",
+        "menu_font_weight": 400,
+        "uppercase_menu_items": false,
+        "menu": "main-menu",
+        "menu_2": "",
+        "menu_mobile": "",
+        "show_search": true,
+        "enable_predictive_search": true,
+        "show_country": true,
+        "show_country_icon": true,
+        "show_language": true,
+        "cart_icon": "local_mall",
+        "account_icon": "account_circle"
+      }
+    },
+    "1776250091cc735111": {
+      "type": "_blocks",
+      "settings": {}
+    },
+    "177756806578277031": {
+      "type": "_blocks",
+      "settings": {}
+    },
+    "1777568951ba28afc4": {
+      "type": "_blocks",
+      "settings": {}
+    },
+    "1777569010b4daa735": {
+      "type": "_blocks",
+      "settings": {}
+    },
+    "1777569224eab481b0": {
+      "type": "_blocks",
+      "settings": {}
+    }
+  },
+  "order": [
+    "announcement_bar_r8QCCw",
+    "header",
+    "1776250091cc735111",
+    "177756806578277031",
+    "1777568951ba28afc4",
+    "1777569010b4daa735",
+    "1777569224eab481b0"
+  ]
+}

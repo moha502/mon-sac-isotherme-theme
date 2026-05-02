@@ -223,7 +223,7 @@ function startCartTimer() {
     clearInterval(cartTimerInterval);
   }
 
-  let duration = 15 * 60;
+  let duration = 10 * 60;
   let timer = duration;
 
   cartTimerInterval = setInterval(function () {

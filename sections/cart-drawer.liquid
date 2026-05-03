@@ -205,7 +205,22 @@
           Vous économisez {{ total_savings | money }} sur votre commande !
         </p>
       {% endif %}
+{% liquid
+  assign total_savings = 0
+  for item in cart.items
+    assign compare_price = item.variant.compare_at_price
+    if compare_price != blank and compare_price > item.final_price
+      assign line_savings = compare_price | minus: item.final_price | times: item.quantity
+      assign total_savings = total_savings | plus: line_savings
+    endif
+  endfor
+%}
 
+{% if total_savings > 0 %}
+  <p class="cart-drawer__savings">
+    Vous économisez {{ total_savings | money }} sur votre commande !
+  </p>
+{% endif %}
       <div class="cart-drawer__ctas">
         <button
           type="submit"

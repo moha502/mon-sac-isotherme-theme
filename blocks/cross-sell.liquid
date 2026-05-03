@@ -146,15 +146,11 @@
       sliderRoots.forEach((root) => {
         const track = root.querySelector('[data-ref="cross-sell-track"]');
         const dots = root.querySelectorAll('[data-ref="cross-sell-dot"]');
+        const slides = root.querySelectorAll('[data-slide-index]');
 
-        if (!track || dots.length <= 1) return;
+        if (!track || dots.length <= 1 || slides.length <= 1) return;
 
-        const updateActiveDot = () => {
-          const slideWidth = track.clientWidth;
-          if (!slideWidth) return;
-
-          const index = Math.round(track.scrollLeft / slideWidth);
-
+        const setActiveDot = (index) => {
           dots.forEach((dot, dotIndex) => {
             const isActive = dotIndex === index;
             dot.classList.toggle('is-active', isActive);
@@ -165,16 +161,36 @@
         dots.forEach((dot) => {
           dot.addEventListener('click', () => {
             const index = Number(dot.dataset.slideIndex || 0);
-            track.scrollTo({
-              left: track.clientWidth * index,
+            const slide = root.querySelector(`[data-slide-index="${index}"]`);
+            if (!slide) return;
+
+            // Navigation clic : on aligne exactement le slide cible.
+            slide.scrollIntoView({
               behavior: 'smooth',
+              block: 'nearest',
+              inline: 'start',
             });
+            setActiveDot(index);
           });
         });
 
-        track.addEventListener('scroll', updateActiveDot, { passive: true });
-        window.addEventListener('resize', updateActiveDot);
-        updateActiveDot();
+        // Synchronisation de l'état actif pendant le swipe/scroll.
+        const observer = new IntersectionObserver(
+          (entries) => {
+            entries.forEach((entry) => {
+              if (!entry.isIntersecting) return;
+              const index = Number(entry.target.dataset.slideIndex || 0);
+              setActiveDot(index);
+            });
+          },
+          {
+            root: track,
+            threshold: 0.65,
+          },
+        );
+
+        slides.forEach((slide) => observer.observe(slide));
+        setActiveDot(0);
       });
     })();
   </script>
@@ -338,6 +354,8 @@
   }
 
   .cross-sell-dot {
+    appearance: none;
+    -webkit-appearance: none;
     width: 20px;
     height: 3px;
     border: 0;
@@ -345,6 +363,7 @@
     padding: 0;
     background: #ccc;
     cursor: pointer;
+    flex: 0 0 auto;
   }
 
   .cross-sell-dot.is-active {

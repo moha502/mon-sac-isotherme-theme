@@ -1,246 +1,219 @@
-<script src="{{ "cross-sell.js" | asset_url }}" type="module"></script>
+<script src="{{ 'cross-sell.js' | asset_url }}" type="module"></script>
 
 {% liquid
-  assign bundle_products = block.settings.products
+  assign cross_sell_products = block.settings.products
 
   if request.visual_preview_mode
-    assign bundle_products = collections.all.products | where: 'available'
+    assign cross_sell_products = collections.all.products | where: 'available'
   endif
 
-  # calcul des prix des produits
-  assign price = 0
-  assign compare_at_price = 0
-  assign bundle_size = 0
-  assign all_available = true
-
-  for bundle_product in bundle_products
-    # check si le produit est disponible
-    if bundle_product.selected_or_first_available_variant.available == false
-      assign all_available = false
-    endif
-
-    if forloop.index == 1
-      assign first_product = bundle_product
-    endif
-
-    assign bundle_size = bundle_size | plus: 1
-    assign price = price | plus: bundle_product.selected_or_first_available_variant.price
-
-    if bundle_product.selected_or_first_available_variant.compare_at_price > 0
-      assign compare_at_price = compare_at_price | plus: bundle_product.selected_or_first_available_variant.compare_at_price
-    else
-      assign compare_at_price = compare_at_price | plus: bundle_product.selected_or_first_available_variant.price
-    endif
-
-    if request.visual_preview_mode and forloop.first and block.settings.title != 'Bundle'
+  assign cross_sell_size = 0
+  for cross_sell_product in cross_sell_products
+    assign cross_sell_size = cross_sell_size | plus: 1
+    if request.visual_preview_mode and forloop.index >= 3
       break
     endif
   endfor
-
-  # check si le block.settings.image est vide
-  assign show_dynamic_variant_image = true
-
-  if block.settings.image != blank
-    assign show_dynamic_variant_image = false
-  endif
-
-  if bundle_size > 1
-    assign show_dynamic_variant_image = false
-  endif
 %}
 
-{% if bundle_size > 0 %}
-  <cross-sell-component
-    data-dynamic-variant-image="{{ show_dynamic_variant_image }}"
-    data-product-handle="{{ first_product.handle }}"
+{% if cross_sell_size > 0 %}
+  <div
+    class="
+      cross-sell-list
+      {%- if block.settings.show_on_display == 'desktop_only' %} mobile-hide{% endif -%}
+      {%- if block.settings.show_on_display == 'mobile_only' %} desktop-hide{% endif -%}
+      {%- if block.settings.additional_class != blank %} {{ block.settings.additional_class }}{% endif -%}
+    "
     style="
       --margin-top: {{ block.settings.margin_top }}px;
       --margin-bottom: {{ block.settings.margin_bottom }}px;
       --image-width: {{ block.settings.image_width }}px;
     "
-    class="
-      cross-sell--{{ block.settings.display_mode }}
-      {%- if block.settings.show_on_display == 'desktop_only' %} mobile-hide{% endif -%}
-      {%- if block.settings.show_on_display == 'mobile_only' %} desktop-hide{% endif -%}
-      {%- if block.settings.additional_class != blank %} {{ block.settings.additional_class }}{% endif -%}
-    "
+    data-ref="cross-sell-slider"
     {{ block.shopify_attributes }}
-    {% if request.visual_preview_mode %}
-      data-visual-preview-mode
-    {% endif %}
   >
-    <div
-      class="cross-sell card{% if block.settings.show_card_border %} card--with-border{% endif %} color-{{ block.settings.color_scheme }}{% if block.settings.show_image == false %} cross-sell--no-image{% endif %}"
-    >
-      {% if block.settings.show_image %}
-        {% assign image_src = '' %}
-        {% assign image_alt = '' %}
-
-        {%- if block.settings.image != blank -%}
-          {% assign image_src = block.settings.image %}
-          {% assign image_alt = block.settings.image.alt %}
-        {%- else -%}
-          {%- if first_product.selected_or_first_available_variant.featured_image != blank -%}
-            {% assign image_src = first_product.selected_or_first_available_variant.featured_image %}
-            {% assign image_alt = first_product.selected_or_first_available_variant.featured_image.alt %}
-          {%- else -%}
-            {% assign image_src = first_product.featured_image %}
-            {% assign image_alt = first_product.featured_image.alt %}
-          {%- endif -%}
-        {%- endif -%}
-
-        <img
-          class="cross-sell__image"
-          src="{{ image_src | image_url: width: 300 }}"
-          width="100"
-          height="auto"
-          loading="lazy"
-          alt="{{ image_alt }}"
-          data-ref="cross-sell-image"
+    <div class="cross-sell-track{% if cross_sell_size > 1 %} cross-sell-track--slider{% endif %}" data-ref="cross-sell-track">
+      {% for cross_sell_product in cross_sell_products %}
+        {% liquid
+          assign selected_variant = cross_sell_product.selected_or_first_available_variant
+          assign product_price = selected_variant.price
+          assign product_compare_at_price = selected_variant.compare_at_price
+          if product_compare_at_price == blank or product_compare_at_price == 0
+            assign product_compare_at_price = selected_variant.price
+          endif
+          assign show_dynamic_variant_image = true
+          if block.settings.image != blank
+            assign show_dynamic_variant_image = false
+          endif
+        %}
+        <cross-sell-component
+          data-dynamic-variant-image="{{ show_dynamic_variant_image }}"
+          data-product-handle="{{ cross_sell_product.handle }}"
+          class="cross-sell-slide cross-sell--{{ block.settings.display_mode }}"
+          data-slide-index="{{ forloop.index0 }}"
         >
-      {% endif %}
-
-      <div class="cross-sell__content">
-        <div class="cross-sell__heading">
-          <div class="cross-sell__title-and-description">
-            <p class="cross-sell__title">
-              {% if block.settings.title != blank %}
-                {{ block.settings.title }}
-              {% else %}
-                {{ first_product.title }}
-              {% endif %}
-            </p>
-
-            {% if block.settings.price_position == 'below_title' %}
-              {% render 'price', price: price, compare_price: compare_at_price, sales_badge: 'none' %}
+          <div class="cross-sell card{% if block.settings.show_card_border %} card--with-border{% endif %} color-{{ block.settings.color_scheme }}{% if block.settings.show_image == false %} cross-sell--no-image{% endif %}">
+            {% if block.settings.show_image %}
+              {% assign image_src = '' %}
+              {% assign image_alt = '' %}
+              {%- if block.settings.image != blank -%}
+                {% assign image_src = block.settings.image %}
+                {% assign image_alt = block.settings.image.alt %}
+              {%- elsif selected_variant.featured_image != blank -%}
+                {% assign image_src = selected_variant.featured_image %}
+                {% assign image_alt = selected_variant.featured_image.alt %}
+              {%- else -%}
+                {% assign image_src = cross_sell_product.featured_image %}
+                {% assign image_alt = cross_sell_product.featured_image.alt %}
+              {%- endif -%}
+              <img class="cross-sell__image" src="{{ image_src | image_url: width: 300 }}" width="100" height="auto" loading="lazy" alt="{{ image_alt }}" data-ref="cross-sell-image">
             {% endif %}
-
-            {% if block.settings.description != blank %}
-              <div class="cross-sell__description">
-                {{ block.settings.description }}
-              </div>
-            {% endif %}
-          </div>
-
-          {% if block.settings.price_position == 'next_to_title' %}
-            {% render 'price', price: price, compare_price: compare_at_price, sales_badge: 'none' %}
-          {% endif %}
-        </div>
-
-        <div class="cross-sell__actions">
-          <div class="cross-sell__selects">
-            {% for bundle_product in bundle_products %}
-              <div class="cross-sell__select{% if bundle_product.variants.size == 1 %} hidden{% endif %}">
-                {% if block.settings.show_options_label %}
-                  <label class="cross-sell__select-label">
-                    {% for option in bundle_product.options_with_values %}
-                      {{ option.name -}}
-                      {%- if forloop.last == false %} / {% endif %}
-                      {%- if forloop.last %}:{% endif %}
-                    {% endfor -%}
-                  </label>
+            <div class="cross-sell__content">
+              <div class="cross-sell__heading">
+                <div class="cross-sell__title-and-description">
+                  <p class="cross-sell__title">{{ cross_sell_product.title }}</p>
+                  {% if block.settings.price_position == 'below_title' %}
+                    {% render 'price', price: product_price, compare_price: product_compare_at_price, sales_badge: 'none' %}
+                  {% endif %}
+                </div>
+                {% if block.settings.price_position == 'next_to_title' %}
+                  {% render 'price', price: product_price, compare_price: product_compare_at_price, sales_badge: 'none' %}
                 {% endif %}
-
-                <div class="select-wrapper select-wrapper--full-width">
-                  <select
-                    name="cross-sell__select-{{ bundle_product.id }}"
-                    class="select select--full-width select--small"
-                    {% if bundle_product.id %}
-                      id="{{ bundle_product.id }}"
+              </div>
+              <div class="cross-sell__actions">
+                <div class="cross-sell__selects">
+                  <div class="cross-sell__select{% if cross_sell_product.variants.size == 1 %} hidden{% endif %}">
+                    {% if block.settings.show_options_label %}
+                      <label class="cross-sell__select-label">
+                        {% for option in cross_sell_product.options_with_values %}{{ option.name }}{% unless forloop.last %} / {% else %}:{% endunless %}{% endfor %}
+                      </label>
                     {% endif %}
-                    data-handle="{{ bundle_product.handle }}"
-                    data-ref="variant-select"
-                    data-price="{{ bundle_product.price }}"
-                    data-compare-at-price="{{ bundle_product.compare_at_price }}"
-                  >
-                    {% for variant in bundle_product.variants %}
-                      {% if variant.available %}
-                        <option
-                          value="{{ variant.id }}"
-                          data-price="{{ variant.price }}"
-                          data-compare-at-price="{{ variant.compare_at_price }}"
-                          {% if variant.featured_image != blank %}
-                            data-image="{{ variant.featured_image | image_url: width: 300 }}"
+                    <div class="select-wrapper select-wrapper--full-width">
+                      <select name="cross-sell__select-{{ cross_sell_product.id }}" class="select select--full-width select--small" data-handle="{{ cross_sell_product.handle }}" data-ref="variant-select" data-price="{{ cross_sell_product.price }}" data-compare-at-price="{{ cross_sell_product.compare_at_price }}">
+                        {% for variant in cross_sell_product.variants %}
+                          {% if variant.available %}
+                            <option value="{{ variant.id }}" data-price="{{ variant.price }}" data-compare-at-price="{{ variant.compare_at_price }}"{% if variant.featured_image != blank %} data-image="{{ variant.featured_image | image_url: width: 300 }}"{% endif %}>{{ variant.title }}</option>
                           {% endif %}
-                        >
-                          {{ variant.title }}
-                        </option>
-                      {% endif %}
-                    {% endfor %}
-                  </select>
-
-                  <div class="select-wrapper__icon">
-                    {% render 'icon', icon: 'keyboard_arrow_down' %}
+                        {% endfor %}
+                      </select>
+                      <div class="select-wrapper__icon">{% render 'icon', icon: 'keyboard_arrow_down' %}</div>
+                    </div>
                   </div>
                 </div>
+                <div class="cross-sell__form" data-ref="add-to-cart-form">
+                  <button data-ref="add-to-cart-button" class="button button--small{% if block.settings.button_content_type == 'icon' and block.settings.price_position != 'inside_cart_add_button' %} button--icon-only{% endif %}" {% unless selected_variant.available %}disabled{% endunless %}>
+                    <span class="button__content">
+                      {% if block.settings.button_content_type == 'icon' %}{% render 'icon', icon: block.settings.button_content_icon %}{% else %}{{ 'products.add' | t }}{% endif %}
+                      {% if block.settings.price_position == 'inside_cart_add_button' %}<span class="button__separator">|</span>{% render 'price', price: product_price, compare_price: product_compare_at_price, sales_badge: 'none' %}{% endif %}
+                    </span>
+                    {% render 'loading-spinner' %}
+                  </button>
+                </div>
               </div>
-
-              {% if forloop.first and request.visual_preview_mode and block.settings.title != 'Bundle' %}
-                {% break %}
-              {% endif %}
-            {% endfor %}
+            </div>
           </div>
-
-          <div class="cross-sell__form" data-ref="add-to-cart-form">
-            <button
-              data-ref="add-to-cart-button"
-              class="button button--small{% if block.settings.button_content_type == 'icon' and block.settings.price_position != 'inside_cart_add_button' %} button--icon-only{% endif %}"
-              {% if all_available == false %}
-                disabled
-              {% endif %}
-            >
-              <span class="button__content">
-                {%- if all_available == false -%}
-                  {% if block.settings.button_content_type == 'icon' %}
-                    {% render 'icon', icon: 'block' %}
-                  {% else %}
-                    {{ 'products.add_to_cart_unavailable' | t }}
-                  {% endif %}
-                {%- else -%}
-                  {% if block.settings.button_content_type == 'icon' %}
-                    {% render 'icon', icon: block.settings.button_content_icon %}
-                  {% else %}
-                    {{ 'products.add' | t }}
-                  {% endif %}
-
-                  {% if block.settings.price_position == 'inside_cart_add_button' %}
-                    <span class="button__separator">|</span>
-
-                    {% render 'price', price: price, compare_price: compare_at_price, sales_badge: 'none' %}
-                  {% endif %}
-                {%- endif -%}
-              </span>
-
-              {% render 'loading-spinner' %}
-            </button>
-          </div>
-        </div>
-      </div>
+        </cross-sell-component>
+        {% if request.visual_preview_mode and forloop.index >= 3 %}{% break %}{% endif %}
+      {% endfor %}
     </div>
-  </cross-sell-component>
+    {% if cross_sell_size > 1 %}
+      <div class="cross-sell-dots" data-ref="cross-sell-dots">
+        {% for cross_sell_product in cross_sell_products %}
+          <button
+            class="cross-sell-dot{% if forloop.first %} is-active{% endif %}"
+            type="button"
+            data-ref="cross-sell-dot"
+            data-slide-index="{{ forloop.index0 }}"
+            aria-label="Afficher le produit {{ forloop.index }}"
+            aria-current="{% if forloop.first %}true{% else %}false{% endif %}"
+          ></button>
+          {% if request.visual_preview_mode and forloop.index >= 3 %}{% break %}{% endif %}
+        {% endfor %}
+      </div>
+    {% endif %}
+  </div>
+{% endif %}
+
+{% if cross_sell_size > 1 %}
+  <script>
+    // Slider simple pour le bloc cross-sell du cart drawer:
+    // - clic sur un trait => scroll vers le slide correspondant
+    // - swipe horizontal natif mobile via overflow + scroll-snap (CSS)
+    // - mise à jour du trait actif selon la position de scroll
+    (() => {
+      const sliderRoots = document.querySelectorAll('[data-ref="cross-sell-slider"]');
+
+      sliderRoots.forEach((root) => {
+        const track = root.querySelector('[data-ref="cross-sell-track"]');
+        const dots = root.querySelectorAll('[data-ref="cross-sell-dot"]');
+
+        if (!track || dots.length <= 1) return;
+
+        const updateActiveDot = () => {
+          const slideWidth = track.clientWidth;
+          if (!slideWidth) return;
+
+          const index = Math.round(track.scrollLeft / slideWidth);
+
+          dots.forEach((dot, dotIndex) => {
+            const isActive = dotIndex === index;
+            dot.classList.toggle('is-active', isActive);
+            dot.setAttribute('aria-current', isActive ? 'true' : 'false');
+          });
+        };
+
+        dots.forEach((dot) => {
+          dot.addEventListener('click', () => {
+            const index = Number(dot.dataset.slideIndex || 0);
+            track.scrollTo({
+              left: track.clientWidth * index,
+              behavior: 'smooth',
+            });
+          });
+        });
+
+        track.addEventListener('scroll', updateActiveDot, { passive: true });
+        window.addEventListener('resize', updateActiveDot);
+        updateActiveDot();
+      });
+    })();
+  </script>
 {% endif %}
 
 {% stylesheet %}
-  cross-sell-component {
+  .cross-sell-list {
     display: block;
-    container-type: inline-size;
     margin-top: var(--margin-top);
     margin-bottom: var(--margin-bottom);
     width: 100%;
-    --cross-sell-padding: 0.65rem;
   }
 
-  shopify-visual-preview-block-list cross-sell-component.cross-sell--row[data-visual-preview-mode] {
-    width: 400px;
+  .cross-sell-track {
+    display: flex;
+    flex-direction: column;
+    gap: var(--gap-xs);
   }
 
-  shopify-visual-preview-block-list cross-sell-component.cross-sell--column[data-visual-preview-mode] {
-    width: 200px;
+  .cross-sell-track--slider {
+    overflow-x: auto;
+    scroll-snap-type: x mandatory;
+    flex-direction: row;
+    -webkit-overflow-scrolling: touch;
+    scrollbar-width: none;
+  }
+
+  .cross-sell-track--slider::-webkit-scrollbar {
+    display: none;
+  }
+
+  .cross-sell-slide {
+    min-width: 100%;
+    scroll-snap-align: start;
   }
 
   .cross-sell {
     display: grid;
-    grid-template-columns: auto 1fr 1fr;
+    grid-template-columns: auto 1fr auto;
     gap: var(--padding-sm);
     grid-template-areas: 'image content content';
     padding: var(--cross-sell-padding);
@@ -329,10 +302,7 @@
 
   .cross-sell__actions {
     display: flex;
-    gap: var(--padding-xs);
-    flex-wrap: wrap;
-    justify-content: space-between;
-    align-items: flex-end;
+    justify-content: flex-end;
   }
 
   .cross-sell__selects {
@@ -360,52 +330,41 @@
     margin-right: var(--padding-sm);
   } */
 
-  @container (width < 350px) {
-    .cross-sell--row .cross-sell {
-      gap: var(--gap-sm);
-    }
+  .cross-sell-dots {
+    display: flex;
+    justify-content: center;
+    gap: 6px;
+    margin-top: 8px;
+  }
 
-    .cross-sell__actions .button:not(.button--icon-only) {
-      min-width: 60px;
-      padding: calc(var(--button-padding-vertical) / 2) calc(var(--button-padding-horizontal) * var(--small-multiplier) / 2);
-    }
+  .cross-sell-dot {
+    width: 20px;
+    height: 3px;
+    border: 0;
+    border-radius: 0;
+    padding: 0;
+    background: #ccc;
+    cursor: pointer;
+  }
 
-    .cross-sell--row .cross-sell__image {
-      max-width: 65px;
+  .cross-sell-dot.is-active {
+    background: #000;
+  }
+
+  @media screen and (max-width: 749px) {
+    .cross-sell {
+      grid-template-columns: auto 1fr;
+      grid-template-areas: 'image content' 'image actions';
+    }
+    .cross-sell__actions {
+      justify-content: flex-start;
+      margin-top: var(--gap-xxs);
     }
   }
 
-  /* Ajustements pour les sliders */
-
-  .slider-block--with-pagination:has(cross-sell-component) {
-    padding-bottom: var(--margin-md);
-
-    .splide__pagination {
-      bottom: calc(-1 * var(--margin-md));
-    }
-
-    .splide__arrow {
-      transform: translateY(calc(-50%));
-    }
-  }
-
-  .slider-block:has(.splide__arrows):has(cross-sell-component) {
-    .splide__arrow--prev {
-      margin-left: -10px;
-    }
-
-    .splide__arrow--next {
-      margin-right: -10px;
-    }
-
-    .splide__slide {
-      padding: 0 20px;
-    }
-  }
-
-  .slider-block:has(.splide__arrow.button--tertiary):has(cross-sell-component) {
-    .splide__slide {
-      padding: 0 35px;
+  @media screen and (min-width: 750px) {
+    .cross-sell__actions {
+      align-items: center;
     }
   }
 {% endstylesheet %}

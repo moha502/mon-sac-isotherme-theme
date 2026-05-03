@@ -29,9 +29,10 @@
       --margin-bottom: {{ block.settings.margin_bottom }}px;
       --image-width: {{ block.settings.image_width }}px;
     "
+    data-ref="cross-sell-slider"
     {{ block.shopify_attributes }}
   >
-    <div class="cross-sell-track{% if cross_sell_size > 1 %} cross-sell-track--slider{% endif %}">
+    <div class="cross-sell-track{% if cross_sell_size > 1 %} cross-sell-track--slider{% endif %}" data-ref="cross-sell-track">
       {% for cross_sell_product in cross_sell_products %}
         {% liquid
           assign selected_variant = cross_sell_product.selected_or_first_available_variant
@@ -49,6 +50,7 @@
           data-dynamic-variant-image="{{ show_dynamic_variant_image }}"
           data-product-handle="{{ cross_sell_product.handle }}"
           class="cross-sell-slide cross-sell--{{ block.settings.display_mode }}"
+          data-slide-index="{{ forloop.index0 }}"
         >
           <div class="cross-sell card{% if block.settings.show_card_border %} card--with-border{% endif %} color-{{ block.settings.color_scheme }}{% if block.settings.show_image == false %} cross-sell--no-image{% endif %}">
             {% if block.settings.show_image %}
@@ -115,14 +117,67 @@
       {% endfor %}
     </div>
     {% if cross_sell_size > 1 %}
-      <div class="cross-sell-dots" aria-hidden="true">
+      <div class="cross-sell-dots" data-ref="cross-sell-dots">
         {% for cross_sell_product in cross_sell_products %}
-          <span class="cross-sell-dot"></span>
+          <button
+            class="cross-sell-dot{% if forloop.first %} is-active{% endif %}"
+            type="button"
+            data-ref="cross-sell-dot"
+            data-slide-index="{{ forloop.index0 }}"
+            aria-label="Afficher le produit {{ forloop.index }}"
+            aria-current="{% if forloop.first %}true{% else %}false{% endif %}"
+          ></button>
           {% if request.visual_preview_mode and forloop.index >= 3 %}{% break %}{% endif %}
         {% endfor %}
       </div>
     {% endif %}
   </div>
+{% endif %}
+
+{% if cross_sell_size > 1 %}
+  <script>
+    // Slider simple pour le bloc cross-sell du cart drawer:
+    // - clic sur un trait => scroll vers le slide correspondant
+    // - swipe horizontal natif mobile via overflow + scroll-snap (CSS)
+    // - mise à jour du trait actif selon la position de scroll
+    (() => {
+      const sliderRoots = document.querySelectorAll('[data-ref="cross-sell-slider"]');
+
+      sliderRoots.forEach((root) => {
+        const track = root.querySelector('[data-ref="cross-sell-track"]');
+        const dots = root.querySelectorAll('[data-ref="cross-sell-dot"]');
+
+        if (!track || dots.length <= 1) return;
+
+        const updateActiveDot = () => {
+          const slideWidth = track.clientWidth;
+          if (!slideWidth) return;
+
+          const index = Math.round(track.scrollLeft / slideWidth);
+
+          dots.forEach((dot, dotIndex) => {
+            const isActive = dotIndex === index;
+            dot.classList.toggle('is-active', isActive);
+            dot.setAttribute('aria-current', isActive ? 'true' : 'false');
+          });
+        };
+
+        dots.forEach((dot) => {
+          dot.addEventListener('click', () => {
+            const index = Number(dot.dataset.slideIndex || 0);
+            track.scrollTo({
+              left: track.clientWidth * index,
+              behavior: 'smooth',
+            });
+          });
+        });
+
+        track.addEventListener('scroll', updateActiveDot, { passive: true });
+        window.addEventListener('resize', updateActiveDot);
+        updateActiveDot();
+      });
+    })();
+  </script>
 {% endif %}
 
 {% stylesheet %}
@@ -283,10 +338,17 @@
   }
 
   .cross-sell-dot {
-    width: 6px;
-    height: 6px;
-    border-radius: 50%;
-    background: color-mix(in srgb, currentColor 35%, transparent);
+    width: 20px;
+    height: 3px;
+    border: 0;
+    border-radius: 0;
+    padding: 0;
+    background: #ccc;
+    cursor: pointer;
+  }
+
+  .cross-sell-dot.is-active {
+    background: #000;
   }
 
   @media screen and (max-width: 749px) {
@@ -305,16 +367,6 @@
       align-items: center;
     }
   }
-  .cross-sell-dots button {
-  width: 20px !important;
-  height: 3px !important;
-  border-radius: 2px !important;
-  background: #ccc !important;
-}
-
-.cross-sell-dots button.active {
-  background: #000 !important;
-}
 {% endstylesheet %}
 
 {% schema %}

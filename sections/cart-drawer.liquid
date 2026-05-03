@@ -187,7 +187,7 @@
     </div>
 
     <div class="cart-drawer__footer color-{{ section.settings.color_scheme_footer }}">
-      {% content_for 'block', type: '_cart-footer-resume-blocks', id: 'cart_footer_resume_blocks' %}
+    
 
       {% liquid
         assign total_savings = 0
@@ -217,7 +217,7 @@
             disabled
           {% endif %}
         >
-          <span>{{ 'cart.checkout' | t }}</span>
+          <span>Commander • {{ cart.total_price | money }} 🔒</span>
           {% render 'loading-spinner' %}
         </button>
       </div>

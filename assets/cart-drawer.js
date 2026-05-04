@@ -257,3 +257,40 @@ document.addEventListener("click", function () {
     }
   }, 300);
 });
+// === AJOUT AUTO EBOOK (SEULEMENT SI PANIER NON VIDE) ===
+document.addEventListener("DOMContentLoaded", function () {
+  setTimeout(async () => {
+    try {
+      const cartRes = await fetch('/cart.js');
+      const cart = await cartRes.json();
+
+      // ❌ Si panier vide → on ne fait rien
+      if (cart.item_count === 0) return;
+
+      const hasEbook = cart.items.some(item =>
+        item.product_handle === 'ebook-comment-preparer-ses-repas-a-lavance'
+      );
+
+      if (hasEbook) return;
+
+      const res = await fetch('/products/ebook-comment-preparer-ses-repas-a-lavance.js');
+      const product = await res.json();
+
+      const variantId = product.variants[0].id;
+
+      await fetch('/cart/add.js', {
+        method: 'POST',
+        headers: { 'Content-Type': 'application/json' },
+        body: JSON.stringify({
+          id: variantId,
+          quantity: 1
+        })
+      });
+
+      location.reload();
+
+    } catch (e) {
+      console.log("Erreur ebook:", e);
+    }
+  }, 800);
+});

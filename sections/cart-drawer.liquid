@@ -200,11 +200,6 @@
         endfor
       %}
 
-      {% if total_savings > 0 %}
-        <p class="cart-drawer__savings">
-          Vous économisez {{ total_savings | money }} sur votre commande !
-        </p>
-      {% endif %}
 {% liquid
   assign total_savings = 0
   for item in cart.items

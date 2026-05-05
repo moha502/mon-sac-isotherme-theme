@@ -257,40 +257,65 @@ document.addEventListener("click", function () {
     }
   }, 300);
 });
-// === AJOUT AUTO EBOOK (SEULEMENT SI PANIER NON VIDE) ===
-document.addEventListener("DOMContentLoaded", function () {
-  setTimeout(async () => {
-    try {
-      const cartRes = await fetch('/cart.js');
-      const cart = await cartRes.json();
+// === AJOUT AUTO EBOOK (COMPATIBLE CART DRAWER AJAX) ===
+let ebookAdding = false;
 
-      // ❌ Si panier vide → on ne fait rien
-      if (cart.item_count === 0) return;
+async function addFreeEbook() {
+  if (ebookAdding) return;
 
-      const hasEbook = cart.items.some(item =>
-        item.product_handle === 'ebook-comment-preparer-ses-repas-a-lavance'
-      );
+  try {
+    const ebookHandle = "ebook-comment-preparer-ses-repas-a-lavance";
 
-      if (hasEbook) return;
+    const cartRes = await fetch("/cart.js");
+    const cart = await cartRes.json();
 
-      const res = await fetch('/products/ebook-comment-preparer-ses-repas-a-lavance.js');
-      const product = await res.json();
+    // ❌ panier vide
+    if (cart.item_count === 0) return;
 
-      const variantId = product.variants[0].id;
+    // ❌ déjà présent
+    const hasEbook = cart.items.some(item =>
+      item.product_handle === ebookHandle
+    );
+    if (hasEbook) return;
 
-      await fetch('/cart/add.js', {
-        method: 'POST',
-        headers: { 'Content-Type': 'application/json' },
-        body: JSON.stringify({
-          id: variantId,
-          quantity: 1
-        })
-      });
+    // ❌ uniquement ebook
+    const nonEbook = cart.items.filter(item =>
+      item.product_handle !== ebookHandle
+    );
+    if (nonEbook.length === 0) return;
 
-      location.reload();
+    ebookAdding = true;
 
-    } catch (e) {
-      console.log("Erreur ebook:", e);
-    }
-  }, 800);
+    const productRes = await fetch(`/products/${ebookHandle}.js`);
+    const product = await productRes.json();
+
+    const variantId = product.variants[0].id;
+
+    await fetch("/cart/add.js", {
+      method: "POST",
+      headers: {
+        "Content-Type": "application/json"
+      },
+      body: JSON.stringify({
+        id: variantId,
+        quantity: 1
+      })
+    });
+
+    // 🔥 recharge le drawer
+    document.dispatchEvent(new Event("cart:refresh"));
+
+  } catch (e) {
+    console.log("Erreur ebook:", e);
+  } finally {
+    ebookAdding = false;
+  }
+}
+
+// 🔥 écoute ouverture panier
+document.addEventListener("click", function () {
+  setTimeout(addFreeEbook, 500);
 });
+
+// 🔥 sécurité supplémentaire
+setInterval(addFreeEbook, 2000);

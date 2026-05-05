@@ -972,6 +972,47 @@ document.addEventListener("DOMContentLoaded", function () {
   background: #111;
   margin: 14px 0 18px;
 }
+.cart-drawer__timer {
+  border-bottom: none !important;
+}
+/* espace timer */
+.cart-drawer__timer {
+  padding: 6px 0 !important;
+  margin-bottom: 5px !important;
+}
+
+/* espace félicitations */
+.cart-drawer__shipping-message {
+  margin-top: 0 !important;
+  margin-bottom: 6px !important;
+}
+
+/* espace "offert avec votre commande" */
+.cart-drawer__bonus,
+.cart-drawer__ebook,
+.cart-drawer__gift {
+  margin-top: 4px !important;
+  margin-bottom: 6px !important;
+}
+
+/* espace entre ebook et barre noire */
+.cart-drawer__bonus + hr,
+.cart-drawer__ebook + hr {
+  margin-top: 6px !important;
+  margin-bottom: 6px !important;
+}
+.cart-drawer__timer {
+  font-size: 15px; /* avant ~13 */
+  font-weight: 600;
+}
+
+#cart-countdown {
+  font-size: 16px;
+  font-weight: 700;
+}
+#cart-countdown {
+  color: #c0392b;
+}
 {% endstylesheet %}
 
 {% schema %}

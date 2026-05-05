@@ -52,7 +52,7 @@
 
 {% if has_ebook_item %}
   <div class="cart-drawer__bonus">
-    <p class="cart-drawer__bonus-title">Offert avec votre commande</p>
+  
     {%- for item in cart.items -%}
       {% if item.product.handle contains 'ebook' %}
         <cart-drawer-item
@@ -86,11 +86,14 @@
                   {% if item.variant.compare_at_price > item.original_price %}
                     {% assign compare_price = item.variant.compare_at_price %}
                   {% endif %}
-                  {%- if compare_price > item.final_price -%}
-                    {% render 'price', price: item.final_price, compare_price: compare_price, sales_badge: 'none' %}
-                  {%- else -%}
-                    {% render 'price', price: item.final_price, sales_badge: 'none' %}
-                  {%- endif -%}
+                  {%- if item.product.handle contains 'ebook' -%}
+  <span class="cart-drawer__ebook-free">OFFERT</span>
+  <span class="cart-drawer__ebook-compare">{{ compare_price | money }}</span>
+{%- elsif compare_price > item.final_price -%}
+  {% render 'price', price: item.final_price, compare_price: compare_price, sales_badge: 'none' %}
+{%- else -%}
+  {% render 'price', price: item.final_price, sales_badge: 'none' %}
+{%- endif -%}
                 </div>
               </div>
             </div>
@@ -1060,6 +1063,36 @@ hr {
 
 .cart-drawer__main-separator {
   margin: 8px 0 12px !important;
+}
+.cart-drawer__timer {
+  font-size: 17px !important;
+  font-weight: 700 !important;
+  padding: 8px 0 6px !important;
+}
+
+#cart-timer {
+  font-size: 18px !important;
+  font-weight: 800 !important;
+}
+
+.cart-drawer__bonus,
+.cart-drawer__item--bonus {
+  margin-top: 4px !important;
+}
+.cart-drawer__ebook-free {
+  font-weight: 700;
+  font-size: 12px;
+  text-transform: uppercase;
+}
+
+.cart-drawer__ebook-compare {
+  margin-left: 6px;
+  font-size: 12px;
+  text-decoration: line-through;
+  opacity: 0.55;
+}
+.cart-drawer__ebook-free {
+  color: #2e7d32;
 }
 {% endstylesheet %}
 

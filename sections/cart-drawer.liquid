@@ -996,8 +996,7 @@ document.addEventListener("DOMContentLoaded", function () {
 }
 
 /* espace entre ebook et barre noire */
-.cart-drawer__bonus + hr,
-.cart-drawer__ebook + hr {
+.cart-drawer__bonus + hr, {
   margin-top: 6px !important;
   margin-bottom: 6px !important;
 }
@@ -1006,12 +1005,35 @@ document.addEventListener("DOMContentLoaded", function () {
   font-weight: 600;
 }
 
-#cart-countdown {
-  font-size: 16px;
-  font-weight: 700;
+/* ===== CLEAN CART DRAWER ===== */
+
+.cart-drawer__timer {
+  border-bottom: none !important;
+  padding: 6px 0 !important;
+  margin: 0 !important;
+  font-size: 15px !important;
+  font-weight: 600 !important;
+  text-align: center;
 }
-#cart-countdown {
-  color: #c0392b;
+
+#cart-timer {
+  font-size: 16px !important;
+  font-weight: 700 !important;
+}
+
+/* espace félicitations */
+.cart-drawer__shipping-message {
+  margin: 6px 0 !important;
+}
+
+/* espace bloc ebook */
+.cart-drawer__bonus {
+  margin: 4px 0 8px !important;
+}
+
+/* barre noire */
+hr {
+  margin: 8px 0 !important;
 }
 {% endstylesheet %}
 

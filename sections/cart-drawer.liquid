@@ -428,14 +428,7 @@ document.addEventListener("DOMContentLoaded", function () {
   :root {
     --cart-item-image-width: 80px;
   }
-.cart-drawer__timer {
-  margin-bottom: 10px;
-  padding: 10px;
-  font-size: 13px;
-  text-align: center;
-  border: 1px solid rgba(var(--color-foreground), 0.2);
-  background: rgba(var(--color-foreground), 0.05);
-}
+
 
 #cart-timer {
   font-weight: bold;
@@ -979,10 +972,7 @@ document.addEventListener("DOMContentLoaded", function () {
   border-bottom: none !important;
 }
 /* espace timer */
-.cart-drawer__timer {
-  padding: 6px 0 !important;
-  margin-bottom: 5px !important;
-}
+
 
 /* espace félicitations */
 .cart-drawer__shipping-message {
@@ -1003,21 +993,12 @@ document.addEventListener("DOMContentLoaded", function () {
   margin-top: 6px !important;
   margin-bottom: 6px !important;
 }
-.cart-drawer__timer {
-  font-size: 15px; /* avant ~13 */
-  font-weight: 600;
-}
+
+
 
 /* ===== CLEAN CART DRAWER ===== */
 
-.cart-drawer__timer {
-  border-bottom: none !important;
-  padding: 6px 0 !important;
-  margin: 0 !important;
-  font-size: 15px !important;
-  font-weight: 600 !important;
-  text-align: center;
-}
+
 
 #cart-timer {
   font-size: 16px !important;
@@ -1064,11 +1045,7 @@ hr {
 .cart-drawer__main-separator {
   margin: 8px 0 12px !important;
 }
-.cart-drawer__timer {
-  font-size: 17px !important;
-  font-weight: 700 !important;
-  padding: 8px 0 6px !important;
-}
+
 
 #cart-timer {
   font-size: 18px !important;
@@ -1094,20 +1071,37 @@ hr {
 .cart-drawer__ebook-free {
   color: #2e7d32;
 }
+
 .cart-drawer__timer {
-  margin-bottom: 4px !important;
+  font-size: 14px !important;
+  font-weight: 600 !important;
+  margin-bottom: 2px !important;
+  padding: 4px 0 !important;
+  border-bottom: none !important;
+  text-align: center;
 }
 
-.cart-drawer__shipping-message {
-  margin-top: 2px !important;
+#cart-timer {
+  font-size: 15px !important;
+  font-weight: 700 !important;
 }
+
+.cart-drawer__ebook-free {
+  font-weight: 700;
+  font-size: 13px; /* avant 12 */
+  text-transform: uppercase;
+  color: #2e7d32;
+  margin-right: 4px;
+}
+
 .cart-drawer__ebook-compare {
+  font-size: 13px;
   text-decoration: line-through;
   opacity: 0.6;
 }
-.cart-drawer__ebook-free {
-  color: #2e7d32;
-  margin-right: 4px;
+.cart-drawer__shipping-message {
+  margin-top: 0px !important;
+  margin-bottom: 6px !important;
 }
 {% endstylesheet %}
 

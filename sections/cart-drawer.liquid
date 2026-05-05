@@ -347,10 +347,22 @@
             disabled
           {% endif %}
         >
-          <span>Commander • {{ cart.total_price | money }} 🔒</span>
+       <span class="cart-drawer__checkout-lock">▣</span>
+<span>Procéder au paiement</span>
+<span class="cart-drawer__checkout-price">• {{ cart.total_price | money }}</span>
           {% render 'loading-spinner' %}
         </button>
-      </div>
+        <div class="cart-drawer__trust-row">
+  <div class="cart-drawer__trust-item">
+    <span>✓</span>
+    <p>Garantie 3 ans</p>
+  </div>
+  <div class="cart-drawer__trust-item">
+    <span>↩</span>
+    <p>Retour gratuit</p>
+  </div>
+</div>
+    
 
       {% content_for 'block', type: '_cart-drawer-footer-blocks', id: 'cart_footer_blocks' %}
     </div>
@@ -1105,6 +1117,34 @@ hr {
 }
 .cart-drawer__body {
   padding-top: 6px !important;
+}
+.cart-drawer__checkout-lock {
+  color: currentColor !important;
+  font-size: 13px;
+  line-height: 1;
+}
+
+.cart-drawer__checkout-price {
+  margin-left: 4px;
+}
+
+.cart-drawer__trust-row {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 10px;
+  margin-top: 10px;
+  font-size: 12px;
+}
+
+.cart-drawer__trust-item {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 6px;
+}
+
+.cart-drawer__trust-item p {
+  margin: 0;
 }
 {% endstylesheet %}
 

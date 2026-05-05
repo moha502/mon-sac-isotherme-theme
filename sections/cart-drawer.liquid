@@ -31,10 +31,13 @@
         {{ drawer_close }}
       </div>
 
-      {% content_for 'block', type: '_cart-header-blocks', id: 'cart_header_blocks' %}
+    
     </div>
 
     <div class="cart-drawer__body">
+      <div class="cart-drawer__shipping-message">
+  Félicitations vous bénéficiez de la livraison offerte !
+</div>
 <!-- EBOOK OFFERT -->
 {% assign has_ebook_item = false %}
 {% for item in cart.items %}
@@ -124,9 +127,13 @@
 {% endif %}
 
      <!-- TIMER PANIER -->
+<div class="cart-drawer__main-separator"></div>
+
 <div class="cart-drawer__timer">
   Mon panier expirera dans <span id="cart-timer">10:00</span>
 </div>
+
+<div class="cart-drawer__thin-separator"></div>
  <form action="{{ routes.cart_url }}" method="post" id="cart_drawer_form">
         <div class="cart-drawer__items">
           {%- for item in cart.items -%}
@@ -945,6 +952,25 @@ document.addEventListener("DOMContentLoaded", function () {
       height: 3px;
     }
   }
+  .cart-drawer__shipping-message {
+  font-size: 14px;
+  font-weight: 500;
+  margin-bottom: 14px;
+}
+
+.cart-drawer__main-separator {
+  width: 100%;
+  height: 4px;
+  background: #111;
+  margin: 14px 0 18px;
+}
+
+.cart-drawer__thin-separator {
+  width: 100%;
+  height: 1px;
+  background: #111;
+  margin: 14px 0 18px;
+}
 {% endstylesheet %}
 
 {% schema %}

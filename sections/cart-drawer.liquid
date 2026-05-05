@@ -35,6 +35,94 @@
     </div>
 
     <div class="cart-drawer__body">
+<!-- EBOOK OFFERT -->
+{% assign has_ebook_item = false %}
+{% for item in cart.items %}
+  {% if item.product.handle contains 'ebook' %}
+    {% assign has_ebook_item = true %}
+    {% break %}
+  {% endif %}
+{% endfor %}
+
+{% if has_ebook_item %}
+  <div class="cart-drawer__bonus">
+    <p class="cart-drawer__bonus-title">Offert avec votre commande</p>
+    {%- for item in cart.items -%}
+      {% if item.product.handle contains 'ebook' %}
+        <cart-drawer-item
+          data-index="{{ item.index | plus: 1 }}"
+          class="cart-drawer__item cart-drawer__item--bonus color-{{ section.settings.color_scheme_elements }}{% if section.settings.show_remove_button == false %} cart-drawer__item--no-remove-button{% endif %}{% if section.settings.color_scheme_elements != section.settings.color_scheme_body %} card{% endif %}"
+          data-ref="cart-item"
+          data-product-handle="{{ item.product.handle }}"
+          style="--product-image-ratio: {{ section.settings.products_media_ratio }};"
+        >
+          {% if item.image %}
+            <a href="{{ item.url }}">
+              <img
+                src="{{ item.image | image_url: width: 150 }}"
+                alt="{{ item.product.title }}"
+                width="85"
+                height="{{ 85 | divided_by: item.image.aspect_ratio | ceil }}"
+              >
+            </a>
+          {% else %}
+            <a href="{{ item.url }}">
+              <img src="{{ 'placeholder-product.jpg' | asset_img_url: 'x150' }}" alt="placeholder product" width="85" height="85">
+            </a>
+          {% endif %}
+
+          <div class="cart-drawer__item-wrapper">
+            <div class="cart-drawer__item-content">
+              <a href="{{ item.url }}" class="cart-drawer__item-name">{{- item.product.title | escape -}}</a>
+              <div class="cart-drawer__item-prices">
+                <div class="cart-drawer__item-price">
+                  {% assign compare_price = item.original_price %}
+                  {% if item.variant.compare_at_price > item.original_price %}
+                    {% assign compare_price = item.variant.compare_at_price %}
+                  {% endif %}
+                  {%- if compare_price > item.final_price -%}
+                    {% render 'price', price: item.final_price, compare_price: compare_price, sales_badge: 'none' %}
+                  {%- else -%}
+                    {% render 'price', price: item.final_price, sales_badge: 'none' %}
+                  {%- endif -%}
+                </div>
+              </div>
+            </div>
+
+            <div class="cart-drawer__item-actions">
+              <div class="cart-drawer__item-actions-wrapper">
+                {%- if section.settings.show_remove_button -%}
+                  {% assign data_variant_id = 'data-variant-id="' | append: item.variant.id | append: '"' %}
+                  {% assign data_ref = 'data-ref="remove-item"' %}
+                  {% assign data = data_variant_id | append: data_ref %}
+                  {% render 'button', button_shape: 'small', button_style: 'secondary', data: data, icon: 'delete' %}
+                {%- endif -%}
+
+                {% assign data_ref = 'data-ref="quantity-selector-input"' %}
+                {% assign data_buttons = 'data-ref="quantity-selector-button"' %}
+                {% assign max_quantity = item.variant.inventory_quantity %}
+                {% if item.variant.inventory_policy == 'continue' %}
+                  {% assign max_quantity = 0 %}
+                {% endif %}
+
+                {% render 'quantity-selector',
+                  small: true,
+                  name: 'updates[]',
+                  value: item.quantity,
+                  min: -1,
+                  max: max_quantity,
+                  data_input: data_ref,
+                  data_buttons: data_buttons
+                %}
+              </div>
+            </div>
+          </div>
+        </cart-drawer-item>
+      {% endif %}
+    {%- endfor -%}
+  </div>
+{% endif %}
+
      <!-- TIMER PANIER -->
 <div class="cart-drawer__timer">
   Mon panier expirera dans <span id="cart-timer">10:00</span>
@@ -42,6 +130,7 @@
  <form action="{{ routes.cart_url }}" method="post" id="cart_drawer_form">
         <div class="cart-drawer__items">
           {%- for item in cart.items -%}
+            {% unless item.product.handle contains 'ebook' %}
             <cart-drawer-item
               data-index="{{ item.index | plus: 1 }}"
               class="cart-drawer__item color-{{ section.settings.color_scheme_elements }}{% if section.settings.show_remove_button == false %} cart-drawer__item--no-remove-button{% endif %}{% if section.settings.color_scheme_elements != section.settings.color_scheme_body %} card{% endif %}"
@@ -181,6 +270,7 @@
                 </div>
               </div>
             </cart-drawer-item>
+            {% endunless %}
           {%- endfor -%}
         </div>
       </form>
@@ -338,6 +428,24 @@ document.addEventListener("DOMContentLoaded", function () {
 
 #cart-timer {
   font-weight: bold;
+}
+
+.cart-drawer__bonus {
+  margin-bottom: 12px;
+  padding: 10px;
+  border: 1px solid rgba(var(--color-foreground), 0.15);
+  background: rgba(var(--color-foreground), 0.03);
+  border-radius: 8px;
+}
+
+.cart-drawer__bonus-title {
+  margin: 0 0 8px;
+  font-size: var(--font-body--size-small);
+  font-weight: 600;
+}
+
+.cart-drawer__item--bonus {
+  margin-bottom: 0;
 }
   cart-drawer {
     position: fixed;

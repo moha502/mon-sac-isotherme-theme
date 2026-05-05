@@ -30,6 +30,9 @@
 
         {{ drawer_close }}
       </div>
+<div class="cart-drawer__timer">
+  Mon panier expirera dans <span id="cart-timer">10:00</span>
+</div>
 
     
     </div>
@@ -129,11 +132,9 @@
      <!-- TIMER PANIER -->
 <div class="cart-drawer__main-separator"></div>
 
-<div class="cart-drawer__timer">
-  Mon panier expirera dans <span id="cart-timer">10:00</span>
-</div>
 
-<div class="cart-drawer__thin-separator"></div>
+
+
  <form action="{{ routes.cart_url }}" method="post" id="cart_drawer_form">
         <div class="cart-drawer__items">
           {%- for item in cart.items -%}

@@ -352,7 +352,9 @@
 <span class="cart-drawer__checkout-price">• {{ cart.total_price | money }}</span>
           {% render 'loading-spinner' %}
         </button>
-        <div class="cart-drawer__trust-row">
+        
+</div>
+<div class="cart-drawer__trust-row">
   <div class="cart-drawer__trust-item">
     <span>✓</span>
     <p>Garantie 3 ans</p>
@@ -361,7 +363,6 @@
     <span>↩</span>
     <p>Retour gratuit</p>
   </div>
-</div>
 </div>
       {% content_for 'block', type: '_cart-drawer-footer-blocks', id: 'cart_footer_blocks' %}
     </div>

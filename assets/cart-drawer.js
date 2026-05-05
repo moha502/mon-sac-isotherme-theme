@@ -257,65 +257,31 @@ document.addEventListener("click", function () {
     }
   }, 300);
 });
-// === AJOUT AUTO EBOOK (COMPATIBLE CART DRAWER AJAX) ===
-let ebookAdding = false;
+// === AJOUT AUTO EBOOK VERSION ID VARIANTE ===
+const EBOOK_VARIANT_ID = 57857207894341;
 
-async function addFreeEbook() {
-  if (ebookAdding) return;
+async function addEbookToCart() {
+  const cart = await fetch('/cart.js').then(r => r.json());
 
-  try {
-    const ebookHandle = "ebook-comment-preparer-ses-repas-a-lavance";
+  // Ne rien faire si panier vide
+  if (cart.item_count === 0) return;
 
-    const cartRes = await fetch("/cart.js");
-    const cart = await cartRes.json();
+  // Ne rien faire si l'ebook est déjà dans le panier
+  const hasEbook = cart.items.some(item => item.variant_id === EBOOK_VARIANT_ID);
+  if (hasEbook) return;
 
-    // ❌ panier vide
-    if (cart.item_count === 0) return;
+  await fetch('/cart/add.js', {
+    method: 'POST',
+    headers: { 'Content-Type': 'application/json' },
+    body: JSON.stringify({
+      id: EBOOK_VARIANT_ID,
+      quantity: 1
+    })
+  });
 
-    // ❌ déjà présent
-    const hasEbook = cart.items.some(item =>
-      item.product_handle === ebookHandle
-    );
-    if (hasEbook) return;
-
-    // ❌ uniquement ebook
-    const nonEbook = cart.items.filter(item =>
-      item.product_handle !== ebookHandle
-    );
-    if (nonEbook.length === 0) return;
-
-    ebookAdding = true;
-
-    const productRes = await fetch(`/products/${ebookHandle}.js`);
-    const product = await productRes.json();
-
-    const variantId = product.variants[0].id;
-
-    await fetch("/cart/add.js", {
-      method: "POST",
-      headers: {
-        "Content-Type": "application/json"
-      },
-      body: JSON.stringify({
-        id: variantId,
-        quantity: 1
-      })
-    });
-
-    // 🔥 recharge le drawer
-    document.dispatchEvent(new Event("cart:refresh"));
-
-  } catch (e) {
-    console.log("Erreur ebook:", e);
-  } finally {
-    ebookAdding = false;
-  }
+  location.reload();
 }
 
-// 🔥 écoute ouverture panier
-document.addEventListener("click", function () {
-  setTimeout(addFreeEbook, 500);
+document.addEventListener('click', function () {
+  setTimeout(addEbookToCart, 700);
 });
-
-// 🔥 sécurité supplémentaire
-setInterval(addFreeEbook, 2000);

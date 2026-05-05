@@ -257,3 +257,31 @@ document.addEventListener("click", function () {
     }
   }, 300);
 });
+// === AJOUT AUTO EBOOK VERSION ID VARIANTE ===
+const EBOOK_VARIANT_ID = 57857207894341;
+
+async function addEbookToCart() {
+  const cart = await fetch('/cart.js').then(r => r.json());
+
+  // Ne rien faire si panier vide
+  if (cart.item_count === 0) return;
+
+  // Ne rien faire si l'ebook est déjà dans le panier
+  const hasEbook = cart.items.some(item => item.variant_id === EBOOK_VARIANT_ID);
+  if (hasEbook) return;
+
+  await fetch('/cart/add.js', {
+    method: 'POST',
+    headers: { 'Content-Type': 'application/json' },
+    body: JSON.stringify({
+      id: EBOOK_VARIANT_ID,
+      quantity: 1
+    })
+  });
+
+  location.reload();
+}
+
+document.addEventListener('click', function () {
+  setTimeout(addEbookToCart, 700);
+});

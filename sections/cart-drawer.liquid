@@ -277,7 +277,7 @@
     </div>
 
     <div class="cart-drawer__footer color-{{ section.settings.color_scheme_footer }}">
-      {% content_for 'block', type: '_cart-footer-resume-blocks', id: 'cart_footer_resume_blocks' %}
+    
 
       {% liquid
         assign total_savings = 0
@@ -290,12 +290,41 @@
         endfor
       %}
 
-      {% if total_savings > 0 %}
-        <p class="cart-drawer__savings">
-          Vous économisez {{ total_savings | money }} sur cette commande
-        </p>
-      {% endif %}
+{% liquid
+  assign total_savings = 0
+  for item in cart.items
+    assign compare_price = item.variant.compare_at_price
+    if compare_price != blank and compare_price > item.final_price
+      assign line_savings = compare_price | minus: item.final_price | times: item.quantity
+      assign total_savings = total_savings | plus: line_savings
+    endif
+  endfor
+%}
 
+{% liquid
+  assign total_savings = 0
+
+  for item in cart.items
+    assign compare_price = item.variant.compare_at_price
+
+    if compare_price == blank or compare_price <= item.final_price
+      assign compare_price = item.original_price
+    endif
+
+    if compare_price > item.final_price
+      assign unit_savings = compare_price | minus: item.final_price
+      assign line_savings = unit_savings | times: item.quantity
+      assign total_savings = total_savings | plus: line_savings
+    endif
+
+  endfor
+%}
+
+{% if total_savings > 0 %}
+  <p class="cart-drawer__savings">
+    Vous économisez {{ total_savings | money }} sur votre commande !
+  </p>
+{% endif %}
       <div class="cart-drawer__ctas">
         <button
           type="submit"
@@ -307,7 +336,7 @@
             disabled
           {% endif %}
         >
-          <span>{{ 'cart.checkout' | t }}</span>
+          <span>Commander • {{ cart.total_price | money }} 🔒</span>
           {% render 'loading-spinner' %}
         </button>
       </div>
@@ -642,12 +671,14 @@ document.addEventListener("DOMContentLoaded", function () {
     gap: 10px;
   }
 
-  .cart-drawer__savings {
-    margin: 0 0 var(--padding-xs);
-    font-size: var(--font-body--size-small);
-    font-weight: 600;
-    line-height: normal;
-  }
+ .cart-drawer__savings {
+  margin: 10px 0 8px;
+  text-align: center;
+  font-size: 13px;
+  line-height: 1.3;
+  font-weight: 600;
+  color: #2f8f46;
+}
 
   .cart-drawer__ctas button {
     width: 100%;

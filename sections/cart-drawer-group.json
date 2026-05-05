@@ -89,25 +89,10 @@
                 "additional_class": ""
               },
               "blocks": {}
-            },
-            "discount_code_GBacFY": {
-              "type": "_discount-code",
-              "name": "t:discount_code",
-              "settings": {
-                "style": "in_accordion",
-                "accordion_heading": "Ajouter un code de réduction",
-                "button_text": "Appliquer",
-                "placeholder": "Code de réduction",
-                "margin_top": 0,
-                "margin_bottom": 10,
-                "additional_class": ""
-              },
-              "blocks": {}
             }
           },
           "block_order": [
-            "cross_sell_6A4GpG",
-            "discount_code_GBacFY"
+            "cross_sell_6A4GpG"
           ]
         },
         "cart_footer_blocks": {

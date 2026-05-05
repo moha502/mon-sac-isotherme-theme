@@ -285,32 +285,3 @@ async function addEbookToCart() {
 document.addEventListener('click', function () {
   setTimeout(addEbookToCart, 700);
 });
-// === REMONTER L'EBOOK EN HAUT DU PANIER ===
-function moveEbookOnTop() {
-  const cartItems = document.querySelector('.cart-drawer__body');
-  if (!cartItems) return;
-
-  const items = cartItems.querySelectorAll('[data-cart-item]');
-  
-  let ebookItem = null;
-
-  items.forEach(item => {
-    if (item.innerText.toLowerCase().includes('ebook')) {
-      ebookItem = item;
-    }
-  });
-
-  if (ebookItem) {
-    cartItems.prepend(ebookItem);
-  }
-}
-
-// relance souvent (car Shopify recharge en AJAX)
-setInterval(moveEbookOnTop, 1000);
-/* EBOOK highlight */
-.cart-drawer__body [data-cart-item]:first-child {
-  border: 2px dashed #2f8f46;
-  background: rgba(47, 143, 70, 0.05);
-  padding: 8px;
-  border-radius: 6px;
-}

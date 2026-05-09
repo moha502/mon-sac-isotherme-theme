@@ -1,0 +1,245 @@
+{% liquid
+  assign section_id = 'economies-repas-' | append: section.id
+%}
+
+<section id="{{ section_id }}" class="economies-repas section section--padding">
+  <div class="page-width">
+    <div class="economies-repas__intro">
+      <p class="economies-repas__badge badge badge--primary">{{ section.settings.badge_text }}</p>
+      <h2 class="economies-repas__title h0">
+        {{ section.settings.title_line_1 }}
+        <span>{{ section.settings.title_line_2 }}</span>
+      </h2>
+      <p class="economies-repas__subtitle rte">{{ section.settings.subtitle }}</p>
+    </div>
+
+    <div class="economies-repas__stats">
+      {% for block in section.blocks %}
+        {% if block.type == 'stat' %}
+          <div class="economies-repas__stat" {{ block.shopify_attributes }}>
+            <p class="economies-repas__stat-value">{{ block.settings.value }}</p>
+            <p class="economies-repas__stat-main">{{ block.settings.main_line }}</p>
+            <p class="economies-repas__stat-sub">{{ block.settings.sub_line }}</p>
+          </div>
+        {% endif %}
+      {% endfor %}
+    </div>
+
+    <div class="economies-repas__lifestyle">
+      <div class="economies-repas__media">
+        {% if section.settings.image != blank %}
+          {{ section.settings.image | image_url: width: 900 | image_tag: loading: 'lazy', widths: '360,540,720,900', sizes: '(min-width: 990px) 50vw, 100vw', class: 'economies-repas__image', alt: section.settings.image.alt | escape }}
+        {% else %}
+          {{ 'collection-1' | placeholder_svg_tag: 'placeholder-svg' }}
+        {% endif %}
+      </div>
+      <div class="economies-repas__content">
+        <p class="economies-repas__label">{{ section.settings.label }}</p>
+        <h3 class="economies-repas__content-title">{{ section.settings.content_title }}</h3>
+
+        <ul class="economies-repas__benefits" role="list">
+          {% for i in (1..3) %}
+            {% assign key = 'benefit_' | append: i %}
+            {% assign benefit = section.settings[key] %}
+            {% if benefit != blank %}
+              <li>{{ benefit }}</li>
+            {% endif %}
+          {% endfor %}
+        </ul>
+
+        {% if section.settings.button_label != blank and section.settings.button_link != blank %}
+          <a href="{{ section.settings.button_link }}" class="button button--primary economies-repas__cta">
+            {{ section.settings.button_label }}
+            <span aria-hidden="true">→</span>
+          </a>
+        {% endif %}
+      </div>
+    </div>
+
+    <div class="economies-repas__transition" aria-hidden="true">
+      <span class="economies-repas__curve"></span>
+      <span class="economies-repas__arrow-wrap">↓</span>
+      <p>{{ section.settings.transition_text }}</p>
+    </div>
+  </div>
+</section>
+
+<style>
+  #{{ section_id }} {
+    --accent: var(--color-primary-button-background);
+  }
+
+  #{{ section_id }} .page-width {
+    max-width: 120rem;
+  }
+
+  #{{ section_id }} .economies-repas__intro {
+    text-align: center;
+    max-width: 84rem;
+    margin: 0 auto;
+  }
+
+  #{{ section_id }} .economies-repas__badge {
+    display: inline-flex;
+    margin-bottom: 2rem;
+    padding: 0.8rem 1.8rem;
+    letter-spacing: 0.08em;
+    font-weight: 700;
+  }
+
+  #{{ section_id }} .economies-repas__title {
+    margin: 0;
+    font-size: clamp(3.4rem, 6vw, 7rem);
+    line-height: 1.05;
+    letter-spacing: -0.02em;
+    color: rgb(var(--color-foreground));
+  }
+
+  #{{ section_id }} .economies-repas__title span {
+    display: block;
+    color: var(--accent);
+  }
+
+  #{{ section_id }} .economies-repas__subtitle {
+    margin: 2.4rem auto 0;
+    max-width: 72rem;
+    color: rgba(var(--color-foreground), 0.78);
+    font-size: 2rem;
+    line-height: 1.45;
+  }
+
+  #{{ section_id }} .economies-repas__stats {
+    margin-top: 4.2rem;
+    background: var(--color-background);
+    border: 1px solid rgba(var(--color-foreground), 0.08);
+    border-radius: 2.2rem;
+    box-shadow: 0 10px 26px rgba(var(--color-shadow), 0.04);
+    display: grid;
+    grid-template-columns: repeat(3, minmax(0, 1fr));
+    overflow: hidden;
+  }
+
+  #{{ section_id }} .economies-repas__stat {
+    text-align: center;
+    padding: 4rem 2rem 3.6rem;
+    position: relative;
+  }
+
+  #{{ section_id }} .economies-repas__stat:not(:last-child)::after {
+    content: '';
+    position: absolute;
+    top: 15%;
+    right: 0;
+    width: 1px;
+    height: 70%;
+    background: rgba(var(--color-foreground), 0.1);
+  }
+
+  #{{ section_id }} .economies-repas__stat-value {
+    margin: 0;
+    font-weight: 700;
+    font-size: clamp(4rem, 4vw, 6rem);
+    line-height: 1;
+  }
+
+  #{{ section_id }} .economies-repas__stat-value::after {
+    content: '';
+    display: block;
+    width: 4.4rem;
+    height: 0.4rem;
+    margin: 1.2rem auto 1.6rem;
+    border-radius: 10px;
+    background: var(--accent);
+  }
+
+  #{{ section_id }} .economies-repas__stat-main {
+    margin: 0;
+    font-size: 2.5rem;
+    font-weight: 600;
+  }
+
+  #{{ section_id }} .economies-repas__stat-sub {
+    margin: 0.8rem 0 0;
+    color: rgba(var(--color-foreground), 0.75);
+  }
+
+  #{{ section_id }} .economies-repas__lifestyle {
+    margin-top: 2.4rem;
+    border-radius: 2.2rem;
+    background: color-mix(in srgb, var(--color-background) 94%, var(--accent) 6%);
+    border: 1px solid rgba(var(--color-foreground), 0.06);
+    padding: 3rem;
+    display: grid;
+    grid-template-columns: 1.05fr 1fr;
+    gap: 3rem;
+    align-items: center;
+  }
+
+  #{{ section_id }} .economies-repas__media { border-radius: 1.6rem; overflow: hidden; }
+  #{{ section_id }} .economies-repas__image { width: 100%; height: 100%; object-fit: cover; display: block; }
+  #{{ section_id }} .economies-repas__label { margin: 0 0 1.2rem; color: var(--accent); font-weight: 700; letter-spacing: 0.06em; text-transform: uppercase; font-size: 1.4rem; }
+  #{{ section_id }} .economies-repas__content-title { margin: 0 0 2rem; font-size: clamp(3rem, 4vw, 5rem); line-height: 1.1; }
+  #{{ section_id }} .economies-repas__benefits { margin: 0; padding: 0; list-style: none; display: grid; gap: 1rem; }
+  #{{ section_id }} .economies-repas__benefits li { display: flex; gap: 1rem; align-items: center; font-size: 1.75rem; }
+  #{{ section_id }} .economies-repas__benefits li::before { content: '•'; color: var(--accent); font-size: 2.2rem; line-height: 1; }
+  #{{ section_id }} .economies-repas__cta { margin-top: 2.4rem; }
+
+  #{{ section_id }} .economies-repas__transition { margin-top: 2.2rem; text-align: center; position: relative; padding-top: 2.2rem; }
+  #{{ section_id }} .economies-repas__curve { position: absolute; top: 0; left: 0; right: 0; height: 3.4rem; border-top: 1px dashed color-mix(in srgb, var(--accent) 70%, transparent); border-radius: 50% / 100% 100% 0 0; }
+  #{{ section_id }} .economies-repas__arrow-wrap { width: 8rem; height: 8rem; border-radius: 50%; display: grid; place-items: center; margin: 0 auto 0.6rem; background: color-mix(in srgb, var(--accent) 14%, var(--color-background)); color: var(--accent); font-size: 3rem; border: 1px solid color-mix(in srgb, var(--accent) 25%, transparent); }
+  #{{ section_id }} .economies-repas__transition p { margin: 0; color: var(--accent); font-size: 1.6rem; }
+
+  @media screen and (max-width: 989px) {
+    #{{ section_id }} .economies-repas__stats { grid-template-columns: 1fr; }
+    #{{ section_id }} .economies-repas__stat:not(:last-child)::after { display: none; }
+    #{{ section_id }} .economies-repas__stat { border-bottom: 1px solid rgba(var(--color-foreground), 0.08); }
+    #{{ section_id }} .economies-repas__stat:last-child { border-bottom: 0; }
+    #{{ section_id }} .economies-repas__lifestyle { grid-template-columns: 1fr; padding: 2rem; }
+    #{{ section_id }} .economies-repas__subtitle { font-size: 1.8rem; }
+  }
+</style>
+
+{% schema %}
+{
+  "name": "Économies repas",
+  "tag": "section",
+  "class": "section",
+  "settings": [
+    { "type": "text", "id": "badge_text", "label": "Badge", "default": "ÉCONOMIES AU QUOTIDIEN" },
+    { "type": "text", "id": "title_line_1", "label": "Titre ligne 1", "default": "Le repas du midi coûte souvent" },
+    { "type": "text", "id": "title_line_2", "label": "Titre ligne 2", "default": "plus qu’on ne le pense." },
+    { "type": "textarea", "id": "subtitle", "label": "Sous-texte", "default": "Préparer son repas à la maison permet de mieux contrôler son budget et son alimentation, sans compliquer le transport du midi." },
+    { "type": "image_picker", "id": "image", "label": "Image lifestyle" },
+    { "type": "text", "id": "label", "label": "Label", "default": "UNE SOLUTION SIMPLE" },
+    { "type": "text", "id": "content_title", "label": "Titre bloc lifestyle", "default": "Une alternative simple au quotidien." },
+    { "type": "text", "id": "benefit_1", "label": "Bénéfice 1", "default": "Garde les aliments au frais plus longtemps" },
+    { "type": "text", "id": "benefit_2", "label": "Bénéfice 2", "default": "Pratique et léger au quotidien" },
+    { "type": "text", "id": "benefit_3", "label": "Bénéfice 3", "default": "Économique et écologique" },
+    { "type": "text", "id": "button_label", "label": "Libellé bouton", "default": "Découvrir les sacs isothermes" },
+    { "type": "url", "id": "button_link", "label": "Lien bouton" },
+    { "type": "text", "id": "transition_text", "label": "Texte transition", "default": "Découvrez la collection juste en dessous !" }
+  ],
+  "blocks": [
+    {
+      "type": "stat",
+      "name": "Statistique",
+      "limit": 3,
+      "settings": [
+        { "type": "text", "id": "value", "label": "Valeur", "default": "10€" },
+        { "type": "text", "id": "main_line", "label": "Ligne principale", "default": "par repas en moyenne" },
+        { "type": "text", "id": "sub_line", "label": "Sous-ligne", "default": "dépensés à l’extérieur" }
+      ]
+    }
+  ],
+  "presets": [
+    {
+      "name": "Économies repas",
+      "blocks": [
+        { "type": "stat", "settings": { "value": "10€", "main_line": "par repas en moyenne", "sub_line": "dépensés à l’extérieur" } },
+        { "type": "stat", "settings": { "value": "50€", "main_line": "par semaine de travail", "sub_line": "sur le repas du midi" } },
+        { "type": "stat", "settings": { "value": "200€+", "main_line": "dépensés chaque mois", "sub_line": "uniquement pour le midi" } }
+      ]
+    }
+  ]
+}
+{% endschema %}

@@ -1,1 +1,1981 @@
-{"sections":{"image_banner_VXNP89":{"type":"image-banner","blocks":{"image_banner_dBEabG":{"type":"_image-banner","name":"t:image_banner","settings":{"media_type":"image","image":"shopify:\/\/shop_images\/Gemini_Generated_Image_sgaed3sgaed3sgae.png","source":"uploaded","video_url":"","color_scheme":"scheme-3","banner_height":"medium","layout_justify":"center","layout_align_items":"flex-start","same_as_desktop":false,"banner_height_mobile":"small","layout_justify_mobile":"center","layout_align_items_mobile":"flex-start","image_filter_opacity":15,"image_filter_color":"#000000","padding_horizontal":0,"padding_vertical":40},"blocks":{"group_nypGzr":{"type":"group","name":"t:group","settings":{"show_on_display":"desktop_and_mobile","wrap_in_card":false,"card_link":"","color_scheme":"","show_card_border":false,"layout_type":"flex","width_desktop":60,"layout_direction_desktop":"column","layout_grid_columns_desktop":3,"layout_gap_desktop":10,"layout_wrap_desktop":"nowrap","layout_justify_desktop":"flex-start","layout_align_items_desktop":"flex-start","same_as_desktop":false,"width_mobile":100,"layout_direction_mobile":"column","layout_grid_columns_mobile":1,"layout_gap_mobile":10,"layout_wrap_mobile":"nowrap","layout_justify_mobile":"flex-start","layout_align_items_mobile":"flex-start","use_global_container_padding":true,"padding_horizontal":30,"padding_vertical":30,"margin_top":10,"margin_bottom":10,"additional_class":""},"blocks":{"reviews_badge_qYM8iY":{"type":"reviews-badge","name":"t:reviews_badge","settings":{"review_badge_style":"custom","wrap_in_a_badge":false,"color_scheme":"scheme-3","show_badge_border":true,"text_1":"Noté 4,5\/5","stars":"4","text_2":"sur 1988 avis","link":"","margin_top":0,"margin_bottom":0,"additional_class":""},"blocks":{}},"text_VJtMDF":{"type":"text","name":"Proposition de valeur","settings":{"show_on_display":"desktop_and_mobile","text":"<p>Arrêter de dépenser chaque midi<\/p>","text_style":"h2","paragraph_font_size":"normal","font_weight":400,"alignment":"left","alignment_mobile":"left","show_read_more":false,"read_more_length":200,"read_more_text":"Voir plus","read_less_text":"Voir moins","truncate":false,"truncate_length":2,"margin_top":0,"margin_bottom":0,"additional_class":""},"blocks":{}},"text_8GW6GA":{"type":"text","name":"Sous titre","settings":{"show_on_display":"desktop_and_mobile","text":"<p>Emporter son repas fait maison devient une habitude simple pour réduire les dépenses.<\/p>","text_style":"paragraph","paragraph_font_size":"large","font_weight":400,"alignment":"left","alignment_mobile":"left","show_read_more":false,"read_more_length":50,"read_more_text":"Voir plus","read_less_text":"Voir moins","truncate":false,"truncate_length":2,"margin_top":0,"margin_bottom":0,"additional_class":""},"blocks":{}},"button_J8zDV7":{"type":"button","name":"t:button","settings":{"show_on_display":"desktop_and_mobile","link":"","open_in_new_tab":false,"label":"Voir les sacs isothermes","button_style":"primary","button_shape":"default","icon":"none","icon_custom":"","icon_position":"end","margin_top":20,"margin_bottom":0,"additional_class":""},"blocks":{}},"group_3Pie6V":{"type":"group","name":"Badges de confiance (Groupe)","settings":{"show_on_display":"desktop_and_mobile","wrap_in_card":false,"card_link":"","color_scheme":"","show_card_border":false,"layout_type":"flex","width_desktop":100,"layout_direction_desktop":"row","layout_grid_columns_desktop":3,"layout_gap_desktop":20,"layout_wrap_desktop":"nowrap","layout_justify_desktop":"flex-start","layout_align_items_desktop":"flex-start","same_as_desktop":false,"width_mobile":100,"layout_direction_mobile":"column","layout_grid_columns_mobile":1,"layout_gap_mobile":10,"layout_wrap_mobile":"nowrap","layout_justify_mobile":"flex-start","layout_align_items_mobile":"flex-start","use_global_container_padding":true,"padding_horizontal":30,"padding_vertical":30,"margin_top":5,"margin_bottom":0,"additional_class":""},"blocks":{"icon_with_text_XwqVzb":{"type":"icon-with-text","name":"t:icon_with_text","settings":{"show_on_display":"desktop_and_mobile","layout_direction_desktop":"row","layout_gap_desktop":5,"same_as_desktop":true,"layout_direction_mobile":"column","layout_gap_mobile":10,"icon_type":"icon","icon":"priority","icon_custom":"","icon_size":22,"icon_position":"start","text":"<p>Livraison gratuite<\/p>","text_style":"paragraph","font_weight":400,"margin_top":0,"margin_bottom":0,"additional_class":""},"blocks":{}},"icon_with_text_MPKKCD":{"type":"icon-with-text","name":"t:icon_with_text","settings":{"show_on_display":"desktop_and_mobile","layout_direction_desktop":"row","layout_gap_desktop":5,"same_as_desktop":true,"layout_direction_mobile":"column","layout_gap_mobile":10,"icon_type":"icon","icon":"priority","icon_custom":"","icon_size":22,"icon_position":"start","text":"<p>Satisfait ou rembourser <\/p>","text_style":"paragraph","font_weight":400,"margin_top":0,"margin_bottom":0,"additional_class":""},"blocks":{}},"icon_with_text_AdYCCm":{"type":"icon-with-text","name":"t:icon_with_text","settings":{"show_on_display":"desktop_and_mobile","layout_direction_desktop":"row","layout_gap_desktop":5,"same_as_desktop":true,"layout_direction_mobile":"column","layout_gap_mobile":10,"icon_type":"icon","icon":"priority","icon_custom":"","icon_size":22,"icon_position":"start","text":"<p>Paiement sécurisé<\/p>","text_style":"paragraph","font_weight":400,"margin_top":0,"margin_bottom":0,"additional_class":""},"blocks":{}}},"block_order":["icon_with_text_XwqVzb","icon_with_text_MPKKCD","icon_with_text_AdYCCm"]}},"block_order":["reviews_badge_qYM8iY","text_VJtMDF","text_8GW6GA","button_J8zDV7","group_3Pie6V"]}},"block_order":["group_nypGzr"]}},"block_order":["image_banner_dBEabG"],"name":"t:image_banner_full_width","settings":{"show_on_display":"desktop_and_mobile","full_width":true,"color_scheme":"scheme-1","show_arrows":false,"arrows_button_style":"secondary","show_pagination":true,"autoplay":false,"rewind":true,"autoplay_speed":4,"padding_top":0,"padding_bottom":0,"margin_top":0,"margin_bottom":0,"anchor_id":"","additional_class":""}},"custom_section_YL63mb":{"type":"custom-section","blocks":{"group_4m4jCN":{"type":"group","name":"t:group","settings":{"show_on_display":"desktop_and_mobile","wrap_in_card":false,"card_link":"","color_scheme":"","show_card_border":false,"layout_type":"flex","width_desktop":100,"layout_direction_desktop":"column","layout_grid_columns_desktop":3,"layout_gap_desktop":5,"layout_wrap_desktop":"nowrap","layout_justify_desktop":"flex-start","layout_align_items_desktop":"center","same_as_desktop":false,"width_mobile":100,"layout_direction_mobile":"column","layout_grid_columns_mobile":1,"layout_gap_mobile":10,"layout_wrap_mobile":"nowrap","layout_justify_mobile":"flex-start","layout_align_items_mobile":"center","use_global_container_padding":true,"padding_horizontal":30,"padding_vertical":30,"margin_top":10,"margin_bottom":10,"additional_class":""},"blocks":{"icon_dHcrBF":{"type":"icon","name":"t:icon","settings":{"show_on_display":"desktop_and_mobile","icon_type":"icon","icon":"savings","icon_custom":"account_balance_wallet","icon_size":42,"margin_top":0,"margin_bottom":0,"additional_class":""},"blocks":{}},"text_aCxjkb":{"type":"text","name":"t:text","settings":{"show_on_display":"desktop_and_mobile","text":"<p>Réduire les dépenses du midi<\/p>","text_style":"h6","paragraph_font_size":"normal","font_weight":400,"alignment":"center","alignment_mobile":"left","show_read_more":false,"read_more_length":50,"read_more_text":"Voir plus","read_less_text":"Voir moins","truncate":false,"truncate_length":2,"margin_top":0,"margin_bottom":0,"additional_class":""},"blocks":{}},"text_PYG9Dn":{"type":"text","name":"t:text","settings":{"show_on_display":"desktop_and_mobile","text":"<p>Sans changer ses habitudes<\/p>","text_style":"paragraph","paragraph_font_size":"normal","font_weight":400,"alignment":"center","alignment_mobile":"left","show_read_more":false,"read_more_length":50,"read_more_text":"Voir plus","read_less_text":"Voir moins","truncate":false,"truncate_length":2,"margin_top":0,"margin_bottom":0,"additional_class":""},"blocks":{}}},"block_order":["icon_dHcrBF","text_aCxjkb","text_PYG9Dn"]},"group_QHFR7k":{"type":"group","name":"t:group","settings":{"show_on_display":"desktop_and_mobile","wrap_in_card":false,"card_link":"","color_scheme":"","show_card_border":false,"layout_type":"flex","width_desktop":100,"layout_direction_desktop":"column","layout_grid_columns_desktop":3,"layout_gap_desktop":5,"layout_wrap_desktop":"nowrap","layout_justify_desktop":"flex-start","layout_align_items_desktop":"center","same_as_desktop":false,"width_mobile":100,"layout_direction_mobile":"column","layout_grid_columns_mobile":1,"layout_gap_mobile":10,"layout_wrap_mobile":"nowrap","layout_justify_mobile":"flex-start","layout_align_items_mobile":"center","use_global_container_padding":true,"padding_horizontal":30,"padding_vertical":30,"margin_top":10,"margin_bottom":10,"additional_class":""},"blocks":{"icon_fGqMk6":{"type":"icon","name":"t:icon","settings":{"show_on_display":"desktop_and_mobile","icon_type":"icon","icon":"ramen_dining","icon_custom":"lunch_dining","icon_size":42,"margin_top":0,"margin_bottom":0,"additional_class":""},"blocks":{}},"text_aE4LWb":{"type":"text","name":"t:text","settings":{"show_on_display":"desktop_and_mobile","text":"<p>Mieux contrôler son alimentation<\/p>","text_style":"h6","paragraph_font_size":"normal","font_weight":400,"alignment":"center","alignment_mobile":"left","show_read_more":false,"read_more_length":50,"read_more_text":"Voir plus","read_less_text":"Voir moins","truncate":false,"truncate_length":2,"margin_top":0,"margin_bottom":0,"additional_class":""},"blocks":{}},"text_rWBLtV":{"type":"text","name":"t:text","settings":{"show_on_display":"desktop_and_mobile","text":"<p>Repas préparé à la maison<\/p>","text_style":"paragraph","paragraph_font_size":"normal","font_weight":400,"alignment":"center","alignment_mobile":"left","show_read_more":false,"read_more_length":50,"read_more_text":"Voir plus","read_less_text":"Voir moins","truncate":false,"truncate_length":2,"margin_top":0,"margin_bottom":0,"additional_class":""},"blocks":{}}},"block_order":["icon_fGqMk6","text_aE4LWb","text_rWBLtV"]},"group_pUMdCd":{"type":"group","name":"t:group","settings":{"show_on_display":"desktop_and_mobile","wrap_in_card":false,"card_link":"","color_scheme":"","show_card_border":false,"layout_type":"flex","width_desktop":100,"layout_direction_desktop":"column","layout_grid_columns_desktop":3,"layout_gap_desktop":5,"layout_wrap_desktop":"nowrap","layout_justify_desktop":"flex-start","layout_align_items_desktop":"center","same_as_desktop":false,"width_mobile":100,"layout_direction_mobile":"column","layout_grid_columns_mobile":1,"layout_gap_mobile":10,"layout_wrap_mobile":"nowrap","layout_justify_mobile":"flex-start","layout_align_items_mobile":"center","use_global_container_padding":true,"padding_horizontal":30,"padding_vertical":30,"margin_top":10,"margin_bottom":10,"additional_class":""},"blocks":{"icon_9t7y4Y":{"type":"icon","name":"t:icon","settings":{"show_on_display":"desktop_and_mobile","icon_type":"icon","icon":"delivery_truck_speed","icon_custom":"shopping_bag","icon_size":42,"margin_top":0,"margin_bottom":0,"additional_class":""},"blocks":{}},"text_6kwGLp":{"type":"text","name":"t:text","settings":{"show_on_display":"desktop_and_mobile","text":"<p>Transport simple au quotidien<\/p>","text_style":"h6","paragraph_font_size":"normal","font_weight":400,"alignment":"center","alignment_mobile":"left","show_read_more":false,"read_more_length":50,"read_more_text":"Voir plus","read_less_text":"Voir moins","truncate":false,"truncate_length":2,"margin_top":0,"margin_bottom":0,"additional_class":""},"blocks":{}},"text_ER3pgU":{"type":"text","name":"t:text","settings":{"show_on_display":"desktop_and_mobile","text":"<p>Travail, études ou déplacements<\/p>","text_style":"paragraph","paragraph_font_size":"normal","font_weight":400,"alignment":"center","alignment_mobile":"left","show_read_more":false,"read_more_length":50,"read_more_text":"Voir plus","read_less_text":"Voir moins","truncate":false,"truncate_length":2,"margin_top":0,"margin_bottom":0,"additional_class":""},"blocks":{}}},"block_order":["icon_9t7y4Y","text_6kwGLp","text_ER3pgU"]},"group_eccPJU":{"type":"group","name":"t:group","settings":{"show_on_display":"desktop_and_mobile","wrap_in_card":false,"card_link":"","color_scheme":"","show_card_border":false,"layout_type":"flex","width_desktop":100,"layout_direction_desktop":"column","layout_grid_columns_desktop":3,"layout_gap_desktop":5,"layout_wrap_desktop":"nowrap","layout_justify_desktop":"flex-start","layout_align_items_desktop":"center","same_as_desktop":false,"width_mobile":100,"layout_direction_mobile":"column","layout_grid_columns_mobile":1,"layout_gap_mobile":10,"layout_wrap_mobile":"nowrap","layout_justify_mobile":"flex-start","layout_align_items_mobile":"center","use_global_container_padding":true,"padding_horizontal":30,"padding_vertical":30,"margin_top":10,"margin_bottom":10,"additional_class":""},"blocks":{"icon_4Cfwy6":{"type":"icon","name":"t:icon","settings":{"show_on_display":"desktop_and_mobile","icon_type":"icon","icon":"support_agent","icon_custom":"calendar_month","icon_size":42,"margin_top":0,"margin_bottom":0,"additional_class":""},"blocks":{}},"text_KrgBHQ":{"type":"text","name":"t:text","settings":{"show_on_display":"desktop_and_mobile","text":"<p><strong>Utilisation facile<\/strong><\/p>","text_style":"h6","paragraph_font_size":"normal","font_weight":400,"alignment":"center","alignment_mobile":"left","show_read_more":false,"read_more_length":50,"read_more_text":"Voir plus","read_less_text":"Voir moins","truncate":false,"truncate_length":2,"margin_top":0,"margin_bottom":0,"additional_class":""},"blocks":{}},"text_e8zrGD":{"type":"text","name":"t:text","settings":{"show_on_display":"desktop_and_mobile","text":"<p>Pensé pour le repas du midi<\/p>","text_style":"paragraph","paragraph_font_size":"normal","font_weight":400,"alignment":"center","alignment_mobile":"left","show_read_more":false,"read_more_length":50,"read_more_text":"Voir plus","read_less_text":"Voir moins","truncate":false,"truncate_length":2,"margin_top":0,"margin_bottom":0,"additional_class":""},"blocks":{}}},"block_order":["icon_4Cfwy6","text_KrgBHQ","text_e8zrGD"]}},"block_order":["group_4m4jCN","group_QHFR7k","group_pUMdCd","group_eccPJU"],"name":"t:reassurances","settings":{"show_on_display":"desktop_and_mobile","color_scheme":"scheme-1","wrap_in_card":false,"color_scheme_card":"","section_width":"normal","layout_type":"grid","layout_flex_direction_desktop":"row","layout_grid_columns_desktop":4,"layout_gap_desktop":30,"layout_wrap_desktop":"nowrap","layout_flex_justify_desktop":"flex-start","layout_flex_align_items_desktop":"flex-start","same_as_desktop":false,"layout_flex_direction_mobile":"row","layout_gap_mobile":20,"layout_wrap_mobile":"nowrap","layout_flex_justify_mobile":"flex-start","layout_flex_align_items_mobile":"flex-start","layout_grid_columns_mobile":2,"padding_top":60,"padding_bottom":60,"margin_top":0,"margin_bottom":0,"anchor_id":"","additional_class":""}},"collection_featured_JXRpw3":{"type":"collection-featured","blocks":{"text_NY6Xjk":{"type":"text","name":"t:text","settings":{"show_on_display":"desktop_and_mobile","text":"<h2><br\/>Combien coûte vraiment un repas du midi ?<br\/><\/h2><p>Un repas acheté à l’extérieur coûte en moyenne 10€.<\/p><p>Sur une semaine, cela représente environ 50€.<br\/><br\/>Sur un mois,<strong> plus de 200€<\/strong> peuvent être dépensés uniquement pour le midi.<\/p><p>Préparer son repas et l’emporter permet de limiter ces dépenses, tout en gardant un repas simple à transporter. <\/p><h3><br\/>Une alternative simple au quotidien<br\/>↓ <\/h3><h3><\/h3>","text_style":"auto","paragraph_font_size":"normal","font_weight":400,"alignment":"center","alignment_mobile":"left","show_read_more":false,"read_more_length":50,"read_more_text":"Voir plus","read_less_text":"Voir moins","truncate":false,"truncate_length":2,"margin_top":0,"margin_bottom":0,"additional_class":""},"blocks":{}},"group_9NwHBp":{"type":"group","name":"t:group","settings":{"show_on_display":"desktop_and_mobile","wrap_in_card":false,"card_link":"","color_scheme":"scheme-3","show_card_border":false,"layout_type":"flex","width_desktop":100,"layout_direction_desktop":"row","layout_grid_columns_desktop":3,"layout_gap_desktop":10,"layout_wrap_desktop":"nowrap","layout_justify_desktop":"space-between","layout_align_items_desktop":"center","same_as_desktop":true,"width_mobile":100,"layout_direction_mobile":"column","layout_grid_columns_mobile":1,"layout_gap_mobile":10,"layout_wrap_mobile":"nowrap","layout_justify_mobile":"flex-start","layout_align_items_mobile":"flex-start","use_global_container_padding":true,"padding_horizontal":30,"padding_vertical":30,"margin_top":10,"margin_bottom":30,"additional_class":""},"blocks":{"group_TwitGb":{"type":"group","name":"Groupe titre","settings":{"show_on_display":"desktop_and_mobile","wrap_in_card":false,"card_link":"","color_scheme":"","show_card_border":false,"layout_type":"flex","width_desktop":70,"layout_direction_desktop":"column","layout_grid_columns_desktop":3,"layout_gap_desktop":10,"layout_wrap_desktop":"nowrap","layout_justify_desktop":"flex-start","layout_align_items_desktop":"flex-start","same_as_desktop":false,"width_mobile":100,"layout_direction_mobile":"column","layout_grid_columns_mobile":1,"layout_gap_mobile":10,"layout_wrap_mobile":"nowrap","layout_justify_mobile":"flex-start","layout_align_items_mobile":"flex-start","use_global_container_padding":true,"padding_horizontal":30,"padding_vertical":30,"margin_top":0,"margin_bottom":0,"additional_class":""},"blocks":{"text_QEHkGh":{"type":"text","name":"t:title","settings":{"show_on_display":"desktop_and_mobile","text":"<p>Les sacs isothermes<\/p>","text_style":"h3","paragraph_font_size":"normal","font_weight":400,"alignment":"left","alignment_mobile":"left","show_read_more":false,"read_more_length":200,"read_more_text":"Voir plus","read_less_text":"Voir moins","truncate":false,"truncate_length":2,"margin_top":0,"margin_bottom":0,"additional_class":""},"blocks":{}},"text_6LANC3":{"type":"text","name":"t:text","settings":{"show_on_display":"desktop_and_mobile","text":"","text_style":"paragraph","paragraph_font_size":"normal","font_weight":400,"alignment":"left","alignment_mobile":"left","show_read_more":false,"read_more_length":50,"read_more_text":"Voir plus","read_less_text":"Voir moins","truncate":false,"truncate_length":2,"margin_top":0,"margin_bottom":0,"additional_class":""},"blocks":{}}},"block_order":["text_QEHkGh","text_6LANC3"]},"button_DFrQyK":{"type":"button","name":"t:button","settings":{"show_on_display":"desktop_only","link":"{{ closest.collection.url }}","open_in_new_tab":false,"label":"Voir tous","button_style":"secondary","button_shape":"small","icon":"arrow_forward","icon_custom":"arrow_forward","icon_position":"end","margin_top":0,"margin_bottom":0,"additional_class":""},"blocks":{}}},"block_order":["group_TwitGb","button_DFrQyK"]},"product-card":{"type":"_product-card","static":true,"settings":{"wrap_in_card":false,"color_scheme":"","layout_gap":15},"blocks":{"product_card_media_gallery_QnTjNe":{"type":"_product-card-media-gallery","name":"t:product_card_gallery","settings":{"show_on_display":"desktop_and_mobile","show_slider":true,"media_rounded":false,"show_badges":true,"media_ratio":"1 \/ 1","additional_class":""},"blocks":{}},"product_card_group_8YB86f":{"type":"_product-card-group","name":"t:group","settings":{"show_on_display":"desktop_and_mobile","wrap_in_card":false,"color_scheme":"scheme-3","layout_direction_desktop":"column","layout_gap_desktop":10,"layout_wrap_desktop":"nowrap","layout_justify_desktop":"flex-start","layout_align_items_desktop":"flex-start","same_as_desktop":true,"layout_direction_mobile":"column","layout_gap_mobile":10,"layout_wrap_mobile":"nowrap","layout_justify_mobile":"flex-start","layout_align_items_mobile":"flex-start","margin_top":0,"margin_bottom":0,"additional_class":""},"blocks":{"text_kW3cUN":{"type":"text","name":"t:text","settings":{"show_on_display":"desktop_and_mobile","text":"<h2>{{ closest.product.title }}<\/h2>","text_style":"paragraph","paragraph_font_size":"normal","font_weight":500,"alignment":"left","alignment_mobile":"left","show_read_more":false,"read_more_length":200,"read_more_text":"Voir plus","read_less_text":"Voir moins","truncate":false,"truncate_length":2,"margin_top":0,"margin_bottom":0,"additional_class":""},"blocks":{}},"rating_stars_VJ6F6G":{"type":"rating-stars","name":"t:rating_stars","settings":{"show_on_display":"desktop_and_mobile","product":"{{ closest.product }}","hide_rating_when_no_reviews":true,"rating":4.5,"show_note":true,"show_review_count":true,"review_count":123,"link":"","margin_top":0,"margin_bottom":0,"additional_class":""},"blocks":{}},"product_price_wqjabM":{"type":"product-price","name":"t:product_price","settings":{"show_on_display":"desktop_and_mobile","product":"{{ closest.product }}","sales_badge":"percentage","show_sales_badge_text":false,"show_unit_price":false,"text_style":"paragraph","additional_class":""},"blocks":{}},"product_card_swatches_67NCxp":{"type":"_product-card-swatches","name":"t:swatches","settings":{"show_on_display":"desktop_and_mobile","swatches_size":"small","swatches_rounded":true,"additional_class":""},"blocks":{}},"button_e3JfxN":{"type":"button","name":"t:button","settings":{"show_on_display":"desktop_and_mobile","link":"","open_in_new_tab":false,"label":"Ajouter au panier","button_style":"secondary","button_shape":"full-width","icon":"none","icon_custom":"","icon_position":"end","margin_top":0,"margin_bottom":0,"additional_class":""},"blocks":{}}},"block_order":["text_kW3cUN","rating_stars_VJ6F6G","product_price_wqjabM","product_card_swatches_67NCxp","button_e3JfxN"]}},"block_order":["product_card_media_gallery_QnTjNe","product_card_group_8YB86f"]}},"block_order":["text_NY6Xjk","group_9NwHBp"],"name":"t:collection_featured","settings":{"show_on_display":"desktop_and_mobile","color_scheme":"","collection":"frontpage","max_products":8,"layout_type":"grid","grid_columns":4,"grid_columns_mobile":"2","slider_items":4,"slider_items_mobile":"1.8","show_arrows":true,"arrows_button_style":"secondary","show_pagination":false,"rewind":true,"padding_top":60,"padding_bottom":60,"margin_top":0,"margin_bottom":0,"anchor_id":"","additional_class":""}},"custom_section_TrizBg":{"type":"custom-section","blocks":{"image_jgNVqC":{"type":"image","name":"t:image","settings":{"show_on_display":"desktop_and_mobile","show_placeholder":true,"link":"","image_ratio":"adapt","image_width_desktop":100,"image_width_mobile":100,"enable_rounded_corners":true,"margin_top":0,"margin_bottom":0,"additional_class":""},"blocks":{}},"group_tiK68b":{"type":"group","name":"t:group","settings":{"show_on_display":"desktop_and_mobile","wrap_in_card":false,"card_link":"","color_scheme":"scheme-2","show_card_border":false,"layout_type":"flex","width_desktop":100,"layout_direction_desktop":"column","layout_grid_columns_desktop":3,"layout_gap_desktop":15,"layout_wrap_desktop":"nowrap","layout_justify_desktop":"flex-start","layout_align_items_desktop":"flex-start","same_as_desktop":true,"width_mobile":100,"layout_direction_mobile":"column","layout_grid_columns_mobile":1,"layout_gap_mobile":10,"layout_wrap_mobile":"nowrap","layout_justify_mobile":"flex-start","layout_align_items_mobile":"flex-start","use_global_container_padding":true,"padding_horizontal":30,"padding_vertical":30,"margin_top":10,"margin_bottom":10,"additional_class":""},"blocks":{"text_yc3zrD":{"type":"text","name":"t:title","settings":{"show_on_display":"desktop_and_mobile","text":"<p>Une solution simple pour limiter les dépenses du midi et mieux gérer son alimentation<\/p>","text_style":"h3","paragraph_font_size":"normal","font_weight":400,"alignment":"left","alignment_mobile":"left","show_read_more":false,"read_more_length":50,"read_more_text":"Voir plus","read_less_text":"Voir moins","truncate":false,"truncate_length":2,"margin_top":0,"margin_bottom":0,"additional_class":""},"blocks":{}},"text_bCXVRY":{"type":"text","name":"t:text","settings":{"show_on_display":"desktop_and_mobile","text":"<p>Un repas acheté à l’extérieur peut sembler anodin sur le moment.<br\/><br\/>Pourtant, répété chaque semaine, cela représente une dépense importante dans le budget du quotidien.<\/p><p>Préparer son repas à la maison et l’emporter permet de limiter ces dépenses, tout en gardant le contrôle sur ce que l’on mange, sans compliquer l’organisation de la journée.<\/p>","text_style":"paragraph","paragraph_font_size":"large","font_weight":400,"alignment":"left","alignment_mobile":"left","show_read_more":false,"read_more_length":50,"read_more_text":"Voir plus","read_less_text":"Voir moins","truncate":false,"truncate_length":2,"margin_top":0,"margin_bottom":0,"additional_class":""},"blocks":{}},"button_B3Vxrk":{"type":"button","name":"t:button","settings":{"show_on_display":"desktop_and_mobile","link":"","open_in_new_tab":false,"label":"En savoir plus","button_style":"primary","button_shape":"default","icon":"none","icon_custom":"","icon_position":"end","margin_top":20,"margin_bottom":0,"additional_class":""},"blocks":{}}},"block_order":["text_yc3zrD","text_bCXVRY","button_B3Vxrk"]}},"block_order":["image_jgNVqC","group_tiK68b"],"name":"t:image_with_text","settings":{"show_on_display":"desktop_and_mobile","color_scheme":"scheme-1","wrap_in_card":false,"color_scheme_card":"","section_width":"normal","layout_type":"flex","layout_flex_direction_desktop":"row","layout_grid_columns_desktop":3,"layout_gap_desktop":30,"layout_wrap_desktop":"nowrap","layout_flex_justify_desktop":"flex-start","layout_flex_align_items_desktop":"center","same_as_desktop":false,"layout_flex_direction_mobile":"column","layout_gap_mobile":10,"layout_wrap_mobile":"nowrap","layout_flex_justify_mobile":"flex-start","layout_flex_align_items_mobile":"flex-start","layout_grid_columns_mobile":1,"padding_top":60,"padding_bottom":60,"margin_top":0,"margin_bottom":0,"anchor_id":"","additional_class":""}},"custom_section_wxUWmx":{"type":"custom-section","blocks":{"group_K88fpM":{"type":"group","name":"t:group","settings":{"show_on_display":"desktop_and_mobile","wrap_in_card":false,"card_link":"","color_scheme":"","show_card_border":false,"layout_type":"flex","width_desktop":60,"layout_direction_desktop":"column","layout_grid_columns_desktop":3,"layout_gap_desktop":15,"layout_wrap_desktop":"nowrap","layout_justify_desktop":"center","layout_align_items_desktop":"center","same_as_desktop":false,"width_mobile":100,"layout_direction_mobile":"column","layout_grid_columns_mobile":1,"layout_gap_mobile":10,"layout_wrap_mobile":"nowrap","layout_justify_mobile":"center","layout_align_items_mobile":"center","use_global_container_padding":true,"padding_horizontal":30,"padding_vertical":30,"margin_top":0,"margin_bottom":0,"additional_class":""},"blocks":{"text_TmGPC9":{"type":"text","name":"t:title","settings":{"show_on_display":"desktop_and_mobile","text":"<p><strong>Pensé pour le repas du midi au quotidien<\/strong><\/p>","text_style":"h2","paragraph_font_size":"normal","font_weight":400,"alignment":"center","alignment_mobile":"center","show_read_more":false,"read_more_length":50,"read_more_text":"Voir plus","read_less_text":"Voir moins","truncate":false,"truncate_length":2,"margin_top":0,"margin_bottom":0,"additional_class":""},"blocks":{}},"text_QABwJ9":{"type":"text","name":"t:text","settings":{"show_on_display":"desktop_and_mobile","text":"<p>Transporter son repas devient plus simple au quotidien, que ce soit pour le travail, les études ou les déplacements.<\/p><p>Le format permet d’emporter un repas, une boisson ou un encas, tout en restant facile à utiliser et à transporter tout au long de la journée.<\/p>","text_style":"paragraph","paragraph_font_size":"large","font_weight":400,"alignment":"center","alignment_mobile":"center","show_read_more":false,"read_more_length":50,"read_more_text":"Voir plus","read_less_text":"Voir moins","truncate":false,"truncate_length":2,"margin_top":0,"margin_bottom":0,"additional_class":""},"blocks":{}}},"block_order":["text_TmGPC9","text_QABwJ9"]}},"block_order":["group_K88fpM"],"name":"Sources d'autorité","settings":{"show_on_display":"desktop_and_mobile","color_scheme":"scheme-3","wrap_in_card":false,"color_scheme_card":"","section_width":"normal","layout_type":"flex","layout_flex_direction_desktop":"column","layout_grid_columns_desktop":3,"layout_gap_desktop":20,"layout_wrap_desktop":"nowrap","layout_flex_justify_desktop":"center","layout_flex_align_items_desktop":"center","same_as_desktop":true,"layout_flex_direction_mobile":"column","layout_gap_mobile":20,"layout_wrap_mobile":"nowrap","layout_flex_justify_mobile":"flex-start","layout_flex_align_items_mobile":"flex-start","layout_grid_columns_mobile":1,"padding_top":100,"padding_bottom":100,"margin_top":0,"margin_bottom":0,"anchor_id":"","additional_class":""}},"reviews_rXFabc":{"type":"reviews","blocks":{"review_slide_Hdzgcy":{"type":"_review-slide","name":"t:review_display_1","settings":{"show_on_display":"desktop_and_mobile","display_type":"5","wrap_in_card":true,"color_scheme":"scheme-1","show_card_border":true,"rating":4.5,"image_ratio":"landscape","source":"uploaded","video_url":"","title":"Excellent produit !","content":"<p>Écrivez un retour à propos de vos produits. Ajustez le nombre de colonnes en fonction de la taille moyenne des messages.<\/p>","author":"John Doe","date":"Le 11\/03\/2025","margin_top":0,"margin_bottom":0,"additional_class":""},"blocks":{}},"review_slide_76Bqb3":{"type":"_review-slide","name":"t:review_display_1","settings":{"show_on_display":"desktop_and_mobile","display_type":"5","wrap_in_card":true,"color_scheme":"scheme-1","show_card_border":true,"rating":4.5,"image_ratio":"landscape","source":"uploaded","video_url":"","title":"Excellent produit !","content":"<p>Écrivez un retour à propos de vos produits. Ajustez le nombre de colonnes en fonction de la taille moyenne des messages.<\/p>","author":"John Doe","date":"Le 11\/03\/2025","margin_top":0,"margin_bottom":0,"additional_class":""},"blocks":{}},"review_slide_f878p6":{"type":"_review-slide","name":"t:review_display_1","settings":{"show_on_display":"desktop_and_mobile","display_type":"5","wrap_in_card":true,"color_scheme":"scheme-1","show_card_border":true,"rating":4.5,"image_ratio":"landscape","source":"uploaded","video_url":"","title":"Excellent produit !","content":"<p>Écrivez un retour à propos de vos produits. Ajustez le nombre de colonnes en fonction de la taille moyenne des messages.<\/p>","author":"John Doe","date":"Le 11\/03\/2025","margin_top":0,"margin_bottom":0,"additional_class":""},"blocks":{}},"review_slide_KTrCUF":{"type":"_review-slide","name":"t:review_display_1","settings":{"show_on_display":"desktop_and_mobile","display_type":"5","wrap_in_card":true,"color_scheme":"scheme-1","show_card_border":true,"rating":4.5,"image_ratio":"landscape","source":"uploaded","video_url":"","title":"Excellent produit !","content":"<p>Écrivez un retour à propos de vos produits. Ajustez le nombre de colonnes en fonction de la taille moyenne des messages.<\/p>","author":"John Doe","date":"Le 11\/03\/2025","margin_top":0,"margin_bottom":0,"additional_class":""},"blocks":{}},"review_slide_9aN8rk":{"type":"_review-slide","name":"t:review_display_1","settings":{"show_on_display":"desktop_and_mobile","display_type":"5","wrap_in_card":true,"color_scheme":"scheme-1","show_card_border":true,"rating":4.5,"image_ratio":"landscape","source":"uploaded","video_url":"","title":"Excellent produit !","content":"<p>Écrivez un retour à propos de vos produits. Ajustez le nombre de colonnes en fonction de la taille moyenne des messages.<\/p>","author":"John Doe","date":"Le 11\/03\/2025","margin_top":0,"margin_bottom":0,"additional_class":""},"blocks":{}},"title":{"type":"text","static":true,"settings":{"show_on_display":"desktop_and_mobile","text":"<h2>Ils l’ont testé, validé et adopté!<\/h2>","text_style":"h3","paragraph_font_size":"normal","font_weight":400,"alignment":"left","alignment_mobile":"left","show_read_more":false,"read_more_length":200,"read_more_text":"Voir plus","read_less_text":"Voir moins","truncate":false,"truncate_length":2,"margin_top":0,"margin_bottom":30,"additional_class":""},"blocks":{}}},"block_order":["review_slide_Hdzgcy","review_slide_76Bqb3","review_slide_f878p6","review_slide_KTrCUF","review_slide_9aN8rk"],"name":"t:reviews_slider","settings":{"show_on_display":"desktop_and_mobile","anchor":"reviews","color_scheme":"scheme-2","layout_type":"slider","grid_columns":3,"grid_columns_mobile":"1","slider_items":3,"slider_items_mobile":"1","show_arrows":false,"arrows_button_style":"secondary","show_pagination":true,"rewind":false,"padding_top":60,"padding_bottom":60,"margin_top":0,"margin_bottom":0,"additional_class":""}},"custom_section_LYUmfE":{"type":"custom-section","blocks":{"text_G4M7mq":{"type":"text","name":"t:title","settings":{"show_on_display":"desktop_and_mobile","text":"<p>Pourquoi ce site existe ?<\/p>","text_style":"h2","paragraph_font_size":"normal","font_weight":400,"alignment":"center","alignment_mobile":"center","show_read_more":false,"read_more_length":50,"read_more_text":"Voir plus","read_less_text":"Voir moins","truncate":false,"truncate_length":2,"margin_top":0,"margin_bottom":0,"additional_class":""},"blocks":{}},"text_McMtXV":{"type":"text","name":"t:text","settings":{"show_on_display":"desktop_and_mobile","text":"<p>Acheter à manger à l’extérieur est souvent la solution la plus simple.<br\/><br\/>Avec le rythme du quotidien, préparer son repas passe facilement au second plan.<\/p><p>Pourtant, répété chaque semaine, cela peut peser sur le budget et sur les habitudes alimentaires.<\/p><p>Ce site a été pensé pour proposer une alternative simple : permettre d’emporter son repas facilement, afin de réduire ces dépenses et mieux gérer ce que l’on mange au quotidien.<\/p>","text_style":"paragraph","paragraph_font_size":"large","font_weight":500,"alignment":"center","alignment_mobile":"center","show_read_more":false,"read_more_length":50,"read_more_text":"Voir plus","read_less_text":"Voir moins","truncate":false,"truncate_length":2,"margin_top":0,"margin_bottom":0,"additional_class":""},"blocks":{}},"button_jgYTqb":{"type":"button","name":"t:button","settings":{"show_on_display":"desktop_and_mobile","link":"","open_in_new_tab":false,"label":"Découvrir nos produits","button_style":"primary","button_shape":"default","icon":"arrow_forward","icon_custom":"","icon_position":"end","margin_top":20,"margin_bottom":0,"additional_class":""},"blocks":{}}},"block_order":["text_G4M7mq","text_McMtXV","button_jgYTqb"],"name":"t:quote","settings":{"show_on_display":"desktop_and_mobile","color_scheme":"","wrap_in_card":false,"color_scheme_card":"","section_width":"narrow","layout_type":"flex","layout_flex_direction_desktop":"column","layout_grid_columns_desktop":3,"layout_gap_desktop":20,"layout_wrap_desktop":"nowrap","layout_flex_justify_desktop":"center","layout_flex_align_items_desktop":"center","same_as_desktop":true,"layout_flex_direction_mobile":"row","layout_gap_mobile":20,"layout_wrap_mobile":"nowrap","layout_flex_justify_mobile":"flex-start","layout_flex_align_items_mobile":"flex-start","layout_grid_columns_mobile":1,"padding_top":60,"padding_bottom":60,"margin_top":0,"margin_bottom":0,"anchor_id":"","additional_class":""}},"custom_section_NK3w8t":{"type":"custom-section","blocks":{"text_WCjBjh":{"type":"text","name":"t:title","settings":{"show_on_display":"desktop_and_mobile","text":"<h3>Questions fréquentes<\/h3>","text_style":"h3","paragraph_font_size":"normal","font_weight":400,"alignment":"center","alignment_mobile":"left","show_read_more":false,"read_more_length":50,"read_more_text":"Voir plus","read_less_text":"Voir moins","truncate":false,"truncate_length":2,"margin_top":0,"margin_bottom":0,"additional_class":""},"blocks":{}},"accordions_RpDUTX":{"type":"accordions","name":"t:accordions","settings":{"show_on_display":"desktop_and_mobile","icon":"caret","accordion_padding":"small","dividers":true,"additional_class":""},"blocks":{"accordion_YrVyWT":{"type":"_accordion","settings":{"show_on_display":"desktop_and_mobile","heading":"Politique de retour","heading_tag":"p","heading_style":"paragraph","open_by_default":true,"icon":"none","icon_custom":"","additional_class":""},"blocks":{"text_UkdcFG":{"type":"text","settings":{"show_on_display":"desktop_and_mobile","text":"<p>Notre objectif est que chaque client soit totalement satisfait de son achat. Si ce n'est pas le cas, faites-le nous savoir et nous ferons de notre mieux pour trouver une solution avec vous.<\/p>","text_style":"paragraph","paragraph_font_size":"normal","font_weight":400,"alignment":"left","alignment_mobile":"left","show_read_more":false,"read_more_length":50,"read_more_text":"Voir plus","read_less_text":"Voir moins","truncate":false,"truncate_length":2,"margin_top":0,"margin_bottom":0,"additional_class":""},"blocks":{}}},"block_order":["text_UkdcFG"]},"accordion_EyWbXa":{"type":"_accordion","settings":{"show_on_display":"desktop_and_mobile","heading":"Livraison","heading_tag":"p","heading_style":"paragraph","open_by_default":false,"icon":"none","icon_custom":"","additional_class":""},"blocks":{"text_Yi6PP4":{"type":"text","settings":{"show_on_display":"desktop_and_mobile","text":"<p>Nous travaillons rapidement pour envoyer votre commande dès que possible. Une fois votre commande expédiée, vous recevrez un email avec des informations supplémentaires. Les délais de livraison varient en fonction de votre emplacement.<\/p>","text_style":"paragraph","paragraph_font_size":"normal","font_weight":400,"alignment":"left","alignment_mobile":"left","show_read_more":false,"read_more_length":50,"read_more_text":"Voir plus","read_less_text":"Voir moins","truncate":false,"truncate_length":2,"margin_top":0,"margin_bottom":0,"additional_class":""},"blocks":{}}},"block_order":["text_Yi6PP4"]},"accordion_zU8z4X":{"type":"_accordion","settings":{"show_on_display":"desktop_and_mobile","heading":"Fabrication","heading_tag":"p","heading_style":"paragraph","open_by_default":false,"icon":"none","icon_custom":"","additional_class":""},"blocks":{"text_6JTzBM":{"type":"text","settings":{"show_on_display":"desktop_and_mobile","text":"<p>Nos produits sont fabriqués localement et à l'international. Nous sélectionnons soigneusement nos partenaires de fabrication pour garantir des produits de haute qualité à un prix juste.<\/p>","text_style":"paragraph","paragraph_font_size":"normal","font_weight":400,"alignment":"left","alignment_mobile":"left","show_read_more":false,"read_more_length":50,"read_more_text":"Voir plus","read_less_text":"Voir moins","truncate":false,"truncate_length":2,"margin_top":0,"margin_bottom":0,"additional_class":""},"blocks":{}}},"block_order":["text_6JTzBM"]},"accordion_Eabhyd":{"type":"_accordion","settings":{"show_on_display":"desktop_and_mobile","heading":"Livraison","heading_tag":"p","heading_style":"paragraph","open_by_default":false,"icon":"none","icon_custom":"","additional_class":""},"blocks":{"text_9Njihg":{"type":"text","settings":{"show_on_display":"desktop_and_mobile","text":"<p>Nous travaillons rapidement pour envoyer votre commande dès que possible. Une fois votre commande expédiée, vous recevrez un email avec des informations supplémentaires. Les délais de livraison varient en fonction de votre emplacement.<\/p>","text_style":"paragraph","paragraph_font_size":"normal","font_weight":400,"alignment":"left","alignment_mobile":"left","show_read_more":false,"read_more_length":50,"read_more_text":"Voir plus","read_less_text":"Voir moins","truncate":false,"truncate_length":2,"margin_top":0,"margin_bottom":0,"additional_class":""},"blocks":{}}},"block_order":["text_9Njihg"]},"accordion_KefnFk":{"type":"_accordion","settings":{"show_on_display":"desktop_and_mobile","heading":"Fabrication","heading_tag":"p","heading_style":"paragraph","open_by_default":false,"icon":"none","icon_custom":"","additional_class":""},"blocks":{"text_MrCqrR":{"type":"text","settings":{"show_on_display":"desktop_and_mobile","text":"<p>Nos produits sont fabriqués localement et à l'international. Nous sélectionnons soigneusement nos partenaires de fabrication pour garantir des produits de haute qualité à un prix juste.<\/p>","text_style":"paragraph","paragraph_font_size":"normal","font_weight":400,"alignment":"left","alignment_mobile":"left","show_read_more":false,"read_more_length":50,"read_more_text":"Voir plus","read_less_text":"Voir moins","truncate":false,"truncate_length":2,"margin_top":0,"margin_bottom":0,"additional_class":""},"blocks":{}}},"block_order":["text_MrCqrR"]}},"block_order":["accordion_YrVyWT","accordion_EyWbXa","accordion_zU8z4X","accordion_Eabhyd","accordion_KefnFk"]}},"block_order":["text_WCjBjh","accordions_RpDUTX"],"name":"t:faq_1","settings":{"show_on_display":"desktop_and_mobile","color_scheme":"scheme-1","wrap_in_card":false,"color_scheme_card":"","section_width":"narrow","layout_type":"flex","layout_flex_direction_desktop":"column","layout_grid_columns_desktop":3,"layout_gap_desktop":20,"layout_wrap_desktop":"nowrap","layout_flex_justify_desktop":"center","layout_flex_align_items_desktop":"center","same_as_desktop":true,"layout_flex_direction_mobile":"row","layout_gap_mobile":20,"layout_wrap_mobile":"nowrap","layout_flex_justify_mobile":"flex-start","layout_flex_align_items_mobile":"flex-start","layout_grid_columns_mobile":1,"padding_top":60,"padding_bottom":60,"margin_top":0,"margin_bottom":0,"anchor_id":"","additional_class":""}}},"order":["image_banner_VXNP89","custom_section_YL63mb","collection_featured_JXRpw3","custom_section_TrizBg","custom_section_wxUWmx","reviews_rXFabc","custom_section_LYUmfE","custom_section_NK3w8t"]}
+/*
+ * ------------------------------------------------------------
+ * IMPORTANT: The contents of this file are auto-generated.
+ *
+ * This file may be updated by the Shopify admin theme editor
+ * or related systems. Please exercise caution as any changes
+ * made to this file may be overwritten.
+ * ------------------------------------------------------------
+ */
+{
+  "sections": {
+    "image_banner_VXNP89": {
+      "type": "image-banner",
+      "blocks": {
+        "image_banner_dBEabG": {
+          "type": "_image-banner",
+          "name": "t:image_banner",
+          "settings": {
+            "media_type": "image",
+            "image": "shopify://shop_images/Gemini_Generated_Image_sgaed3sgaed3sgae.png",
+            "source": "uploaded",
+            "video_url": "",
+            "color_scheme": "scheme-3",
+            "banner_height": "medium",
+            "layout_justify": "center",
+            "layout_align_items": "flex-start",
+            "same_as_desktop": false,
+            "banner_height_mobile": "small",
+            "layout_justify_mobile": "center",
+            "layout_align_items_mobile": "flex-start",
+            "image_filter_opacity": 15,
+            "image_filter_color": "#000000",
+            "padding_horizontal": 0,
+            "padding_vertical": 40
+          },
+          "blocks": {
+            "group_nypGzr": {
+              "type": "group",
+              "name": "t:group",
+              "settings": {
+                "show_on_display": "desktop_and_mobile",
+                "wrap_in_card": false,
+                "card_link": "",
+                "color_scheme": "",
+                "show_card_border": false,
+                "layout_type": "flex",
+                "width_desktop": 60,
+                "layout_direction_desktop": "column",
+                "layout_grid_columns_desktop": 3,
+                "layout_gap_desktop": 10,
+                "layout_wrap_desktop": "nowrap",
+                "layout_justify_desktop": "flex-start",
+                "layout_align_items_desktop": "flex-start",
+                "same_as_desktop": false,
+                "width_mobile": 100,
+                "layout_direction_mobile": "column",
+                "layout_grid_columns_mobile": 1,
+                "layout_gap_mobile": 10,
+                "layout_wrap_mobile": "nowrap",
+                "layout_justify_mobile": "flex-start",
+                "layout_align_items_mobile": "flex-start",
+                "use_global_container_padding": true,
+                "padding_horizontal": 30,
+                "padding_vertical": 30,
+                "margin_top": 10,
+                "margin_bottom": 10,
+                "additional_class": ""
+              },
+              "blocks": {
+                "reviews_badge_qYM8iY": {
+                  "type": "reviews-badge",
+                  "name": "t:reviews_badge",
+                  "settings": {
+                    "review_badge_style": "custom",
+                    "wrap_in_a_badge": false,
+                    "color_scheme": "scheme-3",
+                    "show_badge_border": true,
+                    "text_1": "Noté 4,5/5",
+                    "stars": "4",
+                    "text_2": "sur 1988 avis",
+                    "link": "",
+                    "margin_top": 0,
+                    "margin_bottom": 0,
+                    "additional_class": ""
+                  },
+                  "blocks": {}
+                },
+                "text_VJtMDF": {
+                  "type": "text",
+                  "name": "Proposition de valeur",
+                  "settings": {
+                    "show_on_display": "desktop_and_mobile",
+                    "text": "<p>Arrêter de dépenser chaque midi</p>",
+                    "text_style": "h2",
+                    "paragraph_font_size": "normal",
+                    "font_weight": 400,
+                    "alignment": "left",
+                    "alignment_mobile": "left",
+                    "show_read_more": false,
+                    "read_more_length": 200,
+                    "read_more_text": "Voir plus",
+                    "read_less_text": "Voir moins",
+                    "truncate": false,
+                    "truncate_length": 2,
+                    "margin_top": 0,
+                    "margin_bottom": 0,
+                    "additional_class": ""
+                  },
+                  "blocks": {}
+                },
+                "text_8GW6GA": {
+                  "type": "text",
+                  "name": "Sous titre",
+                  "settings": {
+                    "show_on_display": "desktop_and_mobile",
+                    "text": "<p>Emporter son repas fait maison devient une habitude simple pour réduire les dépenses.</p>",
+                    "text_style": "paragraph",
+                    "paragraph_font_size": "large",
+                    "font_weight": 400,
+                    "alignment": "left",
+                    "alignment_mobile": "left",
+                    "show_read_more": false,
+                    "read_more_length": 50,
+                    "read_more_text": "Voir plus",
+                    "read_less_text": "Voir moins",
+                    "truncate": false,
+                    "truncate_length": 2,
+                    "margin_top": 0,
+                    "margin_bottom": 0,
+                    "additional_class": ""
+                  },
+                  "blocks": {}
+                },
+                "button_J8zDV7": {
+                  "type": "button",
+                  "name": "t:button",
+                  "settings": {
+                    "show_on_display": "desktop_and_mobile",
+                    "link": "",
+                    "open_in_new_tab": false,
+                    "label": "Voir les sacs isothermes",
+                    "button_style": "primary",
+                    "button_shape": "default",
+                    "icon": "none",
+                    "icon_custom": "",
+                    "icon_position": "end",
+                    "margin_top": 20,
+                    "margin_bottom": 0,
+                    "additional_class": ""
+                  },
+                  "blocks": {}
+                },
+                "group_3Pie6V": {
+                  "type": "group",
+                  "name": "Badges de confiance (Groupe)",
+                  "settings": {
+                    "show_on_display": "desktop_and_mobile",
+                    "wrap_in_card": false,
+                    "card_link": "",
+                    "color_scheme": "",
+                    "show_card_border": false,
+                    "layout_type": "flex",
+                    "width_desktop": 100,
+                    "layout_direction_desktop": "row",
+                    "layout_grid_columns_desktop": 3,
+                    "layout_gap_desktop": 20,
+                    "layout_wrap_desktop": "nowrap",
+                    "layout_justify_desktop": "flex-start",
+                    "layout_align_items_desktop": "flex-start",
+                    "same_as_desktop": false,
+                    "width_mobile": 100,
+                    "layout_direction_mobile": "column",
+                    "layout_grid_columns_mobile": 1,
+                    "layout_gap_mobile": 10,
+                    "layout_wrap_mobile": "nowrap",
+                    "layout_justify_mobile": "flex-start",
+                    "layout_align_items_mobile": "flex-start",
+                    "use_global_container_padding": true,
+                    "padding_horizontal": 30,
+                    "padding_vertical": 30,
+                    "margin_top": 5,
+                    "margin_bottom": 0,
+                    "additional_class": ""
+                  },
+                  "blocks": {
+                    "icon_with_text_XwqVzb": {
+                      "type": "icon-with-text",
+                      "name": "t:icon_with_text",
+                      "settings": {
+                        "show_on_display": "desktop_and_mobile",
+                        "layout_direction_desktop": "row",
+                        "layout_gap_desktop": 5,
+                        "same_as_desktop": true,
+                        "layout_direction_mobile": "column",
+                        "layout_gap_mobile": 10,
+                        "icon_type": "icon",
+                        "icon": "priority",
+                        "icon_custom": "",
+                        "icon_size": 22,
+                        "icon_position": "start",
+                        "text": "<p>Livraison gratuite</p>",
+                        "text_style": "paragraph",
+                        "font_weight": 400,
+                        "margin_top": 0,
+                        "margin_bottom": 0,
+                        "additional_class": ""
+                      },
+                      "blocks": {}
+                    },
+                    "icon_with_text_MPKKCD": {
+                      "type": "icon-with-text",
+                      "name": "t:icon_with_text",
+                      "settings": {
+                        "show_on_display": "desktop_and_mobile",
+                        "layout_direction_desktop": "row",
+                        "layout_gap_desktop": 5,
+                        "same_as_desktop": true,
+                        "layout_direction_mobile": "column",
+                        "layout_gap_mobile": 10,
+                        "icon_type": "icon",
+                        "icon": "priority",
+                        "icon_custom": "",
+                        "icon_size": 22,
+                        "icon_position": "start",
+                        "text": "<p>Satisfait ou rembourser </p>",
+                        "text_style": "paragraph",
+                        "font_weight": 400,
+                        "margin_top": 0,
+                        "margin_bottom": 0,
+                        "additional_class": ""
+                      },
+                      "blocks": {}
+                    },
+                    "icon_with_text_AdYCCm": {
+                      "type": "icon-with-text",
+                      "name": "t:icon_with_text",
+                      "settings": {
+                        "show_on_display": "desktop_and_mobile",
+                        "layout_direction_desktop": "row",
+                        "layout_gap_desktop": 5,
+                        "same_as_desktop": true,
+                        "layout_direction_mobile": "column",
+                        "layout_gap_mobile": 10,
+                        "icon_type": "icon",
+                        "icon": "priority",
+                        "icon_custom": "",
+                        "icon_size": 22,
+                        "icon_position": "start",
+                        "text": "<p>Paiement sécurisé</p>",
+                        "text_style": "paragraph",
+                        "font_weight": 400,
+                        "margin_top": 0,
+                        "margin_bottom": 0,
+                        "additional_class": ""
+                      },
+                      "blocks": {}
+                    }
+                  },
+                  "block_order": [
+                    "icon_with_text_XwqVzb",
+                    "icon_with_text_MPKKCD",
+                    "icon_with_text_AdYCCm"
+                  ]
+                }
+              },
+              "block_order": [
+                "reviews_badge_qYM8iY",
+                "text_VJtMDF",
+                "text_8GW6GA",
+                "button_J8zDV7",
+                "group_3Pie6V"
+              ]
+            }
+          },
+          "block_order": [
+            "group_nypGzr"
+          ]
+        }
+      },
+      "block_order": [
+        "image_banner_dBEabG"
+      ],
+      "name": "t:image_banner_full_width",
+      "settings": {
+        "show_on_display": "desktop_and_mobile",
+        "full_width": true,
+        "color_scheme": "scheme-1",
+        "show_arrows": false,
+        "arrows_button_style": "secondary",
+        "show_pagination": true,
+        "autoplay": false,
+        "rewind": true,
+        "autoplay_speed": 4,
+        "padding_top": 0,
+        "padding_bottom": 0,
+        "margin_top": 0,
+        "margin_bottom": 0,
+        "anchor_id": "",
+        "additional_class": ""
+      }
+    },
+    "custom_section_YL63mb": {
+      "type": "custom-section",
+      "blocks": {
+        "group_4m4jCN": {
+          "type": "group",
+          "name": "t:group",
+          "settings": {
+            "show_on_display": "desktop_and_mobile",
+            "wrap_in_card": false,
+            "card_link": "",
+            "color_scheme": "",
+            "show_card_border": false,
+            "layout_type": "flex",
+            "width_desktop": 100,
+            "layout_direction_desktop": "column",
+            "layout_grid_columns_desktop": 3,
+            "layout_gap_desktop": 5,
+            "layout_wrap_desktop": "nowrap",
+            "layout_justify_desktop": "flex-start",
+            "layout_align_items_desktop": "center",
+            "same_as_desktop": false,
+            "width_mobile": 100,
+            "layout_direction_mobile": "column",
+            "layout_grid_columns_mobile": 1,
+            "layout_gap_mobile": 10,
+            "layout_wrap_mobile": "nowrap",
+            "layout_justify_mobile": "flex-start",
+            "layout_align_items_mobile": "center",
+            "use_global_container_padding": true,
+            "padding_horizontal": 30,
+            "padding_vertical": 30,
+            "margin_top": 10,
+            "margin_bottom": 10,
+            "additional_class": ""
+          },
+          "blocks": {
+            "icon_dHcrBF": {
+              "type": "icon",
+              "name": "t:icon",
+              "settings": {
+                "show_on_display": "desktop_and_mobile",
+                "icon_type": "icon",
+                "icon": "savings",
+                "icon_custom": "account_balance_wallet",
+                "icon_size": 42,
+                "margin_top": 0,
+                "margin_bottom": 0,
+                "additional_class": ""
+              },
+              "blocks": {}
+            },
+            "text_aCxjkb": {
+              "type": "text",
+              "name": "t:text",
+              "settings": {
+                "show_on_display": "desktop_and_mobile",
+                "text": "<p>Réduire les dépenses du midi</p>",
+                "text_style": "h6",
+                "paragraph_font_size": "normal",
+                "font_weight": 400,
+                "alignment": "center",
+                "alignment_mobile": "left",
+                "show_read_more": false,
+                "read_more_length": 50,
+                "read_more_text": "Voir plus",
+                "read_less_text": "Voir moins",
+                "truncate": false,
+                "truncate_length": 2,
+                "margin_top": 0,
+                "margin_bottom": 0,
+                "additional_class": ""
+              },
+              "blocks": {}
+            },
+            "text_PYG9Dn": {
+              "type": "text",
+              "name": "t:text",
+              "settings": {
+                "show_on_display": "desktop_and_mobile",
+                "text": "<p>Sans changer ses habitudes</p>",
+                "text_style": "paragraph",
+                "paragraph_font_size": "normal",
+                "font_weight": 400,
+                "alignment": "center",
+                "alignment_mobile": "left",
+                "show_read_more": false,
+                "read_more_length": 50,
+                "read_more_text": "Voir plus",
+                "read_less_text": "Voir moins",
+                "truncate": false,
+                "truncate_length": 2,
+                "margin_top": 0,
+                "margin_bottom": 0,
+                "additional_class": ""
+              },
+              "blocks": {}
+            }
+          },
+          "block_order": [
+            "icon_dHcrBF",
+            "text_aCxjkb",
+            "text_PYG9Dn"
+          ]
+        },
+        "group_QHFR7k": {
+          "type": "group",
+          "name": "t:group",
+          "settings": {
+            "show_on_display": "desktop_and_mobile",
+            "wrap_in_card": false,
+            "card_link": "",
+            "color_scheme": "",
+            "show_card_border": false,
+            "layout_type": "flex",
+            "width_desktop": 100,
+            "layout_direction_desktop": "column",
+            "layout_grid_columns_desktop": 3,
+            "layout_gap_desktop": 5,
+            "layout_wrap_desktop": "nowrap",
+            "layout_justify_desktop": "flex-start",
+            "layout_align_items_desktop": "center",
+            "same_as_desktop": false,
+            "width_mobile": 100,
+            "layout_direction_mobile": "column",
+            "layout_grid_columns_mobile": 1,
+            "layout_gap_mobile": 10,
+            "layout_wrap_mobile": "nowrap",
+            "layout_justify_mobile": "flex-start",
+            "layout_align_items_mobile": "center",
+            "use_global_container_padding": true,
+            "padding_horizontal": 30,
+            "padding_vertical": 30,
+            "margin_top": 10,
+            "margin_bottom": 10,
+            "additional_class": ""
+          },
+          "blocks": {
+            "icon_fGqMk6": {
+              "type": "icon",
+              "name": "t:icon",
+              "settings": {
+                "show_on_display": "desktop_and_mobile",
+                "icon_type": "icon",
+                "icon": "ramen_dining",
+                "icon_custom": "lunch_dining",
+                "icon_size": 42,
+                "margin_top": 0,
+                "margin_bottom": 0,
+                "additional_class": ""
+              },
+              "blocks": {}
+            },
+            "text_aE4LWb": {
+              "type": "text",
+              "name": "t:text",
+              "settings": {
+                "show_on_display": "desktop_and_mobile",
+                "text": "<p>Mieux contrôler son alimentation</p>",
+                "text_style": "h6",
+                "paragraph_font_size": "normal",
+                "font_weight": 400,
+                "alignment": "center",
+                "alignment_mobile": "left",
+                "show_read_more": false,
+                "read_more_length": 50,
+                "read_more_text": "Voir plus",
+                "read_less_text": "Voir moins",
+                "truncate": false,
+                "truncate_length": 2,
+                "margin_top": 0,
+                "margin_bottom": 0,
+                "additional_class": ""
+              },
+              "blocks": {}
+            },
+            "text_rWBLtV": {
+              "type": "text",
+              "name": "t:text",
+              "settings": {
+                "show_on_display": "desktop_and_mobile",
+                "text": "<p>Repas préparé à la maison</p>",
+                "text_style": "paragraph",
+                "paragraph_font_size": "normal",
+                "font_weight": 400,
+                "alignment": "center",
+                "alignment_mobile": "left",
+                "show_read_more": false,
+                "read_more_length": 50,
+                "read_more_text": "Voir plus",
+                "read_less_text": "Voir moins",
+                "truncate": false,
+                "truncate_length": 2,
+                "margin_top": 0,
+                "margin_bottom": 0,
+                "additional_class": ""
+              },
+              "blocks": {}
+            }
+          },
+          "block_order": [
+            "icon_fGqMk6",
+            "text_aE4LWb",
+            "text_rWBLtV"
+          ]
+        },
+        "group_pUMdCd": {
+          "type": "group",
+          "name": "t:group",
+          "settings": {
+            "show_on_display": "desktop_and_mobile",
+            "wrap_in_card": false,
+            "card_link": "",
+            "color_scheme": "",
+            "show_card_border": false,
+            "layout_type": "flex",
+            "width_desktop": 100,
+            "layout_direction_desktop": "column",
+            "layout_grid_columns_desktop": 3,
+            "layout_gap_desktop": 5,
+            "layout_wrap_desktop": "nowrap",
+            "layout_justify_desktop": "flex-start",
+            "layout_align_items_desktop": "center",
+            "same_as_desktop": false,
+            "width_mobile": 100,
+            "layout_direction_mobile": "column",
+            "layout_grid_columns_mobile": 1,
+            "layout_gap_mobile": 10,
+            "layout_wrap_mobile": "nowrap",
+            "layout_justify_mobile": "flex-start",
+            "layout_align_items_mobile": "center",
+            "use_global_container_padding": true,
+            "padding_horizontal": 30,
+            "padding_vertical": 30,
+            "margin_top": 10,
+            "margin_bottom": 10,
+            "additional_class": ""
+          },
+          "blocks": {
+            "icon_9t7y4Y": {
+              "type": "icon",
+              "name": "t:icon",
+              "settings": {
+                "show_on_display": "desktop_and_mobile",
+                "icon_type": "icon",
+                "icon": "delivery_truck_speed",
+                "icon_custom": "shopping_bag",
+                "icon_size": 42,
+                "margin_top": 0,
+                "margin_bottom": 0,
+                "additional_class": ""
+              },
+              "blocks": {}
+            },
+            "text_6kwGLp": {
+              "type": "text",
+              "name": "t:text",
+              "settings": {
+                "show_on_display": "desktop_and_mobile",
+                "text": "<p>Transport simple au quotidien</p>",
+                "text_style": "h6",
+                "paragraph_font_size": "normal",
+                "font_weight": 400,
+                "alignment": "center",
+                "alignment_mobile": "left",
+                "show_read_more": false,
+                "read_more_length": 50,
+                "read_more_text": "Voir plus",
+                "read_less_text": "Voir moins",
+                "truncate": false,
+                "truncate_length": 2,
+                "margin_top": 0,
+                "margin_bottom": 0,
+                "additional_class": ""
+              },
+              "blocks": {}
+            },
+            "text_ER3pgU": {
+              "type": "text",
+              "name": "t:text",
+              "settings": {
+                "show_on_display": "desktop_and_mobile",
+                "text": "<p>Travail, études ou déplacements</p>",
+                "text_style": "paragraph",
+                "paragraph_font_size": "normal",
+                "font_weight": 400,
+                "alignment": "center",
+                "alignment_mobile": "left",
+                "show_read_more": false,
+                "read_more_length": 50,
+                "read_more_text": "Voir plus",
+                "read_less_text": "Voir moins",
+                "truncate": false,
+                "truncate_length": 2,
+                "margin_top": 0,
+                "margin_bottom": 0,
+                "additional_class": ""
+              },
+              "blocks": {}
+            }
+          },
+          "block_order": [
+            "icon_9t7y4Y",
+            "text_6kwGLp",
+            "text_ER3pgU"
+          ]
+        },
+        "group_eccPJU": {
+          "type": "group",
+          "name": "t:group",
+          "settings": {
+            "show_on_display": "desktop_and_mobile",
+            "wrap_in_card": false,
+            "card_link": "",
+            "color_scheme": "",
+            "show_card_border": false,
+            "layout_type": "flex",
+            "width_desktop": 100,
+            "layout_direction_desktop": "column",
+            "layout_grid_columns_desktop": 3,
+            "layout_gap_desktop": 5,
+            "layout_wrap_desktop": "nowrap",
+            "layout_justify_desktop": "flex-start",
+            "layout_align_items_desktop": "center",
+            "same_as_desktop": false,
+            "width_mobile": 100,
+            "layout_direction_mobile": "column",
+            "layout_grid_columns_mobile": 1,
+            "layout_gap_mobile": 10,
+            "layout_wrap_mobile": "nowrap",
+            "layout_justify_mobile": "flex-start",
+            "layout_align_items_mobile": "center",
+            "use_global_container_padding": true,
+            "padding_horizontal": 30,
+            "padding_vertical": 30,
+            "margin_top": 10,
+            "margin_bottom": 10,
+            "additional_class": ""
+          },
+          "blocks": {
+            "icon_4Cfwy6": {
+              "type": "icon",
+              "name": "t:icon",
+              "settings": {
+                "show_on_display": "desktop_and_mobile",
+                "icon_type": "icon",
+                "icon": "support_agent",
+                "icon_custom": "calendar_month",
+                "icon_size": 42,
+                "margin_top": 0,
+                "margin_bottom": 0,
+                "additional_class": ""
+              },
+              "blocks": {}
+            },
+            "text_KrgBHQ": {
+              "type": "text",
+              "name": "t:text",
+              "settings": {
+                "show_on_display": "desktop_and_mobile",
+                "text": "<p><strong>Utilisation facile</strong></p>",
+                "text_style": "h6",
+                "paragraph_font_size": "normal",
+                "font_weight": 400,
+                "alignment": "center",
+                "alignment_mobile": "left",
+                "show_read_more": false,
+                "read_more_length": 50,
+                "read_more_text": "Voir plus",
+                "read_less_text": "Voir moins",
+                "truncate": false,
+                "truncate_length": 2,
+                "margin_top": 0,
+                "margin_bottom": 0,
+                "additional_class": ""
+              },
+              "blocks": {}
+            },
+            "text_e8zrGD": {
+              "type": "text",
+              "name": "t:text",
+              "settings": {
+                "show_on_display": "desktop_and_mobile",
+                "text": "<p>Pensé pour le repas du midi</p>",
+                "text_style": "paragraph",
+                "paragraph_font_size": "normal",
+                "font_weight": 400,
+                "alignment": "center",
+                "alignment_mobile": "left",
+                "show_read_more": false,
+                "read_more_length": 50,
+                "read_more_text": "Voir plus",
+                "read_less_text": "Voir moins",
+                "truncate": false,
+                "truncate_length": 2,
+                "margin_top": 0,
+                "margin_bottom": 0,
+                "additional_class": ""
+              },
+              "blocks": {}
+            }
+          },
+          "block_order": [
+            "icon_4Cfwy6",
+            "text_KrgBHQ",
+            "text_e8zrGD"
+          ]
+        }
+      },
+      "block_order": [
+        "group_4m4jCN",
+        "group_QHFR7k",
+        "group_pUMdCd",
+        "group_eccPJU"
+      ],
+      "name": "t:reassurances",
+      "settings": {
+        "show_on_display": "desktop_and_mobile",
+        "color_scheme": "scheme-1",
+        "wrap_in_card": false,
+        "color_scheme_card": "",
+        "section_width": "normal",
+        "layout_type": "grid",
+        "layout_flex_direction_desktop": "row",
+        "layout_grid_columns_desktop": 4,
+        "layout_gap_desktop": 30,
+        "layout_wrap_desktop": "nowrap",
+        "layout_flex_justify_desktop": "flex-start",
+        "layout_flex_align_items_desktop": "flex-start",
+        "same_as_desktop": false,
+        "layout_flex_direction_mobile": "row",
+        "layout_gap_mobile": 20,
+        "layout_wrap_mobile": "nowrap",
+        "layout_flex_justify_mobile": "flex-start",
+        "layout_flex_align_items_mobile": "flex-start",
+        "layout_grid_columns_mobile": 2,
+        "padding_top": 60,
+        "padding_bottom": 60,
+        "margin_top": 0,
+        "margin_bottom": 0,
+        "anchor_id": "",
+        "additional_class": ""
+      }
+    },
+    "collection_featured_JXRpw3": {
+      "type": "collection-featured",
+      "blocks": {
+        "text_NY6Xjk": {
+          "type": "text",
+          "name": "t:text",
+          "settings": {
+            "show_on_display": "desktop_and_mobile",
+            "text": "<h2><br/>Combien coûte vraiment un repas du midi ?<br/></h2><p>Un repas acheté à l’extérieur coûte en moyenne 10€.</p><p>Sur une semaine, cela représente environ 50€.<br/><br/>Sur un mois,<strong> plus de 200€</strong> peuvent être dépensés uniquement pour le midi.</p><p>Préparer son repas et l’emporter permet de limiter ces dépenses, tout en gardant un repas simple à transporter. </p><h3><br/>Une alternative simple au quotidien<br/>↓ </h3><h3></h3>",
+            "text_style": "auto",
+            "paragraph_font_size": "normal",
+            "font_weight": 400,
+            "alignment": "center",
+            "alignment_mobile": "left",
+            "show_read_more": false,
+            "read_more_length": 50,
+            "read_more_text": "Voir plus",
+            "read_less_text": "Voir moins",
+            "truncate": false,
+            "truncate_length": 2,
+            "margin_top": 0,
+            "margin_bottom": 0,
+            "additional_class": ""
+          },
+          "blocks": {}
+        },
+        "group_9NwHBp": {
+          "type": "group",
+          "name": "t:group",
+          "settings": {
+            "show_on_display": "desktop_and_mobile",
+            "wrap_in_card": false,
+            "card_link": "",
+            "color_scheme": "scheme-3",
+            "show_card_border": false,
+            "layout_type": "flex",
+            "width_desktop": 100,
+            "layout_direction_desktop": "row",
+            "layout_grid_columns_desktop": 3,
+            "layout_gap_desktop": 10,
+            "layout_wrap_desktop": "nowrap",
+            "layout_justify_desktop": "space-between",
+            "layout_align_items_desktop": "center",
+            "same_as_desktop": true,
+            "width_mobile": 100,
+            "layout_direction_mobile": "column",
+            "layout_grid_columns_mobile": 1,
+            "layout_gap_mobile": 10,
+            "layout_wrap_mobile": "nowrap",
+            "layout_justify_mobile": "flex-start",
+            "layout_align_items_mobile": "flex-start",
+            "use_global_container_padding": true,
+            "padding_horizontal": 30,
+            "padding_vertical": 30,
+            "margin_top": 10,
+            "margin_bottom": 30,
+            "additional_class": ""
+          },
+          "blocks": {
+            "group_TwitGb": {
+              "type": "group",
+              "name": "Groupe titre",
+              "settings": {
+                "show_on_display": "desktop_and_mobile",
+                "wrap_in_card": false,
+                "card_link": "",
+                "color_scheme": "",
+                "show_card_border": false,
+                "layout_type": "flex",
+                "width_desktop": 70,
+                "layout_direction_desktop": "column",
+                "layout_grid_columns_desktop": 3,
+                "layout_gap_desktop": 10,
+                "layout_wrap_desktop": "nowrap",
+                "layout_justify_desktop": "flex-start",
+                "layout_align_items_desktop": "flex-start",
+                "same_as_desktop": false,
+                "width_mobile": 100,
+                "layout_direction_mobile": "column",
+                "layout_grid_columns_mobile": 1,
+                "layout_gap_mobile": 10,
+                "layout_wrap_mobile": "nowrap",
+                "layout_justify_mobile": "flex-start",
+                "layout_align_items_mobile": "flex-start",
+                "use_global_container_padding": true,
+                "padding_horizontal": 30,
+                "padding_vertical": 30,
+                "margin_top": 0,
+                "margin_bottom": 0,
+                "additional_class": ""
+              },
+              "blocks": {
+                "text_QEHkGh": {
+                  "type": "text",
+                  "name": "t:title",
+                  "settings": {
+                    "show_on_display": "desktop_and_mobile",
+                    "text": "<p>Les sacs isothermes</p>",
+                    "text_style": "h3",
+                    "paragraph_font_size": "normal",
+                    "font_weight": 400,
+                    "alignment": "left",
+                    "alignment_mobile": "left",
+                    "show_read_more": false,
+                    "read_more_length": 200,
+                    "read_more_text": "Voir plus",
+                    "read_less_text": "Voir moins",
+                    "truncate": false,
+                    "truncate_length": 2,
+                    "margin_top": 0,
+                    "margin_bottom": 0,
+                    "additional_class": ""
+                  },
+                  "blocks": {}
+                },
+                "text_6LANC3": {
+                  "type": "text",
+                  "name": "t:text",
+                  "settings": {
+                    "show_on_display": "desktop_and_mobile",
+                    "text": "",
+                    "text_style": "paragraph",
+                    "paragraph_font_size": "normal",
+                    "font_weight": 400,
+                    "alignment": "left",
+                    "alignment_mobile": "left",
+                    "show_read_more": false,
+                    "read_more_length": 50,
+                    "read_more_text": "Voir plus",
+                    "read_less_text": "Voir moins",
+                    "truncate": false,
+                    "truncate_length": 2,
+                    "margin_top": 0,
+                    "margin_bottom": 0,
+                    "additional_class": ""
+                  },
+                  "blocks": {}
+                }
+              },
+              "block_order": [
+                "text_QEHkGh",
+                "text_6LANC3"
+              ]
+            },
+            "button_DFrQyK": {
+              "type": "button",
+              "name": "t:button",
+              "settings": {
+                "show_on_display": "desktop_only",
+                "link": "{{ closest.collection.url }}",
+                "open_in_new_tab": false,
+                "label": "Voir tous",
+                "button_style": "secondary",
+                "button_shape": "small",
+                "icon": "arrow_forward",
+                "icon_custom": "arrow_forward",
+                "icon_position": "end",
+                "margin_top": 0,
+                "margin_bottom": 0,
+                "additional_class": ""
+              },
+              "blocks": {}
+            }
+          },
+          "block_order": [
+            "group_TwitGb",
+            "button_DFrQyK"
+          ]
+        },
+        "product-card": {
+          "type": "_product-card",
+          "static": true,
+          "settings": {
+            "wrap_in_card": false,
+            "color_scheme": "",
+            "layout_gap": 15
+          },
+          "blocks": {
+            "product_card_media_gallery_QnTjNe": {
+              "type": "_product-card-media-gallery",
+              "name": "t:product_card_gallery",
+              "settings": {
+                "show_on_display": "desktop_and_mobile",
+                "show_slider": true,
+                "media_rounded": false,
+                "show_badges": true,
+                "media_ratio": "1 / 1",
+                "additional_class": ""
+              },
+              "blocks": {}
+            },
+            "product_card_group_8YB86f": {
+              "type": "_product-card-group",
+              "name": "t:group",
+              "settings": {
+                "show_on_display": "desktop_and_mobile",
+                "wrap_in_card": false,
+                "color_scheme": "scheme-3",
+                "layout_direction_desktop": "column",
+                "layout_gap_desktop": 10,
+                "layout_wrap_desktop": "nowrap",
+                "layout_justify_desktop": "flex-start",
+                "layout_align_items_desktop": "flex-start",
+                "same_as_desktop": true,
+                "layout_direction_mobile": "column",
+                "layout_gap_mobile": 10,
+                "layout_wrap_mobile": "nowrap",
+                "layout_justify_mobile": "flex-start",
+                "layout_align_items_mobile": "flex-start",
+                "margin_top": 0,
+                "margin_bottom": 0,
+                "additional_class": ""
+              },
+              "blocks": {
+                "text_kW3cUN": {
+                  "type": "text",
+                  "name": "t:text",
+                  "settings": {
+                    "show_on_display": "desktop_and_mobile",
+                    "text": "<h2>{{ closest.product.title }}</h2>",
+                    "text_style": "paragraph",
+                    "paragraph_font_size": "normal",
+                    "font_weight": 500,
+                    "alignment": "left",
+                    "alignment_mobile": "left",
+                    "show_read_more": false,
+                    "read_more_length": 200,
+                    "read_more_text": "Voir plus",
+                    "read_less_text": "Voir moins",
+                    "truncate": false,
+                    "truncate_length": 2,
+                    "margin_top": 0,
+                    "margin_bottom": 0,
+                    "additional_class": ""
+                  },
+                  "blocks": {}
+                },
+                "rating_stars_VJ6F6G": {
+                  "type": "rating-stars",
+                  "name": "t:rating_stars",
+                  "settings": {
+                    "show_on_display": "desktop_and_mobile",
+                    "product": "{{ closest.product }}",
+                    "hide_rating_when_no_reviews": true,
+                    "rating": 4.5,
+                    "show_note": true,
+                    "show_review_count": true,
+                    "review_count": 123,
+                    "link": "",
+                    "margin_top": 0,
+                    "margin_bottom": 0,
+                    "additional_class": ""
+                  },
+                  "blocks": {}
+                },
+                "product_price_wqjabM": {
+                  "type": "product-price",
+                  "name": "t:product_price",
+                  "settings": {
+                    "show_on_display": "desktop_and_mobile",
+                    "product": "{{ closest.product }}",
+                    "sales_badge": "percentage",
+                    "show_sales_badge_text": false,
+                    "show_unit_price": false,
+                    "text_style": "paragraph",
+                    "additional_class": ""
+                  },
+                  "blocks": {}
+                },
+                "product_card_swatches_67NCxp": {
+                  "type": "_product-card-swatches",
+                  "name": "t:swatches",
+                  "settings": {
+                    "show_on_display": "desktop_and_mobile",
+                    "swatches_size": "small",
+                    "swatches_rounded": true,
+                    "additional_class": ""
+                  },
+                  "blocks": {}
+                },
+                "button_e3JfxN": {
+                  "type": "button",
+                  "name": "t:button",
+                  "settings": {
+                    "show_on_display": "desktop_and_mobile",
+                    "link": "",
+                    "open_in_new_tab": false,
+                    "label": "Ajouter au panier",
+                    "button_style": "secondary",
+                    "button_shape": "full-width",
+                    "icon": "none",
+                    "icon_custom": "",
+                    "icon_position": "end",
+                    "margin_top": 0,
+                    "margin_bottom": 0,
+                    "additional_class": ""
+                  },
+                  "blocks": {}
+                }
+              },
+              "block_order": [
+                "text_kW3cUN",
+                "rating_stars_VJ6F6G",
+                "product_price_wqjabM",
+                "product_card_swatches_67NCxp",
+                "button_e3JfxN"
+              ]
+            }
+          },
+          "block_order": [
+            "product_card_media_gallery_QnTjNe",
+            "product_card_group_8YB86f"
+          ]
+        }
+      },
+      "block_order": [
+        "text_NY6Xjk",
+        "group_9NwHBp"
+      ],
+      "name": "t:collection_featured",
+      "settings": {
+        "show_on_display": "desktop_and_mobile",
+        "color_scheme": "",
+        "collection": "frontpage",
+        "max_products": 8,
+        "layout_type": "grid",
+        "grid_columns": 4,
+        "grid_columns_mobile": "2",
+        "slider_items": 4,
+        "slider_items_mobile": "1.8",
+        "show_arrows": true,
+        "arrows_button_style": "secondary",
+        "show_pagination": false,
+        "rewind": true,
+        "padding_top": 60,
+        "padding_bottom": 60,
+        "margin_top": 0,
+        "margin_bottom": 0,
+        "anchor_id": "",
+        "additional_class": ""
+      }
+    },
+    "custom_section_TrizBg": {
+      "type": "custom-section",
+      "blocks": {
+        "image_jgNVqC": {
+          "type": "image",
+          "name": "t:image",
+          "settings": {
+            "show_on_display": "desktop_and_mobile",
+            "show_placeholder": true,
+            "link": "",
+            "image_ratio": "adapt",
+            "image_width_desktop": 100,
+            "image_width_mobile": 100,
+            "enable_rounded_corners": true,
+            "margin_top": 0,
+            "margin_bottom": 0,
+            "additional_class": ""
+          },
+          "blocks": {}
+        },
+        "group_tiK68b": {
+          "type": "group",
+          "name": "t:group",
+          "settings": {
+            "show_on_display": "desktop_and_mobile",
+            "wrap_in_card": false,
+            "card_link": "",
+            "color_scheme": "scheme-2",
+            "show_card_border": false,
+            "layout_type": "flex",
+            "width_desktop": 100,
+            "layout_direction_desktop": "column",
+            "layout_grid_columns_desktop": 3,
+            "layout_gap_desktop": 15,
+            "layout_wrap_desktop": "nowrap",
+            "layout_justify_desktop": "flex-start",
+            "layout_align_items_desktop": "flex-start",
+            "same_as_desktop": true,
+            "width_mobile": 100,
+            "layout_direction_mobile": "column",
+            "layout_grid_columns_mobile": 1,
+            "layout_gap_mobile": 10,
+            "layout_wrap_mobile": "nowrap",
+            "layout_justify_mobile": "flex-start",
+            "layout_align_items_mobile": "flex-start",
+            "use_global_container_padding": true,
+            "padding_horizontal": 30,
+            "padding_vertical": 30,
+            "margin_top": 10,
+            "margin_bottom": 10,
+            "additional_class": ""
+          },
+          "blocks": {
+            "text_yc3zrD": {
+              "type": "text",
+              "name": "t:title",
+              "settings": {
+                "show_on_display": "desktop_and_mobile",
+                "text": "<p>Une solution simple pour limiter les dépenses du midi et mieux gérer son alimentation</p>",
+                "text_style": "h3",
+                "paragraph_font_size": "normal",
+                "font_weight": 400,
+                "alignment": "left",
+                "alignment_mobile": "left",
+                "show_read_more": false,
+                "read_more_length": 50,
+                "read_more_text": "Voir plus",
+                "read_less_text": "Voir moins",
+                "truncate": false,
+                "truncate_length": 2,
+                "margin_top": 0,
+                "margin_bottom": 0,
+                "additional_class": ""
+              },
+              "blocks": {}
+            },
+            "text_bCXVRY": {
+              "type": "text",
+              "name": "t:text",
+              "settings": {
+                "show_on_display": "desktop_and_mobile",
+                "text": "<p>Un repas acheté à l’extérieur peut sembler anodin sur le moment.<br/><br/>Pourtant, répété chaque semaine, cela représente une dépense importante dans le budget du quotidien.</p><p>Préparer son repas à la maison et l’emporter permet de limiter ces dépenses, tout en gardant le contrôle sur ce que l’on mange, sans compliquer l’organisation de la journée.</p>",
+                "text_style": "paragraph",
+                "paragraph_font_size": "large",
+                "font_weight": 400,
+                "alignment": "left",
+                "alignment_mobile": "left",
+                "show_read_more": false,
+                "read_more_length": 50,
+                "read_more_text": "Voir plus",
+                "read_less_text": "Voir moins",
+                "truncate": false,
+                "truncate_length": 2,
+                "margin_top": 0,
+                "margin_bottom": 0,
+                "additional_class": ""
+              },
+              "blocks": {}
+            },
+            "button_B3Vxrk": {
+              "type": "button",
+              "name": "t:button",
+              "settings": {
+                "show_on_display": "desktop_and_mobile",
+                "link": "",
+                "open_in_new_tab": false,
+                "label": "En savoir plus",
+                "button_style": "primary",
+                "button_shape": "default",
+                "icon": "none",
+                "icon_custom": "",
+                "icon_position": "end",
+                "margin_top": 20,
+                "margin_bottom": 0,
+                "additional_class": ""
+              },
+              "blocks": {}
+            }
+          },
+          "block_order": [
+            "text_yc3zrD",
+            "text_bCXVRY",
+            "button_B3Vxrk"
+          ]
+        }
+      },
+      "block_order": [
+        "image_jgNVqC",
+        "group_tiK68b"
+      ],
+      "name": "t:image_with_text",
+      "settings": {
+        "show_on_display": "desktop_and_mobile",
+        "color_scheme": "scheme-1",
+        "wrap_in_card": false,
+        "color_scheme_card": "",
+        "section_width": "normal",
+        "layout_type": "flex",
+        "layout_flex_direction_desktop": "row",
+        "layout_grid_columns_desktop": 3,
+        "layout_gap_desktop": 30,
+        "layout_wrap_desktop": "nowrap",
+        "layout_flex_justify_desktop": "flex-start",
+        "layout_flex_align_items_desktop": "center",
+        "same_as_desktop": false,
+        "layout_flex_direction_mobile": "column",
+        "layout_gap_mobile": 10,
+        "layout_wrap_mobile": "nowrap",
+        "layout_flex_justify_mobile": "flex-start",
+        "layout_flex_align_items_mobile": "flex-start",
+        "layout_grid_columns_mobile": 1,
+        "padding_top": 60,
+        "padding_bottom": 60,
+        "margin_top": 0,
+        "margin_bottom": 0,
+        "anchor_id": "",
+        "additional_class": ""
+      }
+    },
+    "custom_section_wxUWmx": {
+      "type": "custom-section",
+      "blocks": {
+        "group_K88fpM": {
+          "type": "group",
+          "name": "t:group",
+          "settings": {
+            "show_on_display": "desktop_and_mobile",
+            "wrap_in_card": false,
+            "card_link": "",
+            "color_scheme": "",
+            "show_card_border": false,
+            "layout_type": "flex",
+            "width_desktop": 60,
+            "layout_direction_desktop": "column",
+            "layout_grid_columns_desktop": 3,
+            "layout_gap_desktop": 15,
+            "layout_wrap_desktop": "nowrap",
+            "layout_justify_desktop": "center",
+            "layout_align_items_desktop": "center",
+            "same_as_desktop": false,
+            "width_mobile": 100,
+            "layout_direction_mobile": "column",
+            "layout_grid_columns_mobile": 1,
+            "layout_gap_mobile": 10,
+            "layout_wrap_mobile": "nowrap",
+            "layout_justify_mobile": "center",
+            "layout_align_items_mobile": "center",
+            "use_global_container_padding": true,
+            "padding_horizontal": 30,
+            "padding_vertical": 30,
+            "margin_top": 0,
+            "margin_bottom": 0,
+            "additional_class": ""
+          },
+          "blocks": {
+            "text_TmGPC9": {
+              "type": "text",
+              "name": "t:title",
+              "settings": {
+                "show_on_display": "desktop_and_mobile",
+                "text": "<p><strong>Pensé pour le repas du midi au quotidien</strong></p>",
+                "text_style": "h2",
+                "paragraph_font_size": "normal",
+                "font_weight": 400,
+                "alignment": "center",
+                "alignment_mobile": "center",
+                "show_read_more": false,
+                "read_more_length": 50,
+                "read_more_text": "Voir plus",
+                "read_less_text": "Voir moins",
+                "truncate": false,
+                "truncate_length": 2,
+                "margin_top": 0,
+                "margin_bottom": 0,
+                "additional_class": ""
+              },
+              "blocks": {}
+            },
+            "text_QABwJ9": {
+              "type": "text",
+              "name": "t:text",
+              "settings": {
+                "show_on_display": "desktop_and_mobile",
+                "text": "<p>Transporter son repas devient plus simple au quotidien, que ce soit pour le travail, les études ou les déplacements.</p><p>Le format permet d’emporter un repas, une boisson ou un encas, tout en restant facile à utiliser et à transporter tout au long de la journée.</p>",
+                "text_style": "paragraph",
+                "paragraph_font_size": "large",
+                "font_weight": 400,
+                "alignment": "center",
+                "alignment_mobile": "center",
+                "show_read_more": false,
+                "read_more_length": 50,
+                "read_more_text": "Voir plus",
+                "read_less_text": "Voir moins",
+                "truncate": false,
+                "truncate_length": 2,
+                "margin_top": 0,
+                "margin_bottom": 0,
+                "additional_class": ""
+              },
+              "blocks": {}
+            }
+          },
+          "block_order": [
+            "text_TmGPC9",
+            "text_QABwJ9"
+          ]
+        }
+      },
+      "block_order": [
+        "group_K88fpM"
+      ],
+      "name": "Sources d'autorité",
+      "settings": {
+        "show_on_display": "desktop_and_mobile",
+        "color_scheme": "scheme-3",
+        "wrap_in_card": false,
+        "color_scheme_card": "",
+        "section_width": "normal",
+        "layout_type": "flex",
+        "layout_flex_direction_desktop": "column",
+        "layout_grid_columns_desktop": 3,
+        "layout_gap_desktop": 20,
+        "layout_wrap_desktop": "nowrap",
+        "layout_flex_justify_desktop": "center",
+        "layout_flex_align_items_desktop": "center",
+        "same_as_desktop": true,
+        "layout_flex_direction_mobile": "column",
+        "layout_gap_mobile": 20,
+        "layout_wrap_mobile": "nowrap",
+        "layout_flex_justify_mobile": "flex-start",
+        "layout_flex_align_items_mobile": "flex-start",
+        "layout_grid_columns_mobile": 1,
+        "padding_top": 100,
+        "padding_bottom": 100,
+        "margin_top": 0,
+        "margin_bottom": 0,
+        "anchor_id": "",
+        "additional_class": ""
+      }
+    },
+    "reviews_rXFabc": {
+      "type": "reviews",
+      "blocks": {
+        "review_slide_Hdzgcy": {
+          "type": "_review-slide",
+          "name": "t:review_display_1",
+          "settings": {
+            "show_on_display": "desktop_and_mobile",
+            "display_type": "5",
+            "wrap_in_card": true,
+            "color_scheme": "scheme-1",
+            "show_card_border": true,
+            "rating": 4.5,
+            "image_ratio": "landscape",
+            "source": "uploaded",
+            "video_url": "",
+            "title": "Excellent produit !",
+            "content": "<p>Écrivez un retour à propos de vos produits. Ajustez le nombre de colonnes en fonction de la taille moyenne des messages.</p>",
+            "author": "John Doe",
+            "date": "Le 11/03/2025",
+            "margin_top": 0,
+            "margin_bottom": 0,
+            "additional_class": ""
+          },
+          "blocks": {}
+        },
+        "review_slide_76Bqb3": {
+          "type": "_review-slide",
+          "name": "t:review_display_1",
+          "settings": {
+            "show_on_display": "desktop_and_mobile",
+            "display_type": "5",
+            "wrap_in_card": true,
+            "color_scheme": "scheme-1",
+            "show_card_border": true,
+            "rating": 4.5,
+            "image_ratio": "landscape",
+            "source": "uploaded",
+            "video_url": "",
+            "title": "Excellent produit !",
+            "content": "<p>Écrivez un retour à propos de vos produits. Ajustez le nombre de colonnes en fonction de la taille moyenne des messages.</p>",
+            "author": "John Doe",
+            "date": "Le 11/03/2025",
+            "margin_top": 0,
+            "margin_bottom": 0,
+            "additional_class": ""
+          },
+          "blocks": {}
+        },
+        "review_slide_f878p6": {
+          "type": "_review-slide",
+          "name": "t:review_display_1",
+          "settings": {
+            "show_on_display": "desktop_and_mobile",
+            "display_type": "5",
+            "wrap_in_card": true,
+            "color_scheme": "scheme-1",
+            "show_card_border": true,
+            "rating": 4.5,
+            "image_ratio": "landscape",
+            "source": "uploaded",
+            "video_url": "",
+            "title": "Excellent produit !",
+            "content": "<p>Écrivez un retour à propos de vos produits. Ajustez le nombre de colonnes en fonction de la taille moyenne des messages.</p>",
+            "author": "John Doe",
+            "date": "Le 11/03/2025",
+            "margin_top": 0,
+            "margin_bottom": 0,
+            "additional_class": ""
+          },
+          "blocks": {}
+        },
+        "review_slide_KTrCUF": {
+          "type": "_review-slide",
+          "name": "t:review_display_1",
+          "settings": {
+            "show_on_display": "desktop_and_mobile",
+            "display_type": "5",
+            "wrap_in_card": true,
+            "color_scheme": "scheme-1",
+            "show_card_border": true,
+            "rating": 4.5,
+            "image_ratio": "landscape",
+            "source": "uploaded",
+            "video_url": "",
+            "title": "Excellent produit !",
+            "content": "<p>Écrivez un retour à propos de vos produits. Ajustez le nombre de colonnes en fonction de la taille moyenne des messages.</p>",
+            "author": "John Doe",
+            "date": "Le 11/03/2025",
+            "margin_top": 0,
+            "margin_bottom": 0,
+            "additional_class": ""
+          },
+          "blocks": {}
+        },
+        "review_slide_9aN8rk": {
+          "type": "_review-slide",
+          "name": "t:review_display_1",
+          "settings": {
+            "show_on_display": "desktop_and_mobile",
+            "display_type": "5",
+            "wrap_in_card": true,
+            "color_scheme": "scheme-1",
+            "show_card_border": true,
+            "rating": 4.5,
+            "image_ratio": "landscape",
+            "source": "uploaded",
+            "video_url": "",
+            "title": "Excellent produit !",
+            "content": "<p>Écrivez un retour à propos de vos produits. Ajustez le nombre de colonnes en fonction de la taille moyenne des messages.</p>",
+            "author": "John Doe",
+            "date": "Le 11/03/2025",
+            "margin_top": 0,
+            "margin_bottom": 0,
+            "additional_class": ""
+          },
+          "blocks": {}
+        },
+        "title": {
+          "type": "text",
+          "static": true,
+          "settings": {
+            "show_on_display": "desktop_and_mobile",
+            "text": "<h2>Ils l’ont testé, validé et adopté!</h2>",
+            "text_style": "h3",
+            "paragraph_font_size": "normal",
+            "font_weight": 400,
+            "alignment": "left",
+            "alignment_mobile": "left",
+            "show_read_more": false,
+            "read_more_length": 200,
+            "read_more_text": "Voir plus",
+            "read_less_text": "Voir moins",
+            "truncate": false,
+            "truncate_length": 2,
+            "margin_top": 0,
+            "margin_bottom": 30,
+            "additional_class": ""
+          },
+          "blocks": {}
+        }
+      },
+      "block_order": [
+        "review_slide_Hdzgcy",
+        "review_slide_76Bqb3",
+        "review_slide_f878p6",
+        "review_slide_KTrCUF",
+        "review_slide_9aN8rk"
+      ],
+      "name": "t:reviews_slider",
+      "settings": {
+        "show_on_display": "desktop_and_mobile",
+        "anchor": "reviews",
+        "color_scheme": "scheme-2",
+        "layout_type": "slider",
+        "grid_columns": 3,
+        "grid_columns_mobile": "1",
+        "slider_items": 3,
+        "slider_items_mobile": "1",
+        "show_arrows": false,
+        "arrows_button_style": "secondary",
+        "show_pagination": true,
+        "rewind": false,
+        "padding_top": 60,
+        "padding_bottom": 60,
+        "margin_top": 0,
+        "margin_bottom": 0,
+        "additional_class": ""
+      }
+    },
+    "custom_section_LYUmfE": {
+      "type": "custom-section",
+      "blocks": {
+        "text_G4M7mq": {
+          "type": "text",
+          "name": "t:title",
+          "settings": {
+            "show_on_display": "desktop_and_mobile",
+            "text": "<p>Pourquoi ce site existe ?</p>",
+            "text_style": "h2",
+            "paragraph_font_size": "normal",
+            "font_weight": 400,
+            "alignment": "center",
+            "alignment_mobile": "center",
+            "show_read_more": false,
+            "read_more_length": 50,
+            "read_more_text": "Voir plus",
+            "read_less_text": "Voir moins",
+            "truncate": false,
+            "truncate_length": 2,
+            "margin_top": 0,
+            "margin_bottom": 0,
+            "additional_class": ""
+          },
+          "blocks": {}
+        },
+        "text_McMtXV": {
+          "type": "text",
+          "name": "t:text",
+          "settings": {
+            "show_on_display": "desktop_and_mobile",
+            "text": "<p>Acheter à manger à l’extérieur est souvent la solution la plus simple.<br/><br/>Avec le rythme du quotidien, préparer son repas passe facilement au second plan.</p><p>Pourtant, répété chaque semaine, cela peut peser sur le budget et sur les habitudes alimentaires.</p><p>Ce site a été pensé pour proposer une alternative simple : permettre d’emporter son repas facilement, afin de réduire ces dépenses et mieux gérer ce que l’on mange au quotidien.</p>",
+            "text_style": "paragraph",
+            "paragraph_font_size": "large",
+            "font_weight": 500,
+            "alignment": "center",
+            "alignment_mobile": "center",
+            "show_read_more": false,
+            "read_more_length": 50,
+            "read_more_text": "Voir plus",
+            "read_less_text": "Voir moins",
+            "truncate": false,
+            "truncate_length": 2,
+            "margin_top": 0,
+            "margin_bottom": 0,
+            "additional_class": ""
+          },
+          "blocks": {}
+        },
+        "button_jgYTqb": {
+          "type": "button",
+          "name": "t:button",
+          "settings": {
+            "show_on_display": "desktop_and_mobile",
+            "link": "",
+            "open_in_new_tab": false,
+            "label": "Découvrir nos produits",
+            "button_style": "primary",
+            "button_shape": "default",
+            "icon": "arrow_forward",
+            "icon_custom": "",
+            "icon_position": "end",
+            "margin_top": 20,
+            "margin_bottom": 0,
+            "additional_class": ""
+          },
+          "blocks": {}
+        }
+      },
+      "block_order": [
+        "text_G4M7mq",
+        "text_McMtXV",
+        "button_jgYTqb"
+      ],
+      "name": "t:quote",
+      "settings": {
+        "show_on_display": "desktop_and_mobile",
+        "color_scheme": "",
+        "wrap_in_card": false,
+        "color_scheme_card": "",
+        "section_width": "narrow",
+        "layout_type": "flex",
+        "layout_flex_direction_desktop": "column",
+        "layout_grid_columns_desktop": 3,
+        "layout_gap_desktop": 20,
+        "layout_wrap_desktop": "nowrap",
+        "layout_flex_justify_desktop": "center",
+        "layout_flex_align_items_desktop": "center",
+        "same_as_desktop": true,
+        "layout_flex_direction_mobile": "row",
+        "layout_gap_mobile": 20,
+        "layout_wrap_mobile": "nowrap",
+        "layout_flex_justify_mobile": "flex-start",
+        "layout_flex_align_items_mobile": "flex-start",
+        "layout_grid_columns_mobile": 1,
+        "padding_top": 60,
+        "padding_bottom": 60,
+        "margin_top": 0,
+        "margin_bottom": 0,
+        "anchor_id": "",
+        "additional_class": ""
+      }
+    },
+    "custom_section_NK3w8t": {
+      "type": "custom-section",
+      "blocks": {
+        "text_WCjBjh": {
+          "type": "text",
+          "name": "t:title",
+          "settings": {
+            "show_on_display": "desktop_and_mobile",
+            "text": "<h3>Questions fréquentes</h3>",
+            "text_style": "h3",
+            "paragraph_font_size": "normal",
+            "font_weight": 400,
+            "alignment": "center",
+            "alignment_mobile": "left",
+            "show_read_more": false,
+            "read_more_length": 50,
+            "read_more_text": "Voir plus",
+            "read_less_text": "Voir moins",
+            "truncate": false,
+            "truncate_length": 2,
+            "margin_top": 0,
+            "margin_bottom": 0,
+            "additional_class": ""
+          },
+          "blocks": {}
+        },
+        "accordions_RpDUTX": {
+          "type": "accordions",
+          "name": "t:accordions",
+          "settings": {
+            "show_on_display": "desktop_and_mobile",
+            "icon": "caret",
+            "accordion_padding": "small",
+            "dividers": true,
+            "additional_class": ""
+          },
+          "blocks": {
+            "accordion_YrVyWT": {
+              "type": "_accordion",
+              "settings": {
+                "show_on_display": "desktop_and_mobile",
+                "heading": "Politique de retour",
+                "heading_tag": "p",
+                "heading_style": "paragraph",
+                "open_by_default": true,
+                "icon": "none",
+                "icon_custom": "",
+                "additional_class": ""
+              },
+              "blocks": {
+                "text_UkdcFG": {
+                  "type": "text",
+                  "settings": {
+                    "show_on_display": "desktop_and_mobile",
+                    "text": "<p>Notre objectif est que chaque client soit totalement satisfait de son achat. Si ce n'est pas le cas, faites-le nous savoir et nous ferons de notre mieux pour trouver une solution avec vous.</p>",
+                    "text_style": "paragraph",
+                    "paragraph_font_size": "normal",
+                    "font_weight": 400,
+                    "alignment": "left",
+                    "alignment_mobile": "left",
+                    "show_read_more": false,
+                    "read_more_length": 50,
+                    "read_more_text": "Voir plus",
+                    "read_less_text": "Voir moins",
+                    "truncate": false,
+                    "truncate_length": 2,
+                    "margin_top": 0,
+                    "margin_bottom": 0,
+                    "additional_class": ""
+                  },
+                  "blocks": {}
+                }
+              },
+              "block_order": [
+                "text_UkdcFG"
+              ]
+            },
+            "accordion_EyWbXa": {
+              "type": "_accordion",
+              "settings": {
+                "show_on_display": "desktop_and_mobile",
+                "heading": "Livraison",
+                "heading_tag": "p",
+                "heading_style": "paragraph",
+                "open_by_default": false,
+                "icon": "none",
+                "icon_custom": "",
+                "additional_class": ""
+              },
+              "blocks": {
+                "text_Yi6PP4": {
+                  "type": "text",
+                  "settings": {
+                    "show_on_display": "desktop_and_mobile",
+                    "text": "<p>Nous travaillons rapidement pour envoyer votre commande dès que possible. Une fois votre commande expédiée, vous recevrez un email avec des informations supplémentaires. Les délais de livraison varient en fonction de votre emplacement.</p>",
+                    "text_style": "paragraph",
+                    "paragraph_font_size": "normal",
+                    "font_weight": 400,
+                    "alignment": "left",
+                    "alignment_mobile": "left",
+                    "show_read_more": false,
+                    "read_more_length": 50,
+                    "read_more_text": "Voir plus",
+                    "read_less_text": "Voir moins",
+                    "truncate": false,
+                    "truncate_length": 2,
+                    "margin_top": 0,
+                    "margin_bottom": 0,
+                    "additional_class": ""
+                  },
+                  "blocks": {}
+                }
+              },
+              "block_order": [
+                "text_Yi6PP4"
+              ]
+            },
+            "accordion_zU8z4X": {
+              "type": "_accordion",
+              "settings": {
+                "show_on_display": "desktop_and_mobile",
+                "heading": "Fabrication",
+                "heading_tag": "p",
+                "heading_style": "paragraph",
+                "open_by_default": false,
+                "icon": "none",
+                "icon_custom": "",
+                "additional_class": ""
+              },
+              "blocks": {
+                "text_6JTzBM": {
+                  "type": "text",
+                  "settings": {
+                    "show_on_display": "desktop_and_mobile",
+                    "text": "<p>Nos produits sont fabriqués localement et à l'international. Nous sélectionnons soigneusement nos partenaires de fabrication pour garantir des produits de haute qualité à un prix juste.</p>",
+                    "text_style": "paragraph",
+                    "paragraph_font_size": "normal",
+                    "font_weight": 400,
+                    "alignment": "left",
+                    "alignment_mobile": "left",
+                    "show_read_more": false,
+                    "read_more_length": 50,
+                    "read_more_text": "Voir plus",
+                    "read_less_text": "Voir moins",
+                    "truncate": false,
+                    "truncate_length": 2,
+                    "margin_top": 0,
+                    "margin_bottom": 0,
+                    "additional_class": ""
+                  },
+                  "blocks": {}
+                }
+              },
+              "block_order": [
+                "text_6JTzBM"
+              ]
+            },
+            "accordion_Eabhyd": {
+              "type": "_accordion",
+              "settings": {
+                "show_on_display": "desktop_and_mobile",
+                "heading": "Livraison",
+                "heading_tag": "p",
+                "heading_style": "paragraph",
+                "open_by_default": false,
+                "icon": "none",
+                "icon_custom": "",
+                "additional_class": ""
+              },
+              "blocks": {
+                "text_9Njihg": {
+                  "type": "text",
+                  "settings": {
+                    "show_on_display": "desktop_and_mobile",
+                    "text": "<p>Nous travaillons rapidement pour envoyer votre commande dès que possible. Une fois votre commande expédiée, vous recevrez un email avec des informations supplémentaires. Les délais de livraison varient en fonction de votre emplacement.</p>",
+                    "text_style": "paragraph",
+                    "paragraph_font_size": "normal",
+                    "font_weight": 400,
+                    "alignment": "left",
+                    "alignment_mobile": "left",
+                    "show_read_more": false,
+                    "read_more_length": 50,
+                    "read_more_text": "Voir plus",
+                    "read_less_text": "Voir moins",
+                    "truncate": false,
+                    "truncate_length": 2,
+                    "margin_top": 0,
+                    "margin_bottom": 0,
+                    "additional_class": ""
+                  },
+                  "blocks": {}
+                }
+              },
+              "block_order": [
+                "text_9Njihg"
+              ]
+            },
+            "accordion_KefnFk": {
+              "type": "_accordion",
+              "settings": {
+                "show_on_display": "desktop_and_mobile",
+                "heading": "Fabrication",
+                "heading_tag": "p",
+                "heading_style": "paragraph",
+                "open_by_default": false,
+                "icon": "none",
+                "icon_custom": "",
+                "additional_class": ""
+              },
+              "blocks": {
+                "text_MrCqrR": {
+                  "type": "text",
+                  "settings": {
+                    "show_on_display": "desktop_and_mobile",
+                    "text": "<p>Nos produits sont fabriqués localement et à l'international. Nous sélectionnons soigneusement nos partenaires de fabrication pour garantir des produits de haute qualité à un prix juste.</p>",
+                    "text_style": "paragraph",
+                    "paragraph_font_size": "normal",
+                    "font_weight": 400,
+                    "alignment": "left",
+                    "alignment_mobile": "left",
+                    "show_read_more": false,
+                    "read_more_length": 50,
+                    "read_more_text": "Voir plus",
+                    "read_less_text": "Voir moins",
+                    "truncate": false,
+                    "truncate_length": 2,
+                    "margin_top": 0,
+                    "margin_bottom": 0,
+                    "additional_class": ""
+                  },
+                  "blocks": {}
+                }
+              },
+              "block_order": [
+                "text_MrCqrR"
+              ]
+            }
+          },
+          "block_order": [
+            "accordion_YrVyWT",
+            "accordion_EyWbXa",
+            "accordion_zU8z4X",
+            "accordion_Eabhyd",
+            "accordion_KefnFk"
+          ]
+        }
+      },
+      "block_order": [
+        "text_WCjBjh",
+        "accordions_RpDUTX"
+      ],
+      "name": "t:faq_1",
+      "settings": {
+        "show_on_display": "desktop_and_mobile",
+        "color_scheme": "scheme-1",
+        "wrap_in_card": false,
+        "color_scheme_card": "",
+        "section_width": "narrow",
+        "layout_type": "flex",
+        "layout_flex_direction_desktop": "column",
+        "layout_grid_columns_desktop": 3,
+        "layout_gap_desktop": 20,
+        "layout_wrap_desktop": "nowrap",
+        "layout_flex_justify_desktop": "center",
+        "layout_flex_align_items_desktop": "center",
+        "same_as_desktop": true,
+        "layout_flex_direction_mobile": "row",
+        "layout_gap_mobile": 20,
+        "layout_wrap_mobile": "nowrap",
+        "layout_flex_justify_mobile": "flex-start",
+        "layout_flex_align_items_mobile": "flex-start",
+        "layout_grid_columns_mobile": 1,
+        "padding_top": 60,
+        "padding_bottom": 60,
+        "margin_top": 0,
+        "margin_bottom": 0,
+        "anchor_id": "",
+        "additional_class": ""
+      }
+    },
+    "economies_repas_ECP9Ae": {
+      "type": "economies-repas",
+      "blocks": {
+        "stat_Bg96BK": {
+          "type": "stat",
+          "settings": {
+            "value": "10€",
+            "main_line": "par repas en moyenne",
+            "sub_line": "dépensés à l’extérieur"
+          }
+        },
+        "stat_xWNYgx": {
+          "type": "stat",
+          "settings": {
+            "value": "50€",
+            "main_line": "par semaine de travail",
+            "sub_line": "sur le repas du midi"
+          }
+        },
+        "stat_kjcfyz": {
+          "type": "stat",
+          "settings": {
+            "value": "200€+",
+            "main_line": "dépensés chaque mois",
+            "sub_line": "uniquement pour le midi"
+          }
+        }
+      },
+      "block_order": [
+        "stat_Bg96BK",
+        "stat_xWNYgx",
+        "stat_kjcfyz"
+      ],
+      "name": "Économies repas",
+      "settings": {
+        "badge_text": "ÉCONOMIES AU QUOTIDIEN",
+        "title_line_1": "Le repas du midi coûte souvent",
+        "title_line_2": "plus qu’on ne le pense.",
+        "subtitle": "Préparer son repas à la maison permet de mieux contrôler son budget et son alimentation, sans compliquer le transport du midi.",
+        "label": "UNE SOLUTION SIMPLE",
+        "content_title": "Une alternative simple au quotidien.",
+        "benefit_1": "Garde les aliments au frais plus longtemps",
+        "benefit_2": "Pratique et léger au quotidien",
+        "benefit_3": "Économique et écologique",
+        "button_label": "Découvrir les sacs isothermes",
+        "button_link": "",
+        "transition_text": "Découvrez la collection juste en dessous !"
+      }
+    }
+  },
+  "order": [
+    "image_banner_VXNP89",
+    "custom_section_YL63mb",
+    "collection_featured_JXRpw3",
+    "custom_section_TrizBg",
+    "custom_section_wxUWmx",
+    "reviews_rXFabc",
+    "custom_section_LYUmfE",
+    "custom_section_NK3w8t",
+    "economies_repas_ECP9Ae"
+  ]
+}

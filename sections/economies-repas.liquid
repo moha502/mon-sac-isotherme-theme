@@ -306,6 +306,69 @@
       max-height: 10rem;
     }
   }
+  /* Carte statistiques plus premium */
+#{{ section_id }} .economies-repas__stats {
+  max-width: 96rem;
+  margin: 1.2rem auto 0 !important;
+  background: rgb(var(--color-background)) !important;
+  border: 1px solid rgba(var(--color-foreground), .08) !important;
+  border-radius: 1.6rem !important;
+  box-shadow: 0 10px 28px rgba(var(--color-shadow), .045) !important;
+}
+
+/* Bloc solution simple plus proche de l’illustration */
+#{{ section_id }} .economies-repas__benefits {
+  display: grid !important;
+  grid-template-columns: repeat(3, minmax(0, 1fr)) !important;
+  gap: .8rem !important;
+  margin-top: .9rem !important;
+}
+
+#{{ section_id }} .economies-repas__benefits li {
+  display: grid !important;
+  grid-template-columns: auto 1fr !important;
+  align-items: center !important;
+  gap: .5rem !important;
+  font-size: .82rem !important;
+  line-height: 1.2 !important;
+}
+
+#{{ section_id }} .economies-repas__benefits li::before {
+  width: 2rem !important;
+  height: 2rem !important;
+  border-radius: 999px !important;
+  display: grid !important;
+  place-items: center !important;
+  background: color-mix(in srgb, var(--accent) 12%, transparent) !important;
+  color: var(--accent) !important;
+  font-size: 1rem !important;
+  line-height: 1 !important;
+}
+
+#{{ section_id }} .economies-repas__benefits li:nth-child(1)::before {
+  content: "❄" !important;
+}
+
+#{{ section_id }} .economies-repas__benefits li:nth-child(2)::before {
+  content: "✓" !important;
+}
+
+#{{ section_id }} .economies-repas__benefits li:nth-child(3)::before {
+  content: "€" !important;
+}
+
+/* Transition vers la collection plus visible */
+#{{ section_id }} .economies-repas__arrow-wrap {
+  width: 3.8rem !important;
+  height: 3.8rem !important;
+  font-size: 1.45rem !important;
+  box-shadow: 0 8px 20px rgba(var(--color-shadow), .08) !important;
+}
+
+#{{ section_id }} .economies-repas__transition p {
+  font-size: 1rem !important;
+  font-weight: 600 !important;
+}
 </style>
 
 {% schema %}

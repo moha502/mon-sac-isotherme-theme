@@ -197,81 +197,121 @@
     #{{ section_id }} .economies-repas__lifestyle { grid-template-columns: 1fr; padding: 2rem; }
     #{{ section_id }} .economies-repas__subtitle { font-size: 1.8rem; }
   }
- #{{ section_id }} .economies-repas__badge {
-  font-size: 1rem !important;
-  padding: .45rem 1.2rem !important;
-  margin-bottom: .8rem !important;
+#{{ section_id }} {
+  padding-top: 1rem !important;
+  padding-bottom: 1rem !important;
+  overflow: visible !important;
+}
+
+#{{ section_id }} .page-width {
+  max-width: 98rem !important;
+}
+
+#{{ section_id }} .economies-repas__badge {
+  font-size: .8rem !important;
+  padding: .3rem .8rem !important;
+  margin-bottom: .45rem !important;
 }
 
 #{{ section_id }} .economies-repas__title {
-  font-size: clamp(3rem, 4.2vw, 5rem) !important;
+  font-size: clamp(2rem, 2.8vw, 3.4rem) !important;
   line-height: 1.05 !important;
 }
 
 #{{ section_id }} .economies-repas__subtitle {
-  font-size: 1.35rem !important;
-  max-width: 70rem !important;
-  margin-top: 1rem !important;
+  font-size: .95rem !important;
+  max-width: 52rem !important;
+  margin-top: .5rem !important;
+  line-height: 1.25 !important;
 }
 
 #{{ section_id }} .economies-repas__stats {
-  margin-top: 2.2rem !important;
+  margin-top: 1.1rem !important;
 }
 
 #{{ section_id }} .economies-repas__stat {
-  padding: 1.3rem 1rem !important;
+  padding: .65rem .5rem !important;
 }
 
 #{{ section_id }} .economies-repas__stat-value {
-  font-size: clamp(3rem, 3.2vw, 4.5rem) !important;
+  font-size: clamp(2rem, 2.2vw, 2.8rem) !important;
+}
+
+#{{ section_id }} .economies-repas__stat-value::after {
+  width: 2rem !important;
+  height: .22rem !important;
+  margin: .25rem auto .35rem !important;
 }
 
 #{{ section_id }} .economies-repas__stat-main {
-  font-size: 1.25rem !important;
+  font-size: .85rem !important;
+  line-height: 1.15 !important;
 }
 
 #{{ section_id }} .economies-repas__stat-sub {
-  font-size: 1rem !important;
+  font-size: .72rem !important;
+  margin-top: .15rem !important;
 }
 
 #{{ section_id }} .economies-repas__lifestyle {
-  max-width: 108rem !important;
-  margin: 2rem auto 0 !important;
-  padding: 1.8rem 2.4rem !important;
- min-height: unset !important;
-max-height: unset !important;
-  grid-template-columns: 1fr 1fr !important;
-  gap: 2.4rem !important;
+  max-width: 86rem !important;
+  margin: 1rem auto 0 !important;
+  padding: 1rem 1.4rem !important;
+  min-height: 0 !important;
+  max-height: none !important;
+  grid-template-columns: .9fr 1fr !important;
+  gap: 1.4rem !important;
+  border-radius: 1.4rem !important;
   overflow: hidden !important;
 }
 
 #{{ section_id }} .economies-repas__media {
-  height: 24rem !important;
-  display: flex !important;
-  align-items: center !important;
-  justify-content: center !important;
+  height: 13rem !important;
+  max-height: 13rem !important;
 }
 
 #{{ section_id }} .economies-repas__image {
-  height: 100% !important;
-  max-height: 24rem !important;
+  height: 13rem !important;
+  max-height: 13rem !important;
   width: 100% !important;
   object-fit: contain !important;
 }
 
+#{{ section_id }} .economies-repas__label {
+  font-size: .75rem !important;
+  margin-bottom: .3rem !important;
+}
+
 #{{ section_id }} .economies-repas__content-title {
-  font-size: clamp(2rem, 2.4vw, 3rem) !important;
+  font-size: clamp(1.3rem, 1.6vw, 2rem) !important;
+  margin-bottom: .6rem !important;
+  line-height: 1.1 !important;
+}
+
+#{{ section_id }} .economies-repas__benefits {
+  gap: .35rem !important;
 }
 
 #{{ section_id }} .economies-repas__benefits li {
-  font-size: 1.15rem !important;
+  font-size: .8rem !important;
+  gap: .35rem !important;
 }
-#{{ section_id }} {
-  transform: scale(0.78);
-  transform-origin: top center;
-  margin-bottom: -18rem;
-  margin-top: -4rem;
+
+#{{ section_id }} .economies-repas__cta {
+  margin-top: .7rem !important;
 }
+
+#{{ section_id }} .economies-repas__transition {
+  margin-top: .7rem !important;
+  padding-top: .6rem !important;
+}
+
+#{{ section_id }} .economies-repas__arrow-wrap {
+  width: 2.8rem !important;
+  height: 2.8rem !important;
+  font-size: 1.1rem !important;
+}
+
 </style>
 
 {% schema %}

@@ -67,35 +67,35 @@
 <style>
   #{{ section_id }} {
     --accent: #5B6F5F;
-    padding: 2rem 0 1.5rem;
+    padding: 1.6rem 0 1.2rem;
     background: #f8f9f7;
   }
 
   #{{ section_id }} .page-width {
-    max-width: 112rem;
+    max-width: 96rem;
   }
 
   #{{ section_id }} .economies-repas__intro {
     text-align: center;
-    max-width: 82rem;
+    max-width: 72rem;
     margin: 0 auto;
   }
 
   #{{ section_id }} .economies-repas__badge {
     display: inline-flex;
-    margin-bottom: .8rem;
-    padding: .45rem 1.25rem;
+    margin-bottom: .65rem;
+    padding: .38rem 1rem;
     border-radius: 999px;
     background: rgba(91, 111, 95, .12);
     color: var(--accent);
-    font-size: 1rem;
+    font-size: .9rem;
     font-weight: 700;
     letter-spacing: .07em;
   }
 
   #{{ section_id }} .economies-repas__title {
     margin: 0;
-    font-size: clamp(3rem, 4vw, 5rem);
+    font-size: clamp(2.4rem, 3vw, 4rem);
     line-height: 1.05;
     letter-spacing: -.03em;
     color: #111;
@@ -107,30 +107,29 @@
   }
 
   #{{ section_id }} .economies-repas__subtitle {
-    margin: 1rem auto 0;
-    max-width: 66rem;
-    font-size: 1.25rem;
+    margin: .75rem auto 0;
+    max-width: 58rem;
+    font-size: 1.05rem;
     line-height: 1.35;
     color: #222;
   }
 
   #{{ section_id }} .economies-repas__stats {
-    max-width: 94rem;
-    margin: 2rem auto 0;
-    padding: 0;
+    max-width: 82rem;
+    margin: 1.5rem auto 0;
     display: grid;
     grid-template-columns: repeat(3, 1fr);
     background: #fff;
     border: 1px solid rgba(17,17,17,.08);
-    border-radius: 1.8rem;
-    box-shadow: 0 18px 45px rgba(17,17,17,.07);
+    border-radius: 1.5rem;
+    box-shadow: 0 14px 34px rgba(17,17,17,.06);
     overflow: hidden;
   }
 
   #{{ section_id }} .economies-repas__stat {
     position: relative;
     text-align: center;
-    padding: 2rem 1.4rem 1.8rem;
+    padding: 1.45rem 1rem 1.3rem;
   }
 
   #{{ section_id }} .economies-repas__stat:not(:last-child)::after {
@@ -145,7 +144,7 @@
 
   #{{ section_id }} .economies-repas__stat-value {
     margin: 0;
-    font-size: clamp(3.6rem, 3.8vw, 5rem);
+    font-size: clamp(2.8rem, 3vw, 4rem);
     line-height: 1;
     font-weight: 800;
     color: #111;
@@ -154,34 +153,34 @@
   #{{ section_id }} .economies-repas__stat-value::after {
     content: "";
     display: block;
-    width: 3rem;
-    height: .32rem;
-    margin: .55rem auto .75rem;
+    width: 2.5rem;
+    height: .26rem;
+    margin: .45rem auto .6rem;
     background: var(--accent);
     border-radius: 999px;
   }
 
   #{{ section_id }} .economies-repas__stat-main {
     margin: 0;
-    font-size: 1.35rem;
+    font-size: 1.05rem;
     font-weight: 700;
     line-height: 1.2;
     color: #111;
   }
 
   #{{ section_id }} .economies-repas__stat-sub {
-    margin: .35rem 0 0;
-    font-size: 1rem;
+    margin: .25rem 0 0;
+    font-size: .82rem;
     color: rgba(17,17,17,.65);
   }
 
   #{{ section_id }} .economies-repas__lifestyle {
-    max-width: 94rem;
-    margin: 1.7rem auto 0;
+    max-width: 82rem;
+    margin: 1.4rem auto 0;
     padding: 0;
     display: grid;
     grid-template-columns: 1.05fr 1fr;
-    gap: 3rem;
+    gap: 2.2rem;
     align-items: center;
     background: transparent;
     border: 0;
@@ -189,8 +188,8 @@
   }
 
   #{{ section_id }} .economies-repas__media {
-    height: 21rem;
-    border-radius: 1.8rem;
+    height: 17rem;
+    border-radius: 1.5rem;
     background: rgba(91,111,95,.06);
     overflow: hidden;
     display: flex;
@@ -206,8 +205,8 @@
   }
 
   #{{ section_id }} .economies-repas__label {
-    margin: 0 0 .6rem;
-    font-size: 1rem;
+    margin: 0 0 .45rem;
+    font-size: .85rem;
     font-weight: 700;
     letter-spacing: .07em;
     color: var(--accent);
@@ -215,8 +214,8 @@
   }
 
   #{{ section_id }} .economies-repas__content-title {
-    margin: 0 0 1.3rem;
-    font-size: clamp(2.3rem, 2.8vw, 3.5rem);
+    margin: 0 0 1rem;
+    font-size: clamp(1.8rem, 2vw, 2.8rem);
     line-height: 1.08;
     color: #111;
   }
@@ -227,28 +226,28 @@
     list-style: none;
     display: grid;
     grid-template-columns: repeat(3, 1fr);
-    gap: 1rem;
+    gap: .75rem;
   }
 
   #{{ section_id }} .economies-repas__benefits li {
     display: grid;
     grid-template-columns: auto 1fr;
-    gap: .6rem;
+    gap: .45rem;
     align-items: center;
-    font-size: .98rem;
+    font-size: .78rem;
     line-height: 1.2;
     color: #111;
   }
 
   #{{ section_id }} .economies-repas__benefits li::before {
-    width: 2.6rem;
-    height: 2.6rem;
+    width: 2.2rem;
+    height: 2.2rem;
     display: grid;
     place-items: center;
     border-radius: 999px;
     background: rgba(91,111,95,.12);
     color: var(--accent);
-    font-size: 1.25rem;
+    font-size: 1.05rem;
   }
 
   #{{ section_id }} .economies-repas__benefits li:nth-child(1)::before { content: "❄"; }
@@ -260,36 +259,36 @@
   }
 
   #{{ section_id }} .economies-repas__transition {
-    margin-top: 1.4rem;
+    margin-top: 1rem;
     text-align: center;
     position: relative;
-    padding-top: 1.1rem;
+    padding-top: .9rem;
   }
 
   #{{ section_id }} .economies-repas__curve {
     position: absolute;
     top: 0;
-    left: -8rem;
-    right: -8rem;
+    left: -6rem;
+    right: -6rem;
     border-top: 1px dashed rgba(91,111,95,.55);
   }
 
   #{{ section_id }} .economies-repas__arrow-wrap {
-    width: 4.4rem;
-    height: 4.4rem;
-    margin: 0 auto .35rem;
+    width: 3.6rem;
+    height: 3.6rem;
+    margin: 0 auto .3rem;
     display: grid;
     place-items: center;
     border-radius: 999px;
     background: rgba(91,111,95,.12);
     color: var(--accent);
-    font-size: 1.7rem;
+    font-size: 1.4rem;
   }
 
   #{{ section_id }} .economies-repas__transition p {
     margin: 0;
     color: var(--accent);
-    font-size: 1.05rem;
+    font-size: .95rem;
     font-weight: 600;
   }
 
@@ -305,7 +304,7 @@
     }
 
     #{{ section_id }} .economies-repas__media {
-      height: 18rem;
+      height: 15rem;
     }
   }
 </style>

@@ -369,6 +369,56 @@
   font-size: 1rem !important;
   font-weight: 600 !important;
 }
+/* Stats en vraie carte premium */
+#{{ section_id }} .economies-repas__stats {
+  max-width: 96rem !important;
+  margin: 1.5rem auto 0 !important;
+  background: rgb(var(--color-background)) !important;
+  border: 1px solid rgba(var(--color-foreground), .1) !important;
+  border-radius: 1.8rem !important;
+  box-shadow: 0 12px 32px rgba(var(--color-shadow), .06) !important;
+}
+
+/* Lifestyle moins “carte”, plus intégré comme l’illustration */
+#{{ section_id }} .economies-repas__lifestyle {
+  max-width: 96rem !important;
+  margin: 1.4rem auto 0 !important;
+  padding: 0 !important;
+  background: transparent !important;
+  border: 0 !important;
+  box-shadow: none !important;
+  border-radius: 0 !important;
+  grid-template-columns: 1.05fr 1fr !important;
+  gap: 2.2rem !important;
+}
+
+/* Image plus grande, mais sans gros bloc autour */
+#{{ section_id }} .economies-repas__media {
+  height: 18rem !important;
+  max-height: 18rem !important;
+  background: color-mix(in srgb, var(--accent) 5%, var(--color-background)) !important;
+  border-radius: 1.6rem !important;
+}
+
+#{{ section_id }} .economies-repas__image {
+  height: 18rem !important;
+  max-height: 18rem !important;
+  object-fit: contain !important;
+}
+
+/* Texte solution simple plus respirant */
+#{{ section_id }} .economies-repas__content {
+  align-self: center !important;
+}
+
+#{{ section_id }} .economies-repas__benefits {
+  grid-template-columns: repeat(3, minmax(0, 1fr)) !important;
+  gap: .9rem !important;
+}
+
+#{{ section_id }} .economies-repas__cta {
+  margin-top: 1rem !important;
+}
 </style>
 
 {% schema %}

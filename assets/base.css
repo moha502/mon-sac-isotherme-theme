@@ -1074,7 +1074,9 @@ dropdown-component {
   grid-template-columns: repeat(3, 1fr) !important;
   gap: 0 !important;
 }
-#shopify-section-template--29789973643589__collection_featured_JXRpw3 h3:first-of-type {
+.featured-collection h3,
+.collection-featured h3,
+.collection__title h3 {
   text-align: center !important;
   font-size: clamp(2.4rem, 3vw, 3.8rem) !important;
   font-weight: 700 !important;
@@ -1083,7 +1085,9 @@ dropdown-component {
   position: relative !important;
 }
 
-#shopify-section-template--29789973643589__collection_featured_JXRpw3 h3:first-of-type::after {
+.featured-collection h3::after,
+.collection-featured h3::after,
+.collection__title h3::after {
   content: "";
   display: block;
   width: 3.2rem;

@@ -423,11 +423,11 @@
                   "name": "t:title",
                   "settings": {
                     "show_on_display": "desktop_and_mobile",
-                    "text": "<p>Les sacs isothermes</p>",
-                    "text_style": "h3",
+                    "text": "<p>Les sacs isothermes</p><p>              </p>",
+                    "text_style": "h2",
                     "paragraph_font_size": "normal",
                     "font_weight": 400,
-                    "alignment": "left",
+                    "alignment": "center",
                     "alignment_mobile": "left",
                     "show_read_more": false,
                     "read_more_length": 200,
@@ -437,7 +437,7 @@
                     "truncate_length": 2,
                     "margin_top": 0,
                     "margin_bottom": 0,
-                    "additional_class": ""
+                    "additional_class": "text-with-green-bar"
                   },
                   "blocks": {}
                 },
@@ -644,6 +644,7 @@
       "block_order": [
         "group_9NwHBp"
       ],
+      "custom_css": [],
       "name": "t:collection_featured",
       "settings": {
         "show_on_display": "desktop_and_mobile",

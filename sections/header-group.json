@@ -207,6 +207,9 @@
           "block_order": []
         }
       },
+      "custom_css": [
+        ".header__logo img,.header__heading-logo {max-width: 180px !important; width: 180px !important; height: auto !important;}"
+      ],
       "settings": {
         "color_scheme": "scheme-1",
         "header_layout": "logo_left",

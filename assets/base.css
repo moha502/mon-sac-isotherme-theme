@@ -1074,9 +1074,8 @@ dropdown-component {
   grid-template-columns: repeat(3, 1fr) !important;
   gap: 0 !important;
 }
-.featured-collection h2,
-.collection-featured h2,
-.collection__title h2 {
+.section-template--29789973643589__collection_featured_JXRpw3 .section__heading,
+.section-template--29789973643589__collection_featured_JXRpw3 .section-header h2 {
   text-align: center !important;
   font-size: clamp(2.4rem, 3vw, 3.8rem) !important;
   font-weight: 700 !important;
@@ -1085,9 +1084,8 @@ dropdown-component {
   position: relative !important;
 }
 
-.featured-collection h2::after,
-.collection-featured h2::after,
-.collection__title h2::after {
+.section-template--29789973643589__collection_featured_JXRpw3 .section__heading::after,
+.section-template--29789973643589__collection_featured_JXRpw3 .section-header h2::after {
   content: "";
   display: block;
   width: 3.2rem;

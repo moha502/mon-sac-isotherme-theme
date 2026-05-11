@@ -1074,3 +1074,25 @@ dropdown-component {
   grid-template-columns: repeat(3, 1fr) !important;
   gap: 0 !important;
 }
+.featured-collection h2,
+.collection-featured h2,
+.collection__title h2 {
+  text-align: center !important;
+  font-size: clamp(2.4rem, 3vw, 3.8rem) !important;
+  font-weight: 700 !important;
+  letter-spacing: -0.03em !important;
+  margin-bottom: 2.2rem !important;
+  position: relative !important;
+}
+
+.featured-collection h2::after,
+.collection-featured h2::after,
+.collection__title h2::after {
+  content: "";
+  display: block;
+  width: 3.2rem;
+  height: 0.25rem;
+  background: #5B6F5F;
+  border-radius: 999px;
+  margin: 1rem auto 0;
+}

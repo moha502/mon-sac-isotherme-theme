@@ -509,8 +509,8 @@
               "name": "t:product_card_gallery",
               "settings": {
                 "show_on_display": "desktop_and_mobile",
-                "show_slider": true,
-                "media_rounded": false,
+                "show_slider": false,
+                "media_rounded": true,
                 "show_badges": true,
                 "media_ratio": "1 / 1",
                 "additional_class": ""
@@ -614,7 +614,7 @@
                     "link": "",
                     "open_in_new_tab": false,
                     "label": "Ajouter au panier",
-                    "button_style": "secondary",
+                    "button_style": "primary",
                     "button_shape": "full-width",
                     "icon": "none",
                     "icon_custom": "",

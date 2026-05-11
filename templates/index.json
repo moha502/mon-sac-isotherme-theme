@@ -644,7 +644,9 @@
       "block_order": [
         "group_9NwHBp"
       ],
-      "custom_css": [],
+      "custom_css": [
+        ".text-with-green-bar {transform: translateX(0%); border-bottom: 0.18rem solid #5b6f5f; padding-bottom: 0.5rem; width: fit-content;}"
+      ],
       "name": "t:collection_featured",
       "settings": {
         "show_on_display": "desktop_and_mobile",

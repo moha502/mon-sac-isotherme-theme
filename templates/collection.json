@@ -389,7 +389,7 @@
               "name": "t:product_card_quick_add",
               "settings": {
                 "show_on_display": "desktop_and_mobile",
-                "button_style": "secondary",
+                "button_style": "primary",
                 "button_shape": "default",
                 "align_quick_add_together": true,
                 "show_product_media_gallery": false,

@@ -17,8 +17,9 @@
           "name": "t:image_banner",
           "settings": {
             "media_type": "image",
-            "image": "shopify://shop_images/ChatGPT_Image_12_mai_2026_16_40_08.png",
+            "image": "shopify://shop_images/ChatGPT_Image_13_mai_2026_00_29_52.png",
             "source": "uploaded",
+            "video_url": "",
             "color_scheme": "scheme-3",
             "banner_height": "medium",
             "layout_justify": "center",
@@ -71,7 +72,7 @@
                   "name": "t:text",
                   "settings": {
                     "show_on_display": "desktop_and_mobile",
-                    "text": "<p>Sac isotherme repas</p>",
+                    "text": "<p>Pain de glace</p>",
                     "text_style": "h2",
                     "paragraph_font_size": "normal",
                     "font_weight": 400,
@@ -137,7 +138,7 @@
                         "icon_custom": "",
                         "icon_size": 22,
                         "icon_position": "start",
-                        "text": "<p>Transport facile au quotidien</p>",
+                        "text": "<p>Garde les boissons et les repas au frais plus longtemps</p>",
                         "text_style": "paragraph",
                         "font_weight": 500,
                         "margin_top": 0,
@@ -161,7 +162,7 @@
                         "icon_custom": "",
                         "icon_size": 22,
                         "icon_position": "start",
-                        "text": "<p>Format pratique pour le travail ou les cours</p>",
+                        "text": "<p>Aide à maintenir une température stable pendant plusieurs heures</p>",
                         "text_style": "paragraph",
                         "font_weight": 500,
                         "margin_top": 0,
@@ -185,7 +186,7 @@
                         "icon_custom": "",
                         "icon_size": 22,
                         "icon_position": "start",
-                        "text": "<p>Idéal pour limiter les dépenses du midi</p>",
+                        "text": "<p>Réutilisable et simple à placer dans un sac isotherme ou une glacière</p>",
                         "text_style": "paragraph",
                         "font_weight": 500,
                         "margin_top": 0,
@@ -241,7 +242,7 @@
       "name": "t:custom_liquid",
       "settings": {
         "show_on_display": "desktop_and_mobile",
-        "custom_liquid": "<div class=\"collection-intro-text\">\n  <p>\n    Découvrir une sélection de sacs isothermes repas pensés pour transporter facilement un déjeuner maison, au travail, en cours ou lors des déplacements du quotidien.\n  </p>\n</div>\n\n<style>\n.collection-intro-text {\n  max-width: 1180px;\n  margin: 0 auto;\n  padding: 14px 20px 14px;\n  text-align: left;\n}\n\n.collection-intro-text p {\n  max-width: 820px;\n  margin: 0;\n  font-size: 18px;\n  line-height: 1.55;\n  color: #1f1f1f;\n  font-weight: 400;\n  letter-spacing: -0.2px;\n}\n\n@media screen and (max-width: 749px) {\n  .collection-intro-text {\n    padding: 12px 16px 10px;\n  }\n\n  .collection-intro-text p {\n    font-size: 15px;\n    line-height: 1.5;\n  }\n}\n</style>",
+        "custom_liquid": "<div class=\"collection-intro-text\">\n  <p>\n    Découvrez une sélection de pains de glace, un  accumulateur de froid permettant de prolonger la fraîcheur des repas, boissons et encas dans un sac isotherme au quotidien.\n  </p>\n</div>\n\n<style>\n.collection-intro-text {\n  max-width: 1180px;\n  margin: 0 auto;\n  padding: 14px 20px 14px;\n  text-align: left;\n}\n\n.collection-intro-text p {\n  max-width: 820px;\n  margin: 0;\n  font-size: 18px;\n  line-height: 1.55;\n  color: #1f1f1f;\n  font-weight: 400;\n  letter-spacing: -0.2px;\n}\n\n@media screen and (max-width: 749px) {\n  .collection-intro-text {\n    padding: 12px 16px 10px;\n  }\n\n  .collection-intro-text p {\n    font-size: 15px;\n    line-height: 1.5;\n  }\n}\n</style>",
         "margin_top": 0,
         "margin_bottom": 0,
         "additional_class": "reduce-padding-aggressive increase-font-size"
@@ -417,6 +418,45 @@
         "margin_top": 0,
         "margin_bottom": 0
       }
+    },
+    "17786254015c5c68fc": {
+      "type": "_blocks",
+      "blocks": {
+        "ai_gen_block_0aa1130_UKxmwc": {
+          "type": "ai_gen_block_0aa1130",
+          "settings": {
+            "show_meta_description": false,
+            "content_max_width": 900,
+            "left_offset": 20,
+            "left_offset_mobile": 10,
+            "text_alignment": "left",
+            "padding_top": 5,
+            "padding_bottom": 5,
+            "padding_horizontal": 0,
+            "padding_top_mobile": 5,
+            "padding_bottom_mobile": 5,
+            "padding_horizontal_mobile": 0,
+            "meta_spacing": 5,
+            "border_radius": 0,
+            "background_color": "#fdfdfc",
+            "meta_size": 13,
+            "meta_size_mobile": 12,
+            "meta_color": "#556b5d",
+            "text_size": 13,
+            "text_size_mobile": 12,
+            "text_color": "#1a1a1a",
+            "h2_size": 21,
+            "h2_size_mobile": 18,
+            "h3_size": 14,
+            "h3_size_mobile": 13
+          },
+          "blocks": {}
+        }
+      },
+      "block_order": [
+        "ai_gen_block_0aa1130_UKxmwc"
+      ],
+      "settings": {}
     },
     "17775694987aff6fb0": {
       "type": "_blocks",
@@ -666,6 +706,7 @@
     "image_banner_jkCc3P",
     "custom_code_QJdAUp",
     "main",
+    "17786254015c5c68fc",
     "17775694987aff6fb0",
     "reviews_YNkHHY"
   ]

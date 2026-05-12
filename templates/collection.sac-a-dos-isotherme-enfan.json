@@ -1,0 +1,672 @@
+/*
+ * ------------------------------------------------------------
+ * IMPORTANT: The contents of this file are auto-generated.
+ *
+ * This file may be updated by the Shopify admin theme editor
+ * or related systems. Please exercise caution as any changes
+ * made to this file may be overwritten.
+ * ------------------------------------------------------------
+ */
+{
+  "sections": {
+    "image_banner_jkCc3P": {
+      "type": "image-banner",
+      "blocks": {
+        "image_banner_mTywtm": {
+          "type": "_image-banner",
+          "name": "t:image_banner",
+          "settings": {
+            "media_type": "image",
+            "image": "shopify://shop_images/ChatGPT_Image_12_mai_2026_16_40_08.png",
+            "source": "uploaded",
+            "color_scheme": "scheme-3",
+            "banner_height": "medium",
+            "layout_justify": "center",
+            "layout_align_items": "flex-start",
+            "same_as_desktop": true,
+            "banner_height_mobile": "medium",
+            "layout_justify_mobile": "center",
+            "layout_align_items_mobile": "flex-start",
+            "image_filter_opacity": 15,
+            "image_filter_color": "#000000",
+            "padding_horizontal": 0,
+            "padding_vertical": 40
+          },
+          "blocks": {
+            "group_wrKrNa": {
+              "type": "group",
+              "name": "t:group",
+              "settings": {
+                "show_on_display": "desktop_and_mobile",
+                "wrap_in_card": false,
+                "card_link": "",
+                "color_scheme": "",
+                "show_card_border": false,
+                "layout_type": "flex",
+                "width_desktop": 60,
+                "layout_direction_desktop": "column",
+                "layout_grid_columns_desktop": 3,
+                "layout_gap_desktop": 10,
+                "layout_wrap_desktop": "nowrap",
+                "layout_justify_desktop": "flex-start",
+                "layout_align_items_desktop": "flex-start",
+                "same_as_desktop": false,
+                "width_mobile": 100,
+                "layout_direction_mobile": "column",
+                "layout_grid_columns_mobile": 1,
+                "layout_gap_mobile": 10,
+                "layout_wrap_mobile": "nowrap",
+                "layout_justify_mobile": "flex-start",
+                "layout_align_items_mobile": "flex-start",
+                "use_global_container_padding": true,
+                "padding_horizontal": 30,
+                "padding_vertical": 30,
+                "margin_top": 10,
+                "margin_bottom": 10,
+                "additional_class": ""
+              },
+              "blocks": {
+                "text_jifPxJ": {
+                  "type": "text",
+                  "name": "t:text",
+                  "settings": {
+                    "show_on_display": "desktop_and_mobile",
+                    "text": "<p>Sac isotherme repas</p>",
+                    "text_style": "h2",
+                    "paragraph_font_size": "normal",
+                    "font_weight": 400,
+                    "alignment": "left",
+                    "alignment_mobile": "left",
+                    "show_read_more": false,
+                    "read_more_length": 50,
+                    "read_more_text": "Voir plus",
+                    "read_less_text": "Voir moins",
+                    "truncate": false,
+                    "truncate_length": 2,
+                    "margin_top": 0,
+                    "margin_bottom": 0,
+                    "additional_class": ""
+                  },
+                  "blocks": {}
+                },
+                "group_ULziQa": {
+                  "type": "group",
+                  "name": "t:icons_and_text_inline",
+                  "settings": {
+                    "show_on_display": "desktop_and_mobile",
+                    "wrap_in_card": false,
+                    "card_link": "",
+                    "color_scheme": "",
+                    "show_card_border": false,
+                    "layout_type": "flex",
+                    "width_desktop": 100,
+                    "layout_direction_desktop": "column",
+                    "layout_grid_columns_desktop": 3,
+                    "layout_gap_desktop": 10,
+                    "layout_wrap_desktop": "nowrap",
+                    "layout_justify_desktop": "flex-start",
+                    "layout_align_items_desktop": "flex-start",
+                    "same_as_desktop": true,
+                    "width_mobile": 100,
+                    "layout_direction_mobile": "column",
+                    "layout_grid_columns_mobile": 1,
+                    "layout_gap_mobile": 10,
+                    "layout_wrap_mobile": "nowrap",
+                    "layout_justify_mobile": "flex-start",
+                    "layout_align_items_mobile": "flex-start",
+                    "use_global_container_padding": true,
+                    "padding_horizontal": 30,
+                    "padding_vertical": 30,
+                    "margin_top": 0,
+                    "margin_bottom": 0,
+                    "additional_class": ""
+                  },
+                  "blocks": {
+                    "icon_with_text_6exbUm": {
+                      "type": "icon-with-text",
+                      "name": "t:icon_with_text",
+                      "settings": {
+                        "show_on_display": "desktop_and_mobile",
+                        "layout_direction_desktop": "row",
+                        "layout_gap_desktop": 5,
+                        "same_as_desktop": true,
+                        "layout_direction_mobile": "column",
+                        "layout_gap_mobile": 10,
+                        "icon_type": "icon",
+                        "icon": "verified",
+                        "icon_custom": "",
+                        "icon_size": 22,
+                        "icon_position": "start",
+                        "text": "<p>Transport facile au quotidien</p>",
+                        "text_style": "paragraph",
+                        "font_weight": 500,
+                        "margin_top": 0,
+                        "margin_bottom": 0,
+                        "additional_class": ""
+                      },
+                      "blocks": {}
+                    },
+                    "icon_with_text_yrcRCk": {
+                      "type": "icon-with-text",
+                      "name": "t:icon_with_text",
+                      "settings": {
+                        "show_on_display": "desktop_and_mobile",
+                        "layout_direction_desktop": "row",
+                        "layout_gap_desktop": 5,
+                        "same_as_desktop": true,
+                        "layout_direction_mobile": "column",
+                        "layout_gap_mobile": 10,
+                        "icon_type": "icon",
+                        "icon": "verified",
+                        "icon_custom": "",
+                        "icon_size": 22,
+                        "icon_position": "start",
+                        "text": "<p>Format pratique pour le travail ou les cours</p>",
+                        "text_style": "paragraph",
+                        "font_weight": 500,
+                        "margin_top": 0,
+                        "margin_bottom": 0,
+                        "additional_class": ""
+                      },
+                      "blocks": {}
+                    },
+                    "icon_with_text_ti7r9t": {
+                      "type": "icon-with-text",
+                      "name": "t:icon_with_text",
+                      "settings": {
+                        "show_on_display": "desktop_and_mobile",
+                        "layout_direction_desktop": "row",
+                        "layout_gap_desktop": 5,
+                        "same_as_desktop": true,
+                        "layout_direction_mobile": "column",
+                        "layout_gap_mobile": 10,
+                        "icon_type": "icon",
+                        "icon": "verified",
+                        "icon_custom": "",
+                        "icon_size": 22,
+                        "icon_position": "start",
+                        "text": "<p>Idéal pour limiter les dépenses du midi</p>",
+                        "text_style": "paragraph",
+                        "font_weight": 500,
+                        "margin_top": 0,
+                        "margin_bottom": 0,
+                        "additional_class": ""
+                      },
+                      "blocks": {}
+                    }
+                  },
+                  "block_order": [
+                    "icon_with_text_6exbUm",
+                    "icon_with_text_yrcRCk",
+                    "icon_with_text_ti7r9t"
+                  ]
+                }
+              },
+              "block_order": [
+                "text_jifPxJ",
+                "group_ULziQa"
+              ]
+            }
+          },
+          "block_order": [
+            "group_wrKrNa"
+          ]
+        }
+      },
+      "block_order": [
+        "image_banner_mTywtm"
+      ],
+      "custom_css": [],
+      "name": "t:image_banner",
+      "settings": {
+        "show_on_display": "desktop_and_mobile",
+        "full_width": false,
+        "color_scheme": "",
+        "show_arrows": false,
+        "arrows_button_style": "secondary",
+        "show_pagination": true,
+        "autoplay": true,
+        "rewind": true,
+        "autoplay_speed": 4,
+        "padding_top": 40,
+        "padding_bottom": 30,
+        "margin_top": 0,
+        "margin_bottom": 0,
+        "anchor_id": "",
+        "additional_class": ""
+      }
+    },
+    "custom_code_QJdAUp": {
+      "type": "custom-code",
+      "name": "t:custom_liquid",
+      "settings": {
+        "show_on_display": "desktop_and_mobile",
+        "custom_liquid": "<div class=\"collection-intro-text\">\n  <p>\n    Découvrir une sélection de sacs isothermes repas pensés pour transporter facilement un déjeuner maison, au travail, en cours ou lors des déplacements du quotidien.\n  </p>\n</div>\n\n<style>\n.collection-intro-text {\n  max-width: 1180px;\n  margin: 0 auto;\n  padding: 14px 20px 14px;\n  text-align: left;\n}\n\n.collection-intro-text p {\n  max-width: 820px;\n  margin: 0;\n  font-size: 18px;\n  line-height: 1.55;\n  color: #1f1f1f;\n  font-weight: 400;\n  letter-spacing: -0.2px;\n}\n\n@media screen and (max-width: 749px) {\n  .collection-intro-text {\n    padding: 12px 16px 10px;\n  }\n\n  .collection-intro-text p {\n    font-size: 15px;\n    line-height: 1.5;\n  }\n}\n</style>",
+        "margin_top": 0,
+        "margin_bottom": 0,
+        "additional_class": "reduce-padding-aggressive increase-font-size"
+      }
+    },
+    "main": {
+      "type": "main-collection",
+      "blocks": {
+        "filters": {
+          "type": "filters-and-sort",
+          "static": true,
+          "settings": {
+            "show_on_display": "desktop_and_mobile",
+            "display_mode": "menu",
+            "wrap_in_card": true,
+            "card_color_scheme": "scheme-2",
+            "sticky": false,
+            "show_filters": true,
+            "show_sorting": true,
+            "additional_class": ""
+          },
+          "blocks": {}
+        },
+        "product-card": {
+          "type": "_product-card",
+          "static": true,
+          "settings": {
+            "wrap_in_card": false,
+            "color_scheme": "scheme-3",
+            "layout_gap": 15
+          },
+          "blocks": {
+            "product_card_gallery_6qMVW4": {
+              "type": "_product-card-media-gallery",
+              "name": "t:product_card_gallery",
+              "settings": {
+                "show_on_display": "desktop_and_mobile",
+                "show_slider": true,
+                "media_rounded": false,
+                "show_badges": true,
+                "media_ratio": "1 / 1",
+                "additional_class": ""
+              },
+              "blocks": {}
+            },
+            "product_card_group_rUyxyU": {
+              "type": "_product-card-group",
+              "name": "t:group",
+              "settings": {
+                "show_on_display": "desktop_and_mobile",
+                "wrap_in_card": false,
+                "color_scheme": "scheme-1",
+                "layout_direction_desktop": "column",
+                "layout_gap_desktop": 5,
+                "layout_wrap_desktop": "nowrap",
+                "layout_justify_desktop": "flex-start",
+                "layout_align_items_desktop": "flex-start",
+                "same_as_desktop": true,
+                "layout_direction_mobile": "column",
+                "layout_gap_mobile": 10,
+                "layout_wrap_mobile": "nowrap",
+                "layout_justify_mobile": "flex-start",
+                "layout_align_items_mobile": "flex-start",
+                "margin_top": 0,
+                "margin_bottom": 0,
+                "additional_class": ""
+              },
+              "blocks": {
+                "text_ExEbDY": {
+                  "type": "text",
+                  "name": "Titre produit",
+                  "settings": {
+                    "show_on_display": "desktop_and_mobile",
+                    "text": "<p>{{ closest.product.title }}</p>",
+                    "text_style": "paragraph",
+                    "paragraph_font_size": "normal",
+                    "font_weight": 500,
+                    "alignment": "left",
+                    "alignment_mobile": "left",
+                    "show_read_more": false,
+                    "read_more_length": 200,
+                    "read_more_text": "Voir plus",
+                    "read_less_text": "Voir moins",
+                    "truncate": false,
+                    "truncate_length": 2,
+                    "margin_top": 0,
+                    "margin_bottom": 0,
+                    "additional_class": ""
+                  },
+                  "blocks": {}
+                },
+                "product_price_jg9zQp": {
+                  "type": "product-price",
+                  "name": "t:product_price",
+                  "settings": {
+                    "show_on_display": "desktop_and_mobile",
+                    "product": "{{ closest.product }}",
+                    "sales_badge": "none",
+                    "show_sales_badge_text": false,
+                    "show_unit_price": false,
+                    "text_style": "paragraph",
+                    "additional_class": ""
+                  },
+                  "blocks": {}
+                },
+                "product_card_swatches_wiewgm": {
+                  "type": "_product-card-swatches",
+                  "name": "t:swatches",
+                  "settings": {
+                    "show_on_display": "desktop_and_mobile",
+                    "swatches_size": "small",
+                    "swatches_rounded": true,
+                    "additional_class": ""
+                  },
+                  "blocks": {}
+                },
+                "rating_stars_tmhMrj": {
+                  "type": "rating-stars",
+                  "name": "t:rating_stars",
+                  "settings": {
+                    "show_on_display": "desktop_and_mobile",
+                    "product": "{{ closest.product }}",
+                    "hide_rating_when_no_reviews": true,
+                    "rating": 4.5,
+                    "show_note": true,
+                    "show_review_count": true,
+                    "review_count": 123,
+                    "link": "",
+                    "margin_top": 0,
+                    "margin_bottom": 0,
+                    "additional_class": ""
+                  },
+                  "blocks": {}
+                }
+              },
+              "block_order": [
+                "text_ExEbDY",
+                "product_price_jg9zQp",
+                "product_card_swatches_wiewgm",
+                "rating_stars_tmhMrj"
+              ]
+            },
+            "product_card_quick_add_BnYnWb": {
+              "type": "_product-card-quick-add",
+              "name": "t:product_card_quick_add",
+              "settings": {
+                "show_on_display": "desktop_and_mobile",
+                "button_style": "primary",
+                "button_shape": "default",
+                "align_quick_add_together": true,
+                "show_product_media_gallery": false,
+                "margin_top": 0,
+                "margin_bottom": 0,
+                "additional_class": ""
+              },
+              "blocks": {}
+            }
+          },
+          "block_order": [
+            "product_card_gallery_6qMVW4",
+            "product_card_group_rUyxyU",
+            "product_card_quick_add_BnYnWb"
+          ]
+        }
+      },
+      "settings": {
+        "color_scheme": "scheme-1",
+        "products_per_page": 24,
+        "grid_columns": 4,
+        "grid_columns_mobile": "2",
+        "padding_top": 10,
+        "padding_bottom": 60,
+        "margin_top": 0,
+        "margin_bottom": 0
+      }
+    },
+    "17775694987aff6fb0": {
+      "type": "_blocks",
+      "blocks": {
+        "ai_gen_block_04a5579_yLecpM": {
+          "type": "ai_gen_block_04a5579",
+          "settings": {
+            "title": "Questions fréquentes",
+            "description": "",
+            "text_alignment": "left",
+            "question_1": "Comment choisir un sac isotherme adapté à ses besoins ?",
+            "answer_1": "<p>Le choix dépend surtout de l’usage prévu : transport d’un repas quotidien, sortie prolongée ou besoin de grande capacité. Il faut regarder le volume (en litres), le type de fermeture, le format (à main, bandoulière ou sac à dos) et la présence de compartiments. Un modèle compact suffit pour un déjeuner, alors qu’un format plus grand sera plus adapté pour plusieurs repas.<br/><br/></p>",
+            "question_2": "Combien de temps un sac isotherme conserve-t-il le froid ou le chaud ?",
+            "answer_2": "<p>La durée de conservation varie selon les matériaux, le remplissage du sac et les conditions extérieures. En pratique, un sac isotherme permet généralement de maintenir la température pendant plusieurs heures. L’efficacité reste meilleure lorsque le sac est bien rempli et fermé correctement. Pour des durées plus longues, l’ajout d’un élément réfrigérant peut être utile.</p>",
+            "question_3": "Est-il nécessaire d’ajouter un pain de glace dans un sac isotherme ?",
+            "answer_3": "<p>Un sac isotherme ralentit les échanges de température, mais ne produit pas de froid. Sans source de froid, les aliments vont progressivement se rapprocher de la température ambiante. L’ajout d’un pain de glace permet donc de prolonger la fraîcheur, surtout en été ou lors de trajets longs. Pour un trajet court avec un repas déjà frais, cela peut rester optionnel.</p>",
+            "question_4": "Un sac isotherme permet-il vraiment de réduire le budget repas ?",
+            "answer_4": "<p>Acheter un repas à l’extérieur revient souvent entre 8 € et 12 €. Sur une semaine de travail, cela représente environ 40 € à 60 €, soit plus de 150 € à 250 € par mois. Préparer ses repas à l’avance permet généralement de réduire ce coût, selon les ingrédients choisis et les habitudes alimentaires.</p><p>Un sac isotherme ne fait pas économiser directement, mais il rend le transport des repas maison plus simple au quotidien. Cela facilite une organisation plus régulière, et donc la possibilité de limiter les achats de dernière minute.</p>",
+            "question_5": "",
+            "answer_5": "",
+            "first_item_open": false,
+            "allow_multiple": false,
+            "desktop_width_percent": 100,
+            "section_padding": 40,
+            "item_spacing": 15,
+            "item_padding": 20,
+            "border_radius": 12,
+            "border_width": 1,
+            "title_color": "#1a1a1a",
+            "description_color": "#666666",
+            "item_background": "#ffffff",
+            "border_color": "#e6e6e6",
+            "question_color": "#1a1a1a",
+            "question_hover_color": "#000000",
+            "answer_color": "#666666",
+            "icon_color": "#1a1a1a",
+            "title_size": 32,
+            "description_size": 16,
+            "question_size": 18,
+            "question_weight": 600,
+            "answer_size": 15
+          },
+          "blocks": {}
+        }
+      },
+      "block_order": [
+        "ai_gen_block_04a5579_yLecpM"
+      ],
+      "settings": {}
+    },
+    "reviews_YNkHHY": {
+      "type": "reviews",
+      "blocks": {
+        "review_slide_p6EazW": {
+          "type": "_review-slide",
+          "name": "t:review_display_1",
+          "settings": {
+            "show_on_display": "desktop_and_mobile",
+            "display_type": "1",
+            "wrap_in_card": true,
+            "color_scheme": "scheme-1",
+            "show_card_border": true,
+            "rating": 4.5,
+            "image_ratio": "landscape",
+            "source": "uploaded",
+            "video_url": "",
+            "title": "Excellent produit !",
+            "content": "<p>Écrivez un retour à propos de vos produits. Ajustez le nombre de colonnes en fonction de la taille moyenne des messages.</p>",
+            "author": "John Doe",
+            "date": "Le 11/03/2025",
+            "margin_top": 0,
+            "margin_bottom": 0,
+            "additional_class": ""
+          },
+          "blocks": {}
+        },
+        "review_slide_8etqtV": {
+          "type": "_review-slide",
+          "name": "t:review_display_1",
+          "settings": {
+            "show_on_display": "desktop_and_mobile",
+            "display_type": "1",
+            "wrap_in_card": true,
+            "color_scheme": "scheme-1",
+            "show_card_border": true,
+            "rating": 4.5,
+            "image_ratio": "landscape",
+            "source": "uploaded",
+            "video_url": "",
+            "title": "Excellent produit !",
+            "content": "<p>Écrivez un retour à propos de vos produits. Ajustez le nombre de colonnes en fonction de la taille moyenne des messages.</p>",
+            "author": "John Doe",
+            "date": "Le 11/03/2025",
+            "margin_top": 0,
+            "margin_bottom": 0,
+            "additional_class": ""
+          },
+          "blocks": {}
+        },
+        "review_slide_NEM8GY": {
+          "type": "_review-slide",
+          "name": "t:review_display_1",
+          "settings": {
+            "show_on_display": "desktop_and_mobile",
+            "display_type": "1",
+            "wrap_in_card": true,
+            "color_scheme": "scheme-1",
+            "show_card_border": true,
+            "rating": 4.5,
+            "image_ratio": "landscape",
+            "source": "uploaded",
+            "video_url": "",
+            "title": "Excellent produit !",
+            "content": "<p>Écrivez un retour à propos de vos produits. Ajustez le nombre de colonnes en fonction de la taille moyenne des messages.</p>",
+            "author": "John Doe",
+            "date": "Le 11/03/2025",
+            "margin_top": 0,
+            "margin_bottom": 0,
+            "additional_class": ""
+          },
+          "blocks": {}
+        },
+        "review_slide_cXKdae": {
+          "type": "_review-slide",
+          "name": "t:review_display_1",
+          "settings": {
+            "show_on_display": "desktop_and_mobile",
+            "display_type": "1",
+            "wrap_in_card": true,
+            "color_scheme": "scheme-1",
+            "show_card_border": true,
+            "rating": 4.5,
+            "image_ratio": "landscape",
+            "source": "uploaded",
+            "video_url": "",
+            "title": "Excellent produit !",
+            "content": "<p>Écrivez un retour à propos de vos produits. Ajustez le nombre de colonnes en fonction de la taille moyenne des messages.</p>",
+            "author": "John Doe",
+            "date": "Le 11/03/2025",
+            "margin_top": 0,
+            "margin_bottom": 0,
+            "additional_class": ""
+          },
+          "blocks": {}
+        },
+        "review_slide_z8wEGt": {
+          "type": "_review-slide",
+          "name": "t:review_display_1",
+          "settings": {
+            "show_on_display": "desktop_and_mobile",
+            "display_type": "1",
+            "wrap_in_card": true,
+            "color_scheme": "scheme-1",
+            "show_card_border": true,
+            "rating": 4.5,
+            "image_ratio": "landscape",
+            "source": "uploaded",
+            "video_url": "",
+            "title": "Excellent produit !",
+            "content": "<p>Écrivez un retour à propos de vos produits. Ajustez le nombre de colonnes en fonction de la taille moyenne des messages.</p>",
+            "author": "John Doe",
+            "date": "Le 11/03/2025",
+            "margin_top": 0,
+            "margin_bottom": 0,
+            "additional_class": ""
+          },
+          "blocks": {}
+        },
+        "review_slide_rtcUee": {
+          "type": "_review-slide",
+          "name": "t:review_display_1",
+          "settings": {
+            "show_on_display": "desktop_and_mobile",
+            "display_type": "1",
+            "wrap_in_card": true,
+            "color_scheme": "scheme-1",
+            "show_card_border": true,
+            "rating": 4.5,
+            "image_ratio": "landscape",
+            "source": "uploaded",
+            "video_url": "",
+            "title": "Excellent produit !",
+            "content": "<p>Écrivez un retour à propos de vos produits. Ajustez le nombre de colonnes en fonction de la taille moyenne des messages.</p>",
+            "author": "John Doe",
+            "date": "Le 11/03/2025",
+            "margin_top": 0,
+            "margin_bottom": 0,
+            "additional_class": ""
+          },
+          "blocks": {}
+        },
+        "title": {
+          "type": "text",
+          "static": true,
+          "settings": {
+            "show_on_display": "desktop_and_mobile",
+            "text": "<h3>Avis client</h3>",
+            "text_style": "h3",
+            "paragraph_font_size": "normal",
+            "font_weight": 400,
+            "alignment": "left",
+            "alignment_mobile": "left",
+            "show_read_more": false,
+            "read_more_length": 200,
+            "read_more_text": "Voir plus",
+            "read_less_text": "Voir moins",
+            "truncate": false,
+            "truncate_length": 2,
+            "margin_top": 0,
+            "margin_bottom": 30,
+            "additional_class": ""
+          },
+          "blocks": {}
+        }
+      },
+      "block_order": [
+        "review_slide_p6EazW",
+        "review_slide_8etqtV",
+        "review_slide_NEM8GY",
+        "review_slide_cXKdae",
+        "review_slide_z8wEGt",
+        "review_slide_rtcUee"
+      ],
+      "name": "t:reviews_slider",
+      "settings": {
+        "show_on_display": "desktop_and_mobile",
+        "anchor": "reviews",
+        "color_scheme": "scheme-1",
+        "layout_type": "slider",
+        "grid_columns": 3,
+        "grid_columns_mobile": "1",
+        "slider_items": 3,
+        "slider_items_mobile": "1",
+        "show_arrows": false,
+        "arrows_button_style": "secondary",
+        "show_pagination": true,
+        "rewind": false,
+        "padding_top": 60,
+        "padding_bottom": 60,
+        "margin_top": 0,
+        "margin_bottom": 0,
+        "additional_class": ""
+      }
+    }
+  },
+  "order": [
+    "image_banner_jkCc3P",
+    "custom_code_QJdAUp",
+    "main",
+    "17775694987aff6fb0",
+    "reviews_YNkHHY"
+  ]
+}

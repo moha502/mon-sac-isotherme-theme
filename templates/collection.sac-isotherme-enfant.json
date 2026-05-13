@@ -419,6 +419,46 @@
         "margin_bottom": 0
       }
     },
+    "blocks_MYQUbD": {
+      "type": "_blocks",
+      "blocks": {
+        "ai_gen_block_0aa1130_reQNqr": {
+          "type": "ai_gen_block_0aa1130",
+          "settings": {
+            "show_meta_description": false,
+            "content_max_width": 900,
+            "left_offset": 20,
+            "left_offset_mobile": 10,
+            "text_alignment": "left",
+            "padding_top": 5,
+            "padding_bottom": 5,
+            "padding_horizontal": 0,
+            "padding_top_mobile": 5,
+            "padding_bottom_mobile": 5,
+            "padding_horizontal_mobile": 0,
+            "meta_spacing": 5,
+            "border_radius": 0,
+            "background_color": "#fdfdfc",
+            "meta_size": 13,
+            "meta_size_mobile": 12,
+            "meta_color": "#556b5d",
+            "text_size": 13,
+            "text_size_mobile": 12,
+            "text_color": "#1a1a1a",
+            "h2_size": 21,
+            "h2_size_mobile": 18,
+            "h3_size": 14,
+            "h3_size_mobile": 13
+          },
+          "blocks": {}
+        }
+      },
+      "block_order": [
+        "ai_gen_block_0aa1130_reQNqr"
+      ],
+      "name": "Description collection",
+      "settings": {}
+    },
     "17775694987aff6fb0": {
       "type": "_blocks",
       "blocks": {
@@ -661,54 +701,14 @@
         "margin_bottom": 0,
         "additional_class": ""
       }
-    },
-    "blocks_MYQUbD": {
-      "type": "_blocks",
-      "blocks": {
-        "ai_gen_block_0aa1130_reQNqr": {
-          "type": "ai_gen_block_0aa1130",
-          "settings": {
-            "show_meta_description": false,
-            "content_max_width": 900,
-            "left_offset": 20,
-            "left_offset_mobile": 10,
-            "text_alignment": "left",
-            "padding_top": 5,
-            "padding_bottom": 5,
-            "padding_horizontal": 0,
-            "padding_top_mobile": 5,
-            "padding_bottom_mobile": 5,
-            "padding_horizontal_mobile": 0,
-            "meta_spacing": 5,
-            "border_radius": 0,
-            "background_color": "#fdfdfc",
-            "meta_size": 13,
-            "meta_size_mobile": 12,
-            "meta_color": "#556b5d",
-            "text_size": 13,
-            "text_size_mobile": 12,
-            "text_color": "#1a1a1a",
-            "h2_size": 21,
-            "h2_size_mobile": 18,
-            "h3_size": 14,
-            "h3_size_mobile": 13
-          },
-          "blocks": {}
-        }
-      },
-      "block_order": [
-        "ai_gen_block_0aa1130_reQNqr"
-      ],
-      "name": "Description collection",
-      "settings": {}
     }
   },
   "order": [
     "image_banner_jkCc3P",
     "custom_code_QJdAUp",
     "main",
+    "blocks_MYQUbD",
     "17775694987aff6fb0",
-    "reviews_YNkHHY",
-    "blocks_MYQUbD"
+    "reviews_YNkHHY"
   ]
 }

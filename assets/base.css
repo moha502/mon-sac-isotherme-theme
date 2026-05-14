@@ -1103,12 +1103,10 @@ dropdown-component {
   margin-top: 10px !important;
   align-items: center !important;
 }
-
-.pdp-trust-inline + .pdp-trust-inline {
-  margin-left: 0 !important;
-}
-
-.pdp-trust-inline svg {
-  width: 18px !important;
-  height: 18px !important;
+/* PDP trust badges inline */
+.pdp-trust-inline {
+  display: inline-flex !important;
+  width: 33% !important;
+  vertical-align: top !important;
+  box-sizing: border-box !important;
 }

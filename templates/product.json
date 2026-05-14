@@ -507,7 +507,7 @@
             "font_weight": 400,
             "margin_top": 0,
             "margin_bottom": 0,
-            "additional_class": ""
+            "additional_class": "pdp-trust-inline"
           },
           "blocks": {}
         },
@@ -531,7 +531,7 @@
             "font_weight": 400,
             "margin_top": 0,
             "margin_bottom": 0,
-            "additional_class": ""
+            "additional_class": "pdp-trust-inline"
           },
           "blocks": {}
         },
@@ -555,7 +555,7 @@
             "font_weight": 400,
             "margin_top": 0,
             "margin_bottom": 0,
-            "additional_class": ""
+            "additional_class": "pdp-trust-inline"
           },
           "blocks": {}
         },

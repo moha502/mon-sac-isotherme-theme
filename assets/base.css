@@ -1096,15 +1096,15 @@ dropdown-component {
   border-radius: 999px;
   margin: 1rem auto 0;
 }
-.product-form__blocks > .icon-with-text {
-    display: inline-flex !important;
-    align-items: center;
-    margin-right: 20px;
+.product-form .icon-with-text {
+  display: inline-flex !important;
+  width: auto !important;
+  margin-right: 18px;
+  vertical-align: middle;
 }
 
-.product-form__blocks {
-    display: flex;
-    flex-wrap: wrap;
-    align-items: center;
-    gap: 12px;
+.product-form .icon-with-text__inner {
+  display: flex;
+  align-items: center;
+  gap: 6px;
 }

@@ -1096,15 +1096,19 @@ dropdown-component {
   border-radius: 999px;
   margin: 1rem auto 0;
 }
-.product-form .icon-with-text {
+.pdp-trust-inline {
   display: inline-flex !important;
   width: auto !important;
-  margin-right: 18px;
-  vertical-align: middle;
+  margin-right: 18px !important;
+  margin-top: 10px !important;
+  align-items: center !important;
 }
 
-.product-form .icon-with-text__inner {
-  display: flex;
-  align-items: center;
-  gap: 6px;
+.pdp-trust-inline + .pdp-trust-inline {
+  margin-left: 0 !important;
+}
+
+.pdp-trust-inline svg {
+  width: 18px !important;
+  height: 18px !important;
 }

@@ -1146,3 +1146,6 @@ dropdown-component {
   border-radius: 999px;
   margin: 12px auto 0;
 }
+.group.group--flex {
+  justify-content: center !important;
+}

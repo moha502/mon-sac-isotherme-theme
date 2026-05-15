@@ -1096,13 +1096,6 @@ dropdown-component {
   border-radius: 999px;
   margin: 1rem auto 0;
 }
-.pdp-trust-inline {
-  display: inline-flex !important;
-  width: auto !important;
-  margin-right: 18px !important;
-  margin-top: 10px !important;
-  align-items: center !important;
-}
 /* PDP trust badges inline */
 .pdp-trust-inline {
   display: inline-flex !important;
@@ -1110,3 +1103,4 @@ dropdown-component {
   vertical-align: top !important;
   box-sizing: border-box !important;
 }
+

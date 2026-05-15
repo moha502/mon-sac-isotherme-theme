@@ -28,23 +28,23 @@
   {% assign show_rating = false %}
 {% endif %}
 
-{% if show_rating %}
-  <div
-    style="margin-top: {{ block.settings.margin_top }}px; margin-bottom: {{ block.settings.margin_bottom }}px"
-    class="
-      {%- if block.settings.show_on_display == 'desktop_only' %} mobile-hide{% endif -%}
-      {%- if block.settings.show_on_display == 'mobile_only' %} desktop-hide{% endif -%}
-      {%- if block.settings.additional_class != blank %} {{ block.settings.additional_class }}{% endif -%}
-    "
-    {{ block.shopify_attributes }}
-  >
+<div
+  style="margin-top: {{ block.settings.margin_top }}px; margin-bottom: {{ block.settings.margin_bottom }}px; min-height: 20px;"
+  class="
+    {%- if block.settings.show_on_display == 'desktop_only' %} mobile-hide{% endif -%}
+    {%- if block.settings.show_on_display == 'mobile_only' %} desktop-hide{% endif -%}
+    {%- if block.settings.additional_class != blank %} {{ block.settings.additional_class }}{% endif -%}
+  "
+  {{ block.shopify_attributes }}
+>
+  {% if show_rating %}
     {% capture ratings_stars %}
-    {% if block.settings.show_review_count %}
-      {% render 'rating-stars', rating: rating, rating_count: rating_count, show_note: block.settings.show_note %}
-    {% else %}
-      {% render 'rating-stars', rating: rating, show_note: block.settings.show_note %}
-    {% endif %}
-  {% endcapture %}
+      {% if block.settings.show_review_count %}
+        {% render 'rating-stars', rating: rating, rating_count: rating_count, show_note: block.settings.show_note %}
+      {% else %}
+        {% render 'rating-stars', rating: rating, show_note: block.settings.show_note %}
+      {% endif %}
+    {% endcapture %}
 
     {% if block.settings.link != blank %}
       <a href="{{ block.settings.link }}" class="rating-stars__link">
@@ -53,8 +53,8 @@
     {% else %}
       {{ ratings_stars }}
     {% endif %}
-  </div>
-{% endif %}
+  {% endif %}
+</div>
 
 {% stylesheet %}
   .rating-stars__link {

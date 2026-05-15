@@ -1,0 +1,310 @@
+<section class="comparison-table-section">
+  <div class="comparison-table-wrapper">
+    {% if section.settings.heading != blank %}
+      <h2 class="comparison-table-heading">{{ section.settings.heading }}</h2>
+    {% endif %}
+
+    {% if section.settings.subheading != blank %}
+      <p class="comparison-table-subheading">{{ section.settings.subheading }}</p>
+    {% endif %}
+
+    <div class="comparison-table">
+      <div class="comparison-table-header">
+        <div></div>
+        <div class="brand-col">
+          {{ section.settings.brand_column }}
+        </div>
+        <div class="classic-col">
+          {{ section.settings.classic_column }}
+        </div>
+      </div>
+
+      {% for block in section.blocks %}
+        <div class="comparison-table-row" {{ block.shopify_attributes }}>
+          <div class="comparison-label">
+            {{ block.settings.label }}
+          </div>
+
+          <div class="comparison-value brand-value">
+            <span class="check-icon">✓</span>
+            <span>{{ block.settings.brand_text }}</span>
+          </div>
+
+          <div class="comparison-value classic-value">
+            <span class="minus-icon">–</span>
+            <span>{{ block.settings.classic_text }}</span>
+          </div>
+        </div>
+      {% endfor %}
+    </div>
+  </div>
+</section>
+
+<style>
+  .comparison-table-section {
+    background: #f6f8f7;
+    padding: 72px 20px;
+  }
+
+  .comparison-table-wrapper {
+    max-width: 980px;
+    margin: 0 auto;
+  }
+
+  .comparison-table-heading {
+    text-align: center;
+    font-size: clamp(28px, 4vw, 44px);
+    line-height: 1.1;
+    margin: 0 0 14px;
+    font-weight: 700;
+    color: #111;
+  }
+
+  .comparison-table-subheading {
+    text-align: center;
+    max-width: 620px;
+    margin: 0 auto 42px;
+    font-size: 16px;
+    line-height: 1.6;
+    color: #555;
+  }
+
+  .comparison-table {
+    background: #fff;
+    border: 1px solid rgba(0,0,0,0.08);
+    border-radius: 24px;
+    overflow: hidden;
+    box-shadow: 0 14px 40px rgba(0,0,0,0.06);
+  }
+
+  .comparison-table-header,
+  .comparison-table-row {
+    display: grid;
+    grid-template-columns: 1.1fr 1fr 1fr;
+  }
+
+  .comparison-table-header {
+    background: #eef3f1;
+    font-weight: 700;
+    color: #111;
+  }
+
+  .comparison-table-header > div,
+  .comparison-table-row > div {
+    padding: 22px 24px;
+  }
+
+  .brand-col {
+    background: #526b5b;
+    color: #fff;
+    text-align: center;
+  }
+
+  .classic-col {
+    text-align: center;
+    color: #444;
+  }
+
+  .comparison-table-row {
+    border-top: 1px solid rgba(0,0,0,0.08);
+    align-items: center;
+  }
+
+  .comparison-label {
+    font-weight: 600;
+    color: #222;
+  }
+
+  .comparison-value {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: 10px;
+    text-align: center;
+    line-height: 1.4;
+    color: #333;
+  }
+
+  .brand-value {
+    background: #fbfcfb;
+  }
+
+  .check-icon {
+    width: 24px;
+    height: 24px;
+    border-radius: 999px;
+    background: #526b5b;
+    color: #fff;
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    font-weight: 700;
+    flex-shrink: 0;
+  }
+
+  .minus-icon {
+    width: 24px;
+    height: 24px;
+    border-radius: 999px;
+    background: #e7e7e7;
+    color: #555;
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    font-weight: 700;
+    flex-shrink: 0;
+  }
+
+  @media screen and (max-width: 749px) {
+    .comparison-table-section {
+      padding: 48px 16px;
+    }
+
+    .comparison-table {
+      border-radius: 18px;
+    }
+
+    .comparison-table-header {
+      display: none;
+    }
+
+    .comparison-table-row {
+      display: block;
+      padding: 20px;
+    }
+
+    .comparison-table-row > div {
+      padding: 0;
+    }
+
+    .comparison-label {
+      font-size: 17px;
+      margin-bottom: 16px;
+    }
+
+    .comparison-value {
+      justify-content: flex-start;
+      text-align: left;
+      padding: 14px 16px !important;
+      border-radius: 14px;
+      margin-top: 10px;
+    }
+
+    .brand-value::before {
+      content: "{{ section.settings.brand_column }}";
+      font-weight: 700;
+      margin-right: 4px;
+    }
+
+    .classic-value::before {
+      content: "{{ section.settings.classic_column }}";
+      font-weight: 700;
+      margin-right: 4px;
+    }
+  }
+</style>
+
+{% schema %}
+{
+  "name": "Tableau comparatif",
+  "settings": [
+    {
+      "type": "text",
+      "id": "heading",
+      "label": "Titre",
+      "default": "Manger maison sans compliquer la journée"
+    },
+    {
+      "type": "textarea",
+      "id": "subheading",
+      "label": "Sous-titre",
+      "default": "Un sac pensé pour transporter un repas, une boisson et les essentiels du quotidien plus facilement."
+    },
+    {
+      "type": "text",
+      "id": "brand_column",
+      "label": "Colonne marque",
+      "default": "Sac isotherme repas"
+    },
+    {
+      "type": "text",
+      "id": "classic_column",
+      "label": "Colonne comparaison",
+      "default": "Sac classique"
+    }
+  ],
+  "blocks": [
+    {
+      "type": "row",
+      "name": "Ligne",
+      "settings": [
+        {
+          "type": "text",
+          "id": "label",
+          "label": "Critère",
+          "default": "Organisation du repas"
+        },
+        {
+          "type": "text",
+          "id": "brand_text",
+          "label": "Texte colonne marque",
+          "default": "Compartiment pensé pour lunch box, gourde et accessoires"
+        },
+        {
+          "type": "text",
+          "id": "classic_text",
+          "label": "Texte colonne comparaison",
+          "default": "Espace moins adapté au transport d’un repas"
+        }
+      ]
+    }
+  ],
+  "presets": [
+    {
+      "name": "Tableau comparatif",
+      "blocks": [
+        {
+          "type": "row",
+          "settings": {
+            "label": "Budget du midi",
+            "brand_text": "Permet d’emporter un repas préparé à la maison",
+            "classic_text": "Pousse plus facilement à acheter dehors"
+          }
+        },
+        {
+          "type": "row",
+          "settings": {
+            "label": "Transport du repas",
+            "brand_text": "Format adapté aux lunch box et contenants repas",
+            "classic_text": "Repas moins bien organisé dans le sac"
+          }
+        },
+        {
+          "type": "row",
+          "settings": {
+            "label": "Maintien de la température",
+            "brand_text": "Conception isotherme pour limiter les variations de température",
+            "classic_text": "Aucun maintien spécifique"
+          }
+        },
+        {
+          "type": "row",
+          "settings": {
+            "label": "Usage quotidien",
+            "brand_text": "Pratique pour le travail, les cours ou les déplacements",
+            "classic_text": "Moins pensé pour les repas nomades"
+          }
+        },
+        {
+          "type": "row",
+          "settings": {
+            "label": "Organisation",
+            "brand_text": "Permet de séparer repas, boisson et petits accessoires",
+            "classic_text": "Tout se mélange plus facilement"
+          }
+        }
+      ]
+    }
+  ]
+}
+{% endschema %}

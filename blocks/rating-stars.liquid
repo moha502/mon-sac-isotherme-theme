@@ -27,16 +27,17 @@
 {% if block.settings.product != blank and block.settings.hide_rating_when_no_reviews and rating_count == 0 %}
   {% assign show_rating = false %}
 {% endif %}
-<div
-  style="margin-top: {{ block.settings.margin_top }}px; margin-bottom: {{ block.settings.margin_bottom }}px; min-height: 20px;"
-  class="
-    {%- if block.settings.show_on_display == 'desktop_only' %} mobile-hide{% endif -%}
-    {%- if block.settings.show_on_display == 'mobile_only' %} desktop-hide{% endif -%}
-    {%- if block.settings.additional_class != blank %} {{ block.settings.additional_class }}{% endif -%}
-  "
-  {{ block.shopify_attributes }}
->
-  {% if show_rating %}
+
+{% if show_rating %}
+  <div
+    style="margin-top: {{ block.settings.margin_top }}px; margin-bottom: {{ block.settings.margin_bottom }}px"
+    class="
+      {%- if block.settings.show_on_display == 'desktop_only' %} mobile-hide{% endif -%}
+      {%- if block.settings.show_on_display == 'mobile_only' %} desktop-hide{% endif -%}
+      {%- if block.settings.additional_class != blank %} {{ block.settings.additional_class }}{% endif -%}
+    "
+    {{ block.shopify_attributes }}
+  >
     {% capture ratings_stars %}
     {% if block.settings.show_review_count %}
       {% render 'rating-stars', rating: rating, rating_count: rating_count, show_note: block.settings.show_note %}
@@ -49,11 +50,10 @@
       <a href="{{ block.settings.link }}" class="rating-stars__link">
         {{ ratings_stars }}
       </a>
-   
-  {% endif %}
-</div>>
-
-</div>
+    {% else %}
+      {{ ratings_stars }}
+    {% endif %}
+  </div>
 {% endif %}
 
 {% stylesheet %}

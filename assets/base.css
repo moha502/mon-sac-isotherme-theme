@@ -1127,3 +1127,30 @@ dropdown-component {
 .grid__item .quick-add {
   margin-top: auto !important;
 }
+.collection__title,
+.featured-collection__title,
+.section-header {
+  text-align: center;
+}
+
+.collection__title h2,
+.featured-collection__title h2,
+.section-header h2 {
+  position: relative;
+  display: inline-block;
+  padding-bottom: 14px;
+}
+
+.collection__title h2::after,
+.featured-collection__title h2::after,
+.section-header h2::after {
+  content: "";
+  position: absolute;
+  left: 50%;
+  bottom: 0;
+  transform: translateX(-50%);
+  width: 55px;
+  height: 4px;
+  background: #5B6F5F;
+  border-radius: 999px;
+}

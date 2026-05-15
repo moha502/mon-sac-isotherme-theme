@@ -1127,30 +1127,33 @@ dropdown-component {
 .grid__item .quick-add {
   margin-top: auto !important;
 }
+/* Centrer les titres de sections + barre verte */
+h2.rich-text__heading,
+.collection-list-title,
+.title,
+.title-wrapper-with-link,
 .collection__title,
 .featured-collection__title,
-.section-header {
-  text-align: center;
+.section-heading,
+.section-header,
+.fullstack-section-heading {
+  text-align: center !important;
+  justify-content: center !important;
 }
 
-.collection__title h2,
-.featured-collection__title h2,
-.section-header h2 {
-  position: relative;
-  display: inline-block;
-  padding-bottom: 14px;
-}
-
+/* Barre verte sous les titres */
+h2.rich-text__heading::after,
+.collection-list-title::after,
+.title::after,
 .collection__title h2::after,
 .featured-collection__title h2::after,
+.section-heading::after,
 .section-header h2::after {
   content: "";
-  position: absolute;
-  left: 50%;
-  bottom: 0;
-  transform: translateX(-50%);
-  width: 55px;
+  display: block;
+  width: 58px;
   height: 4px;
-  background: #5B6F5F;
+  background: #536b59;
   border-radius: 999px;
+  margin: 12px auto 0;
 }

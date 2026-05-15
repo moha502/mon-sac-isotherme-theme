@@ -1127,7 +1127,13 @@ dropdown-component {
 .grid__item .quick-add {
   margin-top: auto !important;
 }
-/* Centre le titre "Les sacs isothermes" + bouton voir tous */
+/* Centre et décale légèrement le bloc titre vers la droite */
+.group.group--flex {
+  justify-content: center !important;
+  transform: translateX(60px);
+}
+
+/* Centre le texte */
 .text-block.h2.text-block--center-desktop,
 .text-block.h2.text-block--left-mobile {
   text-align: center !important;
@@ -1145,7 +1151,4 @@ dropdown-component {
   background: #536b59;
   border-radius: 999px;
   margin: 12px auto 0;
-}
-.group.group--flex {
-  justify-content: center !important;
 }

@@ -1130,7 +1130,7 @@ dropdown-component {
 /* Centre et décale légèrement le bloc titre vers la droite */
 .group.group--flex {
   justify-content: center !important;
-  transform: translateX(50px);
+  transform: translateX(45px);
 }
 
 /* Centre le texte */

@@ -1103,8 +1103,16 @@ dropdown-component {
   vertical-align: top !important;
   box-sizing: border-box !important;
 }
-.card-information .jdgm-widget.jdgm-preview-badge {
-    min-height: 24px;
-    display: flex !important;
-    align-items: center;
+.card__information,
+.card-information {
+  display: flex;
+  flex-direction: column;
+}
+
+.card-information .jdgm-widget,
+.card-information .jdgm-preview-badge,
+.jdgm-widget.jdgm-preview-badge {
+  min-height: 22px !important;
+  display: block !important;
+  margin-bottom: 6px;
 }

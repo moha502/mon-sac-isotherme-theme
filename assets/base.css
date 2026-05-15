@@ -1127,28 +1127,17 @@ dropdown-component {
 .grid__item .quick-add {
   margin-top: auto !important;
 }
-/* Centrer les titres de sections + barre verte */
-h2.rich-text__heading,
-.collection-list-title,
-.title,
-.title-wrapper-with-link,
-.collection__title,
-.featured-collection__title,
-.section-heading,
-.section-header,
-.fullstack-section-heading {
+/* Centre le titre "Les sacs isothermes" + bouton voir tous */
+.text-block.h2.text-block--center-desktop,
+.text-block.h2.text-block--left-mobile {
   text-align: center !important;
   justify-content: center !important;
+  width: 100% !important;
 }
 
-/* Barre verte sous les titres */
-h2.rich-text__heading::after,
-.collection-list-title::after,
-.title::after,
-.collection__title h2::after,
-.featured-collection__title h2::after,
-.section-heading::after,
-.section-header h2::after {
+/* Barre verte sous le titre */
+.text-block.h2.text-block--center-desktop p::after,
+.text-block.h2.text-block--left-mobile p::after {
   content: "";
   display: block;
   width: 58px;

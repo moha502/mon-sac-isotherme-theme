@@ -1103,4 +1103,8 @@ dropdown-component {
   vertical-align: top !important;
   box-sizing: border-box !important;
 }
-
+.jdgm-widget.jdgm-preview-badge {
+    min-height: 24px;
+    display: flex;
+    align-items: center;
+}

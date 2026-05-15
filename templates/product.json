@@ -1799,589 +1799,12 @@
     },
     "comparison_table_KD8GmY": {
       "type": "comparison-table",
-      "blocks": {
-        "comparison_table_row_DP7yUh": {
-          "type": "_comparison-table-row",
-          "name": "t:row",
-          "settings": {},
-          "blocks": {
-            "comparison_table_data_jgCF9V": {
-              "type": "_comparison-table-data",
-              "name": "t:cell",
-              "settings": {},
-              "blocks": {}
-            },
-            "comparison_table_data_P9W9xG": {
-              "type": "_comparison-table-data",
-              "name": "t:cell",
-              "settings": {},
-              "blocks": {
-                "logo_fL87zQ": {
-                  "type": "logo",
-                  "name": "t:logo",
-                  "settings": {
-                    "show_on_display": "desktop_and_mobile",
-                    "logo_height": 25,
-                    "inverse": false,
-                    "activate_link": true,
-                    "margin_top": 0,
-                    "margin_bottom": 0,
-                    "additional_class": ""
-                  },
-                  "blocks": {}
-                }
-              },
-              "block_order": [
-                "logo_fL87zQ"
-              ]
-            },
-            "comparison_table_data_UFtx7Y": {
-              "type": "_comparison-table-data",
-              "name": "t:cell",
-              "settings": {},
-              "blocks": {
-                "text_6xncjp": {
-                  "type": "text",
-                  "name": "t:text",
-                  "settings": {
-                    "show_on_display": "desktop_and_mobile",
-                    "text": "<p><strong>Produit \"classique\"</strong></p>",
-                    "text_style": "paragraph",
-                    "paragraph_font_size": "normal",
-                    "font_weight": 400,
-                    "alignment": "center",
-                    "alignment_mobile": "center",
-                    "show_read_more": false,
-                    "read_more_length": 200,
-                    "read_more_text": "Voir plus",
-                    "read_less_text": "Voir moins",
-                    "truncate": false,
-                    "truncate_length": 2,
-                    "margin_top": 0,
-                    "margin_bottom": 0,
-                    "additional_class": ""
-                  },
-                  "blocks": {}
-                }
-              },
-              "block_order": [
-                "text_6xncjp"
-              ]
-            }
-          },
-          "block_order": [
-            "comparison_table_data_jgCF9V",
-            "comparison_table_data_P9W9xG",
-            "comparison_table_data_UFtx7Y"
-          ]
-        },
-        "comparison_table_row_DWaNhB": {
-          "type": "_comparison-table-row",
-          "name": "t:row",
-          "settings": {},
-          "blocks": {
-            "comparison_table_data_t8mqjm": {
-              "type": "_comparison-table-data",
-              "name": "t:cell",
-              "settings": {},
-              "blocks": {
-                "text_yH9jD4": {
-                  "type": "text",
-                  "name": "t:text",
-                  "settings": {
-                    "show_on_display": "desktop_and_mobile",
-                    "text": "<p>Budget au quotidien</p>",
-                    "text_style": "paragraph",
-                    "paragraph_font_size": "normal",
-                    "font_weight": 400,
-                    "alignment": "left",
-                    "alignment_mobile": "left",
-                    "show_read_more": false,
-                    "read_more_length": 200,
-                    "read_more_text": "Voir plus",
-                    "read_less_text": "Voir moins",
-                    "truncate": false,
-                    "truncate_length": 2,
-                    "margin_top": 0,
-                    "margin_bottom": 0,
-                    "additional_class": ""
-                  },
-                  "blocks": {}
-                }
-              },
-              "block_order": [
-                "text_yH9jD4"
-              ]
-            },
-            "comparison_table_data_aNiWCp": {
-              "type": "_comparison-table-data",
-              "name": "t:cell",
-              "settings": {},
-              "blocks": {
-                "rating_stars_AgMFgN": {
-                  "type": "rating-stars",
-                  "name": "t:rating_stars",
-                  "settings": {
-                    "show_on_display": "desktop_and_mobile",
-                    "product": "",
-                    "hide_rating_when_no_reviews": true,
-                    "rating": 5,
-                    "show_note": true,
-                    "show_review_count": true,
-                    "review_count": 100,
-                    "link": "",
-                    "margin_top": 0,
-                    "margin_bottom": 0,
-                    "additional_class": ""
-                  },
-                  "blocks": {}
-                }
-              },
-              "block_order": [
-                "rating_stars_AgMFgN"
-              ]
-            },
-            "comparison_table_data_RUt97i": {
-              "type": "_comparison-table-data",
-              "name": "t:cell",
-              "settings": {},
-              "blocks": {}
-            }
-          },
-          "block_order": [
-            "comparison_table_data_t8mqjm",
-            "comparison_table_data_aNiWCp",
-            "comparison_table_data_RUt97i"
-          ]
-        },
-        "comparison_table_row_KFUHRe": {
-          "type": "_comparison-table-row",
-          "name": "t:row",
-          "settings": {},
-          "blocks": {
-            "comparison_table_data_iWbK7z": {
-              "type": "_comparison-table-data",
-              "name": "t:cell",
-              "settings": {},
-              "blocks": {
-                "text_BjGCPK": {
-                  "type": "text",
-                  "name": "t:text",
-                  "settings": {
-                    "show_on_display": "desktop_and_mobile",
-                    "text": "<p>Argument économique</p>",
-                    "text_style": "paragraph",
-                    "paragraph_font_size": "normal",
-                    "font_weight": 400,
-                    "alignment": "left",
-                    "alignment_mobile": "left",
-                    "show_read_more": false,
-                    "read_more_length": 200,
-                    "read_more_text": "Voir plus",
-                    "read_less_text": "Voir moins",
-                    "truncate": false,
-                    "truncate_length": 2,
-                    "margin_top": 0,
-                    "margin_bottom": 0,
-                    "additional_class": ""
-                  },
-                  "blocks": {}
-                }
-              },
-              "block_order": [
-                "text_BjGCPK"
-              ]
-            },
-            "comparison_table_data_CnDLnT": {
-              "type": "_comparison-table-data",
-              "name": "t:cell",
-              "settings": {},
-              "blocks": {
-                "icon_EfNHeN": {
-                  "type": "icon",
-                  "name": "t:icon",
-                  "settings": {
-                    "show_on_display": "desktop_and_mobile",
-                    "icon_type": "icon",
-                    "icon": "check",
-                    "icon_custom": "",
-                    "icon_size": 32,
-                    "margin_top": 0,
-                    "margin_bottom": 0,
-                    "additional_class": ""
-                  },
-                  "blocks": {}
-                }
-              },
-              "block_order": [
-                "icon_EfNHeN"
-              ]
-            },
-            "comparison_table_data_te3N3p": {
-              "type": "_comparison-table-data",
-              "name": "t:cell",
-              "settings": {},
-              "blocks": {
-                "icon_EyTVEE": {
-                  "type": "icon",
-                  "name": "t:icon",
-                  "settings": {
-                    "show_on_display": "desktop_and_mobile",
-                    "icon_type": "icon",
-                    "icon": "close",
-                    "icon_custom": "",
-                    "icon_size": 32,
-                    "margin_top": 0,
-                    "margin_bottom": 0,
-                    "additional_class": ""
-                  },
-                  "blocks": {}
-                }
-              },
-              "block_order": [
-                "icon_EyTVEE"
-              ]
-            }
-          },
-          "block_order": [
-            "comparison_table_data_iWbK7z",
-            "comparison_table_data_CnDLnT",
-            "comparison_table_data_te3N3p"
-          ]
-        },
-        "comparison_table_row_GzJiaF": {
-          "type": "_comparison-table-row",
-          "name": "t:row",
-          "settings": {},
-          "blocks": {
-            "comparison_table_data_Rk7zpC": {
-              "type": "_comparison-table-data",
-              "name": "t:cell",
-              "settings": {},
-              "blocks": {
-                "text_rEndA7": {
-                  "type": "text",
-                  "name": "t:text",
-                  "settings": {
-                    "show_on_display": "desktop_and_mobile",
-                    "text": "<p>Argument écologique</p>",
-                    "text_style": "paragraph",
-                    "paragraph_font_size": "normal",
-                    "font_weight": 400,
-                    "alignment": "left",
-                    "alignment_mobile": "left",
-                    "show_read_more": false,
-                    "read_more_length": 200,
-                    "read_more_text": "Voir plus",
-                    "read_less_text": "Voir moins",
-                    "truncate": false,
-                    "truncate_length": 2,
-                    "margin_top": 0,
-                    "margin_bottom": 0,
-                    "additional_class": ""
-                  },
-                  "blocks": {}
-                }
-              },
-              "block_order": [
-                "text_rEndA7"
-              ]
-            },
-            "comparison_table_data_iGPefg": {
-              "type": "_comparison-table-data",
-              "name": "t:cell",
-              "settings": {},
-              "blocks": {
-                "icon_iK4KqG": {
-                  "type": "icon",
-                  "name": "t:icon",
-                  "settings": {
-                    "show_on_display": "desktop_and_mobile",
-                    "icon_type": "icon",
-                    "icon": "check",
-                    "icon_custom": "",
-                    "icon_size": 32,
-                    "margin_top": 0,
-                    "margin_bottom": 0,
-                    "additional_class": ""
-                  },
-                  "blocks": {}
-                }
-              },
-              "block_order": [
-                "icon_iK4KqG"
-              ]
-            },
-            "comparison_table_data_k4ercW": {
-              "type": "_comparison-table-data",
-              "name": "t:cell",
-              "settings": {},
-              "blocks": {
-                "icon_CRgXzx": {
-                  "type": "icon",
-                  "name": "t:icon",
-                  "settings": {
-                    "show_on_display": "desktop_and_mobile",
-                    "icon_type": "icon",
-                    "icon": "close",
-                    "icon_custom": "",
-                    "icon_size": 32,
-                    "margin_top": 0,
-                    "margin_bottom": 0,
-                    "additional_class": ""
-                  },
-                  "blocks": {}
-                }
-              },
-              "block_order": [
-                "icon_CRgXzx"
-              ]
-            }
-          },
-          "block_order": [
-            "comparison_table_data_Rk7zpC",
-            "comparison_table_data_iGPefg",
-            "comparison_table_data_k4ercW"
-          ]
-        },
-        "comparison_table_row_QFj4fW": {
-          "type": "_comparison-table-row",
-          "name": "t:row",
-          "settings": {},
-          "blocks": {
-            "comparison_table_data_GBckd6": {
-              "type": "_comparison-table-data",
-              "name": "t:cell",
-              "settings": {},
-              "blocks": {
-                "text_gbdfqx": {
-                  "type": "text",
-                  "name": "t:text",
-                  "settings": {
-                    "show_on_display": "desktop_and_mobile",
-                    "text": "<p>Argument pratique</p>",
-                    "text_style": "paragraph",
-                    "paragraph_font_size": "normal",
-                    "font_weight": 400,
-                    "alignment": "left",
-                    "alignment_mobile": "left",
-                    "show_read_more": false,
-                    "read_more_length": 200,
-                    "read_more_text": "Voir plus",
-                    "read_less_text": "Voir moins",
-                    "truncate": false,
-                    "truncate_length": 2,
-                    "margin_top": 0,
-                    "margin_bottom": 0,
-                    "additional_class": ""
-                  },
-                  "blocks": {}
-                }
-              },
-              "block_order": [
-                "text_gbdfqx"
-              ]
-            },
-            "comparison_table_data_EJEPCA": {
-              "type": "_comparison-table-data",
-              "name": "t:cell",
-              "settings": {},
-              "blocks": {
-                "icon_rVED7K": {
-                  "type": "icon",
-                  "name": "t:icon",
-                  "settings": {
-                    "show_on_display": "desktop_and_mobile",
-                    "icon_type": "icon",
-                    "icon": "check",
-                    "icon_custom": "",
-                    "icon_size": 32,
-                    "margin_top": 0,
-                    "margin_bottom": 0,
-                    "additional_class": ""
-                  },
-                  "blocks": {}
-                }
-              },
-              "block_order": [
-                "icon_rVED7K"
-              ]
-            },
-            "comparison_table_data_kdmFD9": {
-              "type": "_comparison-table-data",
-              "name": "t:cell",
-              "settings": {},
-              "blocks": {
-                "icon_9Ny9iq": {
-                  "type": "icon",
-                  "name": "t:icon",
-                  "settings": {
-                    "show_on_display": "desktop_and_mobile",
-                    "icon_type": "icon",
-                    "icon": "close",
-                    "icon_custom": "",
-                    "icon_size": 32,
-                    "margin_top": 0,
-                    "margin_bottom": 0,
-                    "additional_class": ""
-                  },
-                  "blocks": {}
-                }
-              },
-              "block_order": [
-                "icon_9Ny9iq"
-              ]
-            }
-          },
-          "block_order": [
-            "comparison_table_data_GBckd6",
-            "comparison_table_data_EJEPCA",
-            "comparison_table_data_kdmFD9"
-          ]
-        },
-        "comparison_table_row_QGRDhi": {
-          "type": "_comparison-table-row",
-          "name": "t:row",
-          "settings": {},
-          "blocks": {
-            "comparison_table_data_V96fkL": {
-              "type": "_comparison-table-data",
-              "name": "t:cell",
-              "settings": {},
-              "blocks": {
-                "text_C9fXpp": {
-                  "type": "text",
-                  "name": "t:text",
-                  "settings": {
-                    "show_on_display": "desktop_and_mobile",
-                    "text": "<p>Argument technique</p>",
-                    "text_style": "paragraph",
-                    "paragraph_font_size": "normal",
-                    "font_weight": 400,
-                    "alignment": "left",
-                    "alignment_mobile": "left",
-                    "show_read_more": false,
-                    "read_more_length": 200,
-                    "read_more_text": "Voir plus",
-                    "read_less_text": "Voir moins",
-                    "truncate": false,
-                    "truncate_length": 2,
-                    "margin_top": 0,
-                    "margin_bottom": 0,
-                    "additional_class": ""
-                  },
-                  "blocks": {}
-                }
-              },
-              "block_order": [
-                "text_C9fXpp"
-              ]
-            },
-            "comparison_table_data_3kdAGh": {
-              "type": "_comparison-table-data",
-              "name": "t:cell",
-              "settings": {},
-              "blocks": {
-                "icon_g9tXwC": {
-                  "type": "icon",
-                  "name": "t:icon",
-                  "settings": {
-                    "show_on_display": "desktop_and_mobile",
-                    "icon_type": "icon",
-                    "icon": "check",
-                    "icon_custom": "",
-                    "icon_size": 32,
-                    "margin_top": 0,
-                    "margin_bottom": 0,
-                    "additional_class": ""
-                  },
-                  "blocks": {}
-                }
-              },
-              "block_order": [
-                "icon_g9tXwC"
-              ]
-            },
-            "comparison_table_data_jfWEpQ": {
-              "type": "_comparison-table-data",
-              "name": "t:cell",
-              "settings": {},
-              "blocks": {
-                "icon_YYfiPk": {
-                  "type": "icon",
-                  "name": "t:icon",
-                  "settings": {
-                    "show_on_display": "desktop_and_mobile",
-                    "icon_type": "icon",
-                    "icon": "close",
-                    "icon_custom": "",
-                    "icon_size": 32,
-                    "margin_top": 0,
-                    "margin_bottom": 0,
-                    "additional_class": ""
-                  },
-                  "blocks": {}
-                }
-              },
-              "block_order": [
-                "icon_YYfiPk"
-              ]
-            }
-          },
-          "block_order": [
-            "comparison_table_data_V96fkL",
-            "comparison_table_data_3kdAGh",
-            "comparison_table_data_jfWEpQ"
-          ]
-        },
-        "title": {
-          "type": "text",
-          "static": true,
-          "settings": {
-            "show_on_display": "desktop_and_mobile",
-            "text": "<h3>Pourquoi choisir ce produit ?</h3>",
-            "text_style": "h3",
-            "paragraph_font_size": "normal",
-            "font_weight": 400,
-            "alignment": "center",
-            "alignment_mobile": "center",
-            "show_read_more": false,
-            "read_more_length": 200,
-            "read_more_text": "Voir plus",
-            "read_less_text": "Voir moins",
-            "truncate": false,
-            "truncate_length": 2,
-            "margin_top": 0,
-            "margin_bottom": 40,
-            "additional_class": ""
-          },
-          "blocks": {}
-        }
-      },
-      "block_order": [
-        "comparison_table_row_DP7yUh",
-        "comparison_table_row_DWaNhB",
-        "comparison_table_row_KFUHRe",
-        "comparison_table_row_GzJiaF",
-        "comparison_table_row_QFj4fW",
-        "comparison_table_row_QGRDhi"
-      ],
       "name": "t:comparison_table",
       "settings": {
-        "show_on_display": "desktop_and_mobile",
-        "section_width": "narrow",
-        "color_scheme": "scheme-1",
-        "color_scheme_table": "scheme-2",
-        "cell_min_width_mobile": 120,
-        "highlighted_column": 2,
-        "color_highlighted_column": "#000000",
-        "color_highlighted_background_column": "#f8f8f8",
-        "padding_top": 70,
-        "padding_bottom": 70,
-        "margin_top": 0,
-        "margin_bottom": 0,
-        "anchor_id": "",
-        "additional_class": ""
+        "heading": "Manger maison, plus simple au quotidien",
+        "subheading": "Un sac isotherme pensé pour transporter ton repas, ta boisson et les essentiels, où que tu ailles.",
+        "brand_column": "Sac isotherme repas",
+        "classic_column": "Sans sac adapté"
       }
     },
     "custom_section_LBJBG7": {
@@ -2583,7 +2006,7 @@
                   "type": "_accordion",
                   "settings": {
                     "show_on_display": "desktop_and_mobile",
-                    "heading": "Qu’est-ce que ce produit contient exactement ?",
+                    "heading": "Qu’est-ce qu’un sac isotherme repas ?",
                     "heading_tag": "p",
                     "heading_style": "paragraph",
                     "open_by_default": false,
@@ -2596,7 +2019,7 @@
                       "type": "text",
                       "settings": {
                         "show_on_display": "desktop_and_mobile",
-                        "text": "<p>Notre objectif est que chaque client soit totalement satisfait de son achat. Si ce n'est pas le cas, faites-le nous savoir et nous ferons de notre mieux pour trouver une solution avec vous.</p>",
+                        "text": "<p>Un sac isotherme repas permet de transporter un déjeuner, une lunch box ou une boisson tout en aidant à conserver la température plus longtemps. Une solution simple pour préparer un repas à l’avance et l’avoir sous la main pendant la journée.</p>",
                         "text_style": "paragraph",
                         "paragraph_font_size": "normal",
                         "font_weight": 400,
@@ -2623,7 +2046,7 @@
                   "type": "_accordion",
                   "settings": {
                     "show_on_display": "desktop_and_mobile",
-                    "heading": "Où est-il fabriqué ?",
+                    "heading": "Combien de temps le sac garde-t-il les aliments au frais ?",
                     "heading_tag": "p",
                     "heading_style": "paragraph",
                     "open_by_default": false,
@@ -2636,7 +2059,7 @@
                       "type": "text",
                       "settings": {
                         "show_on_display": "desktop_and_mobile",
-                        "text": "<p>Nous travaillons rapidement pour envoyer votre commande dès que possible. Une fois votre commande expédiée, vous recevrez un email avec des informations supplémentaires. Les délais de livraison varient en fonction de votre emplacement.</p>",
+                        "text": "<p>La durée dépend du contenu transporté, de la température extérieure et de l’utilisation d’un pain de glace. L’isolation thermique aide à conserver la fraîcheur pendant plusieurs heures.</p>",
                         "text_style": "paragraph",
                         "paragraph_font_size": "normal",
                         "font_weight": 400,
@@ -2663,7 +2086,7 @@
                   "type": "_accordion",
                   "settings": {
                     "show_on_display": "desktop_and_mobile",
-                    "heading": "Le produit est-il compatible avec ___ ?",
+                    "heading": "Comment nettoyer un sac isotherme repas ?",
                     "heading_tag": "p",
                     "heading_style": "paragraph",
                     "open_by_default": false,
@@ -2676,7 +2099,7 @@
                       "type": "text",
                       "settings": {
                         "show_on_display": "desktop_and_mobile",
-                        "text": "<p>Nos produits sont fabriqués localement et à l'international. Nous sélectionnons soigneusement nos partenaires de fabrication pour garantir des produits de haute qualité à un prix juste.</p>",
+                        "text": "<p>Un chiffon humide et un peu d’eau savonneuse suffisent généralement pour nettoyer l’intérieur. Il est conseillé de laisser sécher le sac ouvert après utilisation.</p>",
                         "text_style": "paragraph",
                         "paragraph_font_size": "normal",
                         "font_weight": 400,
@@ -2703,7 +2126,7 @@
                   "type": "_accordion",
                   "settings": {
                     "show_on_display": "desktop_and_mobile",
-                    "heading": "En combien de temps voit-on les résultats ?",
+                    "heading": "Le sac prend-il beaucoup de place ?",
                     "heading_tag": "p",
                     "heading_style": "paragraph",
                     "open_by_default": false,
@@ -2716,7 +2139,7 @@
                       "type": "text",
                       "settings": {
                         "show_on_display": "desktop_and_mobile",
-                        "text": "<p>Nous travaillons rapidement pour envoyer votre commande dès que possible. Une fois votre commande expédiée, vous recevrez un email avec des informations supplémentaires. Les délais de livraison varient en fonction de votre emplacement.</p>",
+                        "text": "<p>Le format reste pensé pour transporter un repas sans encombrer inutilement. Certains modèles compacts se rangent facilement une fois vides.</p>",
                         "text_style": "paragraph",
                         "paragraph_font_size": "normal",
                         "font_weight": 400,
@@ -2743,7 +2166,7 @@
                   "type": "_accordion",
                   "settings": {
                     "show_on_display": "desktop_and_mobile",
-                    "heading": "En combien de temps vais-je être livré ?",
+                    "heading": "Le sac isotherme garde-t-il aussi les repas chauds ?",
                     "heading_tag": "p",
                     "heading_style": "paragraph",
                     "open_by_default": false,
@@ -2756,7 +2179,7 @@
                       "type": "text",
                       "settings": {
                         "show_on_display": "desktop_and_mobile",
-                        "text": "<p>Nos produits sont fabriqués localement et à l'international. Nous sélectionnons soigneusement nos partenaires de fabrication pour garantir des produits de haute qualité à un prix juste.</p>",
+                        "text": "<p>Le sac isotherme garde-t-il aussi les repas chauds ?</p>",
                         "text_style": "paragraph",
                         "paragraph_font_size": "normal",
                         "font_weight": 400,

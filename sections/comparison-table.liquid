@@ -10,7 +10,6 @@
     </p>
 
     <div class="comparison-table">
-
       <div class="comparison-table-header">
         <div></div>
 
@@ -20,29 +19,66 @@
         </div>
 
         <div class="comparison-table-head">
-          <span class="head-icon classic">▢</span>
+          <span class="head-icon">□</span>
           <span>{{ section.settings.classic_column }}</span>
         </div>
       </div>
 
+      {% assign has_blocks = false %}
       {% for block in section.blocks %}
-        <div class="comparison-table-row" {{ block.shopify_attributes }}>
-          <div class="comparison-label">
-            <span class="label-icon">{{ block.settings.icon }}</span>
-            <strong>{{ block.settings.label }}</strong>
-          </div>
-
-          <div class="comparison-value">
-            <span class="check-icon">✓</span>
-            <span>{{ block.settings.brand_text }}</span>
-          </div>
-
-          <div class="comparison-value">
-            <span class="cross-icon">×</span>
-            <span>{{ block.settings.classic_text }}</span>
-          </div>
-        </div>
+        {% assign has_blocks = true %}
       {% endfor %}
+
+      {% if has_blocks %}
+        {% for block in section.blocks %}
+          <div class="comparison-table-row" {{ block.shopify_attributes }}>
+            <div class="comparison-label">
+              <span class="label-icon">{{ block.settings.icon }}</span>
+              <strong>{{ block.settings.label }}</strong>
+            </div>
+
+            <div class="comparison-value">
+              <span class="check-icon">✓</span>
+              <span>{{ block.settings.brand_text }}</span>
+            </div>
+
+            <div class="comparison-value">
+              <span class="cross-icon">×</span>
+              <span>{{ block.settings.classic_text }}</span>
+            </div>
+          </div>
+        {% endfor %}
+      {% else %}
+        <div class="comparison-table-row">
+          <div class="comparison-label"><span class="label-icon">💼</span><strong>Contrôle du budget</strong></div>
+          <div class="comparison-value"><span class="check-icon">✓</span><span>Tu prépares à l’avance et tu évites les achats impulsifs à l’extérieur.</span></div>
+          <div class="comparison-value"><span class="cross-icon">×</span><span>Tu dépenses plus facilement en options de dernière minute.</span></div>
+        </div>
+
+        <div class="comparison-table-row">
+          <div class="comparison-label"><span class="label-icon">🌱</span><strong>Contrôle de son alimentation</strong></div>
+          <div class="comparison-value"><span class="check-icon">✓</span><span>Tu choisis des repas adaptés à tes besoins et à ton rythme.</span></div>
+          <div class="comparison-value"><span class="cross-icon">×</span><span>Tu maîtrises moins la qualité et la composition de tes repas.</span></div>
+        </div>
+
+        <div class="comparison-table-row">
+          <div class="comparison-label"><span class="label-icon">🕒</span><strong>Meilleure organisation</strong></div>
+          <div class="comparison-value"><span class="check-icon">✓</span><span>Ton repas est prêt, rangé et facile à emporter avant de partir.</span></div>
+          <div class="comparison-value"><span class="cross-icon">×</span><span>Tu perds du temps à décider quoi acheter au dernier moment.</span></div>
+        </div>
+
+        <div class="comparison-table-row">
+          <div class="comparison-label"><span class="label-icon">🧘</span><strong>Plus de liberté au quotidien</strong></div>
+          <div class="comparison-value"><span class="check-icon">✓</span><span>Tu avances dans ta journée sans dépendre des options autour de toi.</span></div>
+          <div class="comparison-value"><span class="cross-icon">×</span><span>Tu dépends davantage de ce qui est disponible sur place.</span></div>
+        </div>
+
+        <div class="comparison-table-row">
+          <div class="comparison-label"><span class="label-icon">🍃</span><strong>Moins d’emballages jetables</strong></div>
+          <div class="comparison-value"><span class="check-icon">✓</span><span>Tu limites les emballages liés aux repas achetés à l’extérieur.</span></div>
+          <div class="comparison-value"><span class="cross-icon">×</span><span>Les repas à emporter ajoutent souvent plus d’emballages.</span></div>
+        </div>
+      {% endif %}
     </div>
 
     <div class="comparison-bottom-icons">
@@ -50,17 +86,14 @@
         <span>🛡️</span>
         <p>Conserve la fraîcheur<br>plus longtemps</p>
       </div>
-
       <div class="bottom-item">
         <span>💧</span>
         <p>Étanche et facile<br>à nettoyer</p>
       </div>
-
       <div class="bottom-item">
         <span>🪶</span>
         <p>Léger et confortable<br>à transporter</p>
       </div>
-
       <div class="bottom-item">
         <span>♡</span>
         <p>Pensé pour ton<br>quotidien actif</p>
@@ -209,7 +242,6 @@
 .comparison-bottom-icons {
   display: grid;
   grid-template-columns: repeat(4, 1fr);
-  gap: 0;
   max-width: 960px;
   margin: 28px auto 0;
 }
@@ -230,7 +262,6 @@
 .bottom-item span {
   font-size: 28px;
   line-height: 1;
-  color: #555;
 }
 
 .bottom-item p {
@@ -363,54 +394,7 @@
   ],
   "presets": [
     {
-      "name": "Tableau comparatif",
-      "blocks": [
-        {
-          "type": "row",
-          "settings": {
-            "icon": "💼",
-            "label": "Contrôle du budget",
-            "brand_text": "Tu prépares à l’avance et tu évites les achats impulsifs à l’extérieur.",
-            "classic_text": "Tu dépenses plus facilement en options de dernière minute."
-          }
-        },
-        {
-          "type": "row",
-          "settings": {
-            "icon": "🌱",
-            "label": "Contrôle de son alimentation",
-            "brand_text": "Tu choisis des repas adaptés à tes besoins et à ton rythme.",
-            "classic_text": "Tu maîtrises moins la qualité et la composition de tes repas."
-          }
-        },
-        {
-          "type": "row",
-          "settings": {
-            "icon": "🕒",
-            "label": "Meilleure organisation",
-            "brand_text": "Ton repas est prêt, rangé et facile à emporter avant de partir.",
-            "classic_text": "Tu perds du temps à décider quoi acheter au dernier moment."
-          }
-        },
-        {
-          "type": "row",
-          "settings": {
-            "icon": "🧘",
-            "label": "Plus de liberté au quotidien",
-            "brand_text": "Tu avances dans ta journée sans dépendre des options autour de toi.",
-            "classic_text": "Tu dépends davantage de ce qui est disponible sur place."
-          }
-        },
-        {
-          "type": "row",
-          "settings": {
-            "icon": "🍃",
-            "label": "Moins d’emballages jetables",
-            "brand_text": "Tu limites les emballages liés aux repas achetés à l’extérieur.",
-            "classic_text": "Les repas à emporter ajoutent souvent plus d’emballages."
-          }
-        }
-      ]
+      "name": "Tableau comparatif"
     }
   ]
 }

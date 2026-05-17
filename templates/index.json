@@ -1163,7 +1163,7 @@
               "type": "_accordion",
               "settings": {
                 "show_on_display": "desktop_and_mobile",
-                "heading": "Politique de retour",
+                "heading": "Comment fonctionne un sac isotherme ?",
                 "heading_tag": "p",
                 "heading_style": "paragraph",
                 "open_by_default": true,
@@ -1176,7 +1176,7 @@
                   "type": "text",
                   "settings": {
                     "show_on_display": "desktop_and_mobile",
-                    "text": "<p>Notre objectif est que chaque client soit totalement satisfait de son achat. Si ce n'est pas le cas, faites-le nous savoir et nous ferons de notre mieux pour trouver une solution avec vous.</p>",
+                    "text": "<p>Un sac isotherme ralentit les échanges de température entre l’intérieur et l’extérieur. Il aide à conserver un repas, une boisson ou une lunch box plus longtemps au frais ou au chaud selon le contenu placé à l’intérieur.</p>",
                     "text_style": "paragraph",
                     "paragraph_font_size": "normal",
                     "font_weight": 400,
@@ -1203,7 +1203,7 @@
               "type": "_accordion",
               "settings": {
                 "show_on_display": "desktop_and_mobile",
-                "heading": "Livraison",
+                "heading": "Combien de temps un sac isotherme garde-t-il le froid ?",
                 "heading_tag": "p",
                 "heading_style": "paragraph",
                 "open_by_default": false,
@@ -1216,7 +1216,7 @@
                   "type": "text",
                   "settings": {
                     "show_on_display": "desktop_and_mobile",
-                    "text": "<p>Nous travaillons rapidement pour envoyer votre commande dès que possible. Une fois votre commande expédiée, vous recevrez un email avec des informations supplémentaires. Les délais de livraison varient en fonction de votre emplacement.</p>",
+                    "text": "<p>La durée dépend du modèle, du remplissage du sac et de la température extérieure. Avec des aliments déjà froids et un pain de glace, la conservation peut durer plusieurs heures. </p>",
                     "text_style": "paragraph",
                     "paragraph_font_size": "normal",
                     "font_weight": 400,
@@ -1243,7 +1243,7 @@
               "type": "_accordion",
               "settings": {
                 "show_on_display": "desktop_and_mobile",
-                "heading": "Fabrication",
+                "heading": "Faut-il mettre un pain de glace dans un sac isotherme ?",
                 "heading_tag": "p",
                 "heading_style": "paragraph",
                 "open_by_default": false,
@@ -1256,7 +1256,7 @@
                   "type": "text",
                   "settings": {
                     "show_on_display": "desktop_and_mobile",
-                    "text": "<p>Nos produits sont fabriqués localement et à l'international. Nous sélectionnons soigneusement nos partenaires de fabrication pour garantir des produits de haute qualité à un prix juste.</p>",
+                    "text": "<p>Pour des trajets courts, ce n’est pas toujours nécessaire. Pour garder les aliments frais plus longtemps, un pain de glace améliore fortement la conservation thermique.</p>",
                     "text_style": "paragraph",
                     "paragraph_font_size": "normal",
                     "font_weight": 400,
@@ -1283,7 +1283,7 @@
               "type": "_accordion",
               "settings": {
                 "show_on_display": "desktop_and_mobile",
-                "heading": "Livraison",
+                "heading": "Politique de remboursement",
                 "heading_tag": "p",
                 "heading_style": "paragraph",
                 "open_by_default": false,
@@ -1323,7 +1323,7 @@
               "type": "_accordion",
               "settings": {
                 "show_on_display": "desktop_and_mobile",
-                "heading": "Fabrication",
+                "heading": "Délais de livraison",
                 "heading_tag": "p",
                 "heading_style": "paragraph",
                 "open_by_default": false,

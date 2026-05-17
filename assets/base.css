@@ -1141,7 +1141,11 @@ dropdown-component {
   width: 100% !important;
 }
 
-/* Barre verte sous le titre */
+.text-block.h2.text-block--center-desktop p,
+.text-block.h2.text-block--left-mobile p {
+  margin-bottom: 4px !important;
+}
+
 .text-block.h2.text-block--center-desktop p::after,
 .text-block.h2.text-block--left-mobile p::after {
   content: "";
@@ -1150,7 +1154,7 @@ dropdown-component {
   height: 4px;
   background: #536b59;
   border-radius: 999px;
-  margin: 4px auto 0;
+  margin: 4px auto 0 !important;
 }
 .group.group--flex {
   justify-content: center !important;

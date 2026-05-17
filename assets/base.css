@@ -1154,4 +1154,5 @@ dropdown-component {
 }
 .group.group--flex {
   justify-content: center !important;
+  transform: translateX(0px) !important;
 }

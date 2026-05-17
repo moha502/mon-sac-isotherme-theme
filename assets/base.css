@@ -1160,31 +1160,3 @@ dropdown-component {
   justify-content: center !important;
   transform: translateX(0px) !important;
 }
-/* Aligne les boutons Ajouter au panier sur mobile */
-@media screen and (max-width: 749px) {
-
-  .product-card-wrapper,
-  .card-wrapper,
-  .card {
-    height: 100%;
-    display: flex !important;
-    flex-direction: column;
-  }
-
-  .card__content,
-  .card__information {
-    flex: 1;
-    display: flex;
-    flex-direction: column;
-  }
-
-  .quick-add,
-  .product-form,
-  .card__buttons {
-    margin-top: auto !important;
-  }
-
-  .card__information {
-    min-height: 140px;
-  }
-}

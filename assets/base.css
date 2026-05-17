@@ -1161,43 +1161,26 @@ dropdown-component {
   transform: translateX(0px) !important;
 }
 @media screen and (max-width: 749px) {
-  .product-grid .grid__item {
-    display: flex !important;
-    flex-direction: column !important;
+
+  product-card {
+    display: flex;
+    flex-direction: column;
+    height: 100%;
   }
 
-  .product-grid .grid__item > * {
-    height: 100% !important;
-    display: flex !important;
-    flex-direction: column !important;
+  product-card .button-block.button-block--full-width {
+    margin-top: auto !important;
   }
 
-  .product-grid .product-card-wrapper,
-  .product-grid .card-wrapper,
-  .product-grid .card {
-    height: 100% !important;
-    display: flex !important;
-    flex-direction: column !important;
+  product-card .product-card__content,
+  product-card .product-card__info,
+  product-card .card__content {
+    flex: 1;
+    display: flex;
+    flex-direction: column;
   }
 
-  .product-grid .card__content {
-    flex: 1 !important;
-    display: flex !important;
-    flex-direction: column !important;
-  }
-
-  .product-grid .card__information {
-    flex: 1 !important;
-    min-height: 155px !important;
-  }
-
-  .product-grid button,
-  .product-grid .button,
-  .product-grid product-form,
-  .product-grid .product-form,
-  .product-grid .quick-add,
-  .product-grid .add-to-cart,
-  .product-grid .product-card__buttons {
+  product-card .button-block {
     margin-top: auto !important;
   }
 }

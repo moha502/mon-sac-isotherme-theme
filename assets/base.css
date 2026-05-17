@@ -1152,3 +1152,10 @@ dropdown-component {
   border-radius: 999px;
   margin: 12px auto 0;
 }
+@media (max-width: 749px) {
+  .collection-featured .product-card {
+    height: 100%;
+    display: flex;
+    flex-direction: column;
+  }
+}

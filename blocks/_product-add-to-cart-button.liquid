@@ -401,69 +401,78 @@
 {% endschema %}
 <script>
 (function () {
+
   function parseEuro(text) {
     if (!text) return 0;
-    const prices = text.replace(/\s/g, '').match(/\d+[,.]\d{2}€/g);
-    if (!prices || !prices.length) return 0;
 
-    const lastPrice = prices[prices.length - 1];
-    return parseFloat(lastPrice.replace('€', '').replace(',', '.'));
+    const match = text.replace(/\s/g, '').match(/(\d+[,.]\d{2})€/);
+
+    if (!match) return 0;
+
+    return parseFloat(match[1].replace(',', '.'));
   }
 
   function formatEuro(amount) {
     return amount.toFixed(2).replace('.', ',') + '€';
   }
 
-  function getActiveBundlePrice() {
-    const activeBundle = document.querySelector('.moonbundle-option-active');
-    if (!activeBundle) return 0;
-
-    const price = activeBundle.querySelector('.moonbundle-option-price');
-    return parseEuro(price ? price.textContent : activeBundle.textContent);
-  }
-
-  function getUpsellsTotal() {
-    let total = 0;
-
-    document.querySelectorAll('input[type="checkbox"]:checked').forEach(function (checkbox) {
-      if (checkbox.closest('.moonbundle-option')) return;
-
-      const row =
-        checkbox.closest('label') ||
-        checkbox.closest('[class*="upsell"]') ||
-        checkbox.closest('[class*="offer"]') ||
-        checkbox.closest('[class*="product"]') ||
-        checkbox.parentElement;
-
-      if (!row) return;
-
-      total += parseEuro(row.textContent);
-    });
-
-    return total;
-  }
-
   function updateButtonPrice() {
+
     const buttonPrice = document.getElementById('bundle-button-price');
     if (!buttonPrice) return;
 
-    const total = getActiveBundlePrice() + getUpsellsTotal();
+    let total = 0;
+
+    // BUNDLE ACTIF
+    const activeBundle = document.querySelector('.moonbundle-option-active');
+
+    if (activeBundle) {
+
+      const bundlePrice = activeBundle.querySelector('.moonbundle-option-price');
+
+      if (bundlePrice) {
+        total += parseEuro(bundlePrice.textContent);
+      }
+    }
+
+    // UPSELLS COCHÉS
+    const checkedUpsells = document.querySelectorAll(
+      '.moonbundle-upsell-item input[type="checkbox"]:checked'
+    );
+
+    checkedUpsells.forEach(function(checkbox) {
+
+      const upsellItem = checkbox.closest('.moonbundle-upsell-item');
+
+      if (!upsellItem) return;
+
+      const upsellPrice = upsellItem.querySelector(
+        '.moonbundle-upsell-price-container'
+      );
+
+      if (!upsellPrice) return;
+
+      total += parseEuro(upsellPrice.textContent);
+
+    });
 
     if (total > 0) {
       buttonPrice.textContent = formatEuro(total);
     }
+
   }
 
-  document.addEventListener('click', function () {
+  document.addEventListener('click', function() {
+    setTimeout(updateButtonPrice, 150);
+  });
+
+  document.addEventListener('change', function() {
+    setTimeout(updateButtonPrice, 150);
+  });
+
+  document.addEventListener('DOMContentLoaded', function() {
     setTimeout(updateButtonPrice, 300);
   });
 
-  document.addEventListener('change', function () {
-    setTimeout(updateButtonPrice, 300);
-  });
-
-  document.addEventListener('DOMContentLoaded', function () {
-    setTimeout(updateButtonPrice, 500);
-  });
 })();
 </script>

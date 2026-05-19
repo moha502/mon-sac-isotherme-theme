@@ -400,53 +400,70 @@
 }
 {% endschema %}
 <script>
-document.addEventListener('click', function() {
-  setTimeout(updateBundleButtonPrice, 100);
-});
+(function () {
+  function parseEuro(text) {
+    if (!text) return 0;
+    const prices = text.replace(/\s/g, '').match(/\d+[,.]\d{2}€/g);
+    if (!prices || !prices.length) return 0;
 
-document.addEventListener('change', function() {
-  setTimeout(updateBundleButtonPrice, 100);
-});
-
-function parseEuroPrice(text) {
-  if (!text) return 0;
-  const match = text.replace(/\s/g, '').match(/(\d+[,.]\d{2})€/);
-  if (!match) return 0;
-  return parseFloat(match[1].replace(',', '.'));
-}
-
-function formatEuroPrice(amount) {
-  return amount.toFixed(2).replace('.', ',') + '€';
-}
-
-function updateBundleButtonPrice() {
-  const buttonPrice = document.getElementById('bundle-button-price');
-  if (!buttonPrice) return;
-
-  let total = 0;
-
-  const activeBundle = document.querySelector('.moonbundle-option-active');
-  if (activeBundle) {
-    const bundlePrice = activeBundle.querySelector('.moonbundle-option-price');
-    total += parseEuroPrice(bundlePrice ? bundlePrice.textContent : '');
+    const lastPrice = prices[prices.length - 1];
+    return parseFloat(lastPrice.replace('€', '').replace(',', '.'));
   }
 
-  const checkedUpsells = document.querySelectorAll(
-    'input[type="checkbox"]:checked'
-  );
+  function formatEuro(amount) {
+    return amount.toFixed(2).replace('.', ',') + '€';
+  }
 
-  checkedUpsells.forEach(function(checkbox) {
-    const upsellBox = checkbox.closest('label, div');
-    if (!upsellBox) return;
+  function getActiveBundlePrice() {
+    const activeBundle = document.querySelector('.moonbundle-option-active');
+    if (!activeBundle) return 0;
 
-    const priceText = upsellBox.textContent;
-    total += parseEuroPrice(priceText);
+    const price = activeBundle.querySelector('.moonbundle-option-price');
+    return parseEuro(price ? price.textContent : activeBundle.textContent);
+  }
+
+  function getUpsellsTotal() {
+    let total = 0;
+
+    document.querySelectorAll('input[type="checkbox"]:checked').forEach(function (checkbox) {
+      if (checkbox.closest('.moonbundle-option')) return;
+
+      const row =
+        checkbox.closest('label') ||
+        checkbox.closest('[class*="upsell"]') ||
+        checkbox.closest('[class*="offer"]') ||
+        checkbox.closest('[class*="product"]') ||
+        checkbox.parentElement;
+
+      if (!row) return;
+
+      total += parseEuro(row.textContent);
+    });
+
+    return total;
+  }
+
+  function updateButtonPrice() {
+    const buttonPrice = document.getElementById('bundle-button-price');
+    if (!buttonPrice) return;
+
+    const total = getActiveBundlePrice() + getUpsellsTotal();
+
+    if (total > 0) {
+      buttonPrice.textContent = formatEuro(total);
+    }
+  }
+
+  document.addEventListener('click', function () {
+    setTimeout(updateButtonPrice, 300);
   });
 
-  if (total > 0) {
-    buttonPrice.textContent = formatEuroPrice(total);
-  }
-}
+  document.addEventListener('change', function () {
+    setTimeout(updateButtonPrice, 300);
+  });
 
-document.addEventListener('DOMContentLoaded', updateBundleButtonPrice);
+  document.addEventListener('DOMContentLoaded', function () {
+    setTimeout(updateButtonPrice, 500);
+  });
+})();
 </script>

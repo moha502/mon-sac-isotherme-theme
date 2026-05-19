@@ -852,28 +852,6 @@
     "reviews_rXFabc": {
       "type": "reviews",
       "blocks": {
-        "review_slide_4NGNzk": {
-          "type": "_review-slide",
-          "name": "t:review_display_1",
-          "settings": {
-            "show_on_display": "desktop_and_mobile",
-            "display_type": "2",
-            "wrap_in_card": true,
-            "color_scheme": "scheme-1",
-            "show_card_border": true,
-            "rating": 5,
-            "image_ratio": "landscape",
-            "source": "uploaded",
-            "title": "Sarah B.",
-            "content": "<p>Bon sac. Tissu rigide qui garantit une longue durée de vie. Les mesures correspondent à la description. Les coutures sont solides. Je l'ai lavé et il ne déteint absolument pas.</p>",
-            "author": "",
-            "date": "",
-            "margin_top": 0,
-            "margin_bottom": 0,
-            "additional_class": ""
-          },
-          "blocks": {}
-        },
         "review_slide_69Xym4": {
           "type": "_review-slide",
           "name": "t:review_display_1",
@@ -1410,7 +1388,6 @@
         }
       },
       "block_order": [
-        "review_slide_4NGNzk",
         "review_slide_69Xym4",
         "review_slide_EHXt7q",
         "review_slide_EQYFUn",

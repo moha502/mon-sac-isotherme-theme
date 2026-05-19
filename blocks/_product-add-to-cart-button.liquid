@@ -401,7 +401,6 @@
 {% endschema %}
 <script>
 document.addEventListener('click', function(event) {
-
   const bundle = event.target.closest('.moonbundle-option');
   if (!bundle) return;
 
@@ -409,10 +408,10 @@ document.addEventListener('click', function(event) {
   if (!buttonPrice) return;
 
   const priceElement = bundle.querySelector('.moonbundle-option-price');
-
   if (!priceElement) return;
 
-  buttonPrice.innerHTML = priceElement.innerHTML;
+  const firstPrice = priceElement.textContent.trim().split(/\s+/)[0];
 
+  buttonPrice.textContent = firstPrice;
 });
 </script>

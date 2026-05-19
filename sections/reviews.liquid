@@ -14,9 +14,14 @@
   id="{{ section.settings.anchor }}"
 >
   <div class="page-width">
-    {% content_for 'block', type: 'text', id: 'title' %}
+{% content_for 'block', type: 'text', id: 'title' %}
 
-    {% capture reviews %}
+{% if section.settings.subtitle != blank %}
+  <p class="reviews__subtitle">{{ section.settings.subtitle }}</p>
+{% endif %}
+
+{% capture reviews %}
+
       {% content_for 'blocks' %}
     {% endcapture %}
 
@@ -306,7 +311,13 @@
     {
       "type": "paragraph",
       "content": "t:go_further_description"
-    }
+    },
+    {
+  "type": "text",
+  "id": "subtitle",
+  "label": "Sous-titre"
+}
+
   ],
   "presets": [
     {

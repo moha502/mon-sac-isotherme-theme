@@ -94,7 +94,9 @@
           {% if block.settings.show_price %}
             <span class="button__separator">|</span>
             
-            {% render 'price', from_product: product, sales_badge: 'none' %}
+           <span id="bundle-button-price">
+  {% render 'price', from_product: product, sales_badge: 'none' %}
+</span>
           {% endif %}
 
           {% if block.settings.icon_position == 'end' and icon != blank and preorder == false %}
@@ -397,3 +399,20 @@
   ]
 }
 {% endschema %}
+<script>
+document.addEventListener('click', function(event) {
+  const bundle = event.target.closest('.bundle-option');
+  if (!bundle) return;
+
+  const buttonPrice = document.getElementById('bundle-button-price');
+  if (!buttonPrice) return;
+
+  const priceElement = bundle.querySelector(
+    '.price, .bundle-price, [class*="price"], [class*="Price"]'
+  );
+
+  if (!priceElement) return;
+
+  buttonPrice.innerHTML = priceElement.innerHTML;
+});
+</script>

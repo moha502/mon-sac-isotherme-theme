@@ -136,7 +136,7 @@
                   "name": "t:button",
                   "settings": {
                     "show_on_display": "desktop_and_mobile",
-                    "link": "",
+                    "link": "shopify://collections/frontpage",
                     "open_in_new_tab": false,
                     "label": "Voir les sacs isothermes",
                     "button_style": "primary",
@@ -800,7 +800,7 @@
                   "name": "t:button",
                   "settings": {
                     "show_on_display": "desktop_and_mobile",
-                    "link": "",
+                    "link": "shopify://collections/frontpage",
                     "open_in_new_tab": false,
                     "label": "Découvrir",
                     "button_style": "primary",
@@ -1506,7 +1506,7 @@
           "name": "t:button",
           "settings": {
             "show_on_display": "desktop_and_mobile",
-            "link": "",
+            "link": "shopify://collections/frontpage",
             "open_in_new_tab": false,
             "label": "Découvrir nos produits",
             "button_style": "primary",

@@ -67,29 +67,6 @@
           },
           "blocks": {}
         },
-        "review_pHN76K": {
-          "type": "review",
-          "name": "t:review_display_1",
-          "settings": {
-            "show_on_display": "desktop_and_mobile",
-            "display_type": "1",
-            "wrap_in_card": true,
-            "color_scheme": "scheme-1",
-            "show_card_border": false,
-            "rating": 0,
-            "image_ratio": "landscape",
-            "source": "uploaded",
-            "video_url": "",
-            "title": "Excellent produit !",
-            "content": "<p>Écrivez un retour à propos de vos produits. Ajustez le nombre de colonnes en fonction de la taille moyenne des messages.</p>",
-            "author": "John Doe",
-            "date": "Le 11/03/2025",
-            "margin_top": 0,
-            "margin_bottom": 0,
-            "additional_class": "hide-review-stars"
-          },
-          "blocks": {}
-        },
         "group_QH4Wig": {
           "type": "group",
           "name": "t:icons_and_text_inline",
@@ -210,9 +187,9 @@
                 "icon_custom": "",
                 "icon_size": 22,
                 "icon_position": "start",
-                "text": "<p>Rien ne bouge pendant le trajet</p>",
+                "text": "<p>Rien ne bouge pendant le trajet </p>",
                 "text_style": "paragraph",
-                "font_weight": 400,
+                "font_weight": 500,
                 "margin_top": 0,
                 "margin_bottom": 0,
                 "additional_class": ""
@@ -236,7 +213,7 @@
                 "icon_position": "start",
                 "text": "<p>La journée continue sans pause imposée pour manger</p>",
                 "text_style": "paragraph",
-                "font_weight": 400,
+                "font_weight": 500,
                 "margin_top": 0,
                 "margin_bottom": 0,
                 "additional_class": ""
@@ -494,7 +471,7 @@
             "show_on_display": "desktop_and_mobile",
             "layout_direction_desktop": "row",
             "layout_gap_desktop": 5,
-            "same_as_desktop": true,
+            "same_as_desktop": false,
             "layout_direction_mobile": "column",
             "layout_gap_mobile": 10,
             "icon_type": "icon",
@@ -502,12 +479,12 @@
             "icon_custom": "",
             "icon_size": 22,
             "icon_position": "start",
-            "text": "<p>Garantit 3 ans  </p>",
+            "text": "<p>Garantit 3 ans    </p>",
             "text_style": "paragraph",
             "font_weight": 400,
             "margin_top": 0,
             "margin_bottom": 0,
-            "additional_class": "pdp-trust-inline pdp-trust-flex"
+            "additional_class": ""
           },
           "blocks": {}
         },
@@ -731,7 +708,6 @@
         "rating_stars_Krck47",
         "text_zLqMQw",
         "price_yEeMeb",
-        "review_pHN76K",
         "group_QH4Wig",
         "product_form_grYQk6",
         "payment_methods_BdjpFB",
@@ -2478,20 +2454,6 @@
     },
     "17791947081887d1bb": {
       "type": "apps",
-      "blocks": {
-        "judge_me_reviews_review_widget_bBiiqd": {
-          "type": "shopify://apps/judge-me-reviews/blocks/review_widget/61ccd3b1-a9f2-4160-9fe9-4fec8413e5d8",
-          "settings": {
-            "review_data": "real_data",
-            "max_width": 1200,
-            "show_shop_reviews": false,
-            "empty_state": "empty_widget"
-          }
-        }
-      },
-      "block_order": [
-        "judge_me_reviews_review_widget_bBiiqd"
-      ],
       "settings": {}
     }
   },

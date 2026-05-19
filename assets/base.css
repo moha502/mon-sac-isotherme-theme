@@ -1196,3 +1196,10 @@ dropdown-component {
 .block-group_3Pie6V {
   margin-left: -4px;
 }
+.review-subtitle {
+  font-size: 13px;
+  color: #6f6f6f;
+  margin-top: 12px;
+  margin-bottom: 28px;
+  line-height: 1.4;
+}

@@ -1508,7 +1508,7 @@
             "show_on_display": "desktop_and_mobile",
             "link": "shopify://collections/frontpage",
             "open_in_new_tab": false,
-            "label": "Découvrir nos produits",
+            "label": "Notre histoire",
             "button_style": "primary",
             "button_shape": "default",
             "icon": "arrow_forward",

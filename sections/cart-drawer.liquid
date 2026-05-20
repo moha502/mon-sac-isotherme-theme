@@ -241,8 +241,8 @@
       {% assign compare_price = item.variant.compare_at_price %}
     {% endif %}
 {% assign compare_line_price = compare_price | times: item.quantity %}
-    {%- if compare_price > item.final_line_price -%}
-      {% render 'price', price: item.final_line_price, compare_price: compare_line_price, sales_badge: 'none' %}
+   {%- if compare_line_price > item.final_line_price -%}
+     {% render 'price', price: item.final_line_price, compare_price: compare_line_price, sales_badge: 'none' %}
     {%- else -%}
       {% render 'price', price: item.final_line_price, sales_badge: 'none' %}
     {%- endif -%}

@@ -1506,7 +1506,7 @@
           "name": "t:button",
           "settings": {
             "show_on_display": "desktop_and_mobile",
-            "link": "shopify://collections/frontpage",
+            "link": "shopify://pages/notre-histoire",
             "open_in_new_tab": false,
             "label": "Notre histoire",
             "button_style": "primary",

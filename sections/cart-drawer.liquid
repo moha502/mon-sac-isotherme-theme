@@ -234,27 +234,45 @@
                   {%- endif -%}
 
                   <div class="cart-drawer__item-prices">
-                    <div class="cart-drawer__item-price">
-                      {% assign compare_price = item.original_price %}
-                      {% if item.variant.compare_at_price > item.original_price %}
-                        {% assign compare_price = item.variant.compare_at_price %}
-                      {% endif %}
+  <div class="cart-drawer__item-price">
 
-                      {%- if compare_price > item.final_line_price -%}
-                        {% render 'price', price: item.final_line_price, compare_price: compare_price, sales_badge: 'none' %}
-                      {%- else -%}
-                        {% render 'price', price: item.final_line_price, sales_badge: 'none' %}
-                      {%- endif -%}
+    {% assign compare_price = item.original_price %}
 
-                      <div class="cart-drawer__item-discounts">
-                        {%- for discount in item.line_level_discount_allocations -%}
-                          <span class="cart-drawer__item-discount badge badge--secondary badge--small">
-                            {% render 'icon', icon: 'shoppingmode' %}
-                            <span>{{ discount.discount_application.title }}</span>
-                          </span>
-                        {%- endfor -%}
-                      </div>
-                    </div>
+    {% if item.variant.compare_at_price > item.original_price %}
+      {% assign compare_price = item.variant.compare_at_price %}
+    {% endif %}
+
+    {% assign compare_line_price = compare_price | times: item.quantity %}
+
+    {% if compare_line_price > item.final_line_price %}
+
+      <span class="price">
+        {{ item.final_line_price | money }}
+      </span>
+
+      <span class="price price--compare">
+        {{ compare_line_price | money }}
+      </span>
+
+    {% else %}
+
+      <span class="price">
+        {{ item.final_line_price | money }}
+      </span>
+
+    {% endif %}
+
+    <div class="cart-drawer__item-discounts">
+      {%- for discount in item.line_level_discount_allocations -%}
+        <span class="cart-drawer__item-discount badge badge--secondary badge--small">
+          {% render 'icon', icon: 'shoppingmode' %}
+          {{ discount.discount_application.title }}
+        </span>
+      {%- endfor -%}
+    </div>
+
+  </div>
+</div>
                   </div>
                 </div>
 

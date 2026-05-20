@@ -1,0 +1,131 @@
+<div class="sitemap-container">
+ 
+  {% if section.settings.sitemap_products_enable %}
+    <section class="sitemap-block" aria-labelledby="sitemap-products">
+      <h2 class="sitemap-title" id="sitemap-products">Produits</h2>
+      {% paginate collections.all.products by 2000 %}
+        <ul class="sitemap-list">
+          {% for product in collections.all.products %}
+            <li class="sitemap-item">
+              <a href="{{ product.url }}" class="sitemap-link">{{ product.title }}</a>
+            </li>
+          {% endfor %}
+        </ul>
+      {% endpaginate %}
+    </section>
+  {% endif %}
+ 
+  {% if section.settings.sitemap_collections_enable %}
+    <section class="sitemap-block" aria-labelledby="sitemap-collections">
+      <h2 class="sitemap-title" id="sitemap-collections">Collections</h2>
+      <ul class="sitemap-list">
+        {% for collection in collections %}
+          <li class="sitemap-item">
+            <a href="{{ collection.url }}" class="sitemap-link">{{ collection.title }}</a>
+          </li>
+        {% endfor %}
+      </ul>
+    </section>
+  {% endif %}
+ 
+  {% if section.settings.sitemap_blog_enable %}
+    <section class="sitemap-block" aria-labelledby="sitemap-blogs">
+      <h2 class="sitemap-title" id="sitemap-blogs">Articles de blog</h2>
+      {% assign blog_handles = section.settings.sitemap_blog_name | split: ";" %}
+      {% for blog_handle in blog_handles %}
+        {% assign blog = blogs[blog_handle] %}
+        {% if blog %}
+          <h3 class="sitemap-subtitle">{{ blog.title }}</h3>
+          <ul class="sitemap-list">
+            {% for article in blog.articles limit: 2000 %}
+              <li class="sitemap-item">
+                <a href="{{ article.url }}" class="sitemap-link">{{ article.title }}</a>
+              </li>
+            {% endfor %}
+          </ul>
+        {% endif %}
+      {% endfor %}
+    </section>
+  {% endif %}
+ 
+</div>
+ 
+<style>
+  .sitemap-container {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 2rem;
+    padding: 2rem 1rem;
+  }
+ 
+  .sitemap-block {
+    flex: 1 1 300px;
+    min-width: 280px;
+  }
+ 
+  .sitemap-title {
+    font-size: 1.5rem;
+    margin-bottom: 1rem;
+    color: #444;
+  }
+ 
+  .sitemap-subtitle {
+    font-size: 1.2rem;
+    margin: 0.5rem 0;
+    color: #666;
+  }
+ 
+  .sitemap-list {
+    list-style: none;
+    padding-left: 0;
+    margin: 0;
+  }
+ 
+  .sitemap-item {
+    margin-bottom: 0.5rem;
+  }
+ 
+  .sitemap-link {
+    color: #555;
+    text-decoration: none;
+    transition: color 0.2s ease;
+  }
+ 
+  .sitemap-link:hover {
+    color: #222;
+    text-decoration: underline;
+  }
+</style>
+ 
+{% schema %}
+{
+  "name": "Plan du site",
+  "settings": [
+    {
+      "type": "checkbox",
+      "id": "sitemap_products_enable",
+      "label": "Afficher la liste des produits",
+      "default": true
+    },
+    {
+      "type": "checkbox",
+      "id": "sitemap_collections_enable",
+      "label": "Afficher la liste des collections",
+      "default": true
+    },
+    {
+      "type": "checkbox",
+      "id": "sitemap_blog_enable",
+      "label": "Afficher la liste des articles de blog",
+      "default": true
+    },
+    {
+      "type": "text",
+      "id": "sitemap_blog_name",
+      "label": "Identifiant du blog (ex : infos)",
+      "default": "infos",
+      "info": "Si plusieurs blogs, sépare-les avec un point-virgule : blog1;blog2"
+    }
+  ]
+}
+{% endschema %}

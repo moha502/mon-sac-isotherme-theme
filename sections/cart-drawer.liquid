@@ -90,9 +90,9 @@
   <span class="cart-drawer__ebook-free">OFFERT</span>
   <span class="cart-drawer__ebook-compare">{{ compare_price | money }}</span>
 {%- elsif compare_price > item.final_price -%}
-  {% render 'price', price: item.final_price, compare_price: compare_price, sales_badge: 'none' %}
+ {% render 'price', price: item.final_line_price, compare_price: compare_price, sales_badge: 'none' %}
 {%- else -%}
-  {% render 'price', price: item.final_price, sales_badge: 'none' %}
+ {% render 'price', price: item.final_line_price, sales_badge: 'none' %}
 {%- endif -%}
                 </div>
               </div>

@@ -89,7 +89,7 @@
                   {%- if item.product.handle contains 'ebook' -%}
   <span class="cart-drawer__ebook-free">OFFERT</span>
   <span class="cart-drawer__ebook-compare">{{ compare_price | money }}</span>
-{%- elsif compare_price > item.final_price -%}
+{%- elsif compare_price > item.final_line_price -%}
 <span class="price">
   {{ item.final_line_price | money }}
 </span>
@@ -236,10 +236,10 @@
                         {% assign compare_price = item.variant.compare_at_price %}
                       {% endif %}
 
-                      {%- if compare_price > item.final_price -%}
-                        {% render 'price', price: item.final_price, compare_price: compare_price, sales_badge: 'none' %}
+                      {%- if compare_price > item.final_line_price -%}
+                        {% render 'price', price: item.final_line_price, compare_price: compare_price, sales_badge: 'none' %}
                       {%- else -%}
-                        {% render 'price', price: item.final_price, sales_badge: 'none' %}
+                        {% render 'price', price: item.final_line_price, sales_badge: 'none' %}
                       {%- endif -%}
 
                       <div class="cart-drawer__item-discounts">
@@ -298,8 +298,8 @@
         assign total_savings = 0
         for item in cart.items
           assign compare_price = item.variant.compare_at_price
-          if compare_price != blank and compare_price > item.final_price
-            assign line_savings = compare_price | minus: item.final_price | times: item.quantity
+          if compare_price != blank and compare_price > item.final_line_price
+            assign line_savings = compare_price | minus: item.final_line_price | times: item.quantity
             assign total_savings = total_savings | plus: line_savings
           endif
         endfor
@@ -309,8 +309,8 @@
   assign total_savings = 0
   for item in cart.items
     assign compare_price = item.variant.compare_at_price
-    if compare_price != blank and compare_price > item.final_price
-      assign line_savings = compare_price | minus: item.final_price | times: item.quantity
+    if compare_price != blank and compare_price > item.final_line_price
+      assign line_savings = compare_price | minus: item.final_line_price | times: item.quantity
       assign total_savings = total_savings | plus: line_savings
     endif
   endfor
@@ -322,12 +322,12 @@
   for item in cart.items
     assign compare_price = item.variant.compare_at_price
 
-    if compare_price == blank or compare_price <= item.final_price
+    if compare_price == blank or compare_price <= item.final_line_price
       assign compare_price = item.original_price
     endif
 
-    if compare_price > item.final_price
-      assign unit_savings = compare_price | minus: item.final_price
+    if compare_price > item.final_line_price
+      assign unit_savings = compare_price | minus: item.final_line_price
       assign line_savings = unit_savings | times: item.quantity
       assign total_savings = total_savings | plus: line_savings
     endif

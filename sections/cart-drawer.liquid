@@ -90,13 +90,17 @@
   <span class="cart-drawer__ebook-free">OFFERT</span>
   <span class="cart-drawer__ebook-compare">{{ compare_price | money }}</span>
 {%- elsif compare_price > item.final_line_price -%}
-<span class="price">
-  {{ item.final_line_price | money }}
-</span>
+  <span class="price">
+    {{ item.final_line_price | money }}
+  </span>
+
+  <span class="price price--compare">
+    {{ compare_price | money }}
+  </span>
 {%- else -%}
-<span class="price">
-  {{ item.final_line_price | money }}
-</span>
+  <span class="price">
+    {{ item.final_line_price | money }}
+  </span>
 {%- endif -%}
                 </div>
               </div>

@@ -488,54 +488,6 @@
           },
           "blocks": {}
         },
-        "icon_with_text_NW64T4": {
-          "type": "icon-with-text",
-          "name": "t:icon_with_text",
-          "settings": {
-            "show_on_display": "desktop_and_mobile",
-            "layout_direction_desktop": "row",
-            "layout_gap_desktop": 5,
-            "same_as_desktop": true,
-            "layout_direction_mobile": "column",
-            "layout_gap_mobile": 10,
-            "icon_type": "icon",
-            "icon": "favorite",
-            "icon_custom": "",
-            "icon_size": 22,
-            "icon_position": "start",
-            "text": "<p>Icône avec texte</p>",
-            "text_style": "paragraph",
-            "font_weight": 400,
-            "margin_top": 0,
-            "margin_bottom": 0,
-            "additional_class": "pdp-trust-inline pdp-trust-flex"
-          },
-          "blocks": {}
-        },
-        "icon_with_text_TwaJYw": {
-          "type": "icon-with-text",
-          "name": "t:icon_with_text",
-          "settings": {
-            "show_on_display": "desktop_and_mobile",
-            "layout_direction_desktop": "row",
-            "layout_gap_desktop": 5,
-            "same_as_desktop": true,
-            "layout_direction_mobile": "column",
-            "layout_gap_mobile": 10,
-            "icon_type": "icon",
-            "icon": "favorite",
-            "icon_custom": "",
-            "icon_size": 22,
-            "icon_position": "start",
-            "text": "<p>Icône avec texte</p>",
-            "text_style": "paragraph",
-            "font_weight": 400,
-            "margin_top": 0,
-            "margin_bottom": 0,
-            "additional_class": "pdp-trust-inline pdp-trust-flex"
-          },
-          "blocks": {}
-        },
         "accordions_KKUaHK": {
           "type": "accordions",
           "name": "t:accordions",
@@ -712,8 +664,6 @@
         "product_form_grYQk6",
         "payment_methods_BdjpFB",
         "icon_with_text_NtYC8Y",
-        "icon_with_text_NW64T4",
-        "icon_with_text_TwaJYw",
         "accordions_KKUaHK"
       ],
       "settings": {

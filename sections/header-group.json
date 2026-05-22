@@ -47,80 +47,10 @@
           "block_order": [
             "text_Lk3QUw"
           ]
-        },
-        "announcement_VprFGF": {
-          "type": "_announcement",
-          "settings": {
-            "layout_gap": 10,
-            "additional_class": ""
-          },
-          "blocks": {
-            "text_ndz4fN": {
-              "type": "text",
-              "settings": {
-                "show_on_display": "desktop_and_mobile",
-                "text": "<p>Livraison offerte dès [X]€ d'achat</p>",
-                "text_style": "paragraph",
-                "paragraph_font_size": "normal",
-                "font_weight": 400,
-                "alignment": "center",
-                "alignment_mobile": "center",
-                "show_read_more": false,
-                "read_more_length": 200,
-                "read_more_text": "Voir plus",
-                "read_less_text": "Voir moins",
-                "truncate": false,
-                "truncate_length": 2,
-                "margin_top": 0,
-                "margin_bottom": 0,
-                "additional_class": ""
-              },
-              "blocks": {}
-            }
-          },
-          "block_order": [
-            "text_ndz4fN"
-          ]
-        },
-        "announcement_TVKVNW": {
-          "type": "_announcement",
-          "settings": {
-            "layout_gap": 10,
-            "additional_class": ""
-          },
-          "blocks": {
-            "text_P6mECF": {
-              "type": "text",
-              "settings": {
-                "show_on_display": "desktop_and_mobile",
-                "text": "<p>Paiements en 3x, cadeau offert...</p>",
-                "text_style": "paragraph",
-                "paragraph_font_size": "normal",
-                "font_weight": 400,
-                "alignment": "center",
-                "alignment_mobile": "center",
-                "show_read_more": false,
-                "read_more_length": 200,
-                "read_more_text": "Voir plus",
-                "read_less_text": "Voir moins",
-                "truncate": false,
-                "truncate_length": 2,
-                "margin_top": 0,
-                "margin_bottom": 0,
-                "additional_class": ""
-              },
-              "blocks": {}
-            }
-          },
-          "block_order": [
-            "text_P6mECF"
-          ]
         }
       },
       "block_order": [
-        "announcement_y7tnxm",
-        "announcement_VprFGF",
-        "announcement_TVKVNW"
+        "announcement_y7tnxm"
       ],
       "name": "t:announcement_bar",
       "settings": {

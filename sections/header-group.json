@@ -25,7 +25,7 @@
               "type": "text",
               "settings": {
                 "show_on_display": "desktop_and_mobile",
-                "text": "<p>OFFRE PRINTEMPS  -20%</p>",
+                "text": "<p>OFFRE PRINTEMPS  JUSQU'A -20%</p>",
                 "text_style": "paragraph",
                 "paragraph_font_size": "normal",
                 "font_weight": 400,

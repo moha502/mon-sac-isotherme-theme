@@ -651,7 +651,7 @@
       "settings": {
         "show_on_display": "desktop_and_mobile",
         "color_scheme": "",
-        "collection": "frontpage",
+        "collection": "sac-isotherme-repas",
         "max_products": 8,
         "layout_type": "grid",
         "grid_columns": 4,

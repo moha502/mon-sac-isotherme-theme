@@ -540,6 +540,17 @@
                 "additional_class": ""
               },
               "blocks": {
+                "product_card_swatches_tTHyAt": {
+                  "type": "_product-card-swatches",
+                  "name": "t:swatches",
+                  "settings": {
+                    "show_on_display": "desktop_and_mobile",
+                    "swatches_size": "small",
+                    "swatches_rounded": true,
+                    "additional_class": ""
+                  },
+                  "blocks": {}
+                },
                 "text_kW3cUN": {
                   "type": "text",
                   "name": "t:text",
@@ -563,24 +574,6 @@
                   },
                   "blocks": {}
                 },
-                "rating_stars_VJ6F6G": {
-                  "type": "rating-stars",
-                  "name": "t:rating_stars",
-                  "settings": {
-                    "show_on_display": "desktop_and_mobile",
-                    "product": "{{ closest.product }}",
-                    "hide_rating_when_no_reviews": true,
-                    "rating": 4.5,
-                    "show_note": true,
-                    "show_review_count": true,
-                    "review_count": 123,
-                    "link": "",
-                    "margin_top": 0,
-                    "margin_bottom": 0,
-                    "additional_class": ""
-                  },
-                  "blocks": {}
-                },
                 "product_price_wqjabM": {
                   "type": "product-price",
                   "name": "t:product_price",
@@ -595,13 +588,20 @@
                   },
                   "blocks": {}
                 },
-                "product_card_swatches_67NCxp": {
-                  "type": "_product-card-swatches",
-                  "name": "t:swatches",
+                "rating_stars_VJ6F6G": {
+                  "type": "rating-stars",
+                  "name": "t:rating_stars",
                   "settings": {
                     "show_on_display": "desktop_and_mobile",
-                    "swatches_size": "small",
-                    "swatches_rounded": true,
+                    "product": "{{ closest.product }}",
+                    "hide_rating_when_no_reviews": true,
+                    "rating": 4.5,
+                    "show_note": true,
+                    "show_review_count": true,
+                    "review_count": 123,
+                    "link": "",
+                    "margin_top": 0,
+                    "margin_bottom": 0,
                     "additional_class": ""
                   },
                   "blocks": {}
@@ -627,10 +627,10 @@
                 }
               },
               "block_order": [
+                "product_card_swatches_tTHyAt",
                 "text_kW3cUN",
-                "rating_stars_VJ6F6G",
                 "product_price_wqjabM",
-                "product_card_swatches_67NCxp",
+                "rating_stars_VJ6F6G",
                 "button_e3JfxN"
               ]
             }

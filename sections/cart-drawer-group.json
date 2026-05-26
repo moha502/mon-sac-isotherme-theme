@@ -59,33 +59,6 @@
                     "additional_class": ""
                   },
                   "blocks": {
-                    "cross_sell_kr7PEc": {
-                      "type": "cross-sell",
-                      "name": "t:cross_sell",
-                      "settings": {
-                        "show_on_display": "desktop_and_mobile",
-                        "display_mode": "row",
-                        "color_scheme": "",
-                        "show_card_border": true,
-                        "products": [
-                          "denuoniss-small-thermal-cooler-backpack-mini-soft-toddler-backpack-cooler-waterproof-backpack-cooler-thermal-insulated-bag",
-                          "water-bottle-bag-portable-insulated-neoprene-holder-pouch-750ml-1000ml-1500ml-travel-thermos-cup-cover-with-adjustable-strap",
-                          "1-5l-60w-electric-lunch-box-food-warmer-portable-food-heater-for-car-or-home-leak-proof-lunch-heating-microwave-for-truckers"
-                        ],
-                        "title": "",
-                        "description": "",
-                        "show_image": true,
-                        "image_width": 75,
-                        "show_options_label": false,
-                        "price_position": "next_to_title",
-                        "button_content_type": "text",
-                        "button_content_icon": "add",
-                        "margin_top": 0,
-                        "margin_bottom": 0,
-                        "additional_class": ""
-                      },
-                      "blocks": {}
-                    },
                     "cross_sell_wVLFGN": {
                       "type": "cross-sell",
                       "name": "t:cross_sell",
@@ -111,7 +84,6 @@
                     }
                   },
                   "block_order": [
-                    "cross_sell_kr7PEc",
                     "cross_sell_wVLFGN"
                   ]
                 },

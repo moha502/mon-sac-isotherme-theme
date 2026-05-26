@@ -14,87 +14,6 @@
     "cart-drawer": {
       "type": "cart-drawer",
       "blocks": {
-        "cart_header_blocks": {
-          "type": "_cart-header-blocks",
-          "static": true,
-          "settings": {
-            "wrap_in_card": false,
-            "color_scheme": "",
-            "margin_top": 0,
-            "margin_bottom": 0
-          },
-          "blocks": {
-            "cart_progress_bar_dtN84U": {
-              "type": "_cart-progress-bar",
-              "name": "t:progress_bar",
-              "settings": {
-                "show_on_display": "desktop_and_mobile",
-                "progress_bar_based_on": "value",
-                "collection": "",
-                "step1_text": "Plus que # et la livraison est offerte !",
-                "step1_value": 30,
-                "step1_quantity": 3,
-                "step1_label": "",
-                "step2_text": "",
-                "step2_quantity": 0,
-                "step2_label": "",
-                "step3_text": "",
-                "step3_quantity": 0,
-                "step3_label": "",
-                "step_completed_text": "Félicitations vous bénéficiez de la livraison offerte !",
-                "margin_top": 0,
-                "margin_bottom": 0,
-                "additional_class": ""
-              },
-              "blocks": {}
-            }
-          },
-          "block_order": [
-            "cart_progress_bar_dtN84U"
-          ]
-        },
-        "cart_footer_resume_blocks": {
-          "type": "_cart-footer-resume-blocks",
-          "static": true,
-          "settings": {
-            "wrap_in_card": false,
-            "color_scheme": "",
-            "margin_top": 0,
-            "margin_bottom": 0
-          },
-          "blocks": {
-            "cross_sell_6A4GpG": {
-              "type": "cross-sell",
-              "name": "t:cross_sell",
-              "settings": {
-                "show_on_display": "desktop_and_mobile",
-                "display_mode": "row",
-                "color_scheme": "",
-                "show_card_border": true,
-                "products": [
-                  "new-1l-water-bottle-with-time-stamp-bpa-free-reusable-fitness-sports-outdoor-travel-leakproof-water-cup-frosted-kettle",
-                  "adult-bento-box-all-inone-japanese-stackable-lunch-box-with-removable-cutlery-set-and-sealing-tape-microwave-and-dishwasher-safe",
-                  "portable-ice-pack-reusable-freezer-ice-cooling-pack-long-lasting-cooling-water-fill-box-for-fresh-food-storage-refrigeration"
-                ],
-                "title": "",
-                "description": "",
-                "show_image": true,
-                "image_width": 75,
-                "show_options_label": false,
-                "price_position": "next_to_title",
-                "button_content_type": "text",
-                "button_content_icon": "add",
-                "margin_top": 0,
-                "margin_bottom": 0,
-                "additional_class": ""
-              },
-              "blocks": {}
-            }
-          },
-          "block_order": [
-            "cross_sell_6A4GpG"
-          ]
-        },
         "cart_footer_blocks": {
           "type": "_cart-drawer-footer-blocks",
           "static": true,
@@ -134,7 +53,172 @@
             "margin_top": 0,
             "margin_bottom": 0
           },
-          "blocks": {}
+          "blocks": {
+            "slider_az8GYi": {
+              "type": "slider",
+              "name": "t:slider_cross_sell",
+              "settings": {
+                "show_on_display": "desktop_and_mobile",
+                "per_page_desktop": 2,
+                "per_page_mobile": "1.8",
+                "gap": 15,
+                "show_arrows": false,
+                "arrows_button_style": "secondary",
+                "show_pagination": true,
+                "rewind": true,
+                "autoplay": true,
+                "autoplay_speed": 5,
+                "margin_top": 0,
+                "margin_bottom": 0,
+                "additional_class": ""
+              },
+              "blocks": {
+                "slide_3Xb6cp": {
+                  "type": "_slide",
+                  "name": "t:slide",
+                  "settings": {
+                    "wrap_in_card": false,
+                    "color_scheme": "scheme-2",
+                    "layout_direction": "row",
+                    "layout_wrap": "nowrap",
+                    "layout_gap": 10,
+                    "layout_justify": "flex-start",
+                    "layout_align_items": "flex-start",
+                    "margin_top": 0,
+                    "margin_bottom": 0,
+                    "additional_class": ""
+                  },
+                  "blocks": {
+                    "cross_sell_MiyYhY": {
+                      "type": "cross-sell",
+                      "name": "t:cross_sell",
+                      "settings": {
+                        "show_on_display": "desktop_and_mobile",
+                        "display_mode": "row",
+                        "color_scheme": "",
+                        "show_card_border": true,
+                        "products": [],
+                        "title": "",
+                        "description": "",
+                        "show_image": true,
+                        "image_width": 75,
+                        "show_options_label": false,
+                        "price_position": "next_to_title",
+                        "button_content_type": "text",
+                        "button_content_icon": "add",
+                        "margin_top": 0,
+                        "margin_bottom": 0,
+                        "additional_class": ""
+                      },
+                      "blocks": {}
+                    }
+                  },
+                  "block_order": [
+                    "cross_sell_MiyYhY"
+                  ]
+                },
+                "slide_9g96VY": {
+                  "type": "_slide",
+                  "name": "t:slide",
+                  "settings": {
+                    "wrap_in_card": false,
+                    "color_scheme": "",
+                    "layout_direction": "row",
+                    "layout_wrap": "nowrap",
+                    "layout_gap": 10,
+                    "layout_justify": "flex-start",
+                    "layout_align_items": "flex-start",
+                    "margin_top": 0,
+                    "margin_bottom": 0,
+                    "additional_class": ""
+                  },
+                  "blocks": {
+                    "cross_sell_iamjyW": {
+                      "type": "cross-sell",
+                      "name": "t:cross_sell",
+                      "settings": {
+                        "show_on_display": "desktop_and_mobile",
+                        "display_mode": "row",
+                        "color_scheme": "",
+                        "show_card_border": true,
+                        "products": [],
+                        "title": "",
+                        "description": "",
+                        "show_image": true,
+                        "image_width": 75,
+                        "show_options_label": false,
+                        "price_position": "next_to_title",
+                        "button_content_type": "text",
+                        "button_content_icon": "add",
+                        "margin_top": 0,
+                        "margin_bottom": 0,
+                        "additional_class": ""
+                      },
+                      "blocks": {}
+                    }
+                  },
+                  "block_order": [
+                    "cross_sell_iamjyW"
+                  ]
+                },
+                "slide_bR9bAh": {
+                  "type": "_slide",
+                  "name": "t:slide",
+                  "settings": {
+                    "wrap_in_card": false,
+                    "color_scheme": "",
+                    "layout_direction": "row",
+                    "layout_wrap": "nowrap",
+                    "layout_gap": 10,
+                    "layout_justify": "flex-start",
+                    "layout_align_items": "flex-start",
+                    "margin_top": 0,
+                    "margin_bottom": 0,
+                    "additional_class": ""
+                  },
+                  "blocks": {
+                    "cross_sell_7ByQiM": {
+                      "type": "cross-sell",
+                      "name": "t:cross_sell",
+                      "settings": {
+                        "show_on_display": "desktop_and_mobile",
+                        "display_mode": "row",
+                        "color_scheme": "",
+                        "show_card_border": true,
+                        "products": [
+                          "denuoniss-small-thermal-cooler-backpack-mini-soft-toddler-backpack-cooler-waterproof-backpack-cooler-thermal-insulated-bag",
+                          "water-bottle-bag-portable-insulated-neoprene-holder-pouch-750ml-1000ml-1500ml-travel-thermos-cup-cover-with-adjustable-strap"
+                        ],
+                        "title": "",
+                        "description": "",
+                        "show_image": true,
+                        "image_width": 75,
+                        "show_options_label": false,
+                        "price_position": "next_to_title",
+                        "button_content_type": "text",
+                        "button_content_icon": "add",
+                        "margin_top": 0,
+                        "margin_bottom": 0,
+                        "additional_class": ""
+                      },
+                      "blocks": {}
+                    }
+                  },
+                  "block_order": [
+                    "cross_sell_7ByQiM"
+                  ]
+                }
+              },
+              "block_order": [
+                "slide_3Xb6cp",
+                "slide_9g96VY",
+                "slide_bR9bAh"
+              ]
+            }
+          },
+          "block_order": [
+            "slider_az8GYi"
+          ]
         }
       },
       "settings": {

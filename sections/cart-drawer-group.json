@@ -77,7 +77,7 @@
                   "type": "_slide",
                   "name": "t:slide",
                   "settings": {
-                    "wrap_in_card": false,
+                    "wrap_in_card": true,
                     "color_scheme": "scheme-2",
                     "layout_direction": "row",
                     "layout_wrap": "nowrap",
@@ -97,7 +97,11 @@
                         "display_mode": "row",
                         "color_scheme": "",
                         "show_card_border": true,
-                        "products": [],
+                        "products": [
+                          "1-5l-60w-electric-lunch-box-food-warmer-portable-food-heater-for-car-or-home-leak-proof-lunch-heating-microwave-for-truckers",
+                          "denuoniss-small-thermal-cooler-backpack-mini-soft-toddler-backpack-cooler-waterproof-backpack-cooler-thermal-insulated-bag",
+                          "420-1500ml-neoprene-pouch-holder-sleeve-cover-sports-water-bottle-case-insulated-bag-carrier-for-mug-bottle-cup-storage-holder"
+                        ],
                         "title": "",
                         "description": "",
                         "show_image": true,

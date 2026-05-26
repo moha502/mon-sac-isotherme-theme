@@ -24,6 +24,192 @@
             "margin_bottom": 0
           },
           "blocks": {
+            "slider_MY4UKi": {
+              "type": "slider",
+              "name": "t:slider_cross_sell",
+              "settings": {
+                "show_on_display": "desktop_and_mobile",
+                "per_page_desktop": 1,
+                "per_page_mobile": "1",
+                "gap": 15,
+                "show_arrows": false,
+                "arrows_button_style": "secondary",
+                "show_pagination": true,
+                "rewind": true,
+                "autoplay": true,
+                "autoplay_speed": 5,
+                "margin_top": 0,
+                "margin_bottom": 0,
+                "additional_class": ""
+              },
+              "blocks": {
+                "slide_7nDDt9": {
+                  "type": "_slide",
+                  "name": "t:slide",
+                  "settings": {
+                    "wrap_in_card": false,
+                    "color_scheme": "scheme-2",
+                    "layout_direction": "row",
+                    "layout_wrap": "nowrap",
+                    "layout_gap": 10,
+                    "layout_justify": "flex-start",
+                    "layout_align_items": "flex-start",
+                    "margin_top": 0,
+                    "margin_bottom": 0,
+                    "additional_class": ""
+                  },
+                  "blocks": {
+                    "cross_sell_kr7PEc": {
+                      "type": "cross-sell",
+                      "name": "t:cross_sell",
+                      "settings": {
+                        "show_on_display": "desktop_and_mobile",
+                        "display_mode": "row",
+                        "color_scheme": "",
+                        "show_card_border": true,
+                        "products": [
+                          "denuoniss-small-thermal-cooler-backpack-mini-soft-toddler-backpack-cooler-waterproof-backpack-cooler-thermal-insulated-bag",
+                          "water-bottle-bag-portable-insulated-neoprene-holder-pouch-750ml-1000ml-1500ml-travel-thermos-cup-cover-with-adjustable-strap",
+                          "1-5l-60w-electric-lunch-box-food-warmer-portable-food-heater-for-car-or-home-leak-proof-lunch-heating-microwave-for-truckers"
+                        ],
+                        "title": "",
+                        "description": "",
+                        "show_image": true,
+                        "image_width": 75,
+                        "show_options_label": false,
+                        "price_position": "next_to_title",
+                        "button_content_type": "text",
+                        "button_content_icon": "add",
+                        "margin_top": 0,
+                        "margin_bottom": 0,
+                        "additional_class": ""
+                      },
+                      "blocks": {}
+                    },
+                    "cross_sell_wVLFGN": {
+                      "type": "cross-sell",
+                      "name": "t:cross_sell",
+                      "settings": {
+                        "show_on_display": "desktop_and_mobile",
+                        "display_mode": "row",
+                        "color_scheme": "",
+                        "show_card_border": true,
+                        "products": [],
+                        "title": "",
+                        "description": "",
+                        "show_image": true,
+                        "image_width": 75,
+                        "show_options_label": false,
+                        "price_position": "next_to_title",
+                        "button_content_type": "text",
+                        "button_content_icon": "add",
+                        "margin_top": 0,
+                        "margin_bottom": 0,
+                        "additional_class": ""
+                      },
+                      "blocks": {}
+                    }
+                  },
+                  "block_order": [
+                    "cross_sell_kr7PEc",
+                    "cross_sell_wVLFGN"
+                  ]
+                },
+                "slide_ntK8ep": {
+                  "type": "_slide",
+                  "name": "t:slide",
+                  "settings": {
+                    "wrap_in_card": false,
+                    "color_scheme": "",
+                    "layout_direction": "row",
+                    "layout_wrap": "nowrap",
+                    "layout_gap": 10,
+                    "layout_justify": "flex-start",
+                    "layout_align_items": "flex-start",
+                    "margin_top": 0,
+                    "margin_bottom": 0,
+                    "additional_class": ""
+                  },
+                  "blocks": {
+                    "cross_sell_MaLERp": {
+                      "type": "cross-sell",
+                      "name": "t:cross_sell",
+                      "settings": {
+                        "show_on_display": "desktop_and_mobile",
+                        "display_mode": "row",
+                        "color_scheme": "",
+                        "show_card_border": true,
+                        "products": [],
+                        "title": "",
+                        "description": "",
+                        "show_image": true,
+                        "image_width": 75,
+                        "show_options_label": false,
+                        "price_position": "next_to_title",
+                        "button_content_type": "text",
+                        "button_content_icon": "add",
+                        "margin_top": 0,
+                        "margin_bottom": 0,
+                        "additional_class": ""
+                      },
+                      "blocks": {}
+                    }
+                  },
+                  "block_order": [
+                    "cross_sell_MaLERp"
+                  ]
+                },
+                "slide_UCMKg6": {
+                  "type": "_slide",
+                  "name": "t:slide",
+                  "settings": {
+                    "wrap_in_card": false,
+                    "color_scheme": "",
+                    "layout_direction": "row",
+                    "layout_wrap": "nowrap",
+                    "layout_gap": 10,
+                    "layout_justify": "flex-start",
+                    "layout_align_items": "flex-start",
+                    "margin_top": 0,
+                    "margin_bottom": 0,
+                    "additional_class": ""
+                  },
+                  "blocks": {
+                    "cross_sell_EhgC33": {
+                      "type": "cross-sell",
+                      "name": "t:cross_sell",
+                      "settings": {
+                        "show_on_display": "desktop_and_mobile",
+                        "display_mode": "row",
+                        "color_scheme": "",
+                        "show_card_border": true,
+                        "products": [],
+                        "title": "",
+                        "description": "",
+                        "show_image": true,
+                        "image_width": 75,
+                        "show_options_label": false,
+                        "price_position": "next_to_title",
+                        "button_content_type": "text",
+                        "button_content_icon": "add",
+                        "margin_top": 0,
+                        "margin_bottom": 0,
+                        "additional_class": ""
+                      },
+                      "blocks": {}
+                    }
+                  },
+                  "block_order": [
+                    "cross_sell_EhgC33"
+                  ]
+                }
+              },
+              "block_order": [
+                "slide_7nDDt9",
+                "slide_ntK8ep",
+                "slide_UCMKg6"
+              ]
+            },
             "slider_fPgdLQ": {
               "type": "slider",
               "name": "t:slider_cross_sell",
@@ -58,38 +244,7 @@
                     "margin_bottom": 0,
                     "additional_class": ""
                   },
-                  "blocks": {
-                    "cross_sell_Ktcjar": {
-                      "type": "cross-sell",
-                      "name": "t:cross_sell",
-                      "settings": {
-                        "show_on_display": "desktop_and_mobile",
-                        "display_mode": "row",
-                        "color_scheme": "",
-                        "show_card_border": true,
-                        "products": [
-                          "denuoniss-small-thermal-cooler-backpack-mini-soft-toddler-backpack-cooler-waterproof-backpack-cooler-thermal-insulated-bag",
-                          "water-bottle-bag-portable-insulated-neoprene-holder-pouch-750ml-1000ml-1500ml-travel-thermos-cup-cover-with-adjustable-strap",
-                          "1-5l-60w-electric-lunch-box-food-warmer-portable-food-heater-for-car-or-home-leak-proof-lunch-heating-microwave-for-truckers"
-                        ],
-                        "title": "",
-                        "description": "",
-                        "show_image": true,
-                        "image_width": 75,
-                        "show_options_label": false,
-                        "price_position": "next_to_title",
-                        "button_content_type": "text",
-                        "button_content_icon": "add",
-                        "margin_top": 0,
-                        "margin_bottom": 0,
-                        "additional_class": ""
-                      },
-                      "blocks": {}
-                    }
-                  },
-                  "block_order": [
-                    "cross_sell_Ktcjar"
-                  ]
+                  "blocks": {}
                 },
                 "slide_r8hVg3": {
                   "type": "_slide",
@@ -202,6 +357,7 @@
             }
           },
           "block_order": [
+            "slider_MY4UKi",
             "slider_fPgdLQ",
             "payment_methods_WRBbVe"
           ]

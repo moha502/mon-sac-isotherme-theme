@@ -90,100 +90,10 @@
                   "block_order": [
                     "cross_sell_U8yaM9"
                   ]
-                },
-                "slide_4EW4YP": {
-                  "type": "_slide",
-                  "name": "t:slide",
-                  "settings": {
-                    "wrap_in_card": false,
-                    "color_scheme": "",
-                    "layout_direction": "row",
-                    "layout_wrap": "nowrap",
-                    "layout_gap": 10,
-                    "layout_justify": "flex-start",
-                    "layout_align_items": "flex-start",
-                    "margin_top": 0,
-                    "margin_bottom": 0,
-                    "additional_class": ""
-                  },
-                  "blocks": {
-                    "cross_sell_dpPREA": {
-                      "type": "cross-sell",
-                      "name": "t:cross_sell",
-                      "settings": {
-                        "show_on_display": "desktop_and_mobile",
-                        "display_mode": "row",
-                        "color_scheme": "",
-                        "show_card_border": true,
-                        "products": [],
-                        "title": "",
-                        "description": "",
-                        "show_image": true,
-                        "image_width": 75,
-                        "show_options_label": false,
-                        "price_position": "next_to_title",
-                        "button_content_type": "text",
-                        "button_content_icon": "add",
-                        "margin_top": 0,
-                        "margin_bottom": 0,
-                        "additional_class": ""
-                      },
-                      "blocks": {}
-                    }
-                  },
-                  "block_order": [
-                    "cross_sell_dpPREA"
-                  ]
-                },
-                "slide_w3b46R": {
-                  "type": "_slide",
-                  "name": "t:slide",
-                  "settings": {
-                    "wrap_in_card": false,
-                    "color_scheme": "",
-                    "layout_direction": "row",
-                    "layout_wrap": "nowrap",
-                    "layout_gap": 10,
-                    "layout_justify": "flex-start",
-                    "layout_align_items": "flex-start",
-                    "margin_top": 0,
-                    "margin_bottom": 0,
-                    "additional_class": ""
-                  },
-                  "blocks": {
-                    "cross_sell_XekJit": {
-                      "type": "cross-sell",
-                      "name": "t:cross_sell",
-                      "settings": {
-                        "show_on_display": "desktop_and_mobile",
-                        "display_mode": "row",
-                        "color_scheme": "",
-                        "show_card_border": true,
-                        "products": [],
-                        "title": "",
-                        "description": "",
-                        "show_image": true,
-                        "image_width": 75,
-                        "show_options_label": false,
-                        "price_position": "next_to_title",
-                        "button_content_type": "text",
-                        "button_content_icon": "add",
-                        "margin_top": 0,
-                        "margin_bottom": 0,
-                        "additional_class": ""
-                      },
-                      "blocks": {}
-                    }
-                  },
-                  "block_order": [
-                    "cross_sell_XekJit"
-                  ]
                 }
               },
               "block_order": [
-                "slide_pqUTff",
-                "slide_4EW4YP",
-                "slide_w3b46R"
+                "slide_pqUTff"
               ]
             },
             "payment_methods_WRBbVe": {

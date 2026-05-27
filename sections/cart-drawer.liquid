@@ -375,7 +375,10 @@ assign compare_line_price = compare_price | times: item.quantity
     <p>Retour gratuit</p>
   </div>
 </div>
-     
+   <div style="text-align:center; margin: 8px 0;">
+  {{ shop.enabled_payment_types | payment_type_svg_tag: class: 'icon icon--full-color' }}
+</div>
+  
     </div>
 
     {%- if cart.empty? -%}

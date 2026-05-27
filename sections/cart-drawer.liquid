@@ -340,6 +340,7 @@ assign compare_line_price = compare_price | times: item.quantity
 
   endfor
 %}
+{% content_for 'block', type: '_cart-drawer-footer-blocks', id: 'cart_footer_blocks' %}
 
 {% if total_savings > 0 %}
   <p class="cart-drawer__savings">
@@ -374,7 +375,7 @@ assign compare_line_price = compare_price | times: item.quantity
     <p>Retour gratuit</p>
   </div>
 </div>
-      {% content_for 'block', type: '_cart-drawer-footer-blocks', id: 'cart_footer_blocks' %}
+     
     </div>
 
     {%- if cart.empty? -%}

@@ -95,25 +95,10 @@
               "block_order": [
                 "slide_pqUTff"
               ]
-            },
-            "payment_methods_WRBbVe": {
-              "type": "payment-methods",
-              "name": "t:payment_methods",
-              "settings": {
-                "show_on_display": "desktop_only",
-                "alignment_desktop": "center",
-                "alignment_mobile": "center",
-                "icon_size": 35,
-                "margin_top": 5,
-                "margin_bottom": 5,
-                "additional_class": ""
-              },
-              "blocks": {}
             }
           },
           "block_order": [
-            "slider_tiDwdr",
-            "payment_methods_WRBbVe"
+            "slider_tiDwdr"
           ]
         },
         "cart_drawer_empty_blocks": {

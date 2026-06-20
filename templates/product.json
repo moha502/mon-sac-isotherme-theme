@@ -507,7 +507,7 @@
                 "feature_3_icon": "gift",
                 "feature_3_text": "Retours gratuit",
                 "alignment": "center",
-                "mobile_layout": "column",
+                "mobile_layout": "row",
                 "spacing": 30,
                 "icon_text_gap": 10,
                 "padding": 20,

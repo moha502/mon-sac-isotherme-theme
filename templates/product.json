@@ -464,29 +464,70 @@
           },
           "blocks": {}
         },
-        "icon_with_text_NtYC8Y": {
-          "type": "icon-with-text",
-          "name": "t:icon_with_text",
+        "group_YcQ7cA": {
+          "type": "group",
+          "name": "t:group",
           "settings": {
             "show_on_display": "desktop_and_mobile",
+            "wrap_in_card": false,
+            "card_link": "",
+            "color_scheme": "",
+            "show_card_border": false,
+            "layout_type": "flex",
+            "width_desktop": 100,
             "layout_direction_desktop": "row",
-            "layout_gap_desktop": 5,
-            "same_as_desktop": false,
+            "layout_grid_columns_desktop": 3,
+            "layout_gap_desktop": 20,
+            "layout_wrap_desktop": "nowrap",
+            "layout_justify_desktop": "flex-start",
+            "layout_align_items_desktop": "flex-start",
+            "same_as_desktop": true,
+            "width_mobile": 100,
             "layout_direction_mobile": "column",
+            "layout_grid_columns_mobile": 1,
             "layout_gap_mobile": 10,
-            "icon_type": "icon",
-            "icon": "send",
-            "icon_custom": "",
-            "icon_size": 22,
-            "icon_position": "start",
-            "text": "<p>Livraison gratuite </p>",
-            "text_style": "paragraph",
-            "font_weight": 400,
+            "layout_wrap_mobile": "nowrap",
+            "layout_justify_mobile": "flex-start",
+            "layout_align_items_mobile": "flex-start",
+            "use_global_container_padding": true,
+            "padding_horizontal": 30,
+            "padding_vertical": 30,
             "margin_top": 0,
             "margin_bottom": 0,
             "additional_class": ""
           },
-          "blocks": {}
+          "blocks": {
+            "ai_gen_block_0c2b715_cD7bdQ": {
+              "type": "ai_gen_block_0c2b715",
+              "settings": {
+                "feature_1_icon": "truck",
+                "feature_1_text": "Livraison gratuite",
+                "feature_2_icon": "shield",
+                "feature_2_text": "Paiement sécurisé",
+                "feature_3_icon": "gift",
+                "feature_3_text": "Retours gratuit",
+                "alignment": "center",
+                "mobile_layout": "column",
+                "spacing": 30,
+                "icon_text_gap": 10,
+                "padding": 20,
+                "desktop_width_percent": 100,
+                "icon_size": 50,
+                "icon_color": "#556b5d",
+                "icon_background_color": "#f7f7f5",
+                "icon_border_radius": 25,
+                "text_size": 14,
+                "text_color": "#1a1a1a",
+                "text_weight": 500,
+                "background_color": "#fdfdfc",
+                "border_radius": 0
+              },
+              "blocks": {}
+            }
+          },
+          "block_order": [
+            "ai_gen_block_0c2b715_cD7bdQ"
+          ]
         },
         "accordions_KKUaHK": {
           "type": "accordions",
@@ -663,7 +704,7 @@
         "group_QH4Wig",
         "product_form_grYQk6",
         "payment_methods_BdjpFB",
-        "icon_with_text_NtYC8Y",
+        "group_YcQ7cA",
         "accordions_KKUaHK"
       ],
       "settings": {

@@ -25,7 +25,7 @@
               "type": "text",
               "settings": {
                 "show_on_display": "desktop_and_mobile",
-                "text": "<p>OFFRE PRINTEMPS  JUSQU'A -20%</p>",
+                "text": "<p>☀️ Offre d'été : -10% sur une sélection d'articles</p>",
                 "text_style": "paragraph",
                 "paragraph_font_size": "normal",
                 "font_weight": 400,
@@ -55,7 +55,7 @@
       "name": "t:announcement_bar",
       "settings": {
         "show_on_display": "desktop_and_mobile",
-        "color_scheme": "",
+        "color_scheme": "scheme-2",
         "show_arrows": true,
         "arrows_button_style": "secondary",
         "rewind": true,

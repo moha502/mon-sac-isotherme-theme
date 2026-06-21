@@ -731,7 +731,7 @@
           "type": "marquee",
           "settings": {
             "movement_direction": "normal",
-            "speed_factor": "normal",
+            "speed_factor": "fast",
             "gap": 30,
             "color_scheme": "scheme-2",
             "padding_top": 20,

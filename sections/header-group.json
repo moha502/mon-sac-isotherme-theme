@@ -27,7 +27,7 @@
                 "show_on_display": "desktop_and_mobile",
                 "text": "<p>☀️ Offre d'été : -10% sur une sélection d'articles</p>",
                 "text_style": "paragraph",
-                "paragraph_font_size": "normal",
+                "paragraph_font_size": "large",
                 "font_weight": 400,
                 "alignment": "center",
                 "alignment_mobile": "center",

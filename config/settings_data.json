@@ -182,9 +182,9 @@
       },
       "scheme-2": {
         "settings": {
-          "background": "#f8f8f8",
-          "foreground": "#000000cf",
-          "border": "#00000030",
+          "background": "#7A9E7E",
+          "foreground": "#0A0C0A",
+          "border": "#11070730",
           "stars_icons_color": "#000000",
           "primary_button_background": "#7A9E7E",
           "primary_button_text": "#ffffff",

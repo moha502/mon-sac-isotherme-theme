@@ -330,7 +330,25 @@ padding: 16px 20px;
   .bottom-item p {
     font-size: 13px;
   }
+
+@media screen and (max-width: 768px) {
+  .comparison-table,
+  [class*="comparison"] table,
+  [class*="comparison"] .table {
+    display: block;
+    overflow-x: auto;
+    -webkit-overflow-scrolling: touch;
+    white-space: nowrap;
+    width: 100%;
+  }
+
+  [class*="comparison"] td,
+  [class*="comparison"] th {
+    white-space: normal;
+    min-width: 120px;
+  }
 }
+
 </style>
 
 {% schema %}

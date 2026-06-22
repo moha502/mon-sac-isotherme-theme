@@ -466,7 +466,7 @@
       "name": "Réassurances",
       "settings": {
         "show_on_display": "desktop_and_mobile",
-        "color_scheme": "scheme-3",
+        "color_scheme": "scheme-2",
         "wrap_in_card": false,
         "color_scheme_card": "",
         "section_width": "normal",
@@ -785,7 +785,7 @@
         "group_BxVQwU"
       ],
       "settings": {
-        "color_scheme": "scheme-3",
+        "color_scheme": "scheme-2",
         "show_top_border": false,
         "layout_type": "grid",
         "layout_direction_desktop": "row",

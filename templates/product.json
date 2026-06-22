@@ -229,35 +229,35 @@
             "icon_with_text_wPmpig"
           ]
         },
+        "delivery_estimation_VBff3m": {
+          "type": "delivery-estimation",
+          "name": "t:delivery_estimation",
+          "settings": {
+            "show_on_display": "desktop_and_mobile",
+            "icon": "moped_package",
+            "icon_custom": "",
+            "alignment_desktop": "flex-start",
+            "alignment_mobile": "flex-start",
+            "date_format": "in_letters",
+            "show_weekday": true,
+            "minimum_delivery_days": 6,
+            "maximum_delivery_days": 10,
+            "cutoff_hour": 14,
+            "no_delivery_on_saturday": false,
+            "no_delivery_on_sunday": false,
+            "delivery_estimation_text": "Livré entre le",
+            "translation_between_dates": "et le",
+            "margin_top": 0,
+            "margin_bottom": 0,
+            "additional_class": ""
+          },
+          "blocks": {}
+        },
         "product_form_grYQk6": {
           "type": "_product-form",
           "name": "t:product_form",
           "settings": {},
           "blocks": {
-            "delivery_estimation_HDU4a8": {
-              "type": "delivery-estimation",
-              "name": "t:delivery_estimation",
-              "settings": {
-                "show_on_display": "desktop_and_mobile",
-                "icon": "moped_package",
-                "icon_custom": "",
-                "alignment_desktop": "flex-start",
-                "alignment_mobile": "flex-start",
-                "date_format": "in_letters",
-                "show_weekday": true,
-                "minimum_delivery_days": 6,
-                "maximum_delivery_days": 10,
-                "cutoff_hour": 14,
-                "no_delivery_on_saturday": false,
-                "no_delivery_on_sunday": false,
-                "delivery_estimation_text": "Livré entre le",
-                "translation_between_dates": "et le",
-                "margin_top": 0,
-                "margin_bottom": 0,
-                "additional_class": ""
-              },
-              "blocks": {}
-            },
             "product_variant_picker_xWC3wF": {
               "type": "_product-variant-picker",
               "name": "t:product_variant_picker",
@@ -469,7 +469,6 @@
             }
           },
           "block_order": [
-            "delivery_estimation_HDU4a8",
             "product_variant_picker_xWC3wF",
             "quantity_breaks_9fPAXa"
           ]
@@ -727,6 +726,7 @@
         "text_zLqMQw",
         "price_yEeMeb",
         "group_QH4Wig",
+        "delivery_estimation_VBff3m",
         "product_form_grYQk6",
         "payment_methods_BdjpFB",
         "group_YcQ7cA",

@@ -366,7 +366,7 @@
               "name": "t:product_card_gallery",
               "settings": {
                 "show_on_display": "desktop_and_mobile",
-                "show_slider": false,
+                "show_slider": true,
                 "media_rounded": true,
                 "show_badges": true,
                 "media_ratio": "1 / 1",

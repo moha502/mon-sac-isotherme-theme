@@ -390,12 +390,13 @@ slider-component {
 }
 
 .splide__arrow {
-  color: none !important;
+  color: black !important;
 }
 
 .splide__arrow svg {
-  fill: none !important;
-  stroke: none !important;
-  color: none !important;
+  fill: black !important;
+  stroke: black !important;
+  color: black !important;
 }
+
 

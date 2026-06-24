@@ -388,10 +388,6 @@ slider-component {
     }
   }
 }
-.splide__arrow {
-  background: white !important;
-  border: none !important;
-}
 
 .splide__arrow svg {
   fill: black !important;

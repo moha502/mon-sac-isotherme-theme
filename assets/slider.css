@@ -388,9 +388,11 @@ slider-component {
     }
   }
 }
-@media (max-width: 768px) {
-  .carousel-arrows-black,
-  .custom-slider-arrows-black {
-    color: black !important;
-  }
+.splide__arrow {
+  background: white;
+  border: none;
+}
+
+.splide__arrow svg {
+  fill: black;
 }

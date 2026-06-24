@@ -389,10 +389,11 @@ slider-component {
   }
 }
 .splide__arrow {
-  background: white;
-  border: none;
+  background: white !important;
+  border: none !important;
 }
 
 .splide__arrow svg {
-  fill: black;
+  fill: black !important;
+  stroke: black !important;
 }

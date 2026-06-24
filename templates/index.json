@@ -370,7 +370,7 @@
                 "media_rounded": true,
                 "show_badges": true,
                 "media_ratio": "1 / 1",
-                "additional_class": ""
+                "additional_class": "carousel-arrows-black"
               },
               "blocks": {}
             },

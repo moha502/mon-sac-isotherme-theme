@@ -541,50 +541,10 @@
                 "additional_class": ""
               },
               "blocks": {}
-            },
-            "text_hzJHEn": {
-              "type": "text",
-              "name": "t:text",
-              "settings": {
-                "show_on_display": "desktop_and_mobile",
-                "text": "<p>Partagez les informations de contact, les détails de la boutique et le contenu de la marque avec vos prospects.</p>",
-                "text_style": "paragraph",
-                "paragraph_font_size": "normal",
-                "font_weight": 400,
-                "alignment": "left",
-                "alignment_mobile": "left",
-                "show_read_more": false,
-                "read_more_length": 200,
-                "read_more_text": "Voir plus",
-                "read_less_text": "Voir moins",
-                "truncate": false,
-                "truncate_length": 2,
-                "margin_top": 0,
-                "margin_bottom": 0,
-                "additional_class": ""
-              },
-              "blocks": {}
-            },
-            "social_icons_hQdtRf": {
-              "type": "social-icons",
-              "name": "t:social_icons",
-              "settings": {
-                "show_on_display": "desktop_and_mobile",
-                "icon_color": "#ffffff",
-                "icon_size": 22,
-                "alignment": "flex-start",
-                "alignment_mobile": "flex-start",
-                "margin_top": 0,
-                "margin_bottom": 0,
-                "additional_class": ""
-              },
-              "blocks": {}
             }
           },
           "block_order": [
-            "logo_MKbnJy",
-            "text_hzJHEn",
-            "social_icons_hQdtRf"
+            "logo_MKbnJy"
           ]
         },
         "menu_K3tacq": {

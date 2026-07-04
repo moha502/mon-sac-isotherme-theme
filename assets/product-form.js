@@ -425,27 +425,27 @@ if (!customElements.get('product-form')) {
     }
   }
 
-  // Au chargement — on attend que le thème ait fini ses initialisations
-  window.addEventListener('load', () => {
-    setTimeout(updateThemeButton, 1500);
-  });
-
-  // À chaque clic sur une option Moon Bundles
-  document.addEventListener('click', (e) => {
-    if (e.target.closest('.moonbundle-option-wrapper')) {
-      setTimeout(updateThemeButton, 300);
-    }
-  });
-
-  // Observer les changements de classe dans Moon Bundles
+  // Observer sur le BODY entier pour ne jamais perdre la référence
   const observer = new MutationObserver(() => {
     updateThemeButton();
   });
 
   window.addEventListener('load', () => {
-    const moonBox = document.querySelector('.moonbundle-box');
-    if (moonBox) {
-      observer.observe(moonBox, { subtree: true, attributes: true, attributeFilter: ['class'] });
+    setTimeout(updateThemeButton, 1500);
+
+    // On observe le body entier — plus robuste si Moon Bundles recrée ses éléments
+    observer.observe(document.body, { 
+      subtree: true, 
+      attributes: true, 
+      attributeFilter: ['class'],
+      childList: true
+    });
+  });
+
+  // Sécurité : clic sur une option Moon Bundles
+  document.addEventListener('click', (e) => {
+    if (e.target.closest('.moonbundle-option-wrapper')) {
+      setTimeout(updateThemeButton, 400);
     }
   });
 })();

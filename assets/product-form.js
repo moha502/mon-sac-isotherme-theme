@@ -406,6 +406,8 @@ if (!customElements.get('product-form')) {
 }
 // Fix Moon Bundles price sync
 (function() {
+  let isUpdating = false;
+
   function getMoonBundlePrice() {
     const activeOption = document.querySelector('.moonbundle-option-active');
     if (!activeOption) return null;
@@ -416,33 +418,36 @@ if (!customElements.get('product-form')) {
   }
 
   function updateThemeButton() {
+    if (isUpdating) return;
+    isUpdating = true;
+
     const price = getMoonBundlePrice();
-    if (price === null) return;
-    const priceEl = document.querySelector('[data-ref="add-to-cart-button-container"] [data-ref="price"]');
-    if (priceEl) {
-      const formatted = (price / 100).toFixed(2).replace('.', ',') + '\u00a0€';
-      priceEl.innerText = formatted;
+    if (price !== null) {
+      const priceEl = document.querySelector('[data-ref="add-to-cart-button-container"] [data-ref="price"]');
+      if (priceEl) {
+        const formatted = (price / 100).toFixed(2).replace('.', ',') + '\u00a0€';
+        priceEl.innerText = formatted;
+      }
     }
+
+    setTimeout(() => { isUpdating = false; }, 100);
   }
 
-  // Observer sur le BODY entier pour ne jamais perdre la référence
   const observer = new MutationObserver(() => {
-    updateThemeButton();
+    if (!isUpdating) updateThemeButton();
   });
 
   window.addEventListener('load', () => {
     setTimeout(updateThemeButton, 1500);
 
-    // On observe le body entier — plus robuste si Moon Bundles recrée ses éléments
-    observer.observe(document.body, { 
-      subtree: true, 
-      attributes: true, 
-      attributeFilter: ['class'],
-      childList: true
+    observer.observe(document.body, {
+      subtree: true,
+      attributes: true,
+      attributeFilter: ['class']
+      // childList retiré — c'était lui qui causait la boucle infinie
     });
   });
 
-  // Sécurité : clic sur une option Moon Bundles
   document.addEventListener('click', (e) => {
     if (e.target.closest('.moonbundle-option-wrapper')) {
       setTimeout(updateThemeButton, 400);

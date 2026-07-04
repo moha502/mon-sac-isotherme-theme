@@ -404,3 +404,51 @@ class ProductForm extends HTMLElement {
 if (!customElements.get('product-form')) {
   customElements.define('product-form', ProductForm);
 }
+// Fix Moon Bundles price sync
+(function() {
+  function getMoonBundlePrice() {
+    const activeOption = document.querySelector('.moonbundle-option-active');
+    if (!activeOption) return null;
+    const priceEl = activeOption.querySelector('.moonbundle-option-single-price');
+    if (!priceEl) return null;
+    // Convertir "64,80€" en centimes
+    const text = priceEl.innerText.replace(/[^\d,]/g, '').replace(',', '.');
+    return Math.round(parseFloat(text) * 100);
+  }
+
+  function updateThemeButton() {
+    const price = getMoonBundlePrice();
+    if (price === null) return;
+
+    const priceEl = document.querySelector('[data-ref="add-to-cart-button-container"] [data-ref="price"]');
+    if (priceEl) {
+      // Utiliser la fonction formatMoney du thème si disponible
+      const formatted = (price / 100).toFixed(2).replace('.', ',') + '\u00a0€';
+      priceEl.innerText = formatted;
+    }
+  }
+
+  // Au chargement
+  document.addEventListener('DOMContentLoaded', () => {
+    setTimeout(updateThemeButton, 500);
+  });
+
+  // À chaque clic sur une option Moon Bundles
+  document.addEventListener('click', (e) => {
+    if (e.target.closest('.moonbundle-option-wrapper')) {
+      setTimeout(updateThemeButton, 300);
+    }
+  });
+
+  // Observer les changements dans le widget Moon Bundles
+  const observer = new MutationObserver(() => {
+    updateThemeButton();
+  });
+
+  document.addEventListener('DOMContentLoaded', () => {
+    const moonBox = document.querySelector('.moonbundle-box');
+    if (moonBox) {
+      observer.observe(moonBox, { subtree: true, attributes: true, attributeFilter: ['class'] });
+    }
+  });
+})();

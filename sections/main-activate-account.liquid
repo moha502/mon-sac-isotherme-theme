@@ -45,8 +45,8 @@
         {%- endif -%}
 
         <div class="customer-activate__form-actions">
-          {% render 'button', label: 'customer.activate_account.submit' | t, type: 'submit', button_shape: 'full-width' %}
-          {% render 'button', label: 'customer.activate_account.cancel' | t, type: 'button', name: 'decline', button_shape: 'full-width' %}
+          {% render 'button', label: 'customer.activate_account.submit', type: 'submit', button_shape: 'full-width' %}
+          {% render 'button', label: 'customer.activate_account.cancel', type: 'button', name: 'decline', button_shape: 'full-width' %}
         </div>
       {%- endform -%}
     </div>
@@ -112,3 +112,20 @@
   ]
 }
 {% endschema %}
+{% comment %}
+
+This file has been rewritten to preserve the original behavior.
+
+---
+Changes:
+- from: "{% render 'button', label: 'customer.activate_account.submit' | t, type:
+    'submit', button_shape: 'full-width' %}"
+  to: "{% render 'button', label: 'customer.activate_account.submit', type: 'submit',
+    button_shape: 'full-width' %}"
+  position: 1759..1867
+- from: "{% render 'button', label: 'customer.activate_account.cancel' | t, type:
+    'button', name: 'decline', button_shape: 'full-width' %}"
+  to: "{% render 'button', label: 'customer.activate_account.cancel', type: 'button',
+    name: 'decline', button_shape: 'full-width' %}"
+  position: 1878..2003
+{% endcomment %}
